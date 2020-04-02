@@ -74,10 +74,10 @@ dependencies {
     }
 
     //Db and pagination
-//    def roomVersion = '2.2.5'
-//    implementation "androidx.room:room-runtime:$roomVersion"
-//    kapt "androidx.room:room-compiler:$roomVersion"
-//    implementation "androidx.room:room-ktx:$roomVersion"
+    def roomVersion = '2.2.5'
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
 
     //Logger
     implementation "com.jakewharton.timber:timber:4.7.1"
