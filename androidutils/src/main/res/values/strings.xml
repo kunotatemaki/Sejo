@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="date_utils_day_abrev">d</string>
+    <string name="date_utils_hour_abrev">h</string>
+    <string name="date_utils_minute_abrev">min</string>
+</resources>
