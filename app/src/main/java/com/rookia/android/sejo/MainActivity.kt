@@ -1,34 +1,46 @@
 package com.rookia.android.sejo
 
+import android.content.Context
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-//import androidx.compose.Composable
-//import androidx.ui.core.Text
-//import androidx.ui.core.setContent
-//import androidx.ui.material.MaterialTheme
-//import androidx.ui.tooling.preview.Preview
+import android.os.PersistableBundle
+import android.view.MenuItem
+import android.view.inputmethod.InputMethodManager
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.rookia.android.sejo.databinding.MainActivityBinding
 import dagger.android.support.DaggerAppCompatActivity
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        setContent {
-//            MaterialTheme {
-//                Greeting("Android")
-//            }
-//        }
-    }
-}
+class MainActivity : DaggerAppCompatActivity() {
 
-//@Composable
-//fun Greeting(name: String) {
-//    Text(text = "Hello $name!")
-//}
-//
-//@Preview
-//@Composable
-//fun DefaultPreview() {
-//    MaterialTheme {
-//        Greeting("Android")
-//    }
-//}
+    private lateinit var binding: MainActivityBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
+        super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
+    }
+    override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        super.onPostCreate(savedInstanceState, persistentState)
+        supportFragmentManager.findFragmentById(R.id.fragment_container)?.findNavController()
+            ?.let { navController ->
+                setupActionBarWithNavController(navController)
+            }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    @Suppress("unused")
+    fun hideKeyboard() {
+        this.currentFocus?.let { view ->
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.applicationWindowToken, 0)
+        }
+    }
+
+}
