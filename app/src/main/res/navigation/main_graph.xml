@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/blankFragment">
 
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.rookia.android.sejo.ui.BlankFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_blank" >
+        <action
+            android:id="@+id/action_blankFragment_to_register_graph"
+            app:destination="@id/register_graph"
+            app:popUpTo="@id/blankFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <include app:graph="@navigation/register_graph" />
 </navigation>

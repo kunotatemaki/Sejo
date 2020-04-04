@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/register_graph"
+    app:startDestination="@id/validateNumberFragment">
+
+    <fragment
+        android:id="@+id/validateNumberFragment"
+        android:name="com.rookia.android.sejo.ui.register.number.ValidateNumberFragment"
+        android:label="validate_number_fragment"
+        tools:layout="@layout/validate_number_fragment" >
+        <action
+            android:id="@+id/action_validateNumberFragment_to_validateSmsFragment"
+            app:destination="@id/validateSmsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/validateSmsFragment"
+        android:name="com.rookia.android.sejo.ui.register.sms.ValidateSmsFragment"
+        android:label="validate_sms_fragment"
+        tools:layout="@layout/validate_sms_fragment" />
+</navigation>
