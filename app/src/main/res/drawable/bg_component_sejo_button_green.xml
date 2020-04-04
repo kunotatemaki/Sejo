@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/white_20_overlay">
-
-    <item android:drawable="@drawable/bg_component_sejo_button_green_unfocused" />
-</ripple>

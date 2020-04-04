@@ -21,22 +21,38 @@
     </style>
 
     <style name="SejoButton">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">16dp</item>
-        <item name="android:background">@drawable/bg_component_sejo_button</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_gravity">center</item>
-    </style>
-
-    <style name="SejoButtonCaption">
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:maxLines">1</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
         <item name="android:textColor">@color/minimal</item>
         <item name="android:fontFamily">@font/avertastdpesemibold</item>
         <item name="android:textSize">18sp</item>
         <item name="android:lineSpacingExtra">6sp</item>
+    </style>
+
+    <style name="SejoButton.Candy">
+            <item name="android:background">@drawable/bg_component_sejo_button_selector_candy</item>
+    </style>
+
+    <style name="SejoButton.Blue">
+            <item name="android:background">@drawable/bg_component_sejo_button_selector_blue</item>
+    </style>
+
+    <style name="SejoButton.Green">
+            <item name="android:background">@drawable/bg_component_sejo_button_selector_green</item>
+    </style>
+
+    <style name="SejoButton.Grey">
+            <item name="android:background">@drawable/bg_component_sejo_button_selector_grey</item>
+    </style>
+
+    <style name="SejoButton.Colors">
+            <item name="android:background">@drawable/bg_component_sejo_button_selector_colors</item>
+    </style>
+
+    <style name="SejoButton.Red">
+            <item name="android:background">@drawable/bg_component_sejo_button_selector_red</item>
     </style>
 
     <color name="minimal">#ffffff</color>

@@ -5,12 +5,14 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="loadingBackground">#CCFFFFFF</color>
     <color name="candy">#ff0068</color>
+    <color name="candy_light">#F8A0C4</color>
     <color name="white_20_overlay">#D5D5D5</color>
     <color name="ok">#37c977</color>
-    <color name="error">#fa564c</color>
-    <color name="candy_light">#fff1f1</color>
+    <color name="ok_light">#8DC3A5</color>
+    <color name="red">#fa564c</color>
+    <color name="red_light">#FFADA8</color>
     <color name="blue">#4cb4ff</color>
-    <color name="light_blue">#234cb4ff</color>
+    <color name="light_blue">#B8E2FF</color>
     <color name="grey_5">#868d9f</color>
     <color name="grey_5_95_opacity">#f2868d9f</color>
     <color name="grey_4">#a6afbd</color>

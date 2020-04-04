@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
-import com.rookia.android.sejo.ui.register.number.ValidateNumberFragment
+import com.rookia.android.sejo.ui.register.number.ValidatePhoneNumberFragment
 import com.rookia.android.sejo.ui.register.sms.ValidateSmsFragment
 import javax.inject.Inject
 
@@ -26,7 +26,7 @@ class SejoFragmentFactory @Inject constructor(
 ) : FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when(loadFragmentClass(classLoader,className)) {
-            ValidateNumberFragment::class.java -> ValidateNumberFragment(preferencesManager)
+            ValidatePhoneNumberFragment::class.java -> ValidatePhoneNumberFragment(preferencesManager)
             ValidateSmsFragment::class.java -> ValidateSmsFragment(viewModelFactory)
             else -> super.instantiate(classLoader, className)
         }
