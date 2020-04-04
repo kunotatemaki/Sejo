@@ -5,18 +5,35 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.rookia.android.sejo.databinding.MainActivityBinding
-import dagger.android.support.DaggerAppCompatActivity
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import javax.inject.Inject
 
-class MainActivity : DaggerAppCompatActivity() {
+class MainActivity : AppCompatActivity(), HasAndroidInjector {
+
+    @Inject
+    lateinit var androidInjector : DispatchingAndroidInjector<Any>
+
+    override fun androidInjector(): AndroidInjector<Any> {
+        return androidInjector
+    }
+
+    @Inject
+    lateinit var fragmentFactory : SejoFragmentFactory
 
     private lateinit var binding: MainActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
+        AndroidInjection.inject(this)
+        supportFragmentManager.fragmentFactory = fragmentFactory
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
     }

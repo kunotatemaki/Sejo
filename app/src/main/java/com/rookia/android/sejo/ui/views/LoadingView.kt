@@ -1,4 +1,4 @@
-package com.rookia.android.sejo.ui.views.common
+package com.rookia.android.sejo.ui.views
 
 import android.content.Context
 import android.util.AttributeSet

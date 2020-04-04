@@ -1,18 +1,18 @@
 package com.rookia.android.sejo.ui.register.sms
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.rookia.android.androidutils.di.injectViewModel
+import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.R
+import javax.inject.Inject
 
-class ValidateSmsFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ValidateSmsFragment()
-    }
+class ValidateSmsFragment @Inject constructor(
+    private val viewModelFactory: ViewModelFactory
+) : Fragment() {
 
     private lateinit var viewModel: ValidateSmsViewModel
 
@@ -23,10 +23,17 @@ class ValidateSmsFragment : Fragment() {
         return inflater.inflate(R.layout.validate_sms_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ValidateSmsViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = injectViewModel(viewModelFactory)
+
         // TODO: Use the ViewModel
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.store()
+        viewModel.getStore()
     }
 
 }

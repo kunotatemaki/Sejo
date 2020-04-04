@@ -3,10 +3,8 @@ package com.rookia.android.sejo.di.components
 import com.rookia.android.androidutils.di.modules.AndroidUtilsBindsModule
 import com.rookia.android.androidutils.di.modules.AndroidUtilsModule
 import com.rookia.android.sejo.SejoApplication
-import com.rookia.android.sejo.di.modules.ActivitiesBuilder
-import com.rookia.android.sejo.di.modules.BindsModule
-import com.rookia.android.sejo.di.modules.FragmentsProvider
-import com.rookia.android.sejo.di.modules.ProvidesModule
+import com.rookia.android.sejo.di.modules.*
+import com.rookia.android.sejo.di.modules.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -21,8 +19,7 @@ import javax.inject.Singleton
         (ActivitiesBuilder::class),
         (BindsModule::class),
         (ProvidesModule::class),
-        (FragmentsProvider::class),
-        (FragmentsProvider::class),
+        (ViewModelModule::class),
         (AndroidUtilsModule::class),
         (AndroidUtilsBindsModule::class)
     ]
