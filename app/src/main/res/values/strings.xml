@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Sejo</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--    Validate Phone Number -->
+    <string name="validate_phone_number_button_caption">Continuar</string>
 </resources>

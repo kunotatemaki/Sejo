@@ -16,9 +16,9 @@ class PreferencesManagerImpl @Inject constructor(private var context: Context, p
         return prefs.getInt(key, -1)
     }
 
-    override fun getStringFromPreferences(key: String): String {
+    override fun getStringFromPreferences(key: String): String? {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        return prefs.getString(key, "") ?: ""
+        return prefs.getString(key, null)
     }
 
     override fun getEncryptedStringFromPreferences(key: String, alias: String): String {

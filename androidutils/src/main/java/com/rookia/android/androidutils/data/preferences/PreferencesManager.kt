@@ -3,7 +3,7 @@ package com.rookia.android.androidutils.data.preferences
 interface PreferencesManager {
 
     fun getIntFromPreferences(key: String): Int
-    fun getStringFromPreferences(key: String): String
+    fun getStringFromPreferences(key: String): String?
     fun getEncryptedStringFromPreferences(key: String, alias: String): String
     fun getBooleanFromPreferences(key: String): Boolean
     fun getLongFromPreferences(key: String): Long
