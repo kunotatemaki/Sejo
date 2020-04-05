@@ -1,11 +1,9 @@
 package com.rookia.android.sejo.utils
 
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
-import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.Constants.SIGN_IN_PROCESS_VALIDATED_PHONE_NUMBER_TAG
 import com.rookia.android.sejo.Constants.SIGN_IN_PROCESS_VALIDATED_PHONE_PREFIX_TAG
 import io.mockk.MockKAnnotations
-import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import org.junit.After
@@ -81,21 +79,20 @@ class PhoneUtilsTest {
     }
 
     @Test
-    fun progressiveFormat() {
-        assertEquals("6", phoneUtils.progressiveFormat(spanishPhonePrefix, "6"))
-        assertEquals("66", phoneUtils.progressiveFormat(spanishPhonePrefix, "66"))
-        assertEquals("666", phoneUtils.progressiveFormat(spanishPhonePrefix, "666"))
-        assertEquals("666 6", phoneUtils.progressiveFormat(spanishPhonePrefix, "6666"))
-        assertEquals("666 66", phoneUtils.progressiveFormat(spanishPhonePrefix, "666 66"))
-        assertEquals("666 666", phoneUtils.progressiveFormat(spanishPhonePrefix, "666 666"))
-        assertEquals("666 666 6", phoneUtils.progressiveFormat(spanishPhonePrefix, "666 6666"))
-        assertEquals("666 666 66", phoneUtils.progressiveFormat(spanishPhonePrefix, "666 666 66"))
-        assertEquals("666 666 666", phoneUtils.progressiveFormat(spanishPhonePrefix, "666 666 666"))
+    fun formatWithSpaces() {
+        assertEquals("6", phoneUtils.formatWithSpaces(spanishPhonePrefix, "6", false))
+        assertEquals("66", phoneUtils.formatWithSpaces(spanishPhonePrefix, "66", false))
+        assertEquals("666", phoneUtils.formatWithSpaces(spanishPhonePrefix, "666", false))
+        assertEquals("666 6", phoneUtils.formatWithSpaces(spanishPhonePrefix, "6666", false))
+        assertEquals("666 66", phoneUtils.formatWithSpaces(spanishPhonePrefix, "666 66", false))
+        assertEquals("666 666", phoneUtils.formatWithSpaces(spanishPhonePrefix, "666 666", false))
+        assertEquals("666 666 6", phoneUtils.formatWithSpaces(spanishPhonePrefix, "666 6666", false))
+        assertEquals("666 666 66", phoneUtils.formatWithSpaces(spanishPhonePrefix, "666 666 66", false))
+        assertEquals("666 666 666", phoneUtils.formatWithSpaces(spanishPhonePrefix, "666 666 666", false))
     }
 
     @Test
-    fun formatWithSpaces() {
-        assertEquals("666 666 666", phoneUtils.formatWithSpaces(spanishPhonePrefix, "666666666", false))
+    fun formatWithSpacesAndPrefix() {
         assertEquals("+34 666 666 666", phoneUtils.formatWithSpaces(spanishPhonePrefix, "666666666", true))
     }
 }

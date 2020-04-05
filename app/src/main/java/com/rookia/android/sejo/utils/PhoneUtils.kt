@@ -1,13 +1,17 @@
 package com.rookia.android.sejo.utils
 
-import androidx.core.text.isDigitsOnly
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.sejo.Constants.SIGN_IN_PROCESS_VALIDATED_PHONE_NUMBER_TAG
 import com.rookia.android.sejo.Constants.SIGN_IN_PROCESS_VALIDATED_PHONE_PREFIX_TAG
 import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_MAX_LENGTH_WITHOUT_SPACES
-import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_MAX_LENGTH_WITH_SPACES
-import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER
-import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT
+import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_EIGHT_DIGITS
+import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_FIVE_DIGITS
+import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_FOUR_DIGITS
+import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_NINE_DIGITS
+import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_SEVEN_DIGITS
+import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_SIX_DIGITS
+import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_THREE_GROUP
+import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_TWO_GROUP
 import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PREFIX
 import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_START_PATTERN_MATCHER
 import java.util.regex.Pattern
@@ -41,8 +45,10 @@ class PhoneUtils @Inject constructor(private val preferencesManager: Preferences
     }
 
     fun isPhoneNumberYourActualPhone(prefix: String, phone: String): Boolean {
-        val storedPhoneNumber: String? = preferencesManager.getStringFromPreferences(SIGN_IN_PROCESS_VALIDATED_PHONE_NUMBER_TAG)
-        val storedPhonePrefix: String? = preferencesManager.getStringFromPreferences(SIGN_IN_PROCESS_VALIDATED_PHONE_PREFIX_TAG)
+        val storedPhoneNumber: String? =
+            preferencesManager.getStringFromPreferences(SIGN_IN_PROCESS_VALIDATED_PHONE_NUMBER_TAG)
+        val storedPhonePrefix: String? =
+            preferencesManager.getStringFromPreferences(SIGN_IN_PROCESS_VALIDATED_PHONE_PREFIX_TAG)
         return storedPhoneNumber == phone && storedPhonePrefix == prefix
     }
 
@@ -63,67 +69,61 @@ class PhoneUtils @Inject constructor(private val preferencesManager: Preferences
     /**
      * **Progressively** format a string as a valid phone number.
      * To format a full number please use [PhoneUtils.formatWithSpaces]
-     * @param phone
-     * @return
-     */
-    fun progressiveFormat(prefix: String, phone: String): String {
-        var ret = ""
-        when (prefix) {
-            SPANISH_PHONE_NUMBER_PREFIX -> ret = progressiveFormatSpanishPhone(phone)
-        }
-        return ret
-    }
-
-    private fun progressiveFormatSpanishPhone(phone: String): String {
-        var ret = ""
-
-        //Remove non numeric, keep spaces
-        ret = phone.replace("[^\\d\\s]".toRegex(), "")
-        if (ret.length == 4) {
-            ret = ret.substring(0, 3) + " " + ret.substring(3)
-        }
-        if (ret.length == 8) {
-            ret = ret.substring(0, 7) + " " + ret.substring(7)
-        }
-        ret = ret.trim()
-        return if(ret.length > SPANISH_PHONE_NUMBER_MAX_LENGTH_WITH_SPACES) {
-            ret.substring(0, SPANISH_PHONE_NUMBER_MAX_LENGTH_WITH_SPACES)
-        } else {
-            ret
-        }
-    }
-
-    /**
-     * Format phone number to ### ### ###format
      * @param prefix International calling prefix
      * @param phone WITHOUT PREFIX
      * @param includePrefix return with or without prefix
      * @return
      */
-    fun formatWithSpaces(
-        prefix: String,
-        phone: String,
-        includePrefix: Boolean
+    fun formatWithSpaces(prefix: String, phone: String, includePrefix: Boolean): String {
+        val phoneNumberWithoutSpaces = phone.replace("[^\\d\\s]".toRegex(), "")
+        val phoneNumberFormatted = when (prefix) {
+            SPANISH_PHONE_NUMBER_PREFIX -> formatWithSpacesSpanish(phoneNumberWithoutSpaces)
+            else -> phoneNumberWithoutSpaces
+        }
+        return if (includePrefix) {
+            "$prefix $phoneNumberFormatted"
+        } else {
+            phoneNumberFormatted
+        }
+    }
+
+    /**
+     * Format phone number to ### ### ###format
+     * @param phone WITHOUT PREFIX
+     * @return
+     */
+    private fun formatWithSpacesSpanish(
+        phone: String
     ): String {
-        var ret = ""
         //Remove spaces
         val cleanPhone = phone.replace("[\\s]".toRegex(), "")
-        var maxLength = 0
-        var matcher = ""
-        var replacement = ""
-        when (prefix) {
-            SPANISH_PHONE_NUMBER_PREFIX -> {
-                maxLength = SPANISH_PHONE_NUMBER_MAX_LENGTH_WITHOUT_SPACES
-                matcher = SPANISH_PHONE_NUMBER_PATTERN_MATCHER
-                replacement = SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT
-            }
+        return when (cleanPhone.length) {
+            9 -> cleanPhone.replace(
+                SPANISH_PHONE_NUMBER_PATTERN_MATCHER_NINE_DIGITS.toRegex(),
+                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_THREE_GROUP
+            )
+            8 -> cleanPhone.replace(
+                SPANISH_PHONE_NUMBER_PATTERN_MATCHER_EIGHT_DIGITS.toRegex(),
+                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_THREE_GROUP
+            )
+            7 -> cleanPhone.replace(
+                SPANISH_PHONE_NUMBER_PATTERN_MATCHER_SEVEN_DIGITS.toRegex(),
+                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_THREE_GROUP
+            )
+            6 -> cleanPhone.replace(
+                SPANISH_PHONE_NUMBER_PATTERN_MATCHER_SIX_DIGITS.toRegex(),
+                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_TWO_GROUP
+            )
+            5 -> cleanPhone.replace(
+                SPANISH_PHONE_NUMBER_PATTERN_MATCHER_FIVE_DIGITS.toRegex(),
+                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_TWO_GROUP
+            )
+            4 -> cleanPhone.replace(
+                SPANISH_PHONE_NUMBER_PATTERN_MATCHER_FOUR_DIGITS.toRegex(),
+                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_TWO_GROUP
+            )
+            else -> cleanPhone
+
         }
-        if (phone.length == maxLength) {
-            ret = cleanPhone.replace(matcher.toRegex(), replacement)
-        }
-        if (includePrefix) {
-            ret = "$prefix $ret"
-        }
-        return ret
     }
 }
