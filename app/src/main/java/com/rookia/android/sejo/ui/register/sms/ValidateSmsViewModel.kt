@@ -3,10 +3,12 @@ package com.rookia.android.sejo.ui.register.sms
 import androidx.lifecycle.ViewModel
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 
-class ValidateSmsViewModel constructor(private val preferences: PreferencesManager) : ViewModel() {
-    fun store(){
-        preferences.setIntIntoPreferences("hola", 3)
-    }
+class ValidateSmsViewModel constructor(private val preferencesManager: PreferencesManager) : ViewModel() {
 
-    fun getStore() = preferences.getIntFromPreferences("hola")
+    fun requestSms(phonePrefix: String?, phoneNumber: String?) {
+        if(phonePrefix == null || phoneNumber == null){
+            return
+        }
+
+    }
 }

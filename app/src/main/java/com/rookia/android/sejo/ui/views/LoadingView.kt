@@ -5,6 +5,8 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
+import com.rookia.android.androidutils.extensions.gone
+import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.sejo.databinding.ComponentLoadingBinding
 
 
@@ -48,8 +50,11 @@ class LoadingView : FrameLayout {
     }
 
     fun setText(text: String?) {
-        val visibility = if(text.isNullOrBlank()) View.GONE else View.VISIBLE
-        binding.screenLoadingSpinnerText.visibility = visibility
+        if(text.isNullOrBlank()) {
+            binding.screenLoadingSpinnerText.gone()
+        } else {
+            binding.screenLoadingSpinnerText.visible()
+        }
         binding.screenLoadingSpinnerText.text = text
     }
 

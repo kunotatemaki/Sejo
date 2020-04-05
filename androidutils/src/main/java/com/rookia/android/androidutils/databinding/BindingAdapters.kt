@@ -8,6 +8,9 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.rookia.android.androidutils.extensions.gone
+import com.rookia.android.androidutils.extensions.invisible
+import com.rookia.android.androidutils.extensions.visible
 import java.io.File
 
 
@@ -86,28 +89,28 @@ class BindingAdapters {
         fun <T> setIsVisibleOrGone(view: View, isVisible: T?) {
             isVisible?.let {
                 if (isVisible is Boolean && isVisible == true) {
-                    view.visibility = View.VISIBLE
+                    view.visible()
                     return
                 } else if (isVisible is String? && isVisible.isNotBlank()) {
-                    view.visibility = View.VISIBLE
+                    view.visible()
                     return
                 }
             }
-            view.visibility = View.GONE
+            view.gone()
         }
 
         @BindingAdapter("isVisibleOrInvisible")
         fun <T> setIsVisibleOrInvisible(view: View, isVisible: T?) {
             isVisible?.let {
                 if (isVisible is Boolean && isVisible == true) {
-                    view.visibility = View.VISIBLE
+                    view.visible()
                     return
                 } else if (isVisible is String? && isVisible.isNotBlank()) {
-                    view.visibility = View.VISIBLE
+                    view.visible()
                     return
                 }
             }
-            view.visibility = View.INVISIBLE
+            view.invisible()
         }
 
         @BindingAdapter("isBoldOrNot")

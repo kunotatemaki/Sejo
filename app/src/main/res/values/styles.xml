@@ -77,6 +77,20 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/grey_4</item>
     </style>
+    <style name="SimpleTextLabelMediumError" parent="SimpleTextLabelMedium">
+        <item name="android:textColor">@color/red</item>
+    </style>
+    <style name="SimpleTextLabelMedium" parent="SimpleTextLabel">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/grey_4</item>
+    </style>
+
+    <style name="BnextSMSEditTextNumber">
+        <item name="android:textSize">22dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+    </style>
 
 
 </resources>
