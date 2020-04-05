@@ -8,9 +8,7 @@
         android:layout_height="match_parent"
         android:background="@color/loadingBackground"
         android:clickable="true"
-        android:focusable="true"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:focusable="true">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/screen_loading_spinner"

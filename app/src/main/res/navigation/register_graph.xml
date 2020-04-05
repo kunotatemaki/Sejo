@@ -19,5 +19,12 @@
         android:id="@+id/validateSmsFragment"
         android:name="com.rookia.android.sejo.ui.register.sms.ValidateSmsFragment"
         android:label="validate_sms_fragment"
-        tools:layout="@layout/validate_sms_fragment" />
+        tools:layout="@layout/validate_sms_fragment" >
+        <argument
+            android:name="phonePrefix"
+            app:argType="string"/>
+        <argument
+            android:name="phoneNumber"
+            app:argType="string"/>
+    </fragment>
 </navigation>

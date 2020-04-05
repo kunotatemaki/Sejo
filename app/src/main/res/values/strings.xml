@@ -6,4 +6,6 @@
 
     <!--    Validate Phone Number -->
     <string name="validate_phone_number_button_caption">Continuar</string>
+    <string name="component_phone_nuber_prefix_es">+34</string>
+    <string name="component_phone_nuber_error">Formato incorrecto</string>
 </resources>

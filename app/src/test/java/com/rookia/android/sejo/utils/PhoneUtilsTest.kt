@@ -35,7 +35,7 @@ class PhoneUtilsTest {
     @Before
     fun setUp() {
         MockKAnnotations.init(this, relaxed = true)
-        phoneUtils = PhoneUtils(preferencesManager)
+        phoneUtils = PhoneUtils()
         every { preferencesManager.getStringFromPreferences(SIGN_IN_PROCESS_VALIDATED_PHONE_NUMBER_TAG) } returns spanishPhoneNumber
         every { preferencesManager.getStringFromPreferences(SIGN_IN_PROCESS_VALIDATED_PHONE_PREFIX_TAG) } returns spanishPhonePrefix
     }
@@ -59,8 +59,8 @@ class PhoneUtilsTest {
 
     @Test
     fun isPhoneNumberYourActualPhone() {
-        assertTrue(phoneUtils.isPhoneNumberYourActualPhone(spanishPhonePrefix, spanishPhoneNumber))
-        assertFalse(phoneUtils.isPhoneNumberYourActualPhone("+44", spanishPhoneNumber))
+        assertTrue(phoneUtils.isPhoneNumberYourActualPhone(spanishPhonePrefix, spanishPhoneNumber, preferencesManager))
+        assertFalse(phoneUtils.isPhoneNumberYourActualPhone("+44", spanishPhoneNumber, preferencesManager))
     }
 
     @Test

@@ -29,7 +29,7 @@ import javax.inject.Inject
  *
  */
 
-class PhoneUtils @Inject constructor(private val preferencesManager: PreferencesManager) {
+class PhoneUtils @Inject constructor() {
 
     fun isValidPhoneNumber(prefix: String, phone: String): Boolean {
 
@@ -44,7 +44,7 @@ class PhoneUtils @Inject constructor(private val preferencesManager: Preferences
                 phoneStartsWithValidNumber(prefix, cleanPhone)
     }
 
-    fun isPhoneNumberYourActualPhone(prefix: String, phone: String): Boolean {
+    fun isPhoneNumberYourActualPhone(prefix: String, phone: String, preferencesManager: PreferencesManager): Boolean {
         val storedPhoneNumber: String? =
             preferencesManager.getStringFromPreferences(SIGN_IN_PROCESS_VALIDATED_PHONE_NUMBER_TAG)
         val storedPhonePrefix: String? =

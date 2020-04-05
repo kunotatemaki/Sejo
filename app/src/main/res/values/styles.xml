@@ -55,5 +55,28 @@
             <item name="android:background">@drawable/bg_component_sejo_button_selector_red</item>
     </style>
 
-    <color name="minimal">#ffffff</color>
+    <style name="SimpleTextLabelBigBlack" parent="SimpleTextLabelBig">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SimpleTextLabelBig" parent="SimpleTextLabel">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/grey_4</item>
+    </style>
+
+    <style name="SimpleTextLabel">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:fontFamily">@font/avertastdperegular</item>
+    </style>
+
+    <style name="SimpleTextLabelSmallError" parent="SimpleTextLabelSmall">
+        <item name="android:textColor">@color/red</item>
+    </style>
+    <style name="SimpleTextLabelSmall" parent="SimpleTextLabel">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/grey_4</item>
+    </style>
+
+
 </resources>
