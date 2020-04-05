@@ -38,7 +38,7 @@ class ValidatePhoneNumberFragment @Inject constructor(
                         }
                         PhoneNumberView.PhoneNumberFormat.INCOMPLETE -> {
                             binding.buttonEnabled = false
-                            binding.validatePhoneNumberPhoneNumber.showError(resourcesManager.getString(R.string.component_phone_nuber_error))
+                            binding.validatePhoneNumberPhoneNumber.hideError()
                         }
                         PhoneNumberView.PhoneNumberFormat.WRONG -> {
                             binding.buttonEnabled = false
