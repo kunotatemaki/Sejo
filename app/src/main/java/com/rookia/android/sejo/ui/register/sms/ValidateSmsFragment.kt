@@ -1,10 +1,7 @@
 package com.rookia.android.sejo.ui.register.sms
 
 import android.os.Bundle
-import android.renderscript.ScriptGroup
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
@@ -29,7 +26,6 @@ class ValidateSmsFragment @Inject constructor(
             phonePrefix = safeVarargs.phonePrefix
         }
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -32,7 +32,7 @@ import com.rookia.android.sejo.databinding.ComponentSmsCodeBinding
  *
  */
 
-class BnextNewSMSEdittext : ConstraintLayout {
+class SmsCodeView : ConstraintLayout {
     private lateinit var binding: ComponentSmsCodeBinding
     private val introducedPin: SpannableStringBuilder? = null
     private var listener: OnTextChangeListener? = null
@@ -144,8 +144,8 @@ class BnextNewSMSEdittext : ConstraintLayout {
                     5 -> {
                         setDigit(
                             text[i].toString(),
-                            componentBnextSmsEdittextText4Label,
-                            componentBnextSmsEdittextText4Bullet
+                            componentBnextSmsEdittextText5Label,
+                            componentBnextSmsEdittextText5Bullet
                         )
                     }
                 }

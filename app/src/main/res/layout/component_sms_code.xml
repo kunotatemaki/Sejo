@@ -15,7 +15,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/component_bnext_sms_edittext_main_container"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
         android:paddingLeft="24dp"
@@ -71,8 +71,8 @@
 
                 <ImageView
                     android:id="@+id/component_bnext_sms_edittext_text_0_bullet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
                     android:src="@drawable/ic_sms_bullet"
                     android:layout_centerInParent="true"
                     tools:ignore="ContentDescription" />
@@ -99,8 +99,8 @@
 
                 <ImageView
                     android:id="@+id/component_bnext_sms_edittext_text_1_bullet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
                     android:src="@drawable/ic_sms_bullet"
                     android:layout_centerInParent="true"
                     tools:ignore="ContentDescription" />
@@ -127,8 +127,8 @@
 
                 <ImageView
                     android:id="@+id/component_bnext_sms_edittext_text_2_bullet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
                     android:src="@drawable/ic_sms_bullet"
                     android:layout_centerInParent="true"
                     tools:ignore="ContentDescription" />
@@ -170,8 +170,8 @@
 
                 <ImageView
                     android:id="@+id/component_bnext_sms_edittext_text_3_bullet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
                     android:src="@drawable/ic_sms_bullet"
                     android:layout_centerInParent="true"
                     tools:ignore="ContentDescription" />
@@ -198,8 +198,8 @@
 
                 <ImageView
                     android:id="@+id/component_bnext_sms_edittext_text_4_bullet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
                     android:src="@drawable/ic_sms_bullet"
                     android:layout_centerInParent="true"
                     tools:ignore="ContentDescription" />
@@ -227,8 +227,8 @@
 
                 <ImageView
                     android:id="@+id/component_bnext_sms_edittext_text_5_bullet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
                     android:src="@drawable/ic_sms_bullet"
                     android:layout_centerInParent="true"
                     tools:ignore="ContentDescription" />
