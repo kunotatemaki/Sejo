@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "767085979496",
+    "firebase_url": "https://rookiaexpenses.firebaseio.com",
+    "project_id": "rookiaexpenses",
+    "storage_bucket": "rookiaexpenses.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767085979496:android:a0e47de02893f9852d58dd",
+        "android_client_info": {
+          "package_name": "com.rookia.android.sejo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "767085979496-gjuqpn0fet8jht0bqghhlolhd2gdvr23.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXlXYPHu3HJhBY7tICdjyTfPC3RvKf-rk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "767085979496-gjuqpn0fet8jht0bqghhlolhd2gdvr23.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
