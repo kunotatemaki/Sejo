@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.gms.common.api.Status
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 /**
@@ -20,18 +22,25 @@ import com.google.android.gms.common.api.Status
  *
  */
 
-class SMSBroadcastReceiver constructor(private val code: MutableLiveData<String>): BroadcastReceiver() {
+class SMSBroadcastReceiver constructor(private val code: MutableLiveData<String>) :
+    BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent) {
         if (SmsRetriever.SMS_RETRIEVED_ACTION == intent.action) {
-            intent.extras?.let {
-                val status: Status? = it.get(SmsRetriever.EXTRA_STATUS) as Status?
+            intent.extras?.let { extras ->
+                val status: Status? = extras.get(SmsRetriever.EXTRA_STATUS) as Status?
                 when (status?.statusCode) {
                     CommonStatusCodes.SUCCESS -> {
-                        var message: String? = it.getString(SmsRetriever.EXTRA_SMS_MESSAGE)
-                        //todo sacar código y pasarlo al livedata
-                        code.postValue(message)
+                        extras.getString(SmsRetriever.EXTRA_SMS_MESSAGE)?.let { message ->
+                            val p: Pattern = Pattern.compile("\\d{3}-\\d{3}")
+                            val m: Matcher = p.matcher(message)
+                            if (m.find()) {
+                                val codeWithHyphenation = m.group()
+                                val finalCode = codeWithHyphenation.replace("[^0-9]".toRegex(), "")
+                                code.postValue(finalCode)
+                            }
+                        }
                     }
-                    CommonStatusCodes.TIMEOUT -> {
+                    else -> {
                     }
                 }
             }

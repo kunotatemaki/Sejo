@@ -4,6 +4,7 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
@@ -44,6 +45,11 @@ class ValidateSmsFragment @Inject constructor(
         val helper = AppSignatureHelper(requireContext())
         val id = helper.appSignatures
 
+        viewModel.code.observe(this.viewLifecycleOwner, Observer {
+            it?.let{code ->
+                binding.fragmentValidateSmsView.text = code
+            }
+        })
 
         context?.registerReceiver(viewModel.receiver, filter)
         startListeningForSms()
