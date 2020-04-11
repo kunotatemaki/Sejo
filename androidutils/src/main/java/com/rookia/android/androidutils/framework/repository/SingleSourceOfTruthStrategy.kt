@@ -7,16 +7,18 @@ import com.rookia.android.androidutils.domain.vo.Result
 import kotlinx.coroutines.Dispatchers
 
 
-fun <T, A> resultLiveData(
+fun <T, A> resultFromPersistenceAndNetworkInLiveData(
     persistedDataQuery: () -> LiveData<T>,
     networkCall: suspend () -> Result<A>,
     persistCallResult: suspend (A?) -> Unit,
-    runNetworkCall: Boolean
+    isThePersistedInfoOutdated: (T?) -> Boolean
 ): LiveData<Result<T>> =
     liveData(Dispatchers.IO) {
+        var needToGetInfoFromServer = false
         val disposable = emitSource(
             persistedDataQuery.invoke().map {
-                if (runNetworkCall) {
+                needToGetInfoFromServer = isThePersistedInfoOutdated(it)
+                if (needToGetInfoFromServer) {
                     //show data from db but keep the loading state, as a network call will be done
                     Result.loading(it)
                 } else {
@@ -25,7 +27,7 @@ fun <T, A> resultLiveData(
                 }
             }
         )
-        if (runNetworkCall) {
+        if (needToGetInfoFromServer) {
             val responseStatus = networkCall.invoke()
             // Stop the previous emission to avoid dispatching the updated user
             // as `loading`.
@@ -46,7 +48,7 @@ fun <T, A> resultLiveData(
 
     }
 
-suspend fun <T, A> resultRefusingOutdatedInfo(
+suspend fun <T, A> resultFromPersistenceAndNetwork(
     persistedDataQuery: suspend () -> T?,
     networkCall: suspend () -> Result<A>,
     persistCallResult: suspend (A?) -> Unit,
