@@ -1,4 +1,4 @@
-package com.rookia.android.sejo
+package com.rookia.android.sejo.ui.common
 
 import android.content.Context
 import android.os.Bundle
@@ -9,6 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.rookia.android.androidutils.extensions.gone
+import com.rookia.android.androidutils.extensions.visible
+import com.rookia.android.sejo.R
+import com.rookia.android.sejo.SejoFragmentFactory
 import com.rookia.android.sejo.databinding.MainActivityBinding
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -16,7 +20,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), HasAndroidInjector {
+class MainActivity : AppCompatActivity(), HasAndroidInjector, LoadingHelper {
 
     @Inject
     lateinit var androidInjector : DispatchingAndroidInjector<Any>
@@ -58,6 +62,14 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.applicationWindowToken, 0)
         }
+    }
+
+    override fun showLoading() {
+        binding.loadingView.visible()
+    }
+
+    override fun hideLoading() {
+        binding.loadingView.gone()
     }
 
 }

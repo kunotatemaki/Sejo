@@ -10,12 +10,13 @@ import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ValidateSmsFragmentBinding
+import com.rookia.android.sejo.ui.common.BaseFragment
 import javax.inject.Inject
 
 
 class ValidateSmsFragment @Inject constructor(
     private val viewModelFactory: ViewModelFactory
-) : Fragment(R.layout.validate_sms_fragment) {
+) : BaseFragment(R.layout.validate_sms_fragment) {
 
     private lateinit var binding: ValidateSmsFragmentBinding
     private lateinit var viewModel: ValidateSmsViewModel

@@ -2,19 +2,18 @@ package com.rookia.android.sejo.ui.register.number
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ValidateNumberFragmentBinding
+import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.views.PhoneNumberView
 import javax.inject.Inject
 
 class ValidatePhoneNumberFragment @Inject constructor(
     private val resourcesManager: ResourcesManager
-) :
-    Fragment(R.layout.validate_number_fragment) {
+) : BaseFragment(R.layout.validate_number_fragment) {
 
     private lateinit var binding: ValidateNumberFragmentBinding
 
@@ -31,7 +30,7 @@ class ValidatePhoneNumberFragment @Inject constructor(
             this.viewLifecycleOwner,
             Observer {
                 it?.let {
-                    when(it){
+                    when (it) {
                         PhoneNumberView.PhoneNumberFormat.OK -> {
                             binding.buttonEnabled = true
                             binding.validatePhoneNumberPhoneNumber.hideError()
@@ -42,7 +41,11 @@ class ValidatePhoneNumberFragment @Inject constructor(
                         }
                         PhoneNumberView.PhoneNumberFormat.WRONG -> {
                             binding.buttonEnabled = false
-                            binding.validatePhoneNumberPhoneNumber.showError(resourcesManager.getString(R.string.component_phone_nuber_error))
+                            binding.validatePhoneNumberPhoneNumber.showError(
+                                resourcesManager.getString(
+                                    R.string.component_phone_nuber_error
+                                )
+                            )
                         }
                     }
                 }
