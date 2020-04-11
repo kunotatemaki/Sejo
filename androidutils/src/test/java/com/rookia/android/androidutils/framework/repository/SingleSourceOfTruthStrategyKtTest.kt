@@ -37,43 +37,58 @@ class SingleSourceOfTruthStrategyKtTest {
 
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")
 
-    interface SingleSourceOfTruthObservableTestClass {
+    interface SingleSourceOfTruthPersistenceAndNetworkObservableTestClass {
         fun databaseQuery(): LiveData<List<Int>>
-        suspend fun networkCall(): Result<Int>
+        suspend fun networkCall(): Result<List<Int>>
         suspend fun saveCallResult(value: Int?)
     }
 
-    interface SingleSourceOfTruthTestClass {
+    interface SingleSourceOfTruthPersistenceAndNetworkTestClass {
         fun databaseQuery(): List<Int>
-        suspend fun networkCall(): Result<Int>
+        suspend fun networkCall(): Result<List<Int>>
         suspend fun saveCallResult(value: Int?)
     }
 
-    private lateinit var responseFromDb: List<Int>
-    private lateinit var responseFromNetwork: List<Int>
+    interface SingleSourceOfTruthOnlyNetworkObservableTestClass {
+        suspend fun networkCall(): Result<List<Int>>
+    }
+
+    private val responseFromDb: List<Int> = listOf(1, 2, 3)
+    private val responseFromNetwork: List<Int> = listOf(4, 5, 6)
+    private var databaseUpdatedWithNetwork = false
+
     @RelaxedMockK
-    lateinit var singleSourceOfTruthTestClassObservable: SingleSourceOfTruthObservableTestClass
+    lateinit var singleSourceOfTruthTestClassPersistenceAndNetworkObservable: SingleSourceOfTruthPersistenceAndNetworkObservableTestClass
     @RelaxedMockK
-    lateinit var singleSourceOfTruthTestClassNoObservable: SingleSourceOfTruthTestClass
+    lateinit var singleSourceOfTruthPersistenceAndNetworkTestClassNoObservable: SingleSourceOfTruthPersistenceAndNetworkTestClass
+    @RelaxedMockK
+    lateinit var singleSourceOfTruthOnlyNetworkObservableTestClass: SingleSourceOfTruthOnlyNetworkObservableTestClass
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
         Dispatchers.setMain(mainThreadSurrogate)
-        responseFromDb = listOf(1, 2, 3)
-        responseFromNetwork = listOf(4, 5, 6)
-        every { singleSourceOfTruthTestClassObservable.databaseQuery() } answers {
-            MutableLiveData(responseFromDb)
+        databaseUpdatedWithNetwork = false
+        every { singleSourceOfTruthTestClassPersistenceAndNetworkObservable.databaseQuery() } answers {
+            if(databaseUpdatedWithNetwork){
+                MutableLiveData(responseFromNetwork)
+            } else {
+                MutableLiveData(responseFromDb)
+            }
         }
-        coEvery { singleSourceOfTruthTestClassObservable.saveCallResult(any()) } coAnswers {
-            responseFromDb = responseFromNetwork
+        coEvery { singleSourceOfTruthTestClassPersistenceAndNetworkObservable.saveCallResult(any()) } coAnswers {
+            databaseUpdatedWithNetwork = true
         }
 
-        every { singleSourceOfTruthTestClassNoObservable.databaseQuery() } answers {
-            responseFromDb
+        every { singleSourceOfTruthPersistenceAndNetworkTestClassNoObservable.databaseQuery() } answers {
+            if(databaseUpdatedWithNetwork){
+                responseFromNetwork
+            } else {
+                responseFromDb
+            }
         }
-        coEvery { singleSourceOfTruthTestClassNoObservable.saveCallResult(any()) } coAnswers {
-            responseFromDb = responseFromNetwork
+        coEvery { singleSourceOfTruthPersistenceAndNetworkTestClassNoObservable.saveCallResult(any()) } coAnswers {
+            databaseUpdatedWithNetwork = true
         }
     }
 
@@ -87,9 +102,9 @@ class SingleSourceOfTruthStrategyKtTest {
     fun `don't call server if runNetworkCall is false in get result NO Observable`() {
         runBlocking(Dispatchers.IO) {
             val response = resultFromPersistenceAndNetwork(
-                { singleSourceOfTruthTestClassNoObservable.databaseQuery() },
-                { singleSourceOfTruthTestClassNoObservable.networkCall() },
-                { singleSourceOfTruthTestClassNoObservable.saveCallResult(any()) },
+                { singleSourceOfTruthPersistenceAndNetworkTestClassNoObservable.databaseQuery() },
+                { singleSourceOfTruthPersistenceAndNetworkTestClassNoObservable.networkCall() },
+                { singleSourceOfTruthPersistenceAndNetworkTestClassNoObservable.saveCallResult(any()) },
                 isThePersistedInfoOutdated = { dataNotOutdated(listOf()) }
             )
 
@@ -100,12 +115,12 @@ class SingleSourceOfTruthStrategyKtTest {
 
     @Test
     fun `call server if runNetworkCall is true in get result NO Observable, with success response`() {
-        coEvery { singleSourceOfTruthTestClassNoObservable.networkCall() } returns Result.success(8)
+        coEvery { singleSourceOfTruthPersistenceAndNetworkTestClassNoObservable.networkCall() } returns Result.success(responseFromNetwork)
         runBlocking(Dispatchers.IO) {
             val response = resultFromPersistenceAndNetwork(
-                { singleSourceOfTruthTestClassNoObservable.databaseQuery() },
-                { singleSourceOfTruthTestClassNoObservable.networkCall() },
-                { singleSourceOfTruthTestClassNoObservable.saveCallResult(any()) },
+                { singleSourceOfTruthPersistenceAndNetworkTestClassNoObservable.databaseQuery() },
+                { singleSourceOfTruthPersistenceAndNetworkTestClassNoObservable.networkCall() },
+                { singleSourceOfTruthPersistenceAndNetworkTestClassNoObservable.saveCallResult(any()) },
                 isThePersistedInfoOutdated = { dataOutdated(listOf()) }
             )
 
@@ -116,15 +131,15 @@ class SingleSourceOfTruthStrategyKtTest {
     @Test
     fun `call server if runNetworkCall is true in get result NO Observable, with error response`() {
         val errorMessage = "error message"
-        coEvery { singleSourceOfTruthTestClassNoObservable.networkCall() } returns Result.error(
+        coEvery { singleSourceOfTruthPersistenceAndNetworkTestClassNoObservable.networkCall() } returns Result.error(
             errorMessage,
-            8
+            null
         )
         runBlocking(Dispatchers.IO) {
             val response = resultFromPersistenceAndNetwork(
-                { singleSourceOfTruthTestClassNoObservable.databaseQuery() },
-                { singleSourceOfTruthTestClassNoObservable.networkCall() },
-                { singleSourceOfTruthTestClassNoObservable.saveCallResult(any()) },
+                { singleSourceOfTruthPersistenceAndNetworkTestClassNoObservable.databaseQuery() },
+                { singleSourceOfTruthPersistenceAndNetworkTestClassNoObservable.networkCall() },
+                { singleSourceOfTruthPersistenceAndNetworkTestClassNoObservable.saveCallResult(any()) },
                 isThePersistedInfoOutdated = { dataOutdated(listOf()) }
             )
 
@@ -136,9 +151,9 @@ class SingleSourceOfTruthStrategyKtTest {
     fun `don't call server if runNetworkCall is false in get result as Observable`() {
         runBlocking(Dispatchers.IO) {
             val testLiveData = resultFromPersistenceAndNetworkInLiveData(
-                { singleSourceOfTruthTestClassObservable.databaseQuery() },
-                { singleSourceOfTruthTestClassObservable.networkCall() },
-                { singleSourceOfTruthTestClassObservable.saveCallResult(any()) },
+                { singleSourceOfTruthTestClassPersistenceAndNetworkObservable.databaseQuery() },
+                { singleSourceOfTruthTestClassPersistenceAndNetworkObservable.networkCall() },
+                { singleSourceOfTruthTestClassPersistenceAndNetworkObservable.saveCallResult(any()) },
                 isThePersistedInfoOutdated = { dataNotOutdated(listOf()) }
             )
 
@@ -158,13 +173,13 @@ class SingleSourceOfTruthStrategyKtTest {
 
     @Test
     fun `call server if runNetworkCall is true in get result as Observable, with success response`() {
-        coEvery { singleSourceOfTruthTestClassObservable.networkCall() } returns Result.success(8)
+        coEvery { singleSourceOfTruthTestClassPersistenceAndNetworkObservable.networkCall() } returns Result.success(responseFromNetwork)
         runBlocking(Dispatchers.IO) {
             val initialDbResponse = responseFromDb
             val testLiveData = resultFromPersistenceAndNetworkInLiveData(
-                { singleSourceOfTruthTestClassObservable.databaseQuery() },
-                { singleSourceOfTruthTestClassObservable.networkCall() },
-                { singleSourceOfTruthTestClassObservable.saveCallResult(any()) },
+                { singleSourceOfTruthTestClassPersistenceAndNetworkObservable.databaseQuery() },
+                { singleSourceOfTruthTestClassPersistenceAndNetworkObservable.networkCall() },
+                { singleSourceOfTruthTestClassPersistenceAndNetworkObservable.saveCallResult(any()) },
                 isThePersistedInfoOutdated = { dataOutdated(listOf()) }
             )
 
@@ -186,15 +201,15 @@ class SingleSourceOfTruthStrategyKtTest {
     @Test
     fun `call server if runNetworkCall is true in get result as Observable, with error response`() {
         val errorMessage = "error message"
-        coEvery { singleSourceOfTruthTestClassObservable.networkCall() } returns Result.error(
+        coEvery { singleSourceOfTruthTestClassPersistenceAndNetworkObservable.networkCall() } returns Result.error(
             errorMessage,
-            8
+            null
         )
         runBlocking(Dispatchers.IO) {
             val testLiveData = resultFromPersistenceAndNetworkInLiveData(
-                { singleSourceOfTruthTestClassObservable.databaseQuery() },
-                { singleSourceOfTruthTestClassObservable.networkCall() },
-                { singleSourceOfTruthTestClassObservable.saveCallResult(any()) },
+                { singleSourceOfTruthTestClassPersistenceAndNetworkObservable.databaseQuery() },
+                { singleSourceOfTruthTestClassPersistenceAndNetworkObservable.networkCall() },
+                { singleSourceOfTruthTestClassPersistenceAndNetworkObservable.saveCallResult(any()) },
                 isThePersistedInfoOutdated = { dataOutdated(listOf()) }
             )
 
@@ -213,7 +228,56 @@ class SingleSourceOfTruthStrategyKtTest {
         }
     }
 
+    @Test
+    fun `call only server with get result as Observable, with success response`() {
+        coEvery { singleSourceOfTruthOnlyNetworkObservableTestClass.networkCall() } returns Result.success(responseFromNetwork)
+        runBlocking(Dispatchers.IO) {
+            val testLiveData = resultOnlyFromNetworkInLiveData{
+                singleSourceOfTruthOnlyNetworkObservableTestClass.networkCall()
+            }
+
+            val testObserver = testLiveData.test()
+            val latch = CountDownLatch(2)
+            val observer = Observer<Result<List<Any>>> {
+                latch.countDown()
+            }
+            testLiveData.observeForever(observer)
+            latch.await(10, TimeUnit.SECONDS)
+            testObserver
+                .assertHasValue()
+                .assertHistorySize(2)
+                .assertValue(Result.success(responseFromNetwork))
+                .assertValueHistory(Result.loading(null), Result.success(responseFromNetwork))
+        }
+    }
+
+    @Test
+    fun `call only server with get result as Observable, with error response`() {
+        val errorMessage = "error message"
+        coEvery { singleSourceOfTruthOnlyNetworkObservableTestClass.networkCall() } returns Result.error(
+            errorMessage,
+            null
+        )
+        runBlocking(Dispatchers.IO) {
+            val testLiveData = resultOnlyFromNetworkInLiveData{
+                singleSourceOfTruthOnlyNetworkObservableTestClass.networkCall()
+            }
+
+            val testObserver = testLiveData.test()
+            val latch = CountDownLatch(2)
+            val observer = Observer<Result<List<Any>>> {
+                latch.countDown()
+            }
+            testLiveData.observeForever(observer)
+            latch.await(10, TimeUnit.SECONDS)
+            testObserver
+                .assertHasValue()
+                .assertHistorySize(2)
+                .assertValue(Result.error(errorMessage, null))
+                .assertValueHistory(Result.loading(null), Result.error(errorMessage, null))
+        }
+    }
+
     private fun dataOutdated(list: List<Any>): Boolean = true
     private fun dataNotOutdated(list: List<Any>): Boolean = false
-    private fun getPersistenceData(): List<Int> = responseFromDb
 }

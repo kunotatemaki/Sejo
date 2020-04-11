@@ -45,7 +45,18 @@ fun <T, A> resultFromPersistenceAndNetworkInLiveData(
                 }
             )
         }
+    }
 
+fun <T> resultOnlyFromNetworkInLiveData(
+    networkCall: suspend () -> Result<T>
+): LiveData<Result<T>> =
+    liveData(Dispatchers.IO) {
+        emit(
+            Result.loading(null)
+        )
+        emit(
+            networkCall.invoke()
+        )
     }
 
 suspend fun <T, A> resultFromPersistenceAndNetwork(
@@ -65,5 +76,5 @@ suspend fun <T, A> resultFromPersistenceAndNetwork(
     } else {
         persistedData
     }
-
 }
+
