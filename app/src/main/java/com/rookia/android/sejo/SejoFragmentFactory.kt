@@ -6,6 +6,7 @@ import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.ui.register.number.ValidatePhoneNumberFragment
 import com.rookia.android.sejo.ui.register.sms.ValidateSmsFragment
+import com.rookia.android.sejo.utils.TextFormatUtils
 import javax.inject.Inject
 
 
@@ -22,12 +23,13 @@ import javax.inject.Inject
 
 class SejoFragmentFactory @Inject constructor(
     private val viewModelFactory: ViewModelFactory,
-    private val resourcesManager: ResourcesManager
+    private val resourcesManager: ResourcesManager,
+    private val textFormatUtils: TextFormatUtils
 ) : FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when (loadFragmentClass(classLoader, className)) {
             ValidatePhoneNumberFragment::class.java -> ValidatePhoneNumberFragment(resourcesManager)
-            ValidateSmsFragment::class.java -> ValidateSmsFragment(viewModelFactory)
+            ValidateSmsFragment::class.java -> ValidateSmsFragment(viewModelFactory, textFormatUtils)
             else -> super.instantiate(classLoader, className)
         }
     }

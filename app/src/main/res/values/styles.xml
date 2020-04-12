@@ -92,5 +92,8 @@
         <item name="android:paddingRight">8dp</item>
     </style>
 
+    <style name="SimpleTextLabelMediumDark" parent="SimpleTextLabelMedium">
+        <item name="android:textColor">@color/grey_5</item>
+    </style>
 
 </resources>

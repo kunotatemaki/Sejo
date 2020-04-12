@@ -2,6 +2,7 @@ package com.rookia.android.sejo.data.repository
 
 import androidx.lifecycle.LiveData
 import com.rookia.android.androidutils.domain.vo.Result
+import kotlinx.coroutines.flow.Flow
 
 
 /**
@@ -16,5 +17,6 @@ import com.rookia.android.androidutils.domain.vo.Result
  */
 
 interface SmsCodeRepository {
-    fun askForSmsCode(phonePrefix: String, phoneNumber: String): LiveData<Result<Int>>
+    fun askForSmsCode(phonePrefix: String, phoneNumber: String): Flow<Result<Int>>
+    fun validateSmsCode(phonePrefix: String, phoneNumber: String, smsCode: String): Flow<Result<Int>>
 }

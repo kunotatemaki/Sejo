@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.gms.common.api.Status
+import com.rookia.android.sejo.utils.TextFormatUtils
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -24,7 +25,10 @@ import java.util.regex.Pattern
  */
 
 
-class SMSBroadcastReceiver constructor(private val code: MutableLiveData<String>) :
+class SMSBroadcastReceiver constructor(
+    private val code: MutableLiveData<String>,
+    private val textFormatUtils: TextFormatUtils
+) :
     BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent) {
         if (SmsRetriever.SMS_RETRIEVED_ACTION == intent.action) {
@@ -50,7 +54,7 @@ class SMSBroadcastReceiver constructor(private val code: MutableLiveData<String>
         val m: Matcher = p.matcher(message)
         if (m.find()) {
             val codeWithHyphenation = m.group()
-            val finalCode = codeWithHyphenation.replace("[^0-9]".toRegex(), "")
+            val finalCode = textFormatUtils.removeHyphenFromSmsCode(codeWithHyphenation)
             code.postValue(finalCode)
         }
     }

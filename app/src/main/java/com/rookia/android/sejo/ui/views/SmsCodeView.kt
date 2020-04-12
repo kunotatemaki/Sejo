@@ -38,7 +38,7 @@ class SmsCodeView : ConstraintLayout {
     private var listener: OnTextChangeListener? = null
 
     interface OnTextChangeListener {
-        fun onText(newText: String?)
+        fun onText(newText: String)
     }
 
     constructor(context: Context) : super(context) {
@@ -196,8 +196,19 @@ class SmsCodeView : ConstraintLayout {
         bullet.visible()
     }
 
-    fun displayError() {
+    fun displayWrongCode(){
+        val message = resources.getString(R.string.validate_sms_error_label)
+        displayError(message)
+    }
+
+    fun displayExpiredCode(){
+        val message = resources.getString(R.string.validate_sms_expired_label)
+        displayError(message)
+    }
+
+    private fun displayError(message:String) {
         binding.componentBnextSmsEdittextError.visible()
+        binding.componentBnextSmsEdittextError.text = message
         setBoxContainerBackground(R.drawable.bg_component_sejo_sms_edittext_error)
         displayColorInDigit(binding.componentBnextSmsEdittextText0Label, R.color.red)
         displayColorInDigit(binding.componentBnextSmsEdittextText1Label, R.color.red)
@@ -218,7 +229,7 @@ class SmsCodeView : ConstraintLayout {
     }
 
     fun hideError() {
-        binding.componentBnextSmsEdittextError.gone()
+        binding.componentBnextSmsEdittextError.invisible()
         setBoxContainerBackground(R.drawable.bg_component_sejo_sms_edittext)
         displayColorInDigit(binding.componentBnextSmsEdittextText0Label, R.color.black)
         displayColorInDigit(binding.componentBnextSmsEdittextText1Label, R.color.black)

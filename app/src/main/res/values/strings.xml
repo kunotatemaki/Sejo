@@ -11,4 +11,8 @@
 
     <!-- validate sms -->
     <string name="validate_sms_error_label">Código erróneo</string>
+    <string name="validate_sms_expired_label">Código caducado</string>
+    <string name="validate_sms_footer_resend_text"><![CDATA[Si no te llega el código, haz <font color=#ff0068>click aquí</font> y te lo reenviamos.]]></string>
+    <string name="validate_sms_footer_waiting_text">Si no te llega el código podrás reenviarlo en %1$s</string>
+
 </resources>

@@ -2,6 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="textFormatUtils"
+            type="com.rookia.android.sejo.utils.TextFormatUtils" />
+        <variable
+            name="remainingTime"
+            type="Integer" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,5 +27,32 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             />
+
+        <TextView
+            android:visibility="invisible"
+            android:id="@+id/fragment_validate_sms_footer_resend"
+            style="@style/SimpleTextLabelMediumDark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:htmlText="@{@string/validate_sms_footer_resend_text}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/validate_sms_footer_resend_text" />
+
+        <TextView
+            android:id="@+id/fragment_validate_sms_footer_wait"
+            style="@style/SimpleTextLabelMediumDark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@{@string/validate_sms_footer_waiting_text(textFormatUtils.toMinuteSeconds(remainingTime))}"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/validate_sms_footer_waiting_text" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

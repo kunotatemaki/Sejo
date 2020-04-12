@@ -1,8 +1,9 @@
-package com.rookia.android.sejo
+package com.rookia.android.sejo.usecases
 
 import androidx.lifecycle.LiveData
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.data.repository.SmsCodeRepository
+import kotlinx.coroutines.flow.Flow
 
 
 /**
@@ -16,9 +17,9 @@ import com.rookia.android.sejo.data.repository.SmsCodeRepository
  *
  */
 
-class RequestSmsCodeUseCase constructor(private val repository: SmsCodeRepository) {
+class ValidateSmsCodeUseCase constructor(private val repository: SmsCodeRepository) {
 
-    fun askForSmsCode(phonePrefix: String, phoneNumber: String): LiveData<Result<Int>> =
-        repository.askForSmsCode(phonePrefix, phoneNumber)
+    fun validateSmsCode(phonePrefix: String, phoneNumber: String, smsCode: String): Flow<Result<Int>> =
+        repository.validateSmsCode(phonePrefix, phoneNumber, smsCode)
 
 }
