@@ -1,7 +1,7 @@
 package com.rookia.android.sejo.di.modules
 
 import com.rookia.android.androidutils.di.interfaces.CustomScopes
-import com.rookia.android.sejo.MainActivity
+import com.rookia.android.sejo.ui.common.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

@@ -3,6 +3,7 @@ package com.rookia.android.sejo.framework.receivers
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.android.gms.common.api.CommonStatusCodes
@@ -22,6 +23,7 @@ import java.util.regex.Pattern
  *
  */
 
+
 class SMSBroadcastReceiver constructor(private val code: MutableLiveData<String>) :
     BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent) {
@@ -31,19 +33,25 @@ class SMSBroadcastReceiver constructor(private val code: MutableLiveData<String>
                 when (status?.statusCode) {
                     CommonStatusCodes.SUCCESS -> {
                         extras.getString(SmsRetriever.EXTRA_SMS_MESSAGE)?.let { message ->
-                            val p: Pattern = Pattern.compile("\\d{3}-\\d{3}")
-                            val m: Matcher = p.matcher(message)
-                            if (m.find()) {
-                                val codeWithHyphenation = m.group()
-                                val finalCode = codeWithHyphenation.replace("[^0-9]".toRegex(), "")
-                                code.postValue(finalCode)
-                            }
+                            extractCodeFromMessage(message)
                         }
                     }
                     else -> {
                     }
                 }
             }
+        }
+    }
+
+    fun getCode(): LiveData<String> = code
+
+    fun extractCodeFromMessage(message: String) {
+        val p: Pattern = Pattern.compile("\\d{3}-\\d{3}")
+        val m: Matcher = p.matcher(message)
+        if (m.find()) {
+            val codeWithHyphenation = m.group()
+            val finalCode = codeWithHyphenation.replace("[^0-9]".toRegex(), "")
+            code.postValue(finalCode)
         }
     }
 }

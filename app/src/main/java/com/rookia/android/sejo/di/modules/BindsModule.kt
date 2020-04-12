@@ -1,18 +1,16 @@
 package com.rookia.android.sejo.di.modules
 
-import androidx.lifecycle.ViewModel
-import com.rookia.android.androidutils.di.interfaces.ViewModelKey
-import com.rookia.android.sejo.ui.register.sms.ValidateSmsViewModel
+import com.rookia.android.sejo.data.repository.SmsCodeRepository
+import com.rookia.android.sejo.framework.repository.SmsCodeRepositoryImpl
 import dagger.Binds
 import dagger.Module
-import dagger.multibindings.IntoMap
 
 
 @Module
 abstract class BindsModule {
 
-//    @Binds
-//    abstract fun providesPersistenceManager(persistenceManagerImpl: PersistenceManagerImpl): PersistenceManager
+    @Binds
+    abstract fun providesSmsCodeRepository(smsCodeRepositoryImpl: SmsCodeRepositoryImpl): SmsCodeRepository
 
 //    @Binds
 //    abstract fun providesRepository(repositoryImpl: RepositoryImpl): Repository

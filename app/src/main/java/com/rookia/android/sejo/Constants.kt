@@ -14,6 +14,7 @@ package com.rookia.android.sejo
 
 object Constants {
 
+    //region PHONE NUMBER FORMAT
     const val SPANISH_PHONE_NUMBER_PREFIX = "+34"
     const val SPANISH_PHONE_NUMBER_MAX_LENGTH_WITH_SPACES = 11
     const val SPANISH_PHONE_NUMBER_MAX_LENGTH_WITHOUT_SPACES = 9
@@ -40,5 +41,22 @@ object Constants {
     const val SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_THREE_GROUP = "$1 $2 $3"
     const val SPANISH_PHONE_NUMBER_START_PATTERN_MATCHER = "^[678].*"
 
+    //endregion
+
+    //region SMS CODE
     const val SMS_PIN_LENGTH = 6
+
+    //endregion
+
+    //region SERVER CONNECTION
+
+    //endregion
+
+    //region SERVER RESPONSE CODES
+    const val   GENERAL_RESPONSE_OK = -1
+    const val   GENERAL_RESPONSE_ERROR = 1
+    const val   SMS_CODE_OK = 0
+    const val   SMS_CODE_ERROR = 1
+    const val   SMS_CODE_EXPIRED = 2
+    //endregion
 }

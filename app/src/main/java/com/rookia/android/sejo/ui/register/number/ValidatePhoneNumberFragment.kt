@@ -56,7 +56,7 @@ class ValidatePhoneNumberFragment @Inject constructor(
         findNavController().navigate(
             ValidatePhoneNumberFragmentDirections.actionValidateNumberFragmentToValidateSmsFragment(
                 phonePrefix,
-                phoneNumber
+                phoneNumber.replace("\\s+".toRegex(),"")
             )
         )
     }
