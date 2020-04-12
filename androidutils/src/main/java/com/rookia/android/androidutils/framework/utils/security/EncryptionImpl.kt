@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.rookia.android.androidutils.framework.utils.security
 
 
@@ -48,7 +50,6 @@ class EncryptionImpl @Inject constructor(private val context: Context): Encrypti
                     val end = Calendar.getInstance()
                     end.add(Calendar.YEAR, 1)
 
-                    @Suppress("DEPRECATION")
                     val spec = KeyPairGeneratorSpec.Builder(context)
                         .setAlias(alias)
                         .setSubject(X500Principal("CN=Sample Name, O=Android Authority"))

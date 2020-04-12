@@ -2,6 +2,8 @@ package com.rookia.android.androidutils.databinding
 
 import android.graphics.Typeface
 import android.net.Uri
+import android.os.Build
+import android.text.Html
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -150,5 +152,17 @@ class BindingAdapters {
                 }
             }
         }
+
+        @JvmStatic
+        @Suppress("DEPRECATION")
+        @BindingAdapter("htmlText")
+        fun setHtmlText(textView: TextView, string: String?) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                textView.text = Html.fromHtml(string, Html.FROM_HTML_MODE_LEGACY)
+            } else {
+                textView.text = Html.fromHtml(string)
+            }
+        }
+
     }
 }

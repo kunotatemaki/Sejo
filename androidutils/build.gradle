@@ -77,11 +77,6 @@ dependencies {
     def lifecycleVersion = '2.2.0'
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
 
-    //rule for LiveData
-    testImplementation 'android.arch.core:core-testing:1.1.1'
-    androidTestImplementation 'android.arch.core:core-testing:1.1.1'
-    //test observer for LiveData
-    testImplementation 'com.jraska.livedata:testing-ktx:1.1.1'
     //mockito for kotlin
     def mockitoKotlin_version = '2.2.0'
     androidTestImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlin_version"

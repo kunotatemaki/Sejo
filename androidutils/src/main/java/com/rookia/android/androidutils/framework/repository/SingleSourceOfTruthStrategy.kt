@@ -1,56 +1,48 @@
 package com.rookia.android.androidutils.framework.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.liveData
-import androidx.lifecycle.map
 import com.rookia.android.androidutils.domain.vo.Result
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 
-fun <T, A> resultFromPersistenceAndNetworkInLiveData(
-    persistedDataQuery: () -> LiveData<T>,
+fun <T, A> resultFromPersistenceAndNetworkInFlow(
+    persistedDataQuery: () -> T,
     networkCall: suspend () -> Result<A>,
     persistCallResult: suspend (A?) -> Unit,
     isThePersistedInfoOutdated: (T?) -> Boolean
-): LiveData<Result<T>> =
-    liveData(Dispatchers.IO) {
+): Flow<Result<T>> =
+    flow {
         var needToGetInfoFromServer = false
-        val disposable = emitSource(
-            persistedDataQuery.invoke().map {
-                needToGetInfoFromServer = isThePersistedInfoOutdated(it)
-                if (needToGetInfoFromServer) {
-                    //show data from db but keep the loading state, as a network call will be done
-                    Result.loading(it)
-                } else {
-                    //no network call -> show success
-                    Result.success(it)
-                }
-            }
-        )
+
+        var cachedData = persistedDataQuery.invoke()
+        needToGetInfoFromServer = isThePersistedInfoOutdated(cachedData)
+        if (needToGetInfoFromServer) {
+            //show data from db but keep the loading state, as a network call will be done
+            emit(Result.loading(cachedData))
+        } else {
+            //no network call -> show success
+            emit(Result.success(cachedData))
+        }
+
         if (needToGetInfoFromServer) {
             val responseStatus = networkCall.invoke()
             // Stop the previous emission to avoid dispatching the updated user
             // as `loading`.
-            disposable.dispose()
-            emitSource(
-                if (responseStatus.status == Result.Status.ERROR) {
-                    persistedDataQuery.invoke().map {
-                        Result.error(responseStatus.message, it)
-                    }
-                } else {
-                    persistCallResult.invoke(responseStatus.data)
-                    persistedDataQuery.invoke().map {
-                        Result.success(it)
-                    }
-                }
-            )
+            if (responseStatus.status == Result.Status.ERROR) {
+                emit(Result.error(responseStatus.message, cachedData))
+            } else {
+                persistCallResult.invoke(responseStatus.data)
+                cachedData = persistedDataQuery.invoke()
+                emit(Result.success(cachedData))
+            }
         }
     }
 
-fun <T> resultOnlyFromNetworkInLiveData(
+
+fun <T> resultOnlyFromNetworkInFlow(
     networkCall: suspend () -> Result<T>
-): LiveData<Result<T>> =
-    liveData(Dispatchers.IO) {
+): Flow<Result<T>> =
+    flow {
         emit(
             Result.loading(null)
         )
