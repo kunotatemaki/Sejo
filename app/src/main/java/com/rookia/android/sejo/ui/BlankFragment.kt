@@ -11,6 +11,7 @@ import com.rookia.android.androidutils.framework.preferences.PreferencesManagerI
 import com.rookia.android.androidutils.framework.utils.security.EncryptionImpl
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
+import kotlinx.android.synthetic.main.fragment_blank.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,13 +49,13 @@ class BlankFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-//        val direction = BlankFragmentDirections.actionBlankFragmentToRegisterGraph()
-//        val direction2 = BlankFragmentDirections.actionBlankFragmentToRegisterActivity()
-//        navigated = PreferencesManagerImpl(requireContext(), EncryptionImpl(requireContext())).getBooleanFromPreferences(Constants.HAS_VALIDATED_PHONE_TAG)
-//        if (navigated.not()) {
-//            findNavController().navigate(direction2)
-//            navigated = true
-//        }
+        test.setText("623")
+        show.setOnClickListener {
+            test.showPassword()
+        }
+        hide.setOnClickListener {
+            test.hidePassword()
+        }
     }
 
 

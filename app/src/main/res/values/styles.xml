@@ -61,7 +61,7 @@
 
     <style name="SimpleTextLabelBig" parent="SimpleTextLabel">
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/grey_4</item>
+        <item name="android:textColor">@color/grey_400</item>
     </style>
 
     <style name="SimpleTextLabel">
@@ -71,18 +71,18 @@
     </style>
 
     <style name="SimpleTextLabelSmallError" parent="SimpleTextLabelSmall">
-        <item name="android:textColor">@color/red</item>
+        <item name="android:textColor">@color/red_600</item>
     </style>
     <style name="SimpleTextLabelSmall" parent="SimpleTextLabel">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/grey_4</item>
+        <item name="android:textColor">@color/grey_400</item>
     </style>
     <style name="SimpleTextLabelMediumError" parent="SimpleTextLabelMedium">
-        <item name="android:textColor">@color/red</item>
+        <item name="android:textColor">@color/red_600</item>
     </style>
     <style name="SimpleTextLabelMedium" parent="SimpleTextLabel">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/grey_4</item>
+        <item name="android:textColor">@color/grey_400</item>
     </style>
 
     <style name="BnextSMSEditTextNumber">
@@ -93,7 +93,29 @@
     </style>
 
     <style name="SimpleTextLabelMediumDark" parent="SimpleTextLabelMedium">
-        <item name="android:textColor">@color/grey_5</item>
+        <item name="android:textColor">@color/grey_500</item>
     </style>
 
+    <style name="ComponentBulletsContainer">
+        <item name="android:layout_marginTop">@dimen/component_bullets_textviews_margin</item>
+        <item name="android:layout_marginStart">@dimen/component_bullets_textviews_margin</item>
+        <item name="android:layout_marginBottom">@dimen/component_bullets_textviews_margin</item>
+        <item name="android:layout_marginEnd">@dimen/component_bullets_textviews_margin</item>
+    </style>
+    <style name="ComponentBulletsTextViewBullet">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:src">@drawable/ic_bullet</item>
+    </style>
+    <style name="SimpleTextLabelVeryBigBlack_Semibold" parent="SimpleTextLabelVeryBigBlack">
+        <item name="android:fontFamily">@font/avertastdpesemibold</item>
+    </style>
+    <style name="SimpleTextLabelVeryBigBlack" parent="SimpleTextLabelVeryBig">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="SimpleTextLabelVeryBig" parent="SimpleTextLabel">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/grey_400</item>
+    </style>
 </resources>

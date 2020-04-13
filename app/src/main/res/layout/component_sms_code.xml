@@ -141,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"
-                android:textColor="@color/grey_4"
+                android:textColor="@color/grey_400"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/component_sms_edittext_text_3_label_container"
                 app:layout_constraintStart_toEndOf="@+id/component_sms_edittext_text_2_label_container"

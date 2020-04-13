@@ -5,22 +5,21 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="loadingBackground">#CCFFFFFF</color>
     <color name="candy">#ff0068</color>
-    <color name="candy_light">#F8A0C4</color>
-    <color name="white_20_overlay">#D5D5D5</color>
-    <color name="ok">#37c977</color>
-    <color name="ok_light">#8DC3A5</color>
-    <color name="red">#fa564c</color>
-    <color name="red_light">#FFADA8</color>
-    <color name="blue">#4cb4ff</color>
-    <color name="light_blue">#B8E2FF</color>
-    <color name="grey_5">#868d9f</color>
-    <color name="grey_5_95_opacity">#f2868d9f</color>
-    <color name="grey_4">#a6afbd</color>
-    <color name="grey_3">#b3bac8</color>
-    <color name="grey_2">#e8ebf1</color>
-    <color name="grey_1">#f6f7f8</color>
-    <color name="candy_disabled">#ff99c3</color>
+<!--    <color name="white_20_overlay">#D5D5D5</color>-->
+    <color name="button_green">@color/green_A400</color>
+    <color name="button_green_disabled">@color/green_A100</color>
+    <color name="button_blue">@color/blue_A200</color>
+    <color name="button_blue_disabled">@color/blue_A100</color>
+    <color name="button_pink">@color/pink_A400</color>
+    <color name="button_pink_disabled">@color/pink_A100</color>
+    <color name="button_grey">@color/grey_500</color>
+    <color name="button_grey_disabled">@color/grey_300</color>
+    <color name="button_red">@color/red_A400</color>
+    <color name="button_red_disabled">@color/red_A100</color>
+    <color name="red_error">@color/red_A400</color>
+    <color name="sms_bullet">@color/grey_300</color>
     <color name="minimal">#ffffff</color>
-    <color name="black">#000000</color>
+    <color name="password_bullet_normal">@color/grey_400</color>
+    <color name="password_bullet_pressed">@color/grey_600</color>
 
 </resources>

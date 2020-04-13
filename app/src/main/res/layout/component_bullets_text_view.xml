@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            style="@style/ComponentBulletsContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/component_bullets_textview_0"
+                style="@style/ComponentBulletsTextViewBullet"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/component_bullets_textview_text_0"
+                style="@style/SimpleTextLabelVeryBigBlack_Semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+                android:alpha="0"
+                tools:alpha="0.5"
+                android:rotationX="-90"
+                tools:ignore="SpUsage"
+                tools:text="5" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            style="@style/ComponentBulletsContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/component_bullets_textview_1"
+                style="@style/ComponentBulletsTextViewBullet"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/component_bullets_textview_text_1"
+                style="@style/SimpleTextLabelVeryBigBlack_Semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+                android:alpha="0"
+                tools:alpha="0.5"
+                android:rotationX="-90"
+                tools:ignore="SpUsage"
+                tools:text="5"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            style="@style/ComponentBulletsContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/component_bullets_textview_2"
+                style="@style/ComponentBulletsTextViewBullet"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/component_bullets_textview_text_2"
+                style="@style/SimpleTextLabelVeryBigBlack_Semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+                android:alpha="0"
+                tools:alpha="0.5"
+                android:rotationX="-90"
+                tools:ignore="SpUsage"
+                tools:text="5" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            style="@style/ComponentBulletsContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/component_bullets_textview_3"
+                style="@style/ComponentBulletsTextViewBullet"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/component_bullets_textview_text_3"
+                style="@style/SimpleTextLabelVeryBigBlack_Semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+                android:alpha="0"
+                tools:alpha="0.5"
+                android:rotationX="-90"
+                tools:ignore="SpUsage"
+                tools:text="5" />
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+</layout>

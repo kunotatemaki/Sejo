@@ -209,13 +209,13 @@ class SmsCodeView : ConstraintLayout {
         binding.componentSmsEdittextError.visible()
         binding.componentSmsEdittextError.text = message
         setBoxContainerBackground(R.drawable.bg_component_sejo_sms_edittext_error)
-        displayColorInDigit(binding.componentSmsEdittextText0Label, R.color.red)
-        displayColorInDigit(binding.componentSmsEdittextText1Label, R.color.red)
-        displayColorInDigit(binding.componentSmsEdittextText2Label, R.color.red)
-        displayColorInDigit(binding.componentSmsEdittextTextDashLabel, R.color.red)
-        displayColorInDigit(binding.componentSmsEdittextText3Label, R.color.red)
-        displayColorInDigit(binding.componentSmsEdittextText4Label, R.color.red)
-        displayColorInDigit(binding.componentSmsEdittextText5Label, R.color.red)
+        displayColorInDigit(binding.componentSmsEdittextText0Label, R.color.red_error)
+        displayColorInDigit(binding.componentSmsEdittextText1Label, R.color.red_error)
+        displayColorInDigit(binding.componentSmsEdittextText2Label, R.color.red_error)
+        displayColorInDigit(binding.componentSmsEdittextTextDashLabel, R.color.red_error)
+        displayColorInDigit(binding.componentSmsEdittextText3Label, R.color.red_error)
+        displayColorInDigit(binding.componentSmsEdittextText4Label, R.color.red_error)
+        displayColorInDigit(binding.componentSmsEdittextText5Label, R.color.red_error)
     }
 
     private fun displayColorInDigit(view: TextView, colorResValue: Int) {
@@ -233,7 +233,7 @@ class SmsCodeView : ConstraintLayout {
         displayColorInDigit(binding.componentSmsEdittextText0Label, R.color.black)
         displayColorInDigit(binding.componentSmsEdittextText1Label, R.color.black)
         displayColorInDigit(binding.componentSmsEdittextText2Label, R.color.black)
-        displayColorInDigit(binding.componentSmsEdittextTextDashLabel, R.color.grey_4)
+        displayColorInDigit(binding.componentSmsEdittextTextDashLabel, R.color.grey_400)
         displayColorInDigit(binding.componentSmsEdittextText3Label, R.color.black)
         displayColorInDigit(binding.componentSmsEdittextText4Label, R.color.black)
         displayColorInDigit(binding.componentSmsEdittextText5Label, R.color.black)
