@@ -4,13 +4,16 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
+import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ComponentBulletsTextViewBinding
+import com.rookia.android.sejo.utils.VibrationUtils
 
 
 /**
@@ -204,6 +207,11 @@ class BulletsTextView : ConstraintLayout {
             animateHide(componentBulletsTextview2, componentBulletsTextviewText2, 3)
             animateHide(componentBulletsTextview3, componentBulletsTextviewText3, 4)
         }
+    }
+
+    fun showErrorFeedback() {
+        startAnimation(AnimationUtils.loadAnimation(context, R.anim.shake))
+        VibrationUtils.patternVibrate(context, Constants.ERROR_VIBRATION_PATTERN)
     }
 
     companion object {
