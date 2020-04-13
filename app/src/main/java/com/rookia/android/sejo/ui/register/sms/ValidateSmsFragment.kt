@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.domain.vo.Result
@@ -103,10 +104,10 @@ class ValidateSmsFragment @Inject constructor(
                             Constants.SMS_CODE_OK -> {
                                 viewModel.storeValidatedPhone(phonePrefix, phoneNumber)
                                 binding.fragmentValidateSmsView.hideError()
-                                //todo navigate to next screen
+                                navigateToDashboard()
                             }
-                            Constants.SMS_CODE_ERROR -> binding.fragmentValidateSmsView.displayWrongCode()
                             Constants.SMS_CODE_EXPIRED -> binding.fragmentValidateSmsView.displayExpiredCode()
+                            else -> binding.fragmentValidateSmsView.displayWrongCode()
                         }
                     }
                     Result.Status.ERROR -> {
@@ -197,6 +198,12 @@ class ValidateSmsFragment @Inject constructor(
                 }
             })
         }
+    }
+
+    private fun navigateToDashboard() {
+        val direction = ValidateSmsFragmentDirections.actionValidateSmsFragmentToMainActivity()
+        findNavController().navigate(direction)
+        activity?.finish()
     }
 
 

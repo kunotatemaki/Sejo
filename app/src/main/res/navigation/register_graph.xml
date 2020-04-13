@@ -12,7 +12,11 @@
         tools:layout="@layout/validate_number_fragment" >
         <action
             android:id="@+id/action_validateNumberFragment_to_validateSmsFragment"
-            app:destination="@id/validateSmsFragment" />
+            app:destination="@id/validateSmsFragment"
+            app:launchSingleTop="true" />
+        <action
+            android:id="@+id/action_validateNumberFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
     </fragment>
 
     <fragment
@@ -26,5 +30,13 @@
         <argument
             android:name="phoneNumber"
             app:argType="string"/>
+        <action
+            android:id="@+id/action_validateSmsFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
     </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        tools:layout="@layout/fragment_blank"
+        android:name="com.rookia.android.sejo.ui.common.MainActivity"
+        android:label="MainActivity" />
 </navigation>

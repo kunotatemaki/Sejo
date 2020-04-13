@@ -17,10 +17,10 @@ import androidx.fragment.app.Fragment
 open class BaseFragment(layoutId: Int): Fragment(layoutId) {
 
     protected fun showLoading() {
-        (activity as? LoadingHelper)?.showLoading()
+        (activity as? BaseActivity)?.showLoading()
     }
 
     protected fun hideLoading() {
-        (activity as? LoadingHelper)?.hideLoading()
+        (activity as? BaseActivity)?.hideLoading()
     }
 }

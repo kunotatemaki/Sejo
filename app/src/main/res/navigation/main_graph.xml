@@ -9,13 +9,6 @@
         android:id="@+id/blankFragment"
         android:name="com.rookia.android.sejo.ui.BlankFragment"
         android:label="fragment_blank"
-        tools:layout="@layout/fragment_blank" >
-        <action
-            android:id="@+id/action_blankFragment_to_register_graph"
-            app:destination="@id/register_graph"
-            app:popUpTo="@id/blankFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
+        tools:layout="@layout/fragment_blank" />
 
-    <include app:graph="@navigation/register_graph" />
 </navigation>

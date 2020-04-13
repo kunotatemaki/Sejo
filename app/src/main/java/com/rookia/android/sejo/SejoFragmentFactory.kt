@@ -28,7 +28,7 @@ class SejoFragmentFactory @Inject constructor(
 ) : FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when (loadFragmentClass(classLoader, className)) {
-            ValidatePhoneNumberFragment::class.java -> ValidatePhoneNumberFragment(resourcesManager)
+            ValidatePhoneNumberFragment::class.java -> ValidatePhoneNumberFragment(viewModelFactory, resourcesManager)
             ValidateSmsFragment::class.java -> ValidateSmsFragment(viewModelFactory, textFormatUtils)
             else -> super.instantiate(classLoader, className)
         }

@@ -6,6 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.rookia.android.androidutils.data.preferences.PreferencesManager
+import com.rookia.android.androidutils.framework.preferences.PreferencesManagerImpl
+import com.rookia.android.androidutils.framework.utils.security.EncryptionImpl
+import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,6 +35,7 @@ class BlankFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
     }
 
     override fun onCreateView(
@@ -43,12 +48,15 @@ class BlankFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val direction = BlankFragmentDirections.actionBlankFragmentToRegisterGraph()
-        if (navigated.not()) {
-            findNavController().navigate(direction)
-            navigated = true
-        }
+//        val direction = BlankFragmentDirections.actionBlankFragmentToRegisterGraph()
+//        val direction2 = BlankFragmentDirections.actionBlankFragmentToRegisterActivity()
+//        navigated = PreferencesManagerImpl(requireContext(), EncryptionImpl(requireContext())).getBooleanFromPreferences(Constants.HAS_VALIDATED_PHONE_TAG)
+//        if (navigated.not()) {
+//            findNavController().navigate(direction2)
+//            navigated = true
+//        }
     }
+
 
     companion object {
         /**

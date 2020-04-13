@@ -13,7 +13,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.invisible
 import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.sejo.Constants
@@ -55,7 +54,7 @@ class SmsCodeView : ConstraintLayout {
     private fun init(context: Context) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         binding = ComponentSmsCodeBinding.inflate(inflater, this, true)
-        binding.componentBnextSmsEdittextHiddenEdittext.addTextChangedListener(object :
+        binding.componentSmsEdittextHiddenEdittext.addTextChangedListener(object :
             TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
             }
@@ -70,17 +69,17 @@ class SmsCodeView : ConstraintLayout {
             }
         })
 
-        binding.componentBnextSmsEdittextHiddenEdittext.postDelayed({
-            binding.componentBnextSmsEdittextHiddenEdittext.clearFocus()
-            binding.componentBnextSmsEdittextHiddenEdittext.requestFocus()
+        binding.componentSmsEdittextHiddenEdittext.postDelayed({
+            binding.componentSmsEdittextHiddenEdittext.clearFocus()
+            binding.componentSmsEdittextHiddenEdittext.requestFocus()
         }, 0)
     }
 
     var text: String
         get() = introducedPin.toString()
         set(text) {
-            binding.componentBnextSmsEdittextHiddenEdittext.setText(text)
-            binding.componentBnextSmsEdittextHiddenEdittext.setSelection(text.length)
+            binding.componentSmsEdittextHiddenEdittext.setText(text)
+            binding.componentSmsEdittextHiddenEdittext.setSelection(text.length)
         }
 
     fun setOnTextChangeListener(listener: OnTextChangeListener?) {
@@ -109,43 +108,43 @@ class SmsCodeView : ConstraintLayout {
                     0 -> {
                         setDigit(
                             text[i].toString(),
-                            componentBnextSmsEdittextText0Label,
-                            componentBnextSmsEdittextText0Bullet
+                            componentSmsEdittextText0Label,
+                            componentSmsEdittextText0Bullet
                         )
                     }
                     1 -> {
                         setDigit(
                             text[i].toString(),
-                            componentBnextSmsEdittextText1Label,
-                            componentBnextSmsEdittextText1Bullet
+                            componentSmsEdittextText1Label,
+                            componentSmsEdittextText1Bullet
                         )
                     }
                     2 -> {
                         setDigit(
                             text[i].toString(),
-                            componentBnextSmsEdittextText2Label,
-                            componentBnextSmsEdittextText2Bullet
+                            componentSmsEdittextText2Label,
+                            componentSmsEdittextText2Bullet
                         )
                     }
                     3 -> {
                         setDigit(
                             text[i].toString(),
-                            componentBnextSmsEdittextText3Label,
-                            componentBnextSmsEdittextText3Bullet
+                            componentSmsEdittextText3Label,
+                            componentSmsEdittextText3Bullet
                         )
                     }
                     4 -> {
                         setDigit(
                             text[i].toString(),
-                            componentBnextSmsEdittextText4Label,
-                            componentBnextSmsEdittextText4Bullet
+                            componentSmsEdittextText4Label,
+                            componentSmsEdittextText4Bullet
                         )
                     }
                     5 -> {
                         setDigit(
                             text[i].toString(),
-                            componentBnextSmsEdittextText5Label,
-                            componentBnextSmsEdittextText5Bullet
+                            componentSmsEdittextText5Label,
+                            componentSmsEdittextText5Bullet
                         )
                     }
                 }
@@ -157,28 +156,28 @@ class SmsCodeView : ConstraintLayout {
             with(binding) {
                 when (i) {
                     0 -> setBullet(
-                        componentBnextSmsEdittextText0Label,
-                        componentBnextSmsEdittextText0Bullet
+                        componentSmsEdittextText0Label,
+                        componentSmsEdittextText0Bullet
                     )
                     1 -> setBullet(
-                        componentBnextSmsEdittextText1Label,
-                        componentBnextSmsEdittextText1Bullet
+                        componentSmsEdittextText1Label,
+                        componentSmsEdittextText1Bullet
                     )
                     2 -> setBullet(
-                        componentBnextSmsEdittextText2Label,
-                        componentBnextSmsEdittextText2Bullet
+                        componentSmsEdittextText2Label,
+                        componentSmsEdittextText2Bullet
                     )
                     3 -> setBullet(
-                        componentBnextSmsEdittextText3Label,
-                        componentBnextSmsEdittextText3Bullet
+                        componentSmsEdittextText3Label,
+                        componentSmsEdittextText3Bullet
                     )
                     4 -> setBullet(
-                        componentBnextSmsEdittextText4Label,
-                        componentBnextSmsEdittextText4Bullet
+                        componentSmsEdittextText4Label,
+                        componentSmsEdittextText4Bullet
                     )
                     5 -> setBullet(
-                        componentBnextSmsEdittextText5Label,
-                        componentBnextSmsEdittextText5Bullet
+                        componentSmsEdittextText5Label,
+                        componentSmsEdittextText5Bullet
                     )
                 }
             }
@@ -207,16 +206,16 @@ class SmsCodeView : ConstraintLayout {
     }
 
     private fun displayError(message:String) {
-        binding.componentBnextSmsEdittextError.visible()
-        binding.componentBnextSmsEdittextError.text = message
+        binding.componentSmsEdittextError.visible()
+        binding.componentSmsEdittextError.text = message
         setBoxContainerBackground(R.drawable.bg_component_sejo_sms_edittext_error)
-        displayColorInDigit(binding.componentBnextSmsEdittextText0Label, R.color.red)
-        displayColorInDigit(binding.componentBnextSmsEdittextText1Label, R.color.red)
-        displayColorInDigit(binding.componentBnextSmsEdittextText2Label, R.color.red)
-        displayColorInDigit(binding.componentBnextSmsEdittextTextDashLabel, R.color.red)
-        displayColorInDigit(binding.componentBnextSmsEdittextText3Label, R.color.red)
-        displayColorInDigit(binding.componentBnextSmsEdittextText4Label, R.color.red)
-        displayColorInDigit(binding.componentBnextSmsEdittextText5Label, R.color.red)
+        displayColorInDigit(binding.componentSmsEdittextText0Label, R.color.red)
+        displayColorInDigit(binding.componentSmsEdittextText1Label, R.color.red)
+        displayColorInDigit(binding.componentSmsEdittextText2Label, R.color.red)
+        displayColorInDigit(binding.componentSmsEdittextTextDashLabel, R.color.red)
+        displayColorInDigit(binding.componentSmsEdittextText3Label, R.color.red)
+        displayColorInDigit(binding.componentSmsEdittextText4Label, R.color.red)
+        displayColorInDigit(binding.componentSmsEdittextText5Label, R.color.red)
     }
 
     private fun displayColorInDigit(view: TextView, colorResValue: Int) {
@@ -229,27 +228,27 @@ class SmsCodeView : ConstraintLayout {
     }
 
     fun hideError() {
-        binding.componentBnextSmsEdittextError.invisible()
+        binding.componentSmsEdittextError.invisible()
         setBoxContainerBackground(R.drawable.bg_component_sejo_sms_edittext)
-        displayColorInDigit(binding.componentBnextSmsEdittextText0Label, R.color.black)
-        displayColorInDigit(binding.componentBnextSmsEdittextText1Label, R.color.black)
-        displayColorInDigit(binding.componentBnextSmsEdittextText2Label, R.color.black)
-        displayColorInDigit(binding.componentBnextSmsEdittextTextDashLabel, R.color.grey_4)
-        displayColorInDigit(binding.componentBnextSmsEdittextText3Label, R.color.black)
-        displayColorInDigit(binding.componentBnextSmsEdittextText4Label, R.color.black)
-        displayColorInDigit(binding.componentBnextSmsEdittextText5Label, R.color.black)
+        displayColorInDigit(binding.componentSmsEdittextText0Label, R.color.black)
+        displayColorInDigit(binding.componentSmsEdittextText1Label, R.color.black)
+        displayColorInDigit(binding.componentSmsEdittextText2Label, R.color.black)
+        displayColorInDigit(binding.componentSmsEdittextTextDashLabel, R.color.grey_4)
+        displayColorInDigit(binding.componentSmsEdittextText3Label, R.color.black)
+        displayColorInDigit(binding.componentSmsEdittextText4Label, R.color.black)
+        displayColorInDigit(binding.componentSmsEdittextText5Label, R.color.black)
     }
 
     private fun setBoxContainerBackground(resId: Int) {
 
         //This is a LinearLayout bug:
         //https://stackoverflow.com/a/5890473/4021998
-        val bottom: Int = binding.componentBnextSmsEdittextBoxContainer.paddingBottom
-        val top: Int = binding.componentBnextSmsEdittextBoxContainer.paddingTop
-        val right: Int = binding.componentBnextSmsEdittextBoxContainer.paddingRight
-        val left: Int = binding.componentBnextSmsEdittextBoxContainer.paddingLeft
-        binding.componentBnextSmsEdittextBoxContainer.setBackgroundResource(resId)
-        binding.componentBnextSmsEdittextBoxContainer.setPadding(left, top, right, bottom)
+        val bottom: Int = binding.componentSmsEdittextBoxContainer.paddingBottom
+        val top: Int = binding.componentSmsEdittextBoxContainer.paddingTop
+        val right: Int = binding.componentSmsEdittextBoxContainer.paddingRight
+        val left: Int = binding.componentSmsEdittextBoxContainer.paddingLeft
+        binding.componentSmsEdittextBoxContainer.setBackgroundResource(resId)
+        binding.componentSmsEdittextBoxContainer.setPadding(left, top, right, bottom)
     }
 
 }
