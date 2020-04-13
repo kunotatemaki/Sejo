@@ -20,6 +20,7 @@ import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.views.SmsCodeView
 import com.rookia.android.sejo.utils.TextFormatUtils
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -45,7 +46,7 @@ class ValidateSmsFragment @Inject constructor(
                 updateCountDown()
             } finally {
                 if (remainingSeconds >= 0) {
-                    countDownHandler.postDelayed(this, 1000)
+                    countDownHandler.postDelayed(this, TimeUnit.SECONDS.toMillis(1))
                 } else {
                     remainingSeconds = 0
                     displayResendMessage()
@@ -71,18 +72,10 @@ class ValidateSmsFragment @Inject constructor(
         binding.fragmentValidateSmsView.setOnTextChangeListener(this)
         viewModel = injectViewModel(viewModelFactory)
 
-        if (::phonePrefix.isInitialized && ::phoneNumber.isInitialized) {
-            viewModel.requestSms(phonePrefix, phoneNumber).observe(viewLifecycleOwner, Observer {
-                it?.let {
-                    when (it.status) {
-                        Result.Status.LOADING -> showLoading()
-                        Result.Status.SUCCESS, Result.Status.ERROR -> {
-                            hideLoading()
+        requestSmsCode()
 
-                        }
-                    }
-                }
-            })
+        binding.fragmentValidateSmsFooterResend.setOnClickListener {
+            requestSmsCode()
         }
 
         //todo quitar el helper cuando sepa el código de producción
@@ -101,12 +94,12 @@ class ValidateSmsFragment @Inject constructor(
         context?.registerReceiver(viewModel.receiver, filter)
         startListeningForSms()
 
-        viewModel.smsCodeValidation.observe(viewLifecycleOwner, Observer {
+        viewModel.smsCodeValidationResult.observe(viewLifecycleOwner, Observer {
             it?.let {
                 when (it.status) {
                     Result.Status.SUCCESS -> {
                         hideLoading()
-                        when(it.data){
+                        when (it.data) {
                             Constants.SMS_CODE_OK -> {
                                 viewModel.storeValidatedPhone(phonePrefix, phoneNumber)
                                 binding.fragmentValidateSmsView.hideError()
@@ -175,12 +168,34 @@ class ValidateSmsFragment @Inject constructor(
     }
 
     override fun onText(newText: String) {
-        if (newText.length >= SMS_PIN_LENGTH && ::phonePrefix.isInitialized && ::phoneNumber.isInitialized) {
+        if (newText.length >= SMS_PIN_LENGTH && argumentsInitialized()) {
             viewModel.validateCode(
                 phonePrefix,
                 phoneNumber,
                 textFormatUtils.removeHyphenFromSmsCode(newText)
             )
+        } else {
+            binding.fragmentValidateSmsView.hideError()
+        }
+    }
+
+    private fun argumentsInitialized(): Boolean =
+        ::phonePrefix.isInitialized && ::phoneNumber.isInitialized
+
+    fun requestSmsCode() {
+        if (argumentsInitialized()) {
+            hideResendMessage()
+            viewModel.requestSms(phonePrefix, phoneNumber).observe(viewLifecycleOwner, Observer {
+                it?.let {
+                    when (it.status) {
+                        Result.Status.LOADING -> showLoading()
+                        Result.Status.SUCCESS, Result.Status.ERROR -> {
+                            hideLoading()
+                            startCountDown()
+                        }
+                    }
+                }
+            })
         }
     }
 

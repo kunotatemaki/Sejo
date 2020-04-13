@@ -2,6 +2,7 @@ package com.rookia.android.sejo.framework.receivers
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
+import com.rookia.android.sejo.utils.TextFormatUtils
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -24,7 +25,7 @@ class SMSBroadcastReceiverTest {
     val rule = InstantTaskExecutorRule()
 
     private val code: MutableLiveData<String> = MutableLiveData()
-    private val smsBroadcastReceiver = SMSBroadcastReceiver(code)
+    private val smsBroadcastReceiver = SMSBroadcastReceiver(code, TextFormatUtils())
 
     @Test
     fun extractCodeFromMessage() {

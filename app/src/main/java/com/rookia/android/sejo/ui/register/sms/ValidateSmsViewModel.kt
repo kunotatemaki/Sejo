@@ -12,20 +12,23 @@ import com.rookia.android.sejo.Constants.VALIDATED_PHONE_PREFIX_TAG
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
 import com.rookia.android.sejo.usecases.RequestSmsCodeUseCase
 import com.rookia.android.sejo.usecases.ValidateSmsCodeUseCase
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
+import javax.inject.Inject
+import javax.inject.Named
 
-class ValidateSmsViewModel constructor(
+class ValidateSmsViewModel @Inject constructor(
     private val smsCodeUseCase: RequestSmsCodeUseCase,
     private val validateCodeUseCase: ValidateSmsCodeUseCase,
     val receiver: SMSBroadcastReceiver,
-    private val preferencesManager: PreferencesManager
+    private val preferencesManager: PreferencesManager,
+    @Named("IO") private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    val smsCodeValidation: MediatorLiveData<Result<Int>> = MediatorLiveData()
+    val smsCodeValidationResult: MediatorLiveData<Result<Int>> = MediatorLiveData()
     private lateinit var _smsCodeValidation: LiveData<Result<Int>>
 
     fun requestSms(phonePrefix: String, phoneNumber: String): LiveData<Result<Int>> =
-        smsCodeUseCase.askForSmsCode(phonePrefix, phoneNumber).asLiveData(Dispatchers.IO)
+        smsCodeUseCase.askForSmsCode(phonePrefix, phoneNumber).asLiveData(dispatcher)
 
     fun validateCode(
         phonePrefix: String,
@@ -33,11 +36,11 @@ class ValidateSmsViewModel constructor(
         smsCode: String
     ) {
         _smsCodeValidation = validateCodeUseCase.validateSmsCode(phonePrefix, phoneNumber, smsCode)
-            .asLiveData(Dispatchers.IO)
-        smsCodeValidation.addSource(_smsCodeValidation) {
-            smsCodeValidation.value = _smsCodeValidation.value
+            .asLiveData(dispatcher)
+        smsCodeValidationResult.addSource(_smsCodeValidation) {
+            smsCodeValidationResult.value = _smsCodeValidation.value
             if (it.status != Result.Status.LOADING) {
-                smsCodeValidation.removeSource(_smsCodeValidation)
+                smsCodeValidationResult.removeSource(_smsCodeValidation)
             }
         }
     }
