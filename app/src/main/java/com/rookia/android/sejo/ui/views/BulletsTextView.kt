@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import com.rookia.android.sejo.Constants
+import com.rookia.android.sejo.Constants.PASSWORD_LENGTH
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ComponentBulletsTextViewBinding
 import com.rookia.android.sejo.utils.VibrationUtils
@@ -215,7 +216,6 @@ class BulletsTextView : ConstraintLayout {
     }
 
     companion object {
-        private const val PASSWORD_LENGTH: Int = 4
         private const val PASSWORD_SHOW_HIDE_DURATION: Long = 100L
         private const val PASSWORD_SHOW_HIDE_DELAY: Long = 50L
     }

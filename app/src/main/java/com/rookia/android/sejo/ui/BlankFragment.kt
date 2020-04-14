@@ -21,16 +21,16 @@ class BlankFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        test.setText("623")
-        show.setOnClickListener {
-            test.showPassword()
-        }
-        hide.setOnClickListener {
-            test.hidePassword()
-        }
-        error.setOnClickListener {
-            test.showErrorFeedback()
-        }
+//        test.setText("623")
+//        show.setOnClickListener {
+//            test.showPassword()
+//        }
+//        hide.setOnClickListener {
+//            test.hidePassword()
+//        }
+//        error.setOnClickListener {
+//            test.showErrorFeedback()
+//        }
     }
 
 

@@ -208,7 +208,7 @@ class SmsCodeView : ConstraintLayout {
     private fun displayError(message:String) {
         binding.componentSmsEdittextError.visible()
         binding.componentSmsEdittextError.text = message
-        setBoxContainerBackground(R.drawable.bg_component_sejo_sms_edittext_error)
+        setBoxContainerBackground(R.drawable.bg_component_sms_edittext_error)
         displayColorInDigit(binding.componentSmsEdittextText0Label, R.color.red_error)
         displayColorInDigit(binding.componentSmsEdittextText1Label, R.color.red_error)
         displayColorInDigit(binding.componentSmsEdittextText2Label, R.color.red_error)
@@ -229,7 +229,7 @@ class SmsCodeView : ConstraintLayout {
 
     fun hideError() {
         binding.componentSmsEdittextError.invisible()
-        setBoxContainerBackground(R.drawable.bg_component_sejo_sms_edittext)
+        setBoxContainerBackground(R.drawable.bg_component_sms_edittext)
         displayColorInDigit(binding.componentSmsEdittextText0Label, R.color.black)
         displayColorInDigit(binding.componentSmsEdittextText1Label, R.color.black)
         displayColorInDigit(binding.componentSmsEdittextText2Label, R.color.black)

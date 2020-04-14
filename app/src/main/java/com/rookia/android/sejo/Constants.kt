@@ -58,8 +58,10 @@ object Constants {
     //endregion
 
     //region PASSWORD
+    const val PASSWORD_LENGTH: Int = 4
     val ERROR_VIBRATION_PATTERN: LongArray =
         longArrayOf(100, 20, 100, 20, 100, 20, 100, 20, 100, 20)
+    const val USE_FINGERPRINT_TAG = "PREF_TAGS_USE_FINGERPRINT"
     //endregion
 
     //region SERVER CONNECTION

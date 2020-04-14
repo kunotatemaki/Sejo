@@ -19,8 +19,32 @@ import timber.log.Timber
  */
 
 object VibrationUtils {
+
+    /**
+     * Vibrate phone for x ms
+     * @param ms
+     */
     @Suppress("DEPRECATION")
-    fun patternVibrate(context: Context, pattern: LongArray) {
+    fun vibrate(context: Context, ms: Int) = try {
+        val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator?.vibrate(
+                VibrationEffect.createOneShot(ms.toLong(), VibrationEffect.DEFAULT_AMPLITUDE)
+            )
+        } else { //deprecated in API 26
+            vibrator?.vibrate(ms.toLong())
+        }
+    } catch (e: java.lang.NullPointerException) {
+        e.printStackTrace()
+        Timber.d("Couldn't vibrate.")
+    }
+
+    /**
+     * Vibrate with pattern {0, 100, 0, 100} wait, vib, wait, vib
+     * @param pattern
+     */
+    @Suppress("DEPRECATION")
+    fun patternVibrate(context: Context, pattern: LongArray) =
         try {
             val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -32,5 +56,5 @@ object VibrationUtils {
             e.printStackTrace()
             Timber.v("Couldn't vibrate.")
         }
-    }
+
 }

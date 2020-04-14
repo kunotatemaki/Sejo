@@ -9,6 +9,6 @@ class ValidatePhoneViewModel @Inject constructor(
     private val preferencesManager: PreferencesManager
 ) : ViewModel() {
 
-    fun isPhoneValidated(): Boolean =
-        preferencesManager.getBooleanFromPreferences(HAS_VALIDATED_PHONE_TAG)
+    fun isPhoneValidated(): Boolean =true
+//        preferencesManager.getBooleanFromPreferences(HAS_VALIDATED_PHONE_TAG)
 }

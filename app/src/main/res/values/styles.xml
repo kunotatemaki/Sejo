@@ -32,27 +32,27 @@
     </style>
 
     <style name="SejoButton.Candy">
-            <item name="android:background">@drawable/bg_component_sejo_button_selector_candy</item>
+            <item name="android:background">@drawable/bg_component_button_selector_candy</item>
     </style>
 
     <style name="SejoButton.Blue">
-            <item name="android:background">@drawable/bg_component_sejo_button_selector_blue</item>
+            <item name="android:background">@drawable/bg_component_button_selector_blue</item>
     </style>
 
     <style name="SejoButton.Green">
-            <item name="android:background">@drawable/bg_component_sejo_button_selector_green</item>
+            <item name="android:background">@drawable/bg_component_button_selector_green</item>
     </style>
 
     <style name="SejoButton.Grey">
-            <item name="android:background">@drawable/bg_component_sejo_button_selector_grey</item>
+            <item name="android:background">@drawable/bg_component_button_selector_grey</item>
     </style>
 
     <style name="SejoButton.Colors">
-            <item name="android:background">@drawable/bg_component_sejo_button_selector_colors</item>
+            <item name="android:background">@drawable/bg_component_button_selector_colors</item>
     </style>
 
     <style name="SejoButton.Red">
-            <item name="android:background">@drawable/bg_component_sejo_button_selector_red</item>
+            <item name="android:background">@drawable/bg_component_button_selector_red</item>
     </style>
 
     <style name="SimpleTextLabelBigBlack" parent="SimpleTextLabelBig">
@@ -118,4 +118,23 @@
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/grey_400</item>
     </style>
+    <style name="ComponentLoginKeyboardViewNumberContainer">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/component_login_keyboard_view_number_fontsize</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/avertastdperegular</item>
+        <item name="android:background">@drawable/ic_circular_ripple_32dp</item>
+<!--        <item name="android:background">?actionBarItemBackground</item>-->
+    </style>
+    <style name="ComponentLoginKeyboardViewInner">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:clickable">false</item>
+    </style>
+
+    <dimen name="component_login_keyboard_view_number_fontsize">32dp</dimen>
 </resources>

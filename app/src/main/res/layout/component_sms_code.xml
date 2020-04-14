@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@drawable/bg_component_sejo_sms_edittext"
+            android:background="@drawable/bg_component_sms_edittext"
             android:paddingBottom="8dp"
             android:paddingLeft="24dp"
             android:paddingRight="24dp"

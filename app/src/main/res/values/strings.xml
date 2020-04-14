@@ -15,4 +15,8 @@
     <string name="validate_sms_footer_resend_text"><![CDATA[Si no te llega el código, haz <font color=#ff0068>click aquí</font> y te lo reenviamos.]]></string>
     <string name="validate_sms_footer_waiting_text">Si no te llega el código podrás reenviarlo en %1$s</string>
 
+    <!--numeric keyboard -->
+    <string name="component_numeric_keyboard_reset_password">¿Has olvidado tu contraseña?</string>
+    <string name="component_password_screen_subheader_error_text">La contraseña no coincide</string>
+
 </resources>
