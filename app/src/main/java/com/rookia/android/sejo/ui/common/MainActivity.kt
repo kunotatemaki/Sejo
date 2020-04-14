@@ -17,12 +17,12 @@ import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
 
-//    @Inject
-//    lateinit var fragmentFactory: SejoFragmentFactory
+    @Inject
+    lateinit var fragmentFactory: SejoFragmentFactory
 
     private lateinit var binding: MainActivityBinding
 
-    override fun getFragmentFactory(): FragmentFactory? = null
+    override fun getFragmentFactory(): FragmentFactory? = fragmentFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

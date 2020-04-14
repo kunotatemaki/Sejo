@@ -1,7 +1,9 @@
 package com.rookia.android.sejo.di.modules
 
 import android.content.Context
+import androidx.biometric.BiometricPrompt
 import androidx.lifecycle.MutableLiveData
+import com.rookia.android.sejo.R
 import com.rookia.android.sejo.SejoApplication
 import com.rookia.android.sejo.data.repository.SmsCodeRepository
 import com.rookia.android.sejo.framework.network.NetworkServiceFactory
@@ -58,6 +60,14 @@ class ProvidesModule {
     @Provides
     @Named("Default")
     fun providesDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
+
+    @Provides
+    @Singleton
+    fun providesBiometricPromptInfoDialog(context: Context): BiometricPrompt.PromptInfo =
+        BiometricPrompt.PromptInfo.Builder()
+            .setTitle(context.getString(R.string.fragment_login_with_fingerprint_text))
+            .setNegativeButtonText(context.getString(R.string.fragment_login_with_fingerprint_use_password_text))
+            .build()
 
 
 }

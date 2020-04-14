@@ -18,5 +18,7 @@
     <!--numeric keyboard -->
     <string name="component_numeric_keyboard_reset_password">¿Has olvidado tu contraseña?</string>
     <string name="component_password_screen_subheader_error_text">La contraseña no coincide</string>
+    <string name="fragment_login_with_fingerprint_text">Desbloqueo biométrico</string>
+    <string name="fragment_login_with_fingerprint_use_password_text">Usar contraseña</string>
 
 </resources>

@@ -42,24 +42,27 @@ class PasswordScreen : ConstraintLayout {
     private var isFingerprintSupported = false
     private var useFingerPrint = false
 
-    interface PasswordScreenEvents {
-        fun showBiometricsLogin(forceIfAvailable: Boolean)
-        fun isFingerPrintSupported(): Boolean
-        fun isFingerprintSetByTheUser(): Boolean
+    interface PasswordValidator {
         fun checkPassword(password: String)
     }
 
-    private var listener: PasswordScreenEvents? = null
+    interface BiometricHelper {
+        fun showBiometricsLogin(forceIfAvailable: Boolean)
+        fun isFingerPrintSupported(): Boolean
+        fun isFingerprintSetByTheUser(): Boolean
+    }
+
+    private var passwordValidator: PasswordValidator? = null
+    private var biometricHelper: BiometricHelper? = null
 
     private val actions: NumericKeyboardActions = object : NumericKeyboardActions(context) {
 
         override fun onKeyPressed(key: KeyPressed?) {
             super.onKeyPressed(key)
-            val nonNullContext = context ?: return
             key ?: return
             if (key == KEY_BACK_FINGER) {
                 if (useFingerPrint && isFingerprintSupported && binding.componentPasswordScreenBullets.getText().isBlank()) {
-                    listener?.showBiometricsLogin(forceIfAvailable = true)
+                    biometricHelper?.showBiometricsLogin(forceIfAvailable = true)
                 } else {
                     binding.componentPasswordScreenBullets.deleteChar()
                 }
@@ -71,7 +74,7 @@ class PasswordScreen : ConstraintLayout {
             //Login when the length is correct
             val currentEnteredPassword = binding.componentPasswordScreenBullets.getText()
             if (currentEnteredPassword.length == PASSWORD_LENGTH) {
-                listener?.checkPassword(currentEnteredPassword)
+                passwordValidator?.checkPassword(currentEnteredPassword)
             }
 
         }
@@ -129,8 +132,12 @@ class PasswordScreen : ConstraintLayout {
         }
     }
 
-    fun setListener(listener: PasswordScreenEvents){
-        this.listener = listener
+    fun setPasswordValidator(listener: PasswordValidator){
+        passwordValidator = listener
+    }
+
+    fun setBiometricHelper(listener: BiometricHelper){
+        biometricHelper = listener
         isFingerprintSupported = listener.isFingerPrintSupported()
         useFingerPrint = listener.isFingerprintSetByTheUser()
         checkFingerprintIcon()
