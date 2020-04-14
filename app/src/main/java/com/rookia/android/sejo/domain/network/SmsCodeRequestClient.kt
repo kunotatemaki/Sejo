@@ -12,7 +12,7 @@ package com.rookia.android.sejo.domain.network
  *
  */
 
-data class SmsCodeRequest(
+data class SmsCodeRequestClient(
     val phonePrefix: String,
     val phoneNumber: String
 )

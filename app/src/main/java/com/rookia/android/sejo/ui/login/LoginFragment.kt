@@ -7,12 +7,11 @@ import androidx.core.content.ContextCompat
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
-import com.rookia.android.sejo.Constants.USE_FINGERPRINT_TAG
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.LoginFragmentBinding
 import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.views.PasswordScreen
-import com.rookia.android.sejo.utils.FingerprintUtils
+import com.rookia.android.sejo.framework.utils.FingerprintUtils
 import timber.log.Timber
 import java.util.concurrent.Executor
 import javax.inject.Inject
@@ -21,7 +20,6 @@ import javax.inject.Inject
 class LoginFragment @Inject constructor(
     private val viewModelFactory: ViewModelFactory,
     private val fingerprintUtils: FingerprintUtils,
-    private val preferencesManager: PreferencesManager,
     private val biometricInfo: BiometricPrompt.PromptInfo
 ) : BaseFragment(R.layout.login_fragment), PasswordScreen.BiometricHelper,
     PasswordScreen.PasswordValidator {
@@ -68,20 +66,11 @@ class LoginFragment @Inject constructor(
         Timber.d("")
     }
 
-    override fun showBiometricsLogin(forceIfAvailable: Boolean) {
-//        if (forceIfAvailable) {
-//            hideBiometrics = false
-//        }
-//        if (hideBiometrics.not() && fingerprintUtils.shouldShowLoginWithFingerprint()) {
-            biometricPrompt.authenticate(biometricInfo)
-//        }
+    override fun showBiometricsLogin() {
+        biometricPrompt.authenticate(biometricInfo)
     }
 
-    override fun isFingerPrintSupported(): Boolean =
-        fingerprintUtils.isFingerprintSupported()
-
-    override fun isFingerprintSetByTheUser(): Boolean =true
-//        preferencesManager.getBooleanFromPreferences(USE_FINGERPRINT_TAG)
+    override fun shouldShowFingerPrintScreen(): Boolean = fingerprintUtils.shouldShowFingerPrintScreen()
 
 
 

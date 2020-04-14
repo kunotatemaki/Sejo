@@ -4,8 +4,8 @@ import androidx.annotation.VisibleForTesting
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.framework.repository.resultOnlyFromNetworkInFlow
 import com.rookia.android.sejo.data.repository.SmsCodeRepository
-import com.rookia.android.sejo.domain.network.SmsCodeRequest
-import com.rookia.android.sejo.domain.network.SmsCodeValidation
+import com.rookia.android.sejo.domain.network.SmsCodeRequestClient
+import com.rookia.android.sejo.domain.network.SmsCodeValidationClient
 import com.rookia.android.sejo.framework.network.NetworkServiceFactory
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -34,7 +34,7 @@ class SmsCodeRepositoryImpl @Inject constructor(
     suspend fun requestSmsFromServer(phonePrefix: String, phoneNumber: String): Result<Int> =
         try {
             val api = networkServiceFactory.getSmsCodeCodeInstance()
-            val smsCodeRequest = SmsCodeRequest(phonePrefix, phoneNumber)
+            val smsCodeRequest = SmsCodeRequestClient(phonePrefix, phoneNumber)
             val resp = api.requestSmsCode(smsCodeRequest)
             if (resp.isSuccessful && resp.body() != null) {
                 Result.success(resp.body()?.result)
@@ -63,7 +63,7 @@ class SmsCodeRepositoryImpl @Inject constructor(
     ): Result<Int> =
         try {
             val api = networkServiceFactory.getSmsCodeCodeInstance()
-            val smsCodeValidation = SmsCodeValidation(phonePrefix, phoneNumber, smsCode)
+            val smsCodeValidation = SmsCodeValidationClient(phonePrefix, phoneNumber, smsCode)
             val resp = api.validateSmsCode(smsCodeValidation)
             if (resp.isSuccessful && resp.body() != null) {
                 Result.success(resp.body()?.result)

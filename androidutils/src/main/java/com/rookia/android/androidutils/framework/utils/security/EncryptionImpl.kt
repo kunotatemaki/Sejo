@@ -11,8 +11,6 @@ import android.security.keystore.KeyProperties
 import android.util.Base64
 import androidx.annotation.RequiresApi
 import com.rookia.android.androidutils.utils.security.Encryption
-import java.lang.Exception
-import java.math.BigInteger
 import java.security.KeyPairGenerator
 import java.security.KeyStore
 import java.security.KeyStoreException
@@ -23,15 +21,19 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import javax.security.auth.x500.X500Principal
 
+
 @Singleton
-class EncryptionImpl @Inject constructor(private val context: Context): Encryption {
+class EncryptionImpl @Inject constructor(private val context: Context) : Encryption {
 
     companion object {
         private const val CIPHER_TYPE = "RSA/ECB/PKCS1Padding"
+        private const val KEY_ALGORITHM_RSA = "RSA"
+
+        private const val KEYSTORE_PROVIDER_ANDROID_KEYSTORE = "AndroidKeyStore"
     }
 
     private fun getKeystoreInstance(): KeyStore {
-        val keyStore: KeyStore = KeyStore.getInstance("AndroidKeyStore")
+        val keyStore: KeyStore = KeyStore.getInstance(KEYSTORE_PROVIDER_ANDROID_KEYSTORE)
         keyStore.load(null)
         return keyStore
     }
@@ -41,38 +43,43 @@ class EncryptionImpl @Inject constructor(private val context: Context): Encrypti
         val keyStore = getKeystoreInstance()
 
         try {
-            // Create new key if needed
-            if (!keyStore.containsAlias(alias)) {
-                val generator = KeyPairGenerator.getInstance("RSA", "AndroidKeyStore")
-
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            //Create new key if needed
+            if (keyStore.containsAlias(alias).not()) {
+                val spec = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
                     val start = Calendar.getInstance()
                     val end = Calendar.getInstance()
                     end.add(Calendar.YEAR, 1)
 
-                    val spec = KeyPairGeneratorSpec.Builder(context)
+                    KeyPairGeneratorSpec.Builder(context)
                         .setAlias(alias)
-                        .setSubject(X500Principal("CN=Sample Name, O=Android Authority"))
-                        .setSerialNumber(BigInteger.ONE)
+                        .setSubject(X500Principal("CN=$alias, O=Android Authority"))
+                        .setSerialNumber(8938.toBigInteger())
                         .setStartDate(start.time)
                         .setEndDate(end.time)
                         .build()
-                    generator.initialize(spec)
+
                 } else {
 
-                    generator.initialize(
-                        KeyGenParameterSpec.Builder(
-                            alias,
-                            KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT)
-                            .setBlockModes(KeyProperties.BLOCK_MODE_ECB)
-                            .setDigests(KeyProperties.DIGEST_SHA256, KeyProperties.DIGEST_SHA512)
-                            .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_RSA_PKCS1)
-                            .build())
+                    KeyGenParameterSpec.Builder(
+                        alias,
+                        KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
+                    )
+                        .setBlockModes(KeyProperties.BLOCK_MODE_ECB)
+                        .setDigests(KeyProperties.DIGEST_SHA256, KeyProperties.DIGEST_SHA512)
+                        .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_RSA_PKCS1)
+                        .build()
 
                 }
+                val generator = KeyPairGenerator.getInstance(
+                    KEY_ALGORITHM_RSA,
+                    KEYSTORE_PROVIDER_ANDROID_KEYSTORE
+                )
+
+                generator.initialize(spec)
                 generator.generateKeyPair()
             }
         } catch (e: Exception) {
+            deleteKey(alias)
         }
     }
 
@@ -86,7 +93,7 @@ class EncryptionImpl @Inject constructor(private val context: Context): Encrypti
 
     override fun encryptString(text: String?, alias: String): String {
 
-        if(text.isNullOrBlank()) return ""
+        if (text.isNullOrBlank()) return ""
 
         val keyStore = getKeystoreInstance()
         var encryptedText = ""
@@ -111,12 +118,13 @@ class EncryptionImpl @Inject constructor(private val context: Context): Encrypti
 
     override fun decryptString(text: String?, alias: String): String {
 
-        if(text.isNullOrBlank()) return ""
+        if (text.isNullOrBlank()) return ""
 
         val keyStore = getKeystoreInstance()
         var decryptedText = ""
         try {
-            val privateKeyEntry = keyStore.getEntry(alias, null) as KeyStore.PrivateKeyEntry? ?: return ""
+            val privateKeyEntry =
+                keyStore.getEntry(alias, null) as KeyStore.PrivateKeyEntry? ?: return ""
             //RSAPrivateKey privateKey = (RSAPrivateKey) privateKeyEntry.getPrivateKey();
             val output = Cipher.getInstance(CIPHER_TYPE)
             output.init(Cipher.DECRYPT_MODE, privateKeyEntry.privateKey)
@@ -130,7 +138,6 @@ class EncryptionImpl @Inject constructor(private val context: Context): Encrypti
 
         return decryptedText
     }
-
 
 
 }

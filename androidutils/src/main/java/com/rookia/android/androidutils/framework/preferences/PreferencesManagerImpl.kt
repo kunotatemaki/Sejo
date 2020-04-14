@@ -11,9 +11,9 @@ import javax.inject.Singleton
 class PreferencesManagerImpl @Inject constructor(private var context: Context, private val encryption: Encryption?) :
     PreferencesManager {
 
-    override fun getIntFromPreferences(key: String): Int {
+    override fun getIntFromPreferences(key: String, default: Int): Int {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        return prefs.getInt(key, -1)
+        return prefs.getInt(key, default)
     }
 
     override fun getStringFromPreferences(key: String): String? {
@@ -21,25 +21,25 @@ class PreferencesManagerImpl @Inject constructor(private var context: Context, p
         return prefs.getString(key, null)
     }
 
-    override fun getEncryptedStringFromPreferences(key: String, alias: String): String {
+    override fun getEncryptedStringFromPreferences(key: String, alias: String): String? {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        val encrypted = prefs.getString(key, "") ?: ""
-        return encryption?.decryptString(encrypted, alias) ?: ""
+        val encrypted = prefs.getString(key, "")
+        return encryption?.decryptString(encrypted, alias)
     }
 
-    override fun getBooleanFromPreferences(key: String): Boolean {
+    override fun getBooleanFromPreferences(key: String, default: Boolean): Boolean {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        return prefs.getBoolean(key, false)
+        return prefs.getBoolean(key, default)
     }
 
-    override fun getLongFromPreferences(key: String): Long {
+    override fun getLongFromPreferences(key: String, default: Long): Long {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        return prefs.getLong(key, (-1).toLong())
+        return prefs.getLong(key, default)
     }
 
-    override fun getFloatFromPreferences(key: String): Float {
+    override fun getFloatFromPreferences(key: String, default: Float): Float {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        return prefs.getFloat(key, (-1).toFloat())
+        return prefs.getFloat(key, default)
     }
 
     override fun setIntIntoPreferences(key: String, value: Int) {

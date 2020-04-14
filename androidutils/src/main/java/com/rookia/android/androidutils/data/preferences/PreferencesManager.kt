@@ -2,12 +2,12 @@ package com.rookia.android.androidutils.data.preferences
 
 interface PreferencesManager {
 
-    fun getIntFromPreferences(key: String): Int
+    fun getIntFromPreferences(key: String, default: Int = -1): Int
     fun getStringFromPreferences(key: String): String?
-    fun getEncryptedStringFromPreferences(key: String, alias: String): String
-    fun getBooleanFromPreferences(key: String): Boolean
-    fun getLongFromPreferences(key: String): Long
-    fun getFloatFromPreferences(key: String): Float
+    fun getEncryptedStringFromPreferences(key: String, alias: String): String?
+    fun getBooleanFromPreferences(key: String, default: Boolean = false): Boolean
+    fun getLongFromPreferences(key: String, default: Long = -1L): Long
+    fun getFloatFromPreferences(key: String, default: Float = -1f): Float
     fun setIntIntoPreferences(key: String, value: Int)
     fun setStringIntoPreferences(key: String, value: String?)
     fun setEncryptedStringIntoPreferences(key: String, value: String, alias: String): Boolean

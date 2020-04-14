@@ -39,17 +39,15 @@ import com.rookia.android.sejo.ui.views.numerickeyboard.NumericKeyboardActions.K
 class PasswordScreen : ConstraintLayout {
     lateinit var binding: ComponentPasswordWithKeyboardBinding
     private var vibrate = false
-    private var isFingerprintSupported = false
-    private var useFingerPrint = false
+    private var shouldShowFingerprintOption = false
 
     interface PasswordValidator {
         fun checkPassword(password: String)
     }
 
     interface BiometricHelper {
-        fun showBiometricsLogin(forceIfAvailable: Boolean)
-        fun isFingerPrintSupported(): Boolean
-        fun isFingerprintSetByTheUser(): Boolean
+        fun showBiometricsLogin()
+        fun shouldShowFingerPrintScreen(): Boolean
     }
 
     private var passwordValidator: PasswordValidator? = null
@@ -61,8 +59,8 @@ class PasswordScreen : ConstraintLayout {
             super.onKeyPressed(key)
             key ?: return
             if (key == KEY_BACK_FINGER) {
-                if (useFingerPrint && isFingerprintSupported && binding.componentPasswordScreenBullets.getText().isBlank()) {
-                    biometricHelper?.showBiometricsLogin(forceIfAvailable = true)
+                if (shouldShowFingerprintOption && binding.componentPasswordScreenBullets.getText().isBlank()) {
+                    biometricHelper?.showBiometricsLogin()
                 } else {
                     binding.componentPasswordScreenBullets.deleteChar()
                 }
@@ -125,7 +123,7 @@ class PasswordScreen : ConstraintLayout {
     }
 
     private fun checkFingerprintIcon() {
-        if (isFingerprintSupported && binding.componentPasswordScreenBullets.getText().isBlank()) {
+        if (shouldShowFingerprintOption && binding.componentPasswordScreenBullets.getText().isBlank()) {
             binding.componentPasswordScreenNumericKeyboard.setFingerprint()
         } else {
             binding.componentPasswordScreenNumericKeyboard.setBackspace()
@@ -138,8 +136,7 @@ class PasswordScreen : ConstraintLayout {
 
     fun setBiometricHelper(listener: BiometricHelper){
         biometricHelper = listener
-        isFingerprintSupported = listener.isFingerPrintSupported()
-        useFingerPrint = listener.isFingerprintSetByTheUser()
+        shouldShowFingerprintOption = listener.shouldShowFingerPrintScreen()
         checkFingerprintIcon()
     }
 

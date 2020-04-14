@@ -34,7 +34,7 @@ internal abstract class ViewModelModule {
     @ViewModelKey(ValidatePhoneViewModel::class)
     internal abstract fun bindValidatePhoneViewModel(validatePhoneViewModel: ValidatePhoneViewModel): ViewModel
 
-    Binds
+    @Binds
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
     internal abstract fun bindLoginViewModel(loginViewModel: LoginViewModel): ViewModel
