@@ -73,6 +73,8 @@ class PasswordScreen : ConstraintLayout {
             val currentEnteredPassword = binding.componentPasswordScreenBullets.getText()
             if (currentEnteredPassword.length == PASSWORD_LENGTH) {
                 passwordValidator?.checkPassword(currentEnteredPassword)
+            } else {
+                hideError()
             }
 
         }
@@ -148,8 +150,8 @@ class PasswordScreen : ConstraintLayout {
         binding.componentPasswordScreenSubheader.text = text
     }
 
-    fun showError(text: String) {
-        binding.componentPasswordScreenSubheaderError.text = text
+    fun showError() {
+        binding.componentPasswordScreenBullets.showErrorFeedback()
         binding.componentPasswordScreenSubheaderError.visible()
     }
 

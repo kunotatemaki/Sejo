@@ -21,4 +21,8 @@
     <string name="fragment_login_with_fingerprint_text">Desbloqueo biométrico</string>
     <string name="fragment_login_with_fingerprint_use_password_text">Usar contraseña</string>
 
+    <!--  Create Pin  -->
+    <string name="fragment_password_creation_step_1_header">Crear contraseña</string>
+    <string name="fragment_password_creation_step_1_subheader">Elegir un pin de 4 dígitos</string>
+    <string name="fragment_password_creation_step_2_header">Vuelve a introducir tu contraseña</string>
 </resources>

@@ -10,15 +10,14 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.sejo.R
-import com.rookia.android.sejo.SejoFragmentFactory
 import com.rookia.android.sejo.databinding.MainActivityBinding
-import dagger.android.AndroidInjector
+import com.rookia.android.sejo.ui.register.RegisterFragmentFactory
 import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
 
     @Inject
-    lateinit var fragmentFactory: SejoFragmentFactory
+    lateinit var fragmentFactory: RegisterFragmentFactory
 
     private lateinit var binding: MainActivityBinding
 

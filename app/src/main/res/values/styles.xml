@@ -120,7 +120,7 @@
     </style>
     <style name="ComponentLoginKeyboardViewNumberContainer">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_height">@dimen/keyboard_height</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/component_login_keyboard_view_number_fontsize</item>

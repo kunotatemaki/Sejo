@@ -1,4 +1,4 @@
-package com.rookia.android.sejo
+package com.rookia.android.sejo.ui.register
 
 import androidx.biometric.BiometricPrompt
 import androidx.fragment.app.Fragment
@@ -10,6 +10,8 @@ import com.rookia.android.sejo.ui.login.LoginFragment
 import com.rookia.android.sejo.ui.register.number.ValidatePhoneNumberFragment
 import com.rookia.android.sejo.ui.register.sms.ValidateSmsFragment
 import com.rookia.android.sejo.framework.utils.FingerprintUtils
+import com.rookia.android.sejo.ui.register.passwordcreation.PasswordCreationStep1Fragment
+import com.rookia.android.sejo.ui.register.passwordcreation.PasswordCreationStep2Fragment
 import com.rookia.android.sejo.utils.TextFormatUtils
 import javax.inject.Inject
 
@@ -25,7 +27,7 @@ import javax.inject.Inject
  *
  */
 
-class SejoFragmentFactory @Inject constructor(
+class RegisterFragmentFactory @Inject constructor(
     private val viewModelFactory: ViewModelFactory,
     private val resourcesManager: ResourcesManager,
     private val textFormatUtils: TextFormatUtils,
@@ -37,6 +39,8 @@ class SejoFragmentFactory @Inject constructor(
             ValidatePhoneNumberFragment::class.java -> ValidatePhoneNumberFragment(viewModelFactory, resourcesManager)
             ValidateSmsFragment::class.java -> ValidateSmsFragment(viewModelFactory, textFormatUtils)
             LoginFragment::class.java -> LoginFragment(viewModelFactory, fingerprintUtils, biometricDialog)
+            PasswordCreationStep1Fragment::class.java -> PasswordCreationStep1Fragment(resourcesManager)
+            PasswordCreationStep2Fragment::class.java -> PasswordCreationStep2Fragment(resourcesManager, viewModelFactory)
             else -> super.instantiate(classLoader, className)
         }
     }
