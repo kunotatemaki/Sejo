@@ -1,8 +1,6 @@
 package com.rookia.android.sejo.utils
 
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
-import com.rookia.android.sejo.Constants.SIGN_IN_PROCESS_VALIDATED_PHONE_NUMBER_TAG
-import com.rookia.android.sejo.Constants.SIGN_IN_PROCESS_VALIDATED_PHONE_PREFIX_TAG
 import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_MAX_LENGTH_WITHOUT_SPACES
 import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_EIGHT_DIGITS
 import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_FIVE_DIGITS
@@ -10,10 +8,13 @@ import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_FO
 import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_NINE_DIGITS
 import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_SEVEN_DIGITS
 import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_SIX_DIGITS
+import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_FOUR_GROUP
 import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_THREE_GROUP
 import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_TWO_GROUP
 import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PREFIX
 import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_START_PATTERN_MATCHER
+import com.rookia.android.sejo.Constants.USER_PHONE_NUMBER_TAG
+import com.rookia.android.sejo.Constants.USER_PHONE_PREFIX_TAG
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -44,11 +45,15 @@ class PhoneUtils @Inject constructor() {
                 phoneStartsWithValidNumber(prefix, cleanPhone)
     }
 
-    fun isPhoneNumberYourActualPhone(prefix: String, phone: String, preferencesManager: PreferencesManager): Boolean {
+    fun isPhoneNumberYourActualPhone(
+        prefix: String,
+        phone: String,
+        preferencesManager: PreferencesManager
+    ): Boolean {
         val storedPhoneNumber: String? =
-            preferencesManager.getStringFromPreferences(SIGN_IN_PROCESS_VALIDATED_PHONE_NUMBER_TAG)
+            preferencesManager.getStringFromPreferences(USER_PHONE_NUMBER_TAG)
         val storedPhonePrefix: String? =
-            preferencesManager.getStringFromPreferences(SIGN_IN_PROCESS_VALIDATED_PHONE_PREFIX_TAG)
+            preferencesManager.getStringFromPreferences(USER_PHONE_PREFIX_TAG)
         return storedPhoneNumber == phone && storedPhonePrefix == prefix
     }
 
@@ -100,11 +105,11 @@ class PhoneUtils @Inject constructor() {
         return when (cleanPhone.length) {
             9 -> cleanPhone.replace(
                 SPANISH_PHONE_NUMBER_PATTERN_MATCHER_NINE_DIGITS.toRegex(),
-                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_THREE_GROUP
+                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_FOUR_GROUP
             )
             8 -> cleanPhone.replace(
                 SPANISH_PHONE_NUMBER_PATTERN_MATCHER_EIGHT_DIGITS.toRegex(),
-                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_THREE_GROUP
+                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_FOUR_GROUP
             )
             7 -> cleanPhone.replace(
                 SPANISH_PHONE_NUMBER_PATTERN_MATCHER_SEVEN_DIGITS.toRegex(),
@@ -112,7 +117,7 @@ class PhoneUtils @Inject constructor() {
             )
             6 -> cleanPhone.replace(
                 SPANISH_PHONE_NUMBER_PATTERN_MATCHER_SIX_DIGITS.toRegex(),
-                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_TWO_GROUP
+                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_THREE_GROUP
             )
             5 -> cleanPhone.replace(
                 SPANISH_PHONE_NUMBER_PATTERN_MATCHER_FIVE_DIGITS.toRegex(),

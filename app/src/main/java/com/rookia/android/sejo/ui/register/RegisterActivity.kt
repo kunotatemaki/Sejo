@@ -12,6 +12,7 @@ import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.RegisterActivityBinding
 import com.rookia.android.sejo.ui.common.BaseActivity
+import com.rookia.android.sejo.ui.fragmentfactories.RegisterFragmentFactory
 import javax.inject.Inject
 
 class RegisterActivity : BaseActivity() {
@@ -24,9 +25,10 @@ class RegisterActivity : BaseActivity() {
     override fun getFragmentFactory(): FragmentFactory? = fragmentFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.register_activity)
+
+
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {

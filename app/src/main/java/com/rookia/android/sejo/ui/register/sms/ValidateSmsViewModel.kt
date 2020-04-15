@@ -9,6 +9,7 @@ import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.Constants.HAS_VALIDATED_PHONE_TAG
 import com.rookia.android.sejo.Constants.VALIDATED_PHONE_NUMBER_TAG
 import com.rookia.android.sejo.Constants.VALIDATED_PHONE_PREFIX_TAG
+import com.rookia.android.sejo.domain.local.SmsCodeValidation
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
 import com.rookia.android.sejo.usecases.RequestSmsCodeUseCase
 import com.rookia.android.sejo.usecases.ValidateSmsCodeUseCase
@@ -24,8 +25,8 @@ class ValidateSmsViewModel @Inject constructor(
     @Named("IO") private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    val smsCodeValidationResult: MediatorLiveData<Result<Int>> = MediatorLiveData()
-    private lateinit var _smsCodeValidation: LiveData<Result<Int>>
+    val smsCodeValidationResult: MediatorLiveData<Result<SmsCodeValidation>> = MediatorLiveData()
+    private lateinit var _smsCodeValidation: LiveData<Result<SmsCodeValidation>>
 
     fun requestSms(phonePrefix: String, phoneNumber: String): LiveData<Result<Int>> =
         smsCodeUseCase.askForSmsCode(phonePrefix, phoneNumber).asLiveData(dispatcher)

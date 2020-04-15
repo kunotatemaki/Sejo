@@ -1,7 +1,7 @@
 package com.rookia.android.sejo.data.repository
 
-import androidx.lifecycle.LiveData
 import com.rookia.android.androidutils.domain.vo.Result
+import com.rookia.android.sejo.domain.local.SmsCodeValidation
 import kotlinx.coroutines.flow.Flow
 
 
@@ -18,5 +18,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface SmsCodeRepository {
     fun askForSmsCode(phonePrefix: String, phoneNumber: String): Flow<Result<Int>>
-    fun validateSmsCode(phonePrefix: String, phoneNumber: String, smsCode: String): Flow<Result<Int>>
+    fun validateSmsCode(
+        phonePrefix: String,
+        phoneNumber: String,
+        smsCode: String
+    ): Flow<Result<SmsCodeValidation>>
 }

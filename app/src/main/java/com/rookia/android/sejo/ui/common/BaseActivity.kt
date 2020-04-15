@@ -30,12 +30,19 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector {
         super.onCreate(savedInstanceState)
     }
 
-    @Suppress("unused")
     fun hideKeyboard() {
         this.currentFocus?.let { view ->
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.applicationWindowToken, 0)
         }
+    }
+
+    fun showKeyboard(){
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.toggleSoftInput(
+            InputMethodManager.SHOW_IMPLICIT,
+            InputMethodManager.HIDE_IMPLICIT_ONLY
+        )
     }
 
     abstract fun showLoading()

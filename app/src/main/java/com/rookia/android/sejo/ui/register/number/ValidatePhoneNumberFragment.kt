@@ -10,7 +10,6 @@ import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ValidateNumberFragmentBinding
 import com.rookia.android.sejo.ui.common.BaseFragment
-import com.rookia.android.sejo.ui.common.MainActivity
 import com.rookia.android.sejo.ui.register.RegisterActivity
 import com.rookia.android.sejo.ui.views.PhoneNumberView
 import javax.inject.Inject
@@ -74,6 +73,7 @@ class ValidatePhoneNumberFragment @Inject constructor(
     }
 
     private fun navigateToDashboard() {
+        (activity as RegisterActivity).hideKeyboard()
         val direction = ValidatePhoneNumberFragmentDirections.actionValidateNumberFragmentToMainActivity()
         findNavController().navigate(direction)
         activity?.finish()

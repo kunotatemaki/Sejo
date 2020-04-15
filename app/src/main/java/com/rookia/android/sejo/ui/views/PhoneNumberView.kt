@@ -109,7 +109,7 @@ class PhoneNumberView : ConstraintLayout {
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                if (start > s?.length ?: 0 && after == 0 && s?.get(start) == ' ') {
+                if (start < s?.length ?: 0 && after < count && s?.get(start) == ' ') {
                     deletingSpace = true
                 }
             }

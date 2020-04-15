@@ -3,39 +3,63 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/register_graph"
-    app:startDestination="@id/passwordCreationStep1Fragment">
+    app:startDestination="@id/validateNumberFragment">
 
     <fragment
         android:id="@+id/validateNumberFragment"
         android:name="com.rookia.android.sejo.ui.register.number.ValidatePhoneNumberFragment"
         android:label="validate_number_fragment"
-        tools:layout="@layout/validate_number_fragment" >
+        tools:layout="@layout/validate_number_fragment">
         <action
             android:id="@+id/action_validateNumberFragment_to_validateSmsFragment"
             app:destination="@id/validateSmsFragment"
-            app:launchSingleTop="true" />
+            app:enterAnim="@anim/navigation_right_enter"
+            app:exitAnim="@anim/navigation_left_exit"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/navigation_left_enter"
+            app:popExitAnim="@anim/navigation_right_exit" />
         <action
             android:id="@+id/action_validateNumberFragment_to_mainActivity"
-            app:destination="@id/mainActivity" />
+            app:destination="@id/mainActivity"
+            app:enterAnim="@anim/navigation_right_enter"
+            app:exitAnim="@anim/navigation_left_exit"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/navigation_left_enter"
+            app:popExitAnim="@anim/navigation_right_exit"/>
+        <action
+            android:id="@+id/action_validateNumberFragment_to_passwordCreationStep1Fragment"
+            app:destination="@id/passwordCreationStep1Fragment"
+            app:enterAnim="@anim/navigation_right_enter"
+            app:exitAnim="@anim/navigation_left_exit"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/navigation_left_enter"
+            app:popExitAnim="@anim/navigation_right_exit" />
     </fragment>
 
     <fragment
         android:id="@+id/validateSmsFragment"
         android:name="com.rookia.android.sejo.ui.register.sms.ValidateSmsFragment"
         android:label="validate_sms_fragment"
-        tools:layout="@layout/validate_sms_fragment" >
+        tools:layout="@layout/validate_sms_fragment">
         <argument
             android:name="phonePrefix"
-            app:argType="string"/>
+            app:argType="string" />
         <argument
             android:name="phoneNumber"
-            app:argType="string"/>
+            app:argType="string" />
         <action
             android:id="@+id/action_validateSmsFragment_to_mainActivity"
-            app:destination="@id/mainActivity" />
+            app:destination="@id/mainActivity"
+            app:enterAnim="@anim/navigation_bottom_enter"
+            app:launchSingleTop="true" />
         <action
             android:id="@+id/action_validateSmsFragment_to_passwordCreationStep1Fragment"
-            app:destination="@id/passwordCreationStep1Fragment" />
+            app:destination="@id/passwordCreationStep1Fragment"
+
+            app:enterAnim="@anim/navigation_right_enter"
+            app:exitAnim="@anim/navigation_left_exit"
+            app:popEnterAnim="@anim/navigation_left_enter"
+            app:popExitAnim="@anim/navigation_right_exit" />
     </fragment>
     <activity
         android:id="@+id/mainActivity"
@@ -44,18 +68,22 @@
         android:label="MainActivity" />
     <fragment
         android:id="@+id/passwordCreationStep1Fragment"
-        tools:layout="@layout/fragment_password_creation_step1"
         android:name="com.rookia.android.sejo.ui.register.passwordcreation.PasswordCreationStep1Fragment"
-        android:label="PasswordCreationStep1Fragment" >
+        android:label="PasswordCreationStep1Fragment"
+        tools:layout="@layout/fragment_password_creation_step1">
         <action
             android:id="@+id/action_passwordCreationStep1Fragment_to_passwordCreationStep2Fragment"
-            app:destination="@id/passwordCreationStep2Fragment" />
+            app:destination="@id/passwordCreationStep2Fragment"
+            app:enterAnim="@anim/navigation_right_enter"
+            app:exitAnim="@anim/navigation_left_exit"
+            app:popEnterAnim="@anim/navigation_left_enter"
+            app:popExitAnim="@anim/navigation_right_exit" />
     </fragment>
     <fragment
         android:id="@+id/passwordCreationStep2Fragment"
-        tools:layout="@layout/fragment_password_creation_step2"
         android:name="com.rookia.android.sejo.ui.register.passwordcreation.PasswordCreationStep2Fragment"
-        android:label="PasswordCreationStep2Fragment" >
+        android:label="PasswordCreationStep2Fragment"
+        tools:layout="@layout/fragment_password_creation_step2">
         <argument
             android:name="code"
             app:argType="string" />

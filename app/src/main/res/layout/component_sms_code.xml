@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <import type="android.view.View" />
@@ -243,7 +242,7 @@
             android:id="@+id/component_sms_edittext_hidden_edittext"
             android:layout_width="1px"
             android:layout_height="1px"
-            android:inputType="number"
+            android:inputType="phone"
             android:background="@android:color/transparent"
             android:maxLength="@{Constants.SMS_PIN_LENGTH}"
             app:layout_constraintBottom_toBottomOf="parent"

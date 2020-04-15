@@ -1,4 +1,4 @@
-package com.rookia.android.sejo.domain
+package com.rookia.android.sejo.domain.local
 
 
 /**

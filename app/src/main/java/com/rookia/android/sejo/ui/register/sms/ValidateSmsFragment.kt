@@ -17,6 +17,7 @@ import com.rookia.android.sejo.Constants.SMS_PIN_LENGTH
 import com.rookia.android.sejo.Constants.SMS_RESEND_WAITING_TIME
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ValidateSmsFragmentBinding
+import com.rookia.android.sejo.ui.common.BaseActivity
 import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.views.SmsCodeView
 import com.rookia.android.sejo.utils.TextFormatUtils
@@ -100,11 +101,15 @@ class ValidateSmsFragment @Inject constructor(
                 when (it.status) {
                     Result.Status.SUCCESS -> {
                         hideLoading()
-                        when (it.data) {
+                        when (it.data?.result) {
                             Constants.SMS_CODE_OK -> {
                                 viewModel.storeValidatedPhone(phonePrefix, phoneNumber)
                                 binding.fragmentValidateSmsView.hideError()
-                                navigateToDashboard()
+                                if(it.data?.userExists == false) {
+                                    navigateToCreatePassword()
+                                }else{
+                                    navigateToDashboard()
+                                }
                             }
                             Constants.SMS_CODE_EXPIRED -> binding.fragmentValidateSmsView.displayExpiredCode()
                             else -> binding.fragmentValidateSmsView.displayWrongCode()
@@ -201,10 +206,19 @@ class ValidateSmsFragment @Inject constructor(
     }
 
     private fun navigateToDashboard() {
+        (activity as? BaseActivity)?.hideKeyboard()
         val direction = ValidateSmsFragmentDirections.actionValidateSmsFragmentToMainActivity()
         findNavController().navigate(direction)
         activity?.finish()
     }
 
+    private fun navigateToCreatePassword(){
+        (activity as? BaseActivity)?.hideKeyboard()
+        val direction = ValidateSmsFragmentDirections.actionValidateSmsFragmentToPasswordCreationStep1Fragment()
+        findNavController().navigate(direction)
+    }
+
 
 }
+
+//todo no volver aquí desde create password
