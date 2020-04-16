@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="PasswordScreen">
+    <declare-styleable name="PinScreen">
         <attr name="vibrate" format="boolean" />
+        <attr name="recover_pin" format="boolean" />
+        <attr name="show_pin" format="boolean" />
     </declare-styleable>
 </resources>

@@ -7,8 +7,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.BlankFragment">
 
-    <com.rookia.android.sejo.ui.views.PasswordScreen
-        android:id="@+id/login_password_screen"
+    <com.rookia.android.sejo.ui.views.PinScreen
+        android:id="@+id/login_pin_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:vibrate="true"

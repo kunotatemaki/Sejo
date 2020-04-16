@@ -16,13 +16,14 @@
     <string name="validate_sms_footer_waiting_text">Si no te llega el código podrás reenviarlo en %1$s</string>
 
     <!--numeric keyboard -->
-    <string name="component_numeric_keyboard_reset_password">¿Has olvidado tu contraseña?</string>
-    <string name="component_password_screen_subheader_error_text">La contraseña no coincide</string>
+    <string name="component_numeric_keyboard_reset_pin"><u>¿Has olvidado tu número Pin?</u></string>
+    <string name="component_pin_screen_subheader_error_text">El número Pin no coincide</string>
     <string name="fragment_login_with_fingerprint_text">Desbloqueo biométrico</string>
-    <string name="fragment_login_with_fingerprint_use_password_text">Usar contraseña</string>
+    <string name="fragment_login_with_fingerprint_use_pin_text">Usar número Pin</string>
 
     <!--  Create Pin  -->
-    <string name="fragment_password_creation_step_1_header">Crear contraseña</string>
-    <string name="fragment_password_creation_step_1_subheader">Elegir un pin de 4 dígitos</string>
-    <string name="fragment_password_creation_step_2_header">Vuelve a introducir tu contraseña</string>
+    <string name="fragment_pin_creation_step_1_header">Crear Pin</string>
+    <string name="fragment_pin_creation_step_1_subheader">Elegir un Pin de 4 dígitos</string>
+    <string name="fragment_pin_creation_step_2_header">Vuelve a introducir tu Pin</string>
+    <string name="create_pin_menu_item">OK</string>
 </resources>

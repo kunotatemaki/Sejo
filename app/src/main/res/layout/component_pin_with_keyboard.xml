@@ -1,62 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.views.PasswordScreen">
+        tools:context=".ui.views.PinScreen">
 
         <TextView
-            android:id="@+id/component_password_screen_header"
+            android:id="@+id/component_pin_screen_header"
             style="@style/SimpleTextLabelMediumDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/default_margin"
             tools:text="Aquí el título" />
 
         <TextView
-            android:id="@+id/component_password_screen_subheader"
+            android:id="@+id/component_pin_screen_subheader"
             style="@style/SimpleTextLabelSmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/component_password_screen_header"
+            app:layout_constraintTop_toBottomOf="@+id/component_pin_screen_header"
             tools:text="Aquí el subtítulo" />
 
 
         <TextView
-            android:id="@+id/component_password_screen_subheader_error"
+            android:id="@+id/component_pin_screen_subheader_error"
             style="@style/SimpleTextLabelMediumError"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/component_password_screen_subheader_error_text"
+            android:text="@string/component_pin_screen_subheader_error_text"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/component_password_screen_bullets"
+            app:layout_constraintBottom_toTopOf="@id/component_pin_screen_bullets"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:visibility="visible" />
 
         <com.rookia.android.sejo.ui.views.BulletsTextView
-            android:id="@+id/component_password_screen_bullets"
+            android:id="@+id/component_pin_screen_bullets"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/component_password_screen_numeric_keyboard"
-            app:layout_constraintTop_toBottomOf="@id/component_password_screen_subheader" />
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/component_pin_screen_subheader" />
 
         <com.rookia.android.sejo.ui.views.numerickeyboard.NumericKeyboardView
-            android:id="@+id/component_password_screen_numeric_keyboard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/component_pin_screen_numeric_keyboard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline2"
             app:layout_constraintBottom_toBottomOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5"
+            app:layout_constraintGuide_begin="20dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

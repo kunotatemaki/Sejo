@@ -1,8 +1,9 @@
+@file:Suppress("unused")
+
 package com.rookia.android.sejo.ui.views
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.drawable.AnimationDrawable
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
@@ -18,7 +19,7 @@ import com.rookia.android.androidutils.extensions.supportReadBoolean
 import com.rookia.android.androidutils.extensions.supportWriteBoolean
 import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.sejo.Constants
-import com.rookia.android.sejo.Constants.PASSWORD_LENGTH
+import com.rookia.android.sejo.Constants.PIN_LENGTH
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ComponentBulletsTextViewBinding
 import com.rookia.android.sejo.utils.VibrationUtils
@@ -39,26 +40,26 @@ class BulletsTextView : ConstraintLayout {
     private lateinit var binding: ComponentBulletsTextViewBinding
     private var content = ""
     private var listener: OnTextChangedListener? = null
-    private var showPassword = false
+    private var showPin = false
 
     interface OnTextChangedListener {
         fun onText(newText: String)
     }
 
     private class SavedState : BaseSavedState {
-        var password: String? = null
-        var passwordVisibility: Boolean = false
+        var pin: String? = null
+        var pinVisibility: Boolean = false
 
         internal constructor(superState: Parcelable?) : super(superState)
         private constructor(parcel: Parcel) : super(parcel) {
-            password = parcel.readString()
-            passwordVisibility = parcel.supportReadBoolean()
+            pin = parcel.readString()
+            pinVisibility = parcel.supportReadBoolean()
         }
 
         override fun writeToParcel(parcel: Parcel, flags: Int) {
             super.writeToParcel(parcel, flags)
-            parcel.writeString(password)
-            parcel.supportWriteBoolean(passwordVisibility)
+            parcel.writeString(pin)
+            parcel.supportWriteBoolean(pinVisibility)
         }
 
         companion object {
@@ -95,27 +96,27 @@ class BulletsTextView : ConstraintLayout {
         isSaveEnabled = true
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         binding = ComponentBulletsTextViewBinding.inflate(inflater, this, true)
-        setPasswordVisibility()
+        setPinVisibility()
 
         binding.componentBulletsEyePassVisibility.setOnClickListener {
-            showPassword = showPassword.not()
-            setPasswordVisibility()
+            showPin = showPin.not()
+            setPinVisibility()
         }
     }
 
-    private fun setPasswordVisibility(){
-        if(showPassword){
-            showPassword()
+    private fun setPinVisibility(){
+        if(showPin){
+            showPin()
         } else {
-            hidePassword()
+            hidePin()
         }
     }
 
     override fun onSaveInstanceState(): Parcelable? =
         super.onSaveInstanceState().also {
             val myState = SavedState(it)
-            myState.password = this.getText()
-            myState.passwordVisibility = showPassword
+            myState.pin = this.getPin()
+            myState.pinVisibility = showPin
             return myState
         }
 
@@ -123,15 +124,15 @@ class BulletsTextView : ConstraintLayout {
         val savedState = state as SavedState
         super.onRestoreInstanceState(savedState.superState)
 
-        savedState.password?.let {
+        savedState.pin?.let {
             setText(it)
         }
-        showPassword = savedState.passwordVisibility
-        setPasswordVisibility()
+        showPin = savedState.pinVisibility
+        setPinVisibility()
     }
 
     private fun setTextInBullets() {
-        for (i in 0 until PASSWORD_LENGTH) {
+        for (i in 0 until PIN_LENGTH) {
             val char = if (i < content.length) content[i] else null
             val textView: TextView
             val imageView: ImageView
@@ -165,20 +166,20 @@ class BulletsTextView : ConstraintLayout {
                 ColorStateList.valueOf(
                     ContextCompat.getColor(
                         context,
-                        R.color.password_bullet_pressed
+                        R.color.pin_bullet_pressed
                     )
                 )
-            );
+            )
         } else {
             ImageViewCompat.setImageTintList(
                 imageView,
                 ColorStateList.valueOf(
                     ContextCompat.getColor(
                         context,
-                        R.color.password_bullet_normal
+                        R.color.pin_bullet_normal
                     )
                 )
-            );
+            )
         }
     }
 
@@ -192,7 +193,7 @@ class BulletsTextView : ConstraintLayout {
      * and prints the bullets.
      */
     fun addChar(c: String) {
-        if (content.length < PASSWORD_LENGTH) {
+        if (content.length < PIN_LENGTH) {
             content += c
             setText(content)
         }
@@ -216,10 +217,10 @@ class BulletsTextView : ConstraintLayout {
      * @param text
      */
     fun setText(text: String) {
-        content = if (text.length <= PASSWORD_LENGTH) {
+        content = if (text.length <= PIN_LENGTH) {
             text
         } else {
-            text.substring(0, PASSWORD_LENGTH)
+            text.substring(0, PIN_LENGTH)
         }
         setTextInBullets()
         listener?.onText(content)
@@ -227,11 +228,11 @@ class BulletsTextView : ConstraintLayout {
     }
 
     /**
-     * @return the stored text
+     * @return the stored pin
      */
-    fun getText(): String {
-        return content
-    }
+    fun getPin(): String = content
+    
+    fun isPinSet(): Boolean = content.length == PIN_LENGTH
 
     private fun animateShow(dotView: ImageView, text: TextView, position: Int) {
         dotView.animate()
@@ -263,33 +264,32 @@ class BulletsTextView : ConstraintLayout {
             .startDelay
     }
 
-    private fun showPassword() {
+    private fun showPin() {
         with(binding) {
             animateShow(componentBulletsTextview0, componentBulletsTextviewText0, 1)
             animateShow(componentBulletsTextview1, componentBulletsTextviewText1, 2)
             animateShow(componentBulletsTextview2, componentBulletsTextviewText2, 3)
             animateShow(componentBulletsTextview3, componentBulletsTextviewText3, 4)
         }
-        binding.componentBulletsEyePassVisibility.setImageResource(R.drawable.ic_create_password_hide_pass)
+        binding.componentBulletsEyePassVisibility.setImageResource(R.drawable.ic_create_pin_hide_pass)
     }
 
-    private fun hidePassword() {
+    private fun hidePin() {
         with(binding) {
             animateHide(componentBulletsTextview0, componentBulletsTextviewText0, 1)
             animateHide(componentBulletsTextview1, componentBulletsTextviewText1, 2)
             animateHide(componentBulletsTextview2, componentBulletsTextviewText2, 3)
             animateHide(componentBulletsTextview3, componentBulletsTextviewText3, 4)
         }
-        binding.componentBulletsEyePassVisibility.setImageResource(R.drawable.ic_create_password_show_pass)
+        binding.componentBulletsEyePassVisibility.setImageResource(R.drawable.ic_create_pin_show_pass)
     }
 
-    private lateinit var rocketAnimation: AnimationDrawable
     fun showErrorFeedback() {
         startAnimation(AnimationUtils.loadAnimation(context, R.anim.shake))
         VibrationUtils.patternVibrate(context, Constants.ERROR_VIBRATION_PATTERN)
     }
 
-    fun showPasswordButtonVisibility(visible: Boolean) {
+    fun showPinButtonVisibility(visible: Boolean) {
         with(binding.componentBulletsEyePassVisibility) {
             if (visible) visible() else gone()
         }

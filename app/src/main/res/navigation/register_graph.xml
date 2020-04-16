@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/register_graph"
-    app:startDestination="@id/validateNumberFragment">
+    app:startDestination="@id/passwordCreationStep1Fragment">
 
     <fragment
         android:id="@+id/validateNumberFragment"
@@ -68,9 +68,9 @@
         android:label="MainActivity" />
     <fragment
         android:id="@+id/passwordCreationStep1Fragment"
-        android:name="com.rookia.android.sejo.ui.register.passwordcreation.PasswordCreationStep1Fragment"
+        android:name="com.rookia.android.sejo.ui.register.pincreation.PinCreationStep1Fragment"
         android:label="PasswordCreationStep1Fragment"
-        tools:layout="@layout/fragment_password_creation_step1">
+        tools:layout="@layout/fragment_pin_creation_step1">
         <action
             android:id="@+id/action_passwordCreationStep1Fragment_to_passwordCreationStep2Fragment"
             app:destination="@id/passwordCreationStep2Fragment"
@@ -81,9 +81,9 @@
     </fragment>
     <fragment
         android:id="@+id/passwordCreationStep2Fragment"
-        android:name="com.rookia.android.sejo.ui.register.passwordcreation.PasswordCreationStep2Fragment"
+        android:name="com.rookia.android.sejo.ui.register.pincreation.PinCreationStep2Fragment"
         android:label="PasswordCreationStep2Fragment"
-        tools:layout="@layout/fragment_password_creation_step2">
+        tools:layout="@layout/fragment_pin_creation_step2">
         <argument
             android:name="code"
             app:argType="string" />

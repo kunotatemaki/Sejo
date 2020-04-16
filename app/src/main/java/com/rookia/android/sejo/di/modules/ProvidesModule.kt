@@ -66,7 +66,7 @@ class ProvidesModule {
     fun providesBiometricPromptInfoDialog(context: Context): BiometricPrompt.PromptInfo =
         BiometricPrompt.PromptInfo.Builder()
             .setTitle(context.getString(R.string.fragment_login_with_fingerprint_text))
-            .setNegativeButtonText(context.getString(R.string.fragment_login_with_fingerprint_use_password_text))
+            .setNegativeButtonText(context.getString(R.string.fragment_login_with_fingerprint_use_pin_text))
             .build()
 
 

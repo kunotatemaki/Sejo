@@ -5,13 +5,14 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.register.passwordcreation.PasswordCreationStep1Fragment">
+        tools:context=".ui.register.pincreation.PinCreationStep1Fragment">
 
-        <com.rookia.android.sejo.ui.views.PasswordScreen
-            android:id="@+id/fragment_password_creation_password_screen"
+        <com.rookia.android.sejo.ui.views.PinScreen
+            android:id="@+id/fragment_pin_creation_pin_screen"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:vibrate="true"
+            app:show_pin="true"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

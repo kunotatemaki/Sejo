@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.rookia.android.androidutils.di.interfaces.ViewModelKey
 import com.rookia.android.sejo.ui.login.LoginViewModel
 import com.rookia.android.sejo.ui.register.number.ValidatePhoneViewModel
-import com.rookia.android.sejo.ui.register.passwordcreation.PasswordCreationStep2ViewModel
+import com.rookia.android.sejo.ui.register.pincreation.PinCreationStep2ViewModel
 import com.rookia.android.sejo.ui.register.sms.ValidateSmsViewModel
 import dagger.Binds
 import dagger.Module
@@ -42,6 +42,6 @@ internal abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(PasswordCreationStep2ViewModel::class)
-    internal abstract fun bindPasswordCreationStep2ViewModel(passwordCreationStep2ViewModel: PasswordCreationStep2ViewModel): ViewModel
+    @ViewModelKey(PinCreationStep2ViewModel::class)
+    internal abstract fun bindPinCreationStep2ViewModel(pinCreationStep2ViewModel: PinCreationStep2ViewModel): ViewModel
 }

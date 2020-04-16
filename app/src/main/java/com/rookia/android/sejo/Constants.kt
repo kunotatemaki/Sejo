@@ -43,7 +43,7 @@ object Constants {
     //endregion
 
     //region PASSWORD
-    const val PASSWORD_LENGTH: Int = 4
+    const val PIN_LENGTH: Int = 4
     val ERROR_VIBRATION_PATTERN: LongArray =
         longArrayOf(100, 20, 100, 20, 100, 20, 100, 20, 100, 20)
     //endregion

@@ -11,7 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/default_margin">
 
 
@@ -21,7 +21,8 @@
             android:text="1"
             app:layout_constraintEnd_toStartOf="@id/component_numeric_keyboard_view_number_2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/component_numeric_keyboard_view_number_2"
+            app:layout_constraintBottom_toBottomOf="@id/component_numeric_keyboard_view_number_2"
             tools:ignore="HardcodedText" />
 
 
@@ -29,7 +30,9 @@
             android:id="@+id/component_numeric_keyboard_view_number_2"
             style="@style/ComponentLoginKeyboardViewNumberContainer"
             android:text="2"
+            app:layout_constraintBottom_toTopOf="@+id/component_numeric_keyboard_view_number_5"
             app:layout_constraintEnd_toStartOf="@id/component_numeric_keyboard_view_number_3"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@id/component_numeric_keyboard_view_number_1"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="HardcodedText" />
@@ -40,7 +43,8 @@
             android:text="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/component_numeric_keyboard_view_number_2"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/component_numeric_keyboard_view_number_2"
+            app:layout_constraintBottom_toBottomOf="@id/component_numeric_keyboard_view_number_2"
             tools:ignore="HardcodedText" />
 
         <TextView
@@ -49,16 +53,19 @@
             android:text="4"
             app:layout_constraintEnd_toEndOf="@id/component_numeric_keyboard_view_number_1"
             app:layout_constraintStart_toStartOf="@id/component_numeric_keyboard_view_number_1"
-            app:layout_constraintTop_toBottomOf="@id/component_numeric_keyboard_view_number_1"
+            app:layout_constraintTop_toTopOf="@id/component_numeric_keyboard_view_number_5"
+            app:layout_constraintBottom_toBottomOf="@id/component_numeric_keyboard_view_number_5"
             tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/component_numeric_keyboard_view_number_5"
             style="@style/ComponentLoginKeyboardViewNumberContainer"
             android:text="5"
+            app:layout_constraintBottom_toTopOf="@+id/component_numeric_keyboard_view_number_8"
             app:layout_constraintEnd_toEndOf="@id/component_numeric_keyboard_view_number_2"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@id/component_numeric_keyboard_view_number_2"
-            app:layout_constraintTop_toBottomOf="@id/component_numeric_keyboard_view_number_2"
+            app:layout_constraintTop_toBottomOf="@+id/component_numeric_keyboard_view_number_2"
             tools:ignore="HardcodedText" />
 
         <TextView
@@ -67,7 +74,8 @@
             android:text="6"
             app:layout_constraintEnd_toEndOf="@id/component_numeric_keyboard_view_number_3"
             app:layout_constraintStart_toStartOf="@id/component_numeric_keyboard_view_number_3"
-            app:layout_constraintTop_toBottomOf="@id/component_numeric_keyboard_view_number_3"
+            app:layout_constraintTop_toTopOf="@id/component_numeric_keyboard_view_number_5"
+            app:layout_constraintBottom_toBottomOf="@id/component_numeric_keyboard_view_number_5"
             tools:ignore="HardcodedText" />
 
         <TextView
@@ -76,16 +84,19 @@
             android:text="7"
             app:layout_constraintEnd_toEndOf="@id/component_numeric_keyboard_view_number_4"
             app:layout_constraintStart_toStartOf="@id/component_numeric_keyboard_view_number_4"
-            app:layout_constraintTop_toBottomOf="@id/component_numeric_keyboard_view_number_4"
+            app:layout_constraintTop_toTopOf="@id/component_numeric_keyboard_view_number_8"
+            app:layout_constraintBottom_toBottomOf="@id/component_numeric_keyboard_view_number_8"
             tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/component_numeric_keyboard_view_number_8"
             style="@style/ComponentLoginKeyboardViewNumberContainer"
             android:text="8"
+            app:layout_constraintBottom_toTopOf="@+id/component_numeric_keyboard_view_number_0"
             app:layout_constraintEnd_toEndOf="@id/component_numeric_keyboard_view_number_5"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@id/component_numeric_keyboard_view_number_5"
-            app:layout_constraintTop_toBottomOf="@id/component_numeric_keyboard_view_number_5"
+            app:layout_constraintTop_toBottomOf="@+id/component_numeric_keyboard_view_number_5"
             tools:ignore="HardcodedText" />
 
         <TextView
@@ -95,6 +106,8 @@
             app:layout_constraintEnd_toEndOf="@id/component_numeric_keyboard_view_number_6"
             app:layout_constraintStart_toStartOf="@id/component_numeric_keyboard_view_number_6"
             app:layout_constraintTop_toBottomOf="@id/component_numeric_keyboard_view_number_6"
+            app:layout_constraintTop_toTopOf="@id/component_numeric_keyboard_view_number_8"
+            app:layout_constraintBottom_toBottomOf="@id/component_numeric_keyboard_view_number_8"
             tools:ignore="HardcodedText" />
 
 
@@ -102,9 +115,11 @@
             android:id="@+id/component_numeric_keyboard_view_number_0"
             style="@style/ComponentLoginKeyboardViewNumberContainer"
             android:text="0"
+            app:layout_constraintBottom_toTopOf="@+id/component_numeric_keyboard_recover_password"
             app:layout_constraintEnd_toEndOf="@id/component_numeric_keyboard_view_number_8"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@id/component_numeric_keyboard_view_number_8"
-            app:layout_constraintTop_toBottomOf="@id/component_numeric_keyboard_view_number_8"
+            app:layout_constraintTop_toBottomOf="@+id/component_numeric_keyboard_view_number_8"
             tools:ignore="HardcodedText" />
 
 
@@ -113,7 +128,9 @@
             style="@style/ComponentLoginKeyboardViewNumberContainer"
             app:layout_constraintEnd_toEndOf="@id/component_numeric_keyboard_view_number_9"
             app:layout_constraintStart_toStartOf="@id/component_numeric_keyboard_view_number_9"
-            app:layout_constraintTop_toBottomOf="@id/component_numeric_keyboard_view_number_9">
+            app:layout_constraintTop_toTopOf="@id/component_numeric_keyboard_view_number_0"
+            app:layout_constraintBottom_toBottomOf="@id/component_numeric_keyboard_view_number_0"
+            >
 
             <ImageView
                 android:id="@+id/component_numeric_keyboard_view_delete_image"
@@ -124,16 +141,16 @@
 
         <TextView
             android:id="@+id/component_numeric_keyboard_recover_password"
-            android:layout_width="0dp"
+            style="@style/SimpleTextLabelSmallLink"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/component_numeric_keyboard_reset_password"
-            android:textAlignment="center"
-            app:layout_constraintTop_toBottomOf="@id/component_numeric_keyboard_view_number_0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_margin="@dimen/default_margin"
-            />
+            android:text="@string/component_numeric_keyboard_reset_pin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/component_numeric_keyboard_view_number_0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

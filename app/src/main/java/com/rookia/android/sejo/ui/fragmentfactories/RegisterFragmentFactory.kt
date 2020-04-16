@@ -5,8 +5,8 @@ import androidx.fragment.app.FragmentFactory
 import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.ui.register.number.ValidatePhoneNumberFragment
-import com.rookia.android.sejo.ui.register.passwordcreation.PasswordCreationStep1Fragment
-import com.rookia.android.sejo.ui.register.passwordcreation.PasswordCreationStep2Fragment
+import com.rookia.android.sejo.ui.register.pincreation.PinCreationStep1Fragment
+import com.rookia.android.sejo.ui.register.pincreation.PinCreationStep2Fragment
 import com.rookia.android.sejo.ui.register.sms.ValidateSmsFragment
 import com.rookia.android.sejo.utils.TextFormatUtils
 import javax.inject.Inject
@@ -38,10 +38,10 @@ class RegisterFragmentFactory @Inject constructor(
                 viewModelFactory,
                 textFormatUtils
             )
-            PasswordCreationStep1Fragment::class.java -> PasswordCreationStep1Fragment(
+            PinCreationStep1Fragment::class.java -> PinCreationStep1Fragment(
                 resourcesManager
             )
-            PasswordCreationStep2Fragment::class.java -> PasswordCreationStep2Fragment(
+            PinCreationStep2Fragment::class.java -> PinCreationStep2Fragment(
                 resourcesManager,
                 viewModelFactory
             )

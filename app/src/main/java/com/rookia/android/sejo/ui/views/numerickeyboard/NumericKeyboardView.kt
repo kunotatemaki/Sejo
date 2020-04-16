@@ -3,7 +3,6 @@ package com.rookia.android.sejo.ui.views.numerickeyboard
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.visible
@@ -25,7 +24,6 @@ import com.rookia.android.sejo.ui.views.numerickeyboard.NumericKeyboardActions.K
 
 class NumericKeyboardView : ConstraintLayout {
     lateinit var binding: ComponentNumericKeyboardViewBinding
-    private var vibrate = false
 
     constructor(context: Context) : super(context) {
         init(context)
@@ -78,32 +76,12 @@ class NumericKeyboardView : ConstraintLayout {
         binding.componentNumericKeyboardViewDeleteImage.setImageResource(R.drawable.ic_component_numeric_keyboard_fingerprint)
     }
 
-    fun showRecoverPassword() {
+    fun showRecoverPin() {
         binding.componentNumericKeyboardRecoverPassword.visible()
     }
 
-    fun hideRecoverPassword() {
+    fun hideRecoverPin() {
         binding.componentNumericKeyboardRecoverPassword.gone()
     }
 
-    /**
-     * Returns the view associated with each key
-     * @param key
-     * @return
-     */
-    fun getKeyView(key: NumericKeyboardActions.KeyPressed): View {
-        return when (key) {
-            KEY0 -> binding.componentNumericKeyboardViewNumber0
-            KEY1 -> binding.componentNumericKeyboardViewNumber1
-            KEY2 -> binding.componentNumericKeyboardViewNumber2
-            KEY3 -> binding.componentNumericKeyboardViewNumber3
-            KEY4 -> binding.componentNumericKeyboardViewNumber4
-            KEY5 -> binding.componentNumericKeyboardViewNumber5
-            KEY6 -> binding.componentNumericKeyboardViewNumber6
-            KEY7 -> binding.componentNumericKeyboardViewNumber7
-            KEY8 -> binding.componentNumericKeyboardViewNumber8
-            KEY9 -> binding.componentNumericKeyboardViewNumber9
-            KEY_BACK_FINGER -> binding.componentNumericKeyboardViewDelete
-        }
-    }
 }

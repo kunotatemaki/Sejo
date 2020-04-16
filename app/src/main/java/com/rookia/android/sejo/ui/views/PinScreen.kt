@@ -18,31 +18,21 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.visible
-import com.rookia.android.sejo.Constants.PASSWORD_LENGTH
 import com.rookia.android.sejo.R
-import com.rookia.android.sejo.databinding.ComponentPasswordWithKeyboardBinding
+import com.rookia.android.sejo.databinding.ComponentPinWithKeyboardBinding
 import com.rookia.android.sejo.ui.views.numerickeyboard.NumericKeyboardActions
 import com.rookia.android.sejo.ui.views.numerickeyboard.NumericKeyboardActions.KeyPressed.KEY_BACK_FINGER
 
 
-/**
- * Copyright (C) Rookia - All Rights Reserved
- *
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * Proprietary and confidential
- *
- * Written by Roll <raulfeliz@gmail.com>, April 2020
- *
- *
- */
-
-class PasswordScreen : ConstraintLayout {
-    lateinit var binding: ComponentPasswordWithKeyboardBinding
+class PinScreen : ConstraintLayout {
+    lateinit var binding: ComponentPinWithKeyboardBinding
     private var vibrate = false
+    private var showRecoverPin = false
+    private var showPinButton = false
     private var shouldShowFingerprintOption = false
 
-    interface PasswordValidator {
-        fun checkPassword(password: String)
+    interface PinValidator {
+        fun onPinChanged(pin: String, isCompleted: Boolean)
     }
 
     interface BiometricHelper {
@@ -50,7 +40,7 @@ class PasswordScreen : ConstraintLayout {
         fun shouldShowFingerPrintScreen(): Boolean
     }
 
-    private var passwordValidator: PasswordValidator? = null
+    private var pinValidator: PinValidator? = null
     private var biometricHelper: BiometricHelper? = null
 
     private val actions: NumericKeyboardActions = object : NumericKeyboardActions(context) {
@@ -59,21 +49,21 @@ class PasswordScreen : ConstraintLayout {
             super.onKeyPressed(key)
             key ?: return
             if (key == KEY_BACK_FINGER) {
-                if (shouldShowFingerprintOption && binding.componentPasswordScreenBullets.getText().isBlank()) {
+                if (shouldShowFingerprintOption && binding.componentPinScreenBullets.getPin().isBlank()) {
                     biometricHelper?.showBiometricsLogin()
                 } else {
-                    binding.componentPasswordScreenBullets.deleteChar()
+                    binding.componentPinScreenBullets.deleteChar()
                 }
             } else {
-                binding.componentPasswordScreenBullets.addChar(key.value.toString())
+                binding.componentPinScreenBullets.addChar(key.value.toString())
             }
             checkFingerprintIcon()
 
             //Login when the length is correct
-            val currentEnteredPassword = binding.componentPasswordScreenBullets.getText()
-            if (currentEnteredPassword.length == PASSWORD_LENGTH) {
-                passwordValidator?.checkPassword(currentEnteredPassword)
-            } else {
+            val currentEnteredPin = getPin()
+            val pinCompleted = isPinSet()
+            pinValidator?.onPinChanged(currentEnteredPin, pinCompleted)
+            if (pinCompleted.not()) {
                 hideError()
             }
 
@@ -81,7 +71,7 @@ class PasswordScreen : ConstraintLayout {
 
         override fun onLongDeleteKeyPressed(): Boolean {
             this.onKeyPressed(KEY_BACK_FINGER)
-            binding.componentPasswordScreenBullets.setText("")
+            binding.componentPinScreenBullets.setText("")
             checkFingerprintIcon()
             return super.onLongDeleteKeyPressed()
         }
@@ -106,9 +96,11 @@ class PasswordScreen : ConstraintLayout {
     }
 
     private fun initAttrs(context: Context, attrs: AttributeSet) {
-        val a = context.theme.obtainStyledAttributes(attrs, R.styleable.PasswordScreen, 0, 0)
+        val a = context.theme.obtainStyledAttributes(attrs, R.styleable.PinScreen, 0, 0)
         try {
-            vibrate = a.getBoolean(R.styleable.PasswordScreen_vibrate, false)
+            vibrate = a.getBoolean(R.styleable.PinScreen_vibrate, false)
+            showRecoverPin = a.getBoolean(R.styleable.PinScreen_recover_pin, false)
+            showPinButton = a.getBoolean(R.styleable.PinScreen_show_pin, false)
 
         } finally {
             a.recycle()
@@ -118,22 +110,30 @@ class PasswordScreen : ConstraintLayout {
     private fun init(context: Context) {
         val inflater =
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = ComponentPasswordWithKeyboardBinding.inflate(inflater, this, true)
+        binding = ComponentPinWithKeyboardBinding.inflate(inflater, this, true)
         actions.vibrate = vibrate
-        binding.componentPasswordScreenNumericKeyboard.setAction(actions)
+        binding.componentPinScreenNumericKeyboard.setAction(actions)
+        with(binding.componentPinScreenNumericKeyboard) {
+            if (showRecoverPin) {
+                showRecoverPin()
+            } else {
+                hideRecoverPin()
+            }
+        }
+        binding.componentPinScreenBullets.showPinButtonVisibility(visible = showPinButton)
         checkFingerprintIcon()
     }
 
     private fun checkFingerprintIcon() {
-        if (shouldShowFingerprintOption && binding.componentPasswordScreenBullets.getText().isBlank()) {
-            binding.componentPasswordScreenNumericKeyboard.setFingerprint()
+        if (shouldShowFingerprintOption && binding.componentPinScreenBullets.getPin().isBlank()) {
+            binding.componentPinScreenNumericKeyboard.setFingerprint()
         } else {
-            binding.componentPasswordScreenNumericKeyboard.setBackspace()
+            binding.componentPinScreenNumericKeyboard.setBackspace()
         }
     }
 
-    fun setPasswordValidator(listener: PasswordValidator){
-        passwordValidator = listener
+    fun setPinValidator(listener: PinValidator){
+        pinValidator = listener
     }
 
     fun setBiometricHelper(listener: BiometricHelper){
@@ -143,20 +143,24 @@ class PasswordScreen : ConstraintLayout {
     }
 
     fun setHeader(text: String) {
-        binding.componentPasswordScreenHeader.text = text
+        binding.componentPinScreenHeader.text = text
     }
 
     fun setSubHeader(text: String) {
-        binding.componentPasswordScreenSubheader.text = text
+        binding.componentPinScreenSubheader.text = text
     }
 
     fun showError() {
-        binding.componentPasswordScreenBullets.showErrorFeedback()
-        binding.componentPasswordScreenSubheaderError.visible()
+        binding.componentPinScreenBullets.showErrorFeedback()
+        binding.componentPinScreenSubheaderError.visible()
     }
 
     fun hideError() {
-        binding.componentPasswordScreenSubheaderError.gone()
+        binding.componentPinScreenSubheaderError.gone()
     }
+    
+    fun getPin(): String = binding.componentPinScreenBullets.getPin()
+    
+    fun isPinSet(): Boolean = binding.componentPinScreenBullets.isPinSet()
 
 }

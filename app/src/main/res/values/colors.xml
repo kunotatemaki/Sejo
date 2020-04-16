@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorPrimary">@color/candy</color>
+    <color name="colorPrimaryDark">@color/candy</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="loadingBackground">#CCFFFFFF</color>
     <color name="candy">#ff0068</color>
@@ -19,7 +19,8 @@
     <color name="red_error">@color/red_A400</color>
     <color name="sms_bullet">@color/grey_300</color>
     <color name="minimal">#ffffff</color>
-    <color name="password_bullet_normal">@color/grey_400</color>
-    <color name="password_bullet_pressed">@color/grey_600</color>
+    <color name="pin_bullet_normal">@color/grey_400</color>
+    <color name="pin_bullet_pressed">@color/grey_600</color>
+    <color name="text_link">@color/blue_A400</color>
 
 </resources>

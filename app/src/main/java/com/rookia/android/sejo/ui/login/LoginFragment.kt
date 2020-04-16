@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
-import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.LoginFragmentBinding
-import com.rookia.android.sejo.ui.common.BaseFragment
-import com.rookia.android.sejo.ui.views.PasswordScreen
 import com.rookia.android.sejo.framework.utils.FingerprintUtils
+import com.rookia.android.sejo.ui.common.BaseFragment
+import com.rookia.android.sejo.ui.views.PinScreen
 import timber.log.Timber
 import java.util.concurrent.Executor
 import javax.inject.Inject
@@ -21,8 +20,8 @@ class LoginFragment @Inject constructor(
     private val viewModelFactory: ViewModelFactory,
     private val fingerprintUtils: FingerprintUtils,
     private val biometricInfo: BiometricPrompt.PromptInfo
-) : BaseFragment(R.layout.login_fragment), PasswordScreen.BiometricHelper,
-    PasswordScreen.PasswordValidator {
+) : BaseFragment(R.layout.login_fragment), PinScreen.BiometricHelper,
+    PinScreen.PinValidator {
 
     private lateinit var binding: LoginFragmentBinding
     private lateinit var viewModel: LoginViewModel
@@ -34,8 +33,8 @@ class LoginFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = LoginFragmentBinding.bind(view)
-        binding.loginPasswordScreen.setBiometricHelper(this)
-        binding.loginPasswordScreen.setPasswordValidator(this)
+        binding.loginPinScreen.setBiometricHelper(this)
+        binding.loginPinScreen.setPinValidator(this)
         viewModel = injectViewModel(viewModelFactory)
 
         executor = ContextCompat.getMainExecutor(context)
@@ -62,7 +61,7 @@ class LoginFragment @Inject constructor(
             })
     }
 
-    override fun checkPassword(password: String) {
+    override fun onPinChanged(pin: String, isCompleted: Boolean) {
         Timber.d("")
     }
 
