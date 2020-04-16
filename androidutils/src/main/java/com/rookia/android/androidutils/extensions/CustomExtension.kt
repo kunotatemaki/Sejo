@@ -2,11 +2,13 @@
 
 package com.rookia.android.androidutils.extensions
 
+import android.os.Parcel
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import java.lang.ref.WeakReference
 import java.text.Normalizer
+
 
 fun String.normalizedString(): String {
     val normalized: String = Normalizer.normalize(this, Normalizer.Form.NFD)
@@ -36,3 +38,12 @@ fun View?.visible() {
 fun View?.invisible() {
     this?.visibility = View.INVISIBLE
 }
+
+fun Parcel.supportReadBoolean(): Boolean =
+    this.readByte().toInt() != 0
+
+fun Parcel.supportWriteBoolean(value: Boolean) {
+    val byte: Byte = if(value) 1 else 0
+    this.writeByte(byte)
+}
+

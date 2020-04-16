@@ -2,6 +2,9 @@ package com.rookia.android.sejo.ui.views
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.AnimationDrawable
+import android.os.Parcel
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.animation.AnimationUtils
@@ -10,6 +13,10 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
+import com.rookia.android.androidutils.extensions.gone
+import com.rookia.android.androidutils.extensions.supportReadBoolean
+import com.rookia.android.androidutils.extensions.supportWriteBoolean
+import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.Constants.PASSWORD_LENGTH
 import com.rookia.android.sejo.R
@@ -32,9 +39,40 @@ class BulletsTextView : ConstraintLayout {
     private lateinit var binding: ComponentBulletsTextViewBinding
     private var content = ""
     private var listener: OnTextChangedListener? = null
+    private var showPassword = false
 
     interface OnTextChangedListener {
         fun onText(newText: String)
+    }
+
+    private class SavedState : BaseSavedState {
+        var password: String? = null
+        var passwordVisibility: Boolean = false
+
+        internal constructor(superState: Parcelable?) : super(superState)
+        private constructor(parcel: Parcel) : super(parcel) {
+            password = parcel.readString()
+            passwordVisibility = parcel.supportReadBoolean()
+        }
+
+        override fun writeToParcel(parcel: Parcel, flags: Int) {
+            super.writeToParcel(parcel, flags)
+            parcel.writeString(password)
+            parcel.supportWriteBoolean(passwordVisibility)
+        }
+
+        companion object {
+            @JvmField
+            val CREATOR: Parcelable.Creator<SavedState> = object : Parcelable.Creator<SavedState> {
+                override fun createFromParcel(`in`: Parcel): SavedState {
+                    return SavedState(`in`)
+                }
+
+                override fun newArray(size: Int): Array<SavedState?> {
+                    return arrayOfNulls(size)
+                }
+            }
+        }
     }
 
     constructor(context: Context) : super(context) {
@@ -54,9 +92,42 @@ class BulletsTextView : ConstraintLayout {
     }
 
     private fun init(context: Context) {
+        isSaveEnabled = true
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         binding = ComponentBulletsTextViewBinding.inflate(inflater, this, true)
+        setPasswordVisibility()
 
+        binding.componentBulletsEyePassVisibility.setOnClickListener {
+            showPassword = showPassword.not()
+            setPasswordVisibility()
+        }
+    }
+
+    private fun setPasswordVisibility(){
+        if(showPassword){
+            showPassword()
+        } else {
+            hidePassword()
+        }
+    }
+
+    override fun onSaveInstanceState(): Parcelable? =
+        super.onSaveInstanceState().also {
+            val myState = SavedState(it)
+            myState.password = this.getText()
+            myState.passwordVisibility = showPassword
+            return myState
+        }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        val savedState = state as SavedState
+        super.onRestoreInstanceState(savedState.superState)
+
+        savedState.password?.let {
+            setText(it)
+        }
+        showPassword = savedState.passwordVisibility
+        setPasswordVisibility()
     }
 
     private fun setTextInBullets() {
@@ -192,27 +263,36 @@ class BulletsTextView : ConstraintLayout {
             .startDelay
     }
 
-    fun showPassword() {
+    private fun showPassword() {
         with(binding) {
             animateShow(componentBulletsTextview0, componentBulletsTextviewText0, 1)
             animateShow(componentBulletsTextview1, componentBulletsTextviewText1, 2)
             animateShow(componentBulletsTextview2, componentBulletsTextviewText2, 3)
             animateShow(componentBulletsTextview3, componentBulletsTextviewText3, 4)
         }
+        binding.componentBulletsEyePassVisibility.setImageResource(R.drawable.ic_create_password_hide_pass)
     }
 
-    fun hidePassword() {
+    private fun hidePassword() {
         with(binding) {
             animateHide(componentBulletsTextview0, componentBulletsTextviewText0, 1)
             animateHide(componentBulletsTextview1, componentBulletsTextviewText1, 2)
             animateHide(componentBulletsTextview2, componentBulletsTextviewText2, 3)
             animateHide(componentBulletsTextview3, componentBulletsTextviewText3, 4)
         }
+        binding.componentBulletsEyePassVisibility.setImageResource(R.drawable.ic_create_password_show_pass)
     }
 
+    private lateinit var rocketAnimation: AnimationDrawable
     fun showErrorFeedback() {
         startAnimation(AnimationUtils.loadAnimation(context, R.anim.shake))
         VibrationUtils.patternVibrate(context, Constants.ERROR_VIBRATION_PATTERN)
+    }
+
+    fun showPasswordButtonVisibility(visible: Boolean) {
+        with(binding.componentBulletsEyePassVisibility) {
+            if (visible) visible() else gone()
+        }
     }
 
     companion object {
