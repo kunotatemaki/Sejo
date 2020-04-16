@@ -7,7 +7,5 @@ import javax.inject.Inject
 class ValidatePhoneViewModel @Inject constructor(
     private val preferencesManager: PreferencesManager
 ) : ViewModel() {
-
-    fun isPhoneValidated(): Boolean = false
-//        preferencesManager.getBooleanFromPreferences(HAS_VALIDATED_PHONE_TAG)
+//todo borrar este viewmodel
 }

@@ -6,7 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
-import com.rookia.android.sejo.Constants.HAS_VALIDATED_PHONE_TAG
+import com.rookia.android.sejo.Constants.NAVIGATION_PIN_SENT_TAG
+import com.rookia.android.sejo.Constants.NAVIGATION_VALIDATED_PHONE_TAG
 import com.rookia.android.sejo.Constants.VALIDATED_PHONE_NUMBER_TAG
 import com.rookia.android.sejo.Constants.VALIDATED_PHONE_PREFIX_TAG
 import com.rookia.android.sejo.domain.local.SmsCodeValidation
@@ -48,10 +49,14 @@ class ValidateSmsViewModel @Inject constructor(
 
     fun storeValidatedPhone(phonePrefix: String, phoneNumber: String) {
         with(preferencesManager){
-            setBooleanIntoPreferences(HAS_VALIDATED_PHONE_TAG, true)
+            setBooleanIntoPreferences(NAVIGATION_VALIDATED_PHONE_TAG, true)
             setStringIntoPreferences(VALIDATED_PHONE_PREFIX_TAG, phonePrefix)
             setStringIntoPreferences(VALIDATED_PHONE_NUMBER_TAG, phoneNumber)
         }
+    }
+
+    fun setPinSet() {
+        preferencesManager.setBooleanIntoPreferences(NAVIGATION_PIN_SENT_TAG, true)
     }
 
 

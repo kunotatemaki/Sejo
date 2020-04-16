@@ -106,8 +106,9 @@ class ValidateSmsFragment @Inject constructor(
                                 viewModel.storeValidatedPhone(phonePrefix, phoneNumber)
                                 binding.fragmentValidateSmsView.hideError()
                                 if(it.data?.userExists == false) {
-                                    navigateToCreatePassword()
+                                    navigateToCreatePin()
                                 }else{
+                                    viewModel.setPinSet()
                                     navigateToDashboard()
                                 }
                             }
@@ -212,13 +213,13 @@ class ValidateSmsFragment @Inject constructor(
         activity?.finish()
     }
 
-    private fun navigateToCreatePassword(){
+    private fun navigateToCreatePin(){
         (activity as? BaseActivity)?.hideKeyboard()
-        val direction = ValidateSmsFragmentDirections.actionValidateSmsFragmentToPasswordCreationStep1Fragment()
+        val direction = ValidateSmsFragmentDirections.actionValidateSmsFragmentToPinCreationStep1Fragment()
         findNavController().navigate(direction)
     }
 
 
 }
 
-//todo no volver aquí desde create password
+//todo poner el número en la pantalla para ver a dónde se va a mandar el sms

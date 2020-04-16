@@ -82,7 +82,7 @@ class PinCreationStep2Fragment @Inject constructor(
     }
 
     private fun navigateToDashboard() {
-        val direction = PinCreationStep2FragmentDirections.actionPasswordCreationStep2FragmentToMainActivity()
+        val direction = PinCreationStep2FragmentDirections.actionPinCreationStep2FragmentToMainActivity()
         findNavController().navigate(direction)
         activity?.finish()
     }

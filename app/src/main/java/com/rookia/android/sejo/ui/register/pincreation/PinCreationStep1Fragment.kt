@@ -59,7 +59,7 @@ class PinCreationStep1Fragment @Inject constructor(
 
     private fun navigateToPinConfirmationScreen() {
         val direction =
-            PinCreationStep1FragmentDirections.actionPasswordCreationStep1FragmentToPasswordCreationStep2Fragment(
+            PinCreationStep1FragmentDirections.actionPinCreationStep1FragmentToPinCreationStep2Fragment(
                 binding.fragmentPinCreationPinScreen.getPin()
             )
         findNavController().navigate(direction)

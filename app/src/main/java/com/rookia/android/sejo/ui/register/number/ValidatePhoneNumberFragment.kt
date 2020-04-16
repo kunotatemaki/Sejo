@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
+import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ValidateNumberFragmentBinding
 import com.rookia.android.sejo.ui.common.BaseFragment
@@ -16,11 +18,20 @@ import javax.inject.Inject
 
 class ValidatePhoneNumberFragment @Inject constructor(
     private val viewModelFactory: ViewModelFactory,
-    private val resourcesManager: ResourcesManager
+    private val resourcesManager: ResourcesManager,
+    private val preferencesManager: PreferencesManager
 ) : BaseFragment(R.layout.validate_number_fragment) {
 
     private lateinit var binding: ValidateNumberFragmentBinding
     private lateinit var viewModel: ValidatePhoneViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val validatedPhone = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG)
+        if(validatedPhone){
+            navigateToPinCreation()
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,9 +68,6 @@ class ValidatePhoneNumberFragment @Inject constructor(
                 }
             })
 
-        if(viewModel.isPhoneValidated()){
-            navigateToDashboard()
-        }
     }
 
     private fun navigateToSmsValidation(phonePrefix: String, phoneNumber: String) {
@@ -72,11 +80,10 @@ class ValidatePhoneNumberFragment @Inject constructor(
         )
     }
 
-    private fun navigateToDashboard() {
+    private fun navigateToPinCreation() {
         (activity as RegisterActivity).hideKeyboard()
-        val direction = ValidatePhoneNumberFragmentDirections.actionValidateNumberFragmentToMainActivity()
+        val direction = ValidatePhoneNumberFragmentDirections.actionValidateNumberFragmentToPinCreationStep1Fragment()
         findNavController().navigate(direction)
-        activity?.finish()
     }
 
 }

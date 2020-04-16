@@ -6,9 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
-import com.rookia.android.sejo.Constants.HAS_VALIDATED_PHONE_TAG
-import com.rookia.android.sejo.Constants.VALIDATED_PHONE_NUMBER_TAG
-import com.rookia.android.sejo.Constants.VALIDATED_PHONE_PREFIX_TAG
 import com.rookia.android.sejo.domain.local.SmsCodeValidation
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
 import com.rookia.android.sejo.usecases.RequestSmsCodeUseCase
@@ -43,14 +40,6 @@ class LoginViewModel @Inject constructor(
             if (it.status != Result.Status.LOADING) {
                 smsCodeValidationResult.removeSource(_smsCodeValidation)
             }
-        }
-    }
-
-    fun storeValidatedPhone(phonePrefix: String, phoneNumber: String) {
-        with(preferencesManager){
-            setBooleanIntoPreferences(HAS_VALIDATED_PHONE_TAG, true)
-            setStringIntoPreferences(VALIDATED_PHONE_PREFIX_TAG, phonePrefix)
-            setStringIntoPreferences(VALIDATED_PHONE_NUMBER_TAG, phoneNumber)
         }
     }
 

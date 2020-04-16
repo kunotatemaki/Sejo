@@ -11,13 +11,13 @@ import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.MainActivityBinding
-import com.rookia.android.sejo.ui.fragmentfactories.RegisterFragmentFactory
+import com.rookia.android.sejo.ui.fragmentfactories.MainFragmentFactory
 import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
 
     @Inject
-    lateinit var fragmentFactory: RegisterFragmentFactory
+    lateinit var fragmentFactory: MainFragmentFactory
 
     private lateinit var binding: MainActivityBinding
 

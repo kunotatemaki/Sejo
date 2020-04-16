@@ -1,11 +1,15 @@
 package com.rookia.android.sejo.ui.login
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
+import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
+import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.LoginFragmentBinding
 import com.rookia.android.sejo.framework.utils.FingerprintUtils
@@ -19,7 +23,8 @@ import javax.inject.Inject
 class LoginFragment @Inject constructor(
     private val viewModelFactory: ViewModelFactory,
     private val fingerprintUtils: FingerprintUtils,
-    private val biometricInfo: BiometricPrompt.PromptInfo
+    private val biometricInfo: BiometricPrompt.PromptInfo,
+    private val preferencesManager: PreferencesManager
 ) : BaseFragment(R.layout.login_fragment), PinScreen.BiometricHelper,
     PinScreen.PinValidator {
 
@@ -29,6 +34,15 @@ class LoginFragment @Inject constructor(
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val pinSet = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PIN_SENT_TAG)
+        val phoneValidated = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG)
+        if(pinSet.not() || phoneValidated.not()){
+            navigateToRegisterFlow()
+            activity?.finish()
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -70,6 +84,11 @@ class LoginFragment @Inject constructor(
     }
 
     override fun shouldShowFingerPrintScreen(): Boolean = fingerprintUtils.shouldShowFingerPrintScreen()
+
+    private fun navigateToRegisterFlow() {
+        val direction = LoginFragmentDirections.actionLoginFragmentToRegisterActivity()
+        findNavController().navigate(direction)
+    }
 
 
 

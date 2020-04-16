@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/register_graph"
-    app:startDestination="@id/passwordCreationStep1Fragment">
+    app:startDestination="@id/validateNumberFragment">
 
     <fragment
         android:id="@+id/validateNumberFragment"
@@ -17,23 +17,18 @@
             app:exitAnim="@anim/navigation_left_exit"
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/navigation_left_enter"
-            app:popExitAnim="@anim/navigation_right_exit" />
+            app:popExitAnim="@anim/navigation_right_exit"
+            app:popUpToInclusive="false" />
         <action
-            android:id="@+id/action_validateNumberFragment_to_mainActivity"
-            app:destination="@id/mainActivity"
+            android:id="@+id/action_validateNumberFragment_to_pinCreationStep1Fragment"
+            app:destination="@id/pinCreationStep1Fragment"
             app:enterAnim="@anim/navigation_right_enter"
             app:exitAnim="@anim/navigation_left_exit"
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/navigation_left_enter"
-            app:popExitAnim="@anim/navigation_right_exit"/>
-        <action
-            android:id="@+id/action_validateNumberFragment_to_passwordCreationStep1Fragment"
-            app:destination="@id/passwordCreationStep1Fragment"
-            app:enterAnim="@anim/navigation_right_enter"
-            app:exitAnim="@anim/navigation_left_exit"
-            app:launchSingleTop="true"
-            app:popEnterAnim="@anim/navigation_left_enter"
-            app:popExitAnim="@anim/navigation_right_exit" />
+            app:popExitAnim="@anim/navigation_right_exit"
+            app:popUpTo="@id/validateNumberFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -53,13 +48,16 @@
             app:enterAnim="@anim/navigation_bottom_enter"
             app:launchSingleTop="true" />
         <action
-            android:id="@+id/action_validateSmsFragment_to_passwordCreationStep1Fragment"
-            app:destination="@id/passwordCreationStep1Fragment"
+            android:id="@+id/action_validateSmsFragment_to_pinCreationStep1Fragment"
+            app:destination="@id/pinCreationStep1Fragment"
 
             app:enterAnim="@anim/navigation_right_enter"
             app:exitAnim="@anim/navigation_left_exit"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/navigation_left_enter"
-            app:popExitAnim="@anim/navigation_right_exit" />
+            app:popExitAnim="@anim/navigation_right_exit"
+            app:popUpTo="@id/validateNumberFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <activity
         android:id="@+id/mainActivity"
@@ -67,28 +65,30 @@
         android:name="com.rookia.android.sejo.ui.common.MainActivity"
         android:label="MainActivity" />
     <fragment
-        android:id="@+id/passwordCreationStep1Fragment"
+        android:id="@+id/pinCreationStep1Fragment"
         android:name="com.rookia.android.sejo.ui.register.pincreation.PinCreationStep1Fragment"
-        android:label="PasswordCreationStep1Fragment"
+        android:label="PinCreationStep1Fragment"
         tools:layout="@layout/fragment_pin_creation_step1">
         <action
-            android:id="@+id/action_passwordCreationStep1Fragment_to_passwordCreationStep2Fragment"
-            app:destination="@id/passwordCreationStep2Fragment"
+            android:id="@+id/action_pinCreationStep1Fragment_to_pinCreationStep2Fragment"
+            app:destination="@id/pinCreationStep2Fragment"
             app:enterAnim="@anim/navigation_right_enter"
             app:exitAnim="@anim/navigation_left_exit"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/navigation_left_enter"
             app:popExitAnim="@anim/navigation_right_exit" />
     </fragment>
     <fragment
-        android:id="@+id/passwordCreationStep2Fragment"
+        android:id="@+id/pinCreationStep2Fragment"
         android:name="com.rookia.android.sejo.ui.register.pincreation.PinCreationStep2Fragment"
-        android:label="PasswordCreationStep2Fragment"
+        android:label="PinCreationStep2Fragment"
         tools:layout="@layout/fragment_pin_creation_step2">
         <argument
             android:name="code"
             app:argType="string" />
         <action
-            android:id="@+id/action_passwordCreationStep2Fragment_to_mainActivity"
-            app:destination="@id/mainActivity" />
+            android:id="@+id/action_pinCreationStep2Fragment_to_mainActivity"
+            app:destination="@id/mainActivity"
+            app:enterAnim="@anim/navigation_bottom_enter" />
     </fragment>
 </navigation>

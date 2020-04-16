@@ -7,6 +7,7 @@ import com.jraska.livedata.test
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
+import com.rookia.android.sejo.domain.local.SmsCodeValidation
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
 import com.rookia.android.sejo.usecases.RequestSmsCodeUseCase
 import com.rookia.android.sejo.usecases.ValidateSmsCodeUseCase
@@ -152,16 +153,17 @@ class ValidateSmsViewModelTest {
 
     @Test
     fun `validate sms code with success response from server`() {
+        val smsCodeValidation = SmsCodeValidation(1, true)
         coEvery { validateSmsCodeUseCase.validateSmsCode(any(), any(), any()) } returns flow {
             emit(Result.loading(null))
-            emit(Result.success(1))
+            emit(Result.success(smsCodeValidation))
         }
         testDispatcher.runBlockingTest {
             viewModel.validateCode("", "", "")
 
             val responseObserver = viewModel.smsCodeValidationResult.test()
             val latch = CountDownLatch(2)
-            val observer = Observer<Result<Int>> {
+            val observer = Observer<Result<SmsCodeValidation>> {
                 latch.countDown()
             }
             viewModel.smsCodeValidationResult.observeForever(observer)
@@ -169,10 +171,10 @@ class ValidateSmsViewModelTest {
             responseObserver
                 .assertHasValue()
                 .assertHistorySize(2)
-                .assertValue(Result.success(1))
+                .assertValue(Result.success(smsCodeValidation))
                 .assertValueHistory(
                     Result.loading(null),
-                    Result.success(1)
+                    Result.success(smsCodeValidation)
                 )
         }
     }
@@ -189,7 +191,7 @@ class ValidateSmsViewModelTest {
 
             val responseObserver = viewModel.smsCodeValidationResult.test()
             val latch = CountDownLatch(2)
-            val observer = Observer<Result<Int>> {
+            val observer = Observer<Result<SmsCodeValidation>> {
                 latch.countDown()
             }
             viewModel.smsCodeValidationResult.observeForever(observer)
@@ -214,7 +216,7 @@ class ValidateSmsViewModelTest {
 
         verify {
             preferencesManager.setBooleanIntoPreferences(
-                Constants.HAS_VALIDATED_PHONE_TAG,
+                Constants.NAVIGATION_VALIDATED_PHONE_TAG,
                 true
             )
         }
