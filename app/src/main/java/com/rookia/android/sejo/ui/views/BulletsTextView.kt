@@ -171,6 +171,7 @@ class BulletsTextView : ConstraintLayout {
                 )
             )
         } else {
+            textView.text = null
             ImageViewCompat.setImageTintList(
                 imageView,
                 ColorStateList.valueOf(

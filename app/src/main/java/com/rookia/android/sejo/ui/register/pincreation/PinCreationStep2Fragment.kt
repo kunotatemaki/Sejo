@@ -1,7 +1,12 @@
 package com.rookia.android.sejo.ui.register.pincreation
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
@@ -24,6 +29,7 @@ class PinCreationStep2Fragment @Inject constructor(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         arguments?.apply {
             val safeArgs = PinCreationStep2FragmentArgs.fromBundle(this)
             previousCode = safeArgs.code
@@ -37,16 +43,48 @@ class PinCreationStep2Fragment @Inject constructor(
         binding.fragmentPinCreationPinScreen.setPinValidator(this)
         viewModel = injectViewModel(viewModelFactory)
 
+        viewModel.pinSentToServer.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if(it){
+                    navigateToDashboard()
+                }
+            }
+        })
     }
 
-    override fun onPinChanged(pin: String, isCompleted: Boolean) {
-        previousCode?.let {
-            if (viewModel.validatePin(it, pin)) {
-                viewModel.sendPinInfo()
-            } else {
-                binding.fragmentPinCreationPinScreen.showError()
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.create_pin_menu, menu)
+        menu.findItem(R.id.create_pin_menu_item)?.let {
+            it.isEnabled = binding.fragmentPinCreationPinScreen.isPinSet()
+        }
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+        when(item.itemId){
+            R.id.create_pin_menu_item -> {
+                with(binding.fragmentPinCreationPinScreen) {
+                previousCode?.let {
+                    if (viewModel.validatePin(it, getPin())) {
+                        viewModel.sendPinInfo()
+                    } else {
+                        showError()
+                    }
+                } ?: showError()
             }
-        } ?: binding.fragmentPinCreationPinScreen.showError()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
+    override fun onPinChanged(pin: String, isCompleted: Boolean) {
+        activity?.invalidateOptionsMenu()
+    }
+
+    private fun navigateToDashboard() {
+        val direction = PinCreationStep2FragmentDirections.actionPasswordCreationStep2FragmentToMainActivity()
+        findNavController().navigate(direction)
+        activity?.finish()
     }
 
 
