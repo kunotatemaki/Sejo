@@ -4,6 +4,7 @@ package com.rookia.android.sejo.ui.views
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
@@ -92,20 +93,24 @@ class PinBulletsView : ConstraintLayout {
         init(context)
     }
 
+
     private fun init(context: Context) {
         isSaveEnabled = true
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         binding = ComponentPinBulletsBinding.inflate(inflater, this, true)
         setPinVisibility()
 
-        binding.componentBulletsEyePassVisibility.setOnClickListener {
-            showPin = showPin.not()
-            setPinVisibility()
+        binding.componentBulletsEyePassVisibility.apply {
+            setOnClickListener {
+                showPin = showPin.not()
+                setPinVisibility()
+            }
+
         }
     }
 
-    private fun setPinVisibility(){
-        if(showPin){
+    private fun setPinVisibility() {
+        if (showPin) {
             showPin()
         } else {
             hidePin()
@@ -232,7 +237,7 @@ class PinBulletsView : ConstraintLayout {
      * @return the stored pin
      */
     fun getPin(): String = content
-    
+
     fun isPinSet(): Boolean = content.length == PIN_LENGTH
 
     private fun animateShow(dotView: ImageView, text: TextView, position: Int) {
@@ -272,7 +277,10 @@ class PinBulletsView : ConstraintLayout {
             animateShow(componentBulletsTextview2, componentBulletsTextviewText2, 3)
             animateShow(componentBulletsTextview3, componentBulletsTextviewText3, 4)
         }
-        binding.componentBulletsEyePassVisibility.setImageResource(R.drawable.ic_create_pin_hide_pass)
+        val eyeToBlind: AnimatedVectorDrawable =
+            context.getDrawable(R.drawable.animated_icon_eye_open_to_blind) as AnimatedVectorDrawable
+        binding.componentBulletsEyePassVisibility.setImageDrawable(eyeToBlind)
+        eyeToBlind.start()
     }
 
     private fun hidePin() {
@@ -282,7 +290,10 @@ class PinBulletsView : ConstraintLayout {
             animateHide(componentBulletsTextview2, componentBulletsTextviewText2, 3)
             animateHide(componentBulletsTextview3, componentBulletsTextviewText3, 4)
         }
-        binding.componentBulletsEyePassVisibility.setImageResource(R.drawable.ic_create_pin_show_pass)
+        val eyeToBlind: AnimatedVectorDrawable =
+            context.getDrawable(R.drawable.animated_icon_eye_blind_to_open) as AnimatedVectorDrawable
+        binding.componentBulletsEyePassVisibility.setImageDrawable(eyeToBlind)
+        eyeToBlind.start()
     }
 
     fun showErrorFeedback() {
