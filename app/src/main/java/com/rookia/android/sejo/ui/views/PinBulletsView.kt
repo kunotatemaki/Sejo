@@ -21,7 +21,7 @@ import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.Constants.PIN_LENGTH
 import com.rookia.android.sejo.R
-import com.rookia.android.sejo.databinding.ComponentBulletsTextViewBinding
+import com.rookia.android.sejo.databinding.ComponentPinBulletsBinding
 import com.rookia.android.sejo.utils.VibrationUtils
 
 
@@ -36,8 +36,8 @@ import com.rookia.android.sejo.utils.VibrationUtils
  *
  */
 
-class BulletsTextView : ConstraintLayout {
-    private lateinit var binding: ComponentBulletsTextViewBinding
+class PinBulletsView : ConstraintLayout {
+    private lateinit var binding: ComponentPinBulletsBinding
     private var content = ""
     private var listener: OnTextChangedListener? = null
     private var showPin = false
@@ -95,7 +95,7 @@ class BulletsTextView : ConstraintLayout {
     private fun init(context: Context) {
         isSaveEnabled = true
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = ComponentBulletsTextViewBinding.inflate(inflater, this, true)
+        binding = ComponentPinBulletsBinding.inflate(inflater, this, true)
         setPinVisibility()
 
         binding.componentBulletsEyePassVisibility.setOnClickListener {

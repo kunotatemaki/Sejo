@@ -45,7 +45,7 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:visibility="visible" />
 
-        <com.rookia.android.sejo.ui.views.BulletsTextView
+        <com.rookia.android.sejo.ui.views.PinBulletsView
             android:id="@+id/component_pin_screen_bullets"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

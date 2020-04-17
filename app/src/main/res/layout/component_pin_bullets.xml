@@ -142,7 +142,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:clickable="true"
             android:focusable="true"
-            android:tint="@color/candy"
+            android:tint="@color/pin_eye"
             android:background="@drawable/ic_circular_ripple_32dp"
             tools:ignore="ContentDescription" />
 
