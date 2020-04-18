@@ -15,6 +15,17 @@
         android:layout_height="match_parent"
         tools:context=".ui.register.number.ValidatePhoneNumberFragment">
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/validate_phone_number_phone_number"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="textStart"
+            android:text="@string/fragment_validate_number_title"/>
+
         <com.rookia.android.sejo.ui.views.PhoneNumberView
             android:id="@+id/validate_phone_number_phone_number"
             android:layout_width="0dp"

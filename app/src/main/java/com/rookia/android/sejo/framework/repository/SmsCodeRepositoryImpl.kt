@@ -44,7 +44,7 @@ class SmsCodeRepositoryImpl @Inject constructor(
                 Result.error(resp.message())
             }
         } catch (e: Exception) {
-            Result.error("error fetching from network")
+            Result.error(e.message)
         }
 
     override fun validateSmsCode(
@@ -73,7 +73,7 @@ class SmsCodeRepositoryImpl @Inject constructor(
                 Result.error(resp.message())
             }
         } catch (e: Exception) {
-            Result.error("error fetching from network")
+            Result.error(e.message)
         }
 
 }

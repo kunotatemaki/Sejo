@@ -72,6 +72,7 @@ class ValidateSmsFragment @Inject constructor(
         binding = ValidateSmsFragmentBinding.bind(view)
         binding.textFormatUtils = textFormatUtils
         binding.fragmentValidateSmsView.setOnTextChangeListener(this)
+        binding.fragmentValidateSmsView.setPhoneText(phonePrefix, phoneNumber)
         viewModel = injectViewModel(viewModelFactory)
 
         requestSmsCode()

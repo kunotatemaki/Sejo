@@ -14,12 +14,17 @@
     <string name="validate_sms_expired_label">Código caducado</string>
     <string name="validate_sms_footer_resend_text"><![CDATA[Si no te llega el código, haz <font color=#ff0068>click aquí</font> y te lo reenviamos.]]></string>
     <string name="validate_sms_footer_waiting_text">Si no te llega el código podrás reenviarlo en %1$s</string>
+    <string name="component_validate_sms_title"><![CDATA[Introduce el código enviado por SMS al <b>%1$s</b>]]></string>
 
     <!--numeric keyboard -->
     <string name="component_numeric_keyboard_reset_pin"><u>¿Has olvidado tu número Pin?</u></string>
     <string name="component_pin_screen_subheader_error_text">El número Pin no coincide</string>
     <string name="fragment_login_with_fingerprint_text">Desbloqueo biométrico</string>
     <string name="fragment_login_with_fingerprint_use_pin_text">Usar número Pin</string>
+
+    <!--  Validate number  -->
+    <string name="fragment_validate_number_title">Número de teléfono</string>
+
 
     <!--  Create Pin  -->
     <string name="fragment_pin_creation_step_1_header">Crear Pin</string>

@@ -10,10 +10,13 @@
         <variable
             name="introducedPin"
             type="android.text.SpannableStringBuilder"/>
+        <variable
+            name="phoneNumber"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/component_sms_edittext_main_container"
+        android:id="@+id/component_sms_code_main_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
@@ -24,7 +27,7 @@
         <TextView
             android:visibility="gone"
             tools:visibility="visible"
-            android:id="@+id/component_sms_edittext_error"
+            android:id="@+id/component_sms_code_error"
             style="@style/SimpleTextLabelMediumError"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -36,7 +39,7 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:id="@+id/component_sms_edittext_box_container"
+            android:id="@+id/component_sms_code_box_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -47,19 +50,19 @@
             android:paddingTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/component_sms_edittext_error">
+            app:layout_constraintTop_toBottomOf="@+id/component_sms_code_error">
 
 
             <RelativeLayout
-                android:id="@+id/component_sms_edittext_text_0_label_container"
+                android:id="@+id/component_sms_code_text_0_label_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/component_sms_edittext_text_1_label_container"
+                app:layout_constraintEnd_toStartOf="@+id/component_sms_code_text_1_label_container"
                 app:layout_constraintStart_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
                 <TextView
-                    android:id="@+id/component_sms_edittext_text_0_label"
+                    android:id="@+id/component_sms_code_text_0_label"
                     style="@style/SMSEditTextNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -69,7 +72,7 @@
                     tools:ignore="HardcodedText" />
 
                 <ImageView
-                    android:id="@+id/component_sms_edittext_text_0_bullet"
+                    android:id="@+id/component_sms_code_text_0_bullet"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
                     android:src="@drawable/ic_sms_bullet"
@@ -79,15 +82,15 @@
 
 
             <RelativeLayout
-                android:id="@+id/component_sms_edittext_text_1_label_container"
+                android:id="@+id/component_sms_code_text_1_label_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/component_sms_edittext_text_2_label_container"
-                app:layout_constraintStart_toEndOf="@+id/component_sms_edittext_text_0_label_container"
+                app:layout_constraintEnd_toStartOf="@+id/component_sms_code_text_2_label_container"
+                app:layout_constraintStart_toEndOf="@+id/component_sms_code_text_0_label_container"
                 app:layout_constraintTop_toTopOf="parent">
                 <TextView
-                    android:id="@+id/component_sms_edittext_text_1_label"
+                    android:id="@+id/component_sms_code_text_1_label"
                     style="@style/SMSEditTextNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -97,7 +100,7 @@
                     tools:ignore="HardcodedText" />
 
                 <ImageView
-                    android:id="@+id/component_sms_edittext_text_1_bullet"
+                    android:id="@+id/component_sms_code_text_1_bullet"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
                     android:src="@drawable/ic_sms_bullet"
@@ -107,15 +110,15 @@
 
 
             <RelativeLayout
-                android:id="@+id/component_sms_edittext_text_2_label_container"
+                android:id="@+id/component_sms_code_text_2_label_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/component_sms_edittext_text_dash_label"
-                app:layout_constraintStart_toEndOf="@+id/component_sms_edittext_text_1_label_container"
+                app:layout_constraintEnd_toStartOf="@+id/component_sms_code_text_dash_label"
+                app:layout_constraintStart_toEndOf="@+id/component_sms_code_text_1_label_container"
                 app:layout_constraintTop_toTopOf="parent">
                 <TextView
-                    android:id="@+id/component_sms_edittext_text_2_label"
+                    android:id="@+id/component_sms_code_text_2_label"
                     style="@style/SMSEditTextNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -125,7 +128,7 @@
                     tools:ignore="HardcodedText" />
 
                 <ImageView
-                    android:id="@+id/component_sms_edittext_text_2_bullet"
+                    android:id="@+id/component_sms_code_text_2_bullet"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
                     android:src="@drawable/ic_sms_bullet"
@@ -135,30 +138,30 @@
 
 
             <TextView
-                android:id="@+id/component_sms_edittext_text_dash_label"
+                android:id="@+id/component_sms_code_text_dash_label"
                 style="@style/SMSEditTextNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"
                 android:textColor="@color/grey_400"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/component_sms_edittext_text_3_label_container"
-                app:layout_constraintStart_toEndOf="@+id/component_sms_edittext_text_2_label_container"
+                app:layout_constraintEnd_toStartOf="@+id/component_sms_code_text_3_label_container"
+                app:layout_constraintStart_toEndOf="@+id/component_sms_code_text_2_label_container"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="-"
                 tools:ignore="HardcodedText" />
 
 
             <RelativeLayout
-                android:id="@+id/component_sms_edittext_text_3_label_container"
+                android:id="@+id/component_sms_code_text_3_label_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/component_sms_edittext_text_4_label_container"
-                app:layout_constraintStart_toEndOf="@+id/component_sms_edittext_text_dash_label"
+                app:layout_constraintEnd_toStartOf="@+id/component_sms_code_text_4_label_container"
+                app:layout_constraintStart_toEndOf="@+id/component_sms_code_text_dash_label"
                 app:layout_constraintTop_toTopOf="parent">
                 <TextView
-                    android:id="@+id/component_sms_edittext_text_3_label"
+                    android:id="@+id/component_sms_code_text_3_label"
                     style="@style/SMSEditTextNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -168,7 +171,7 @@
                     tools:ignore="HardcodedText" />
 
                 <ImageView
-                    android:id="@+id/component_sms_edittext_text_3_bullet"
+                    android:id="@+id/component_sms_code_text_3_bullet"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
                     android:src="@drawable/ic_sms_bullet"
@@ -178,15 +181,15 @@
 
 
             <RelativeLayout
-                android:id="@+id/component_sms_edittext_text_4_label_container"
+                android:id="@+id/component_sms_code_text_4_label_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/component_sms_edittext_text_5_label_container"
-                app:layout_constraintStart_toEndOf="@+id/component_sms_edittext_text_3_label_container"
+                app:layout_constraintEnd_toStartOf="@+id/component_sms_code_text_5_label_container"
+                app:layout_constraintStart_toEndOf="@+id/component_sms_code_text_3_label_container"
                 app:layout_constraintTop_toTopOf="parent">
                 <TextView
-                    android:id="@+id/component_sms_edittext_text_4_label"
+                    android:id="@+id/component_sms_code_text_4_label"
                     style="@style/SMSEditTextNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -196,7 +199,7 @@
                     tools:ignore="HardcodedText" />
 
                 <ImageView
-                    android:id="@+id/component_sms_edittext_text_4_bullet"
+                    android:id="@+id/component_sms_code_text_4_bullet"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
                     android:src="@drawable/ic_sms_bullet"
@@ -206,16 +209,16 @@
 
 
             <RelativeLayout
-                android:id="@+id/component_sms_edittext_text_5_label_container"
+                android:id="@+id/component_sms_code_text_5_label_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/component_sms_edittext_text_4_label_container"
+                app:layout_constraintStart_toEndOf="@+id/component_sms_code_text_4_label_container"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/component_sms_edittext_text_5_label"
+                    android:id="@+id/component_sms_code_text_5_label"
                     style="@style/SMSEditTextNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -225,21 +228,32 @@
                     tools:ignore="HardcodedText" />
 
                 <ImageView
-                    android:id="@+id/component_sms_edittext_text_5_bullet"
+                    android:id="@+id/component_sms_code_text_5_bullet"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
                     android:src="@drawable/ic_sms_bullet"
                     android:layout_centerInParent="true"
                     tools:ignore="ContentDescription" />
             </RelativeLayout>
-
-
         </LinearLayout>
 
-        <!-- https://stackoverflow.com/questions/12083183/android-edittext-max-length/19222238#19222238 -->
-        <!-- https://stackoverflow.com/questions/17586102/edittext-request-focus-not-working -->
+        <TextView
+            android:id="@+id/component_sms_code_phone_number"
+            style="@style/SimpleTextLabelSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="center"
+            app:htmlText="@{phoneNumber}"
+            android:layout_marginTop="8dp"
+            tools:text="Introduzca el mensaje que se va a enviar al número 655808506"
+            app:layout_constraintTop_toBottomOf="@id/component_sms_code_box_container"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/component_sms_edittext_hidden_edittext"
+            android:id="@+id/component_sms_code_hidden_edittext"
             android:layout_width="1px"
             android:layout_height="1px"
             android:inputType="phone"

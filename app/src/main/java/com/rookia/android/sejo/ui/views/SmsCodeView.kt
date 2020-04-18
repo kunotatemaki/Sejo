@@ -54,7 +54,7 @@ class SmsCodeView : ConstraintLayout {
     private fun init(context: Context) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         binding = ComponentSmsCodeBinding.inflate(inflater, this, true)
-        binding.componentSmsEdittextHiddenEdittext.addTextChangedListener(object :
+        binding.componentSmsCodeHiddenEdittext.addTextChangedListener(object :
             TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
             }
@@ -69,17 +69,19 @@ class SmsCodeView : ConstraintLayout {
             }
         })
 
-        binding.componentSmsEdittextHiddenEdittext.postDelayed({
-            binding.componentSmsEdittextHiddenEdittext.clearFocus()
-            binding.componentSmsEdittextHiddenEdittext.requestFocus()
-        }, 0)
+        with(binding.componentSmsCodeHiddenEdittext) {
+            postDelayed({
+                clearFocus()
+                requestFocus()
+            }, 0)
+        }
     }
 
     var text: String
         get() = introducedPin.toString()
         set(text) {
-            binding.componentSmsEdittextHiddenEdittext.setText(text)
-            binding.componentSmsEdittextHiddenEdittext.setSelection(text.length)
+            binding.componentSmsCodeHiddenEdittext.setText(text)
+            binding.componentSmsCodeHiddenEdittext.setSelection(text.length)
         }
 
     fun setOnTextChangeListener(listener: OnTextChangeListener?) {
@@ -108,43 +110,43 @@ class SmsCodeView : ConstraintLayout {
                     0 -> {
                         setDigit(
                             text[i].toString(),
-                            componentSmsEdittextText0Label,
-                            componentSmsEdittextText0Bullet
+                            componentSmsCodeText0Label,
+                            componentSmsCodeText0Bullet
                         )
                     }
                     1 -> {
                         setDigit(
                             text[i].toString(),
-                            componentSmsEdittextText1Label,
-                            componentSmsEdittextText1Bullet
+                            componentSmsCodeText1Label,
+                            componentSmsCodeText1Bullet
                         )
                     }
                     2 -> {
                         setDigit(
                             text[i].toString(),
-                            componentSmsEdittextText2Label,
-                            componentSmsEdittextText2Bullet
+                            componentSmsCodeText2Label,
+                            componentSmsCodeText2Bullet
                         )
                     }
                     3 -> {
                         setDigit(
                             text[i].toString(),
-                            componentSmsEdittextText3Label,
-                            componentSmsEdittextText3Bullet
+                            componentSmsCodeText3Label,
+                            componentSmsCodeText3Bullet
                         )
                     }
                     4 -> {
                         setDigit(
                             text[i].toString(),
-                            componentSmsEdittextText4Label,
-                            componentSmsEdittextText4Bullet
+                            componentSmsCodeText4Label,
+                            componentSmsCodeText4Bullet
                         )
                     }
                     5 -> {
                         setDigit(
                             text[i].toString(),
-                            componentSmsEdittextText5Label,
-                            componentSmsEdittextText5Bullet
+                            componentSmsCodeText5Label,
+                            componentSmsCodeText5Bullet
                         )
                     }
                 }
@@ -156,28 +158,28 @@ class SmsCodeView : ConstraintLayout {
             with(binding) {
                 when (i) {
                     0 -> setBullet(
-                        componentSmsEdittextText0Label,
-                        componentSmsEdittextText0Bullet
+                        componentSmsCodeText0Label,
+                        componentSmsCodeText0Bullet
                     )
                     1 -> setBullet(
-                        componentSmsEdittextText1Label,
-                        componentSmsEdittextText1Bullet
+                        componentSmsCodeText1Label,
+                        componentSmsCodeText1Bullet
                     )
                     2 -> setBullet(
-                        componentSmsEdittextText2Label,
-                        componentSmsEdittextText2Bullet
+                        componentSmsCodeText2Label,
+                        componentSmsCodeText2Bullet
                     )
                     3 -> setBullet(
-                        componentSmsEdittextText3Label,
-                        componentSmsEdittextText3Bullet
+                        componentSmsCodeText3Label,
+                        componentSmsCodeText3Bullet
                     )
                     4 -> setBullet(
-                        componentSmsEdittextText4Label,
-                        componentSmsEdittextText4Bullet
+                        componentSmsCodeText4Label,
+                        componentSmsCodeText4Bullet
                     )
                     5 -> setBullet(
-                        componentSmsEdittextText5Label,
-                        componentSmsEdittextText5Bullet
+                        componentSmsCodeText5Label,
+                        componentSmsCodeText5Bullet
                     )
                 }
             }
@@ -195,27 +197,27 @@ class SmsCodeView : ConstraintLayout {
         bullet.visible()
     }
 
-    fun displayWrongCode(){
+    fun displayWrongCode() {
         val message = resources.getString(R.string.validate_sms_error_label)
         displayError(message)
     }
 
-    fun displayExpiredCode(){
+    fun displayExpiredCode() {
         val message = resources.getString(R.string.validate_sms_expired_label)
         displayError(message)
     }
 
-    private fun displayError(message:String) {
-        binding.componentSmsEdittextError.visible()
-        binding.componentSmsEdittextError.text = message
+    private fun displayError(message: String) {
+        binding.componentSmsCodeError.visible()
+        binding.componentSmsCodeError.text = message
         setBoxContainerBackground(R.drawable.bg_component_sms_edittext_error)
-        displayColorInDigit(binding.componentSmsEdittextText0Label, R.color.red_error)
-        displayColorInDigit(binding.componentSmsEdittextText1Label, R.color.red_error)
-        displayColorInDigit(binding.componentSmsEdittextText2Label, R.color.red_error)
-        displayColorInDigit(binding.componentSmsEdittextTextDashLabel, R.color.red_error)
-        displayColorInDigit(binding.componentSmsEdittextText3Label, R.color.red_error)
-        displayColorInDigit(binding.componentSmsEdittextText4Label, R.color.red_error)
-        displayColorInDigit(binding.componentSmsEdittextText5Label, R.color.red_error)
+        displayColorInDigit(binding.componentSmsCodeText0Label, R.color.red_error)
+        displayColorInDigit(binding.componentSmsCodeText1Label, R.color.red_error)
+        displayColorInDigit(binding.componentSmsCodeText2Label, R.color.red_error)
+        displayColorInDigit(binding.componentSmsCodeTextDashLabel, R.color.red_error)
+        displayColorInDigit(binding.componentSmsCodeText3Label, R.color.red_error)
+        displayColorInDigit(binding.componentSmsCodeText4Label, R.color.red_error)
+        displayColorInDigit(binding.componentSmsCodeText5Label, R.color.red_error)
     }
 
     private fun displayColorInDigit(view: TextView, colorResValue: Int) {
@@ -228,27 +230,29 @@ class SmsCodeView : ConstraintLayout {
     }
 
     fun hideError() {
-        binding.componentSmsEdittextError.invisible()
+        binding.componentSmsCodeError.invisible()
         setBoxContainerBackground(R.drawable.bg_component_sms_edittext)
-        displayColorInDigit(binding.componentSmsEdittextText0Label, R.color.black)
-        displayColorInDigit(binding.componentSmsEdittextText1Label, R.color.black)
-        displayColorInDigit(binding.componentSmsEdittextText2Label, R.color.black)
-        displayColorInDigit(binding.componentSmsEdittextTextDashLabel, R.color.grey_400)
-        displayColorInDigit(binding.componentSmsEdittextText3Label, R.color.black)
-        displayColorInDigit(binding.componentSmsEdittextText4Label, R.color.black)
-        displayColorInDigit(binding.componentSmsEdittextText5Label, R.color.black)
+        displayColorInDigit(binding.componentSmsCodeText0Label, R.color.black)
+        displayColorInDigit(binding.componentSmsCodeText1Label, R.color.black)
+        displayColorInDigit(binding.componentSmsCodeText2Label, R.color.black)
+        displayColorInDigit(binding.componentSmsCodeTextDashLabel, R.color.grey_400)
+        displayColorInDigit(binding.componentSmsCodeText3Label, R.color.black)
+        displayColorInDigit(binding.componentSmsCodeText4Label, R.color.black)
+        displayColorInDigit(binding.componentSmsCodeText5Label, R.color.black)
     }
 
     private fun setBoxContainerBackground(resId: Int) {
 
-        //This is a LinearLayout bug:
-        //https://stackoverflow.com/a/5890473/4021998
-        val bottom: Int = binding.componentSmsEdittextBoxContainer.paddingBottom
-        val top: Int = binding.componentSmsEdittextBoxContainer.paddingTop
-        val right: Int = binding.componentSmsEdittextBoxContainer.paddingRight
-        val left: Int = binding.componentSmsEdittextBoxContainer.paddingLeft
-        binding.componentSmsEdittextBoxContainer.setBackgroundResource(resId)
-        binding.componentSmsEdittextBoxContainer.setPadding(left, top, right, bottom)
+        val bottom: Int = binding.componentSmsCodeBoxContainer.paddingBottom
+        val top: Int = binding.componentSmsCodeBoxContainer.paddingTop
+        val right: Int = binding.componentSmsCodeBoxContainer.paddingRight
+        val left: Int = binding.componentSmsCodeBoxContainer.paddingLeft
+        binding.componentSmsCodeBoxContainer.setBackgroundResource(resId)
+        binding.componentSmsCodeBoxContainer.setPadding(left, top, right, bottom)
+    }
+
+    fun setPhoneText(phonePrefix: String, phoneNumber: String){
+        binding.phoneNumber = String.format(resources.getString(R.string.component_validate_sms_title), "$phonePrefix$phoneNumber")
     }
 
 }
