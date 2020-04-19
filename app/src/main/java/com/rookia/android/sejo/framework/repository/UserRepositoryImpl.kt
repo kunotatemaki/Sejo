@@ -1,9 +1,14 @@
 package com.rookia.android.sejo.framework.repository
 
 import androidx.annotation.VisibleForTesting
+import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.framework.repository.resultOnlyFromNetworkInFlow
+import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.data.repository.UserRepository
+import com.rookia.android.sejo.domain.local.user.TokenReceived
+import com.rookia.android.sejo.domain.network.login.LoginRequestClient
+import com.rookia.android.sejo.domain.network.toTokenReceived
 import com.rookia.android.sejo.domain.network.user.UserCreationRequestClient
 import com.rookia.android.sejo.domain.network.user.UserUpdateRequestClient
 import com.rookia.android.sejo.framework.network.NetworkServiceFactory
@@ -23,7 +28,8 @@ import javax.inject.Inject
  */
 
 class UserRepositoryImpl @Inject constructor(
-    private val networkServiceFactory: NetworkServiceFactory
+    private val networkServiceFactory: NetworkServiceFactory,
+    private val preferencesManager: PreferencesManager
 ) : UserRepository {
     override fun createUser(phonePrefix: String, phoneNumber: String, pin: Int): Flow<Result<Int>> =
         resultOnlyFromNetworkInFlow {
@@ -81,6 +87,35 @@ class UserRepositoryImpl @Inject constructor(
             Result.error(e.message)
         }
 
+    override fun login(
+        phonePrefix: String,
+        phoneNumber: String,
+        pin: Int
+    ): Flow<Result<TokenReceived>> =
+        resultOnlyFromNetworkInFlow {
+            loginInServer(phonePrefix, phoneNumber, pin)
+        }
 
+    @VisibleForTesting
+    suspend fun loginInServer(
+        phonePrefix: String,
+        phoneNumber: String,
+        pin: Int
+    ): Result<TokenReceived> =
+        try {
+            val api = networkServiceFactory.getUserInstance()
+            val loginRequest = LoginRequestClient(phonePrefix, phoneNumber, pin)
+            val resp = api.login(loginRequest)
+            if (resp.isSuccessful && resp.body() != null) {
+                Result.success(resp.body()?.toTokenReceived())
+            } else {
+                Result.error(resp.message())
+            }
+        } catch (e: Exception) {
+            Result.error(e.message)
+        }
 
+    override fun storeToken(token: String) {
+        preferencesManager.setStringIntoPreferences(Constants.USER_TOKEN_TAG, token)
+    }
 }

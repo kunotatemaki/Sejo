@@ -6,39 +6,34 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
-import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
-import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
-import com.rookia.android.sejo.usecases.RequestSmsCodeUseCase
-import com.rookia.android.sejo.usecases.ValidateSmsCodeUseCase
+import com.rookia.android.sejo.domain.local.user.TokenReceived
+import com.rookia.android.sejo.usecases.LoginUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 import javax.inject.Named
 
 class LoginViewModel @Inject constructor(
-    private val smsCodeUseCase: RequestSmsCodeUseCase,
-    private val validateCodeUseCase: ValidateSmsCodeUseCase,
-    val receiver: SMSBroadcastReceiver,
+    private val loginUseCase: LoginUseCase,
     private val preferencesManager: PreferencesManager,
     @Named("IO") private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    val smsCodeValidationResult: MediatorLiveData<Result<SmsCodeValidation>> = MediatorLiveData()
-    private lateinit var _smsCodeValidation: LiveData<Result<SmsCodeValidation>>
+    val loginResult: MediatorLiveData<Result<TokenReceived>> = MediatorLiveData()
+    private lateinit var _login: LiveData<Result<TokenReceived>>
 
-    fun requestSms(phonePrefix: String, phoneNumber: String): LiveData<Result<Int>> =
-        smsCodeUseCase.askForSmsCode(phonePrefix, phoneNumber).asLiveData(dispatcher)
+    fun storeToken(token: String?) =
+        loginUseCase.storeToken(token)
 
-    fun validateCode(
+    fun login(
         phonePrefix: String,
         phoneNumber: String,
-        smsCode: String
+        pin: Int
     ) {
-        _smsCodeValidation = validateCodeUseCase.validateSmsCode(phonePrefix, phoneNumber, smsCode)
-            .asLiveData(dispatcher)
-        smsCodeValidationResult.addSource(_smsCodeValidation) {
-            smsCodeValidationResult.value = _smsCodeValidation.value
+        _login = loginUseCase.login(phonePrefix, phoneNumber, pin).asLiveData(dispatcher)
+        loginResult.addSource(_login) {
+            loginResult.value = _login.value
             if (it.status != Result.Status.LOADING) {
-                smsCodeValidationResult.removeSource(_smsCodeValidation)
+                loginResult.removeSource(_login)
             }
         }
     }

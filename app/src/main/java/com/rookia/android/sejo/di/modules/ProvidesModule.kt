@@ -10,6 +10,7 @@ import com.rookia.android.sejo.data.repository.UserRepository
 import com.rookia.android.sejo.framework.network.NetworkServiceFactory
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
 import com.rookia.android.sejo.usecases.CreateUserUseCase
+import com.rookia.android.sejo.usecases.LoginUseCase
 import com.rookia.android.sejo.usecases.RequestSmsCodeUseCase
 import com.rookia.android.sejo.usecases.ValidateSmsCodeUseCase
 import com.rookia.android.sejo.utils.TextFormatUtils
@@ -50,6 +51,10 @@ class ProvidesModule {
     @Provides
     fun providesCreateUserUseCase(repository: UserRepository): CreateUserUseCase =
         CreateUserUseCase(repository)
+
+    @Provides
+    fun providesLoginUseCase(repository: UserRepository): LoginUseCase =
+        LoginUseCase(repository)
 
     @Singleton
     @Provides

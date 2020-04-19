@@ -8,8 +8,8 @@ import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.Constants.NAVIGATION_PIN_SENT_TAG
 import com.rookia.android.sejo.Constants.NAVIGATION_VALIDATED_PHONE_TAG
-import com.rookia.android.sejo.Constants.VALIDATED_PHONE_NUMBER_TAG
-import com.rookia.android.sejo.Constants.VALIDATED_PHONE_PREFIX_TAG
+import com.rookia.android.sejo.Constants.USER_PHONE_NUMBER_TAG
+import com.rookia.android.sejo.Constants.USER_PHONE_PREFIX_TAG
 import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
 import com.rookia.android.sejo.usecases.RequestSmsCodeUseCase
@@ -50,8 +50,8 @@ class ValidateSmsViewModel @Inject constructor(
     fun storeValidatedPhone(phonePrefix: String, phoneNumber: String) {
         with(preferencesManager){
             setBooleanIntoPreferences(NAVIGATION_VALIDATED_PHONE_TAG, true)
-            setStringIntoPreferences(VALIDATED_PHONE_PREFIX_TAG, phonePrefix)
-            setStringIntoPreferences(VALIDATED_PHONE_NUMBER_TAG, phoneNumber)
+            setStringIntoPreferences(USER_PHONE_PREFIX_TAG, phonePrefix)
+            setStringIntoPreferences(USER_PHONE_NUMBER_TAG, phoneNumber)
         }
     }
 

@@ -36,8 +36,6 @@ object Constants {
     //region SMS CODE
     const val SMS_PIN_LENGTH = 6
     const val SMS_RESEND_WAITING_TIME = 30
-    const val VALIDATED_PHONE_NUMBER_TAG = "PREF_TAGS_VALIDATED_PHONE_NUMBER_TAG"
-    const val VALIDATED_PHONE_PREFIX_TAG = "PREF_TAGS_VALIDATED_PHONE_PREFIX_TAG"
 
     //endregion
 
@@ -67,11 +65,11 @@ object Constants {
 
     //region USER DATA
     const val USER_TOKEN_TAG = "USER_TOKEN_TAG"
-    const val USER_PASSWORD_TAG = "USER_PASSWORD_TAG"
-    const val USER_PASSWORD_ALIAS = "com.rookia.android.sejo"
+    const val USER_PIN_TAG = "USER_PASSWORD_TAG"
+    const val USER_PIN_ALIAS = "com.rookia.android.sejo"
     const val USER_BIOMETRICS_TAG = "USER_BIOMETRICS_TAG"
-    const val USER_PHONE_NUMBER_TAG = "USER_BIOMETRICS_TAG"
-    const val USER_PHONE_PREFIX_TAG = "USER_BIOMETRICS_TAG"
+    const val USER_PHONE_NUMBER_TAG = "USER_PHONE_NUMBER_TAG"
+    const val USER_PHONE_PREFIX_TAG = "USER_PHONE_PREFIX_TAG"
 
 
     //endregion

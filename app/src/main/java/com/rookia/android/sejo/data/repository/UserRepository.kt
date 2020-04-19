@@ -1,6 +1,7 @@
 package com.rookia.android.sejo.data.repository
 
 import com.rookia.android.androidutils.domain.vo.Result
+import com.rookia.android.sejo.domain.local.user.TokenReceived
 import kotlinx.coroutines.flow.Flow
 
 
@@ -23,4 +24,6 @@ interface UserRepository {
         pin: Int,
         token: String
     ): Flow<Result<Int>>
+    fun login(phonePrefix: String, phoneNumber: String, pin: Int): Flow<Result<TokenReceived>>
+    fun storeToken(token: String)
 }

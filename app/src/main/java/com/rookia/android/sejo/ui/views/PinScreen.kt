@@ -152,6 +152,7 @@ class PinScreen : ConstraintLayout {
 
     fun showError() {
         binding.componentPinScreenBullets.showErrorFeedback()
+        binding.componentPinScreenBullets.setText("")
         binding.componentPinScreenSubheaderError.visible()
     }
 

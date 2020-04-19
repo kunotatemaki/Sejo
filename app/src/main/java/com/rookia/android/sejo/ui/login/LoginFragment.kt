@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.androidutils.di.injectViewModel
+import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
@@ -16,7 +18,6 @@ import com.rookia.android.sejo.databinding.LoginFragmentBinding
 import com.rookia.android.sejo.framework.utils.FingerprintUtils
 import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.views.PinScreen
-import timber.log.Timber
 import java.util.concurrent.Executor
 import javax.inject.Inject
 
@@ -67,28 +68,36 @@ class LoginFragment @Inject constructor(
                     errString: CharSequence
                 ) {
                     super.onAuthenticationError(errorCode, errString)
+                    login(null)
                 }
 
-                override fun onAuthenticationSucceeded(
-                    result: BiometricPrompt.AuthenticationResult
-                ) {
-                    super.onAuthenticationSucceeded(result)
-//                    val phoneNumber = SharedPreferencesUtils.get(Constants.PREF_TAGS.SIGN_IN_PROCESS.VALIDATED_PHONE_NUMBER_TAG)
-//                    val phonePrefix = SharedPreferencesUtils.get(Constants.PREF_TAGS.SIGN_IN_PROCESS.VALIDATED_PHONE_PREFIX_TAG, Constants.PHONE_NUMBER.SPANISH_PHONE_NUMBER_PREFIX)
-//                    val pwdBytes = storageHelper.getData(Constants.PREF_TAGS.SIGN_IN_PROCESS.PASSWORD_TAG)
-//                    val pwd = String(pwdBytes)
-//                    (presenter as LoginFragmentPresenter).login(phonePrefix, phoneNumber, pwd)
-                }
-
-                override fun onAuthenticationFailed() {
-                    super.onAuthenticationFailed()
-                }
             })
+
+        viewModel.loginResult.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                when(it.status){
+                    Result.Status.SUCCESS -> {
+                        hideLoading()
+                        viewModel.storeToken(it.data?.token)
+                        navigateToDashboard()
+                    }
+                    Result.Status.ERROR -> {
+                        hideLoading()
+                        binding.loginPinScreen.showError()
+                    }
+                    Result.Status.LOADING -> showLoading()
+                }
+            }
+        })
 
     }
 
     override fun onPinChanged(pin: String, isCompleted: Boolean) {
-        Timber.d("")
+        if (isCompleted) {
+            login(pin)
+        } else {
+            binding.loginPinScreen.hideError()
+        }
     }
 
     override fun showBiometricsLogin() {
@@ -103,5 +112,30 @@ class LoginFragment @Inject constructor(
         findNavController().navigate(direction)
     }
 
+    private fun navigateToDashboard() {
+        val direction = LoginFragmentDirections.actionLoginFragmentToBlankFragment()
+        findNavController().navigate(direction)
+    }
+
+    private fun login(pin: String?) {
+        val phoneNumber =
+            preferencesManager.getStringFromPreferences(Constants.USER_PHONE_NUMBER_TAG) ?: ""
+        val phonePrefix =
+            preferencesManager.getStringFromPreferences(Constants.USER_PHONE_PREFIX_TAG) ?: ""
+
+        val pinToBeSent = pin
+            ?: preferencesManager.getEncryptedStringFromPreferences(
+                Constants.USER_PIN_TAG,
+                Constants.USER_PIN_ALIAS
+            )
+
+        try {
+            val nPin = pinToBeSent?.toInt() ?: 0
+            viewModel.login(phonePrefix, phoneNumber, nPin)
+        } catch (e: NumberFormatException) {
+        }
+    }
 
 }
+
+

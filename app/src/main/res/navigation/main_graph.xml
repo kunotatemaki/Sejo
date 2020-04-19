@@ -19,6 +19,9 @@
             android:id="@+id/action_loginFragment_to_registerActivity"
             app:destination="@id/registerActivity"
             app:enterAnim="@anim/navigation_bottom_enter" />
+        <action
+            android:id="@+id/action_loginFragment_to_blankFragment"
+            app:destination="@id/blankFragment" />
     </fragment>
     <activity
         android:id="@+id/registerActivity"

@@ -28,21 +28,25 @@ class PinCreationStep2ViewModel @Inject constructor(
         try {
             val nPin = pin.toInt()
             val phonePrefix =
-                preferencesManager.getStringFromPreferences(Constants.VALIDATED_PHONE_PREFIX_TAG)
+                preferencesManager.getStringFromPreferences(Constants.USER_PHONE_PREFIX_TAG)
                     ?: return
             val phoneNumber =
-                preferencesManager.getStringFromPreferences(Constants.VALIDATED_PHONE_NUMBER_TAG)
+                preferencesManager.getStringFromPreferences(Constants.USER_PHONE_NUMBER_TAG)
                     ?: return
             _pinSentToServer =
                 userUseCase.createUSer(phonePrefix, phoneNumber, nPin).asLiveData(dispatcher)
             pinSentToServer.addSource(_pinSentToServer) {
-                _pinSentToServer.value?.let { result ->
+                it?.let { result ->
                     pinSentToServer.value =
                         Result.from(result.status, result.data == Constants.GENERAL_RESPONSE_OK)
                 }
-                if (it.status != Result.Status.LOADING) {
-                    pinSentToServer.removeSource(_pinSentToServer)
-
+                when(it.status){
+                    Result.Status.SUCCESS -> {
+                        pinSentToServer.removeSource(_pinSentToServer)
+                        preferencesManager.setEncryptedStringIntoPreferences(Constants.USER_PIN_TAG, pin, Constants.USER_PIN_ALIAS)
+                    }
+                    Result.Status.ERROR -> pinSentToServer.removeSource(_pinSentToServer)
+                    Result.Status.LOADING -> {}
                 }
             }
         } catch (e: NumberFormatException) {

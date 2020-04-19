@@ -17,5 +17,4 @@ abstract class BindsModule {
     @Binds
     abstract fun providesUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
 
-
 }
