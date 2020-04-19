@@ -4,6 +4,7 @@ import androidx.biometric.BiometricPrompt
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
+import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.framework.utils.FingerprintUtils
 import com.rookia.android.sejo.ui.login.LoginFragment
@@ -25,7 +26,8 @@ class MainFragmentFactory @Inject constructor(
     private val viewModelFactory: ViewModelFactory,
     private val fingerprintUtils: FingerprintUtils,
     private val biometricDialog: BiometricPrompt.PromptInfo,
-    private val preferencesManager: PreferencesManager
+    private val preferencesManager: PreferencesManager,
+    private val resourcesManager: ResourcesManager
 ) : FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when (loadFragmentClass(classLoader, className)) {
@@ -33,7 +35,8 @@ class MainFragmentFactory @Inject constructor(
                 viewModelFactory,
                 fingerprintUtils,
                 biometricDialog,
-                preferencesManager
+                preferencesManager,
+                resourcesManager
             )
             else -> super.instantiate(classLoader, className)
         }

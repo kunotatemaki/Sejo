@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.androidutils.di.injectViewModel
+import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentPinCreationStep2Binding
@@ -26,6 +27,8 @@ class PinCreationStep2Fragment @Inject constructor(
     private lateinit var viewModel: PinCreationStep2ViewModel
 
     private var previousCode: String? = null
+
+    override fun needToShowBackArrow() : Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +48,13 @@ class PinCreationStep2Fragment @Inject constructor(
 
         viewModel.pinSentToServer.observe(viewLifecycleOwner, Observer {
             it?.let {
-                if(it){
-                    navigateToDashboard()
+                when(it.status){
+                    Result.Status.SUCCESS -> {
+                        hideLoading()
+                        navigateToDashboard()
+                    }
+                    Result.Status.ERROR -> hideLoading()
+                    Result.Status.LOADING -> showLoading()
                 }
             }
         })
@@ -66,7 +74,7 @@ class PinCreationStep2Fragment @Inject constructor(
                 with(binding.fragmentPinCreationPinScreen) {
                 previousCode?.let {
                     if (viewModel.validatePin(it, getPin())) {
-                        viewModel.sendPinInfo()
+                        viewModel.sendPinInfo(getPin())
                     } else {
                         showError()
                     }
@@ -82,6 +90,7 @@ class PinCreationStep2Fragment @Inject constructor(
     }
 
     private fun navigateToDashboard() {
+        viewModel.storePinCreated()
         val direction = PinCreationStep2FragmentDirections.actionPinCreationStep2FragmentToMainActivity()
         findNavController().navigate(direction)
         activity?.finish()

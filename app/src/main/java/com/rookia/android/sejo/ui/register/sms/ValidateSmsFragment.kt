@@ -57,6 +57,8 @@ class ValidateSmsFragment @Inject constructor(
         }
     }
 
+    override fun needToShowBackArrow() : Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.apply {

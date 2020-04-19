@@ -1,4 +1,4 @@
-package com.rookia.android.sejo.domain.network
+package com.rookia.android.sejo.domain.network.user
 
 
 /**
@@ -12,8 +12,6 @@ package com.rookia.android.sejo.domain.network
  *
  */
 
-data class SmsCodeRequestClient(
-    val phonePrefix: String,
-    val phoneNumber: String
+data class UserCreationRequestServer(
+    val result: Int
 )
- 

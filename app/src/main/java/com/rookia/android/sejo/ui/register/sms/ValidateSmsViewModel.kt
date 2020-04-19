@@ -10,7 +10,7 @@ import com.rookia.android.sejo.Constants.NAVIGATION_PIN_SENT_TAG
 import com.rookia.android.sejo.Constants.NAVIGATION_VALIDATED_PHONE_TAG
 import com.rookia.android.sejo.Constants.VALIDATED_PHONE_NUMBER_TAG
 import com.rookia.android.sejo.Constants.VALIDATED_PHONE_PREFIX_TAG
-import com.rookia.android.sejo.domain.local.SmsCodeValidation
+import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
 import com.rookia.android.sejo.usecases.RequestSmsCodeUseCase
 import com.rookia.android.sejo.usecases.ValidateSmsCodeUseCase

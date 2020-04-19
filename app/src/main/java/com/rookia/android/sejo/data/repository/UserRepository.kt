@@ -1,7 +1,6 @@
 package com.rookia.android.sejo.data.repository
 
 import com.rookia.android.androidutils.domain.vo.Result
-import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
 import kotlinx.coroutines.flow.Flow
 
 
@@ -16,11 +15,12 @@ import kotlinx.coroutines.flow.Flow
  *
  */
 
-interface SmsCodeRepository {
-    fun askForSmsCode(phonePrefix: String, phoneNumber: String): Flow<Result<Int>>
-    fun validateSmsCode(
+interface UserRepository {
+    fun createUser(phonePrefix: String, phoneNumber: String, pin: Int): Flow<Result<Int>>
+    fun updateUser(
         phonePrefix: String,
         phoneNumber: String,
-        smsCode: String
-    ): Flow<Result<SmsCodeValidation>>
+        pin: Int,
+        token: String
+    ): Flow<Result<Int>>
 }

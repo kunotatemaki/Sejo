@@ -1,4 +1,4 @@
-package com.rookia.android.sejo.domain.network
+package com.rookia.android.sejo.domain.local.user
 
 
 /**
@@ -12,8 +12,9 @@ package com.rookia.android.sejo.domain.network
  *
  */
 
-data class SmsCodeValidationServer(
-    val result: Int,
-    val userExists: Boolean
+data class User(
+    val phonePrefix: String,
+    val phoneNumber: String,
+    val pin: Int,
+    val token: String
 )
- 

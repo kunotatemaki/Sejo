@@ -1,7 +1,7 @@
-package com.rookia.android.sejo.data.repository
+package com.rookia.android.sejo.usecases
 
 import com.rookia.android.androidutils.domain.vo.Result
-import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
+import com.rookia.android.sejo.data.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
 
 
@@ -16,11 +16,13 @@ import kotlinx.coroutines.flow.Flow
  *
  */
 
-interface SmsCodeRepository {
-    fun askForSmsCode(phonePrefix: String, phoneNumber: String): Flow<Result<Int>>
-    fun validateSmsCode(
+class CreateUserUseCase constructor(private val repository: UserRepository) {
+
+    fun createUSer(
         phonePrefix: String,
         phoneNumber: String,
-        smsCode: String
-    ): Flow<Result<SmsCodeValidation>>
+        pin: Int
+    ): Flow<Result<Int>> =
+        repository.createUser(phonePrefix, phoneNumber, pin)
+
 }

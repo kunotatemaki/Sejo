@@ -25,6 +25,8 @@ class ValidatePhoneNumberFragment @Inject constructor(
     private lateinit var binding: ValidateNumberFragmentBinding
     private lateinit var viewModel: ValidatePhoneViewModel
 
+    override fun needToShowBackArrow() : Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val validatedPhone = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG)

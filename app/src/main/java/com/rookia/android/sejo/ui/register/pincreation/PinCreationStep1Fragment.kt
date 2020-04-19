@@ -21,6 +21,8 @@ class PinCreationStep1Fragment @Inject constructor(
 
     private lateinit var binding: FragmentPinCreationStep1Binding
 
+    override fun needToShowBackArrow() : Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)

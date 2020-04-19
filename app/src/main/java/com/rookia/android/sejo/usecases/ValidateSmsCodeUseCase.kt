@@ -2,7 +2,7 @@ package com.rookia.android.sejo.usecases
 
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.data.repository.SmsCodeRepository
-import com.rookia.android.sejo.domain.local.SmsCodeValidation
+import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
 import kotlinx.coroutines.flow.Flow
 
 

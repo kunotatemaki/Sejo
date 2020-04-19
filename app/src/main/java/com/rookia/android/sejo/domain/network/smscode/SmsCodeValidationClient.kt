@@ -1,4 +1,4 @@
-package com.rookia.android.sejo.domain.network
+package com.rookia.android.sejo.domain.network.smscode
 
 
 /**

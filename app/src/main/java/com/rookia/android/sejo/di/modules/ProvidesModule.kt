@@ -6,8 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.SejoApplication
 import com.rookia.android.sejo.data.repository.SmsCodeRepository
+import com.rookia.android.sejo.data.repository.UserRepository
 import com.rookia.android.sejo.framework.network.NetworkServiceFactory
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
+import com.rookia.android.sejo.usecases.CreateUserUseCase
 import com.rookia.android.sejo.usecases.RequestSmsCodeUseCase
 import com.rookia.android.sejo.usecases.ValidateSmsCodeUseCase
 import com.rookia.android.sejo.utils.TextFormatUtils
@@ -44,6 +46,10 @@ class ProvidesModule {
     @Provides
     fun providesValidateSmsCodeUseCase(repository: SmsCodeRepository): ValidateSmsCodeUseCase =
         ValidateSmsCodeUseCase(repository)
+
+    @Provides
+    fun providesCreateUserUseCase(repository: UserRepository): CreateUserUseCase =
+        CreateUserUseCase(repository)
 
     @Singleton
     @Provides

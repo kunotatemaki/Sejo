@@ -1,9 +1,9 @@
 package com.rookia.android.sejo.framework.network
 
-import com.rookia.android.sejo.domain.network.SmsCodeRequestClient
-import com.rookia.android.sejo.domain.network.SmsCodeRequestServer
-import com.rookia.android.sejo.domain.network.SmsCodeValidationClient
-import com.rookia.android.sejo.domain.network.SmsCodeValidationServer
+import com.rookia.android.sejo.domain.network.smscode.SmsCodeRequestClient
+import com.rookia.android.sejo.domain.network.smscode.SmsCodeRequestServer
+import com.rookia.android.sejo.domain.network.smscode.SmsCodeValidationClient
+import com.rookia.android.sejo.domain.network.smscode.SmsCodeValidationServer
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST

@@ -26,13 +26,24 @@ open class NetworkServiceFactory {
     @Volatile
     private var smsCodeCodeInstance: SmsCodeApi? = null
 
+    @Volatile
+    private var userInstance: UserApi? = null
+
     open fun getSmsCodeCodeInstance(): SmsCodeApi =
         smsCodeCodeInstance ?: buildSmsCodeNetworkService().also { smsCodeCodeInstance = it }
+
+    open fun getUserInstance(): UserApi =
+        userInstance ?: buildUserNetworkService().also { userInstance = it }
 
     private fun buildSmsCodeNetworkService(): SmsCodeApi = Retrofit.Builder()
         .baseUrl(ROOKIA_EXPENSES_SERVER_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build().create(SmsCodeApi::class.java)
+
+    private fun buildUserNetworkService(): UserApi = Retrofit.Builder()
+            .baseUrl(ROOKIA_EXPENSES_SERVER_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build().create(UserApi::class.java)
 
 
 }

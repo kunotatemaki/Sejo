@@ -1,6 +1,7 @@
 package com.rookia.android.sejo.domain.network
 
-import com.rookia.android.sejo.domain.local.SmsCodeValidation
+import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
+import com.rookia.android.sejo.domain.network.smscode.SmsCodeValidationServer
 
 
 /**

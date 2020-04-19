@@ -1,5 +1,7 @@
 package com.rookia.android.sejo.ui.common
 
+import androidx.annotation.CallSuper
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 
 
@@ -14,7 +16,15 @@ import androidx.fragment.app.Fragment
  *
  */
 
-open class BaseFragment(layoutId: Int): Fragment(layoutId) {
+abstract class BaseFragment(layoutId: Int): Fragment(layoutId) {
+
+    abstract fun needToShowBackArrow() : Boolean
+
+    @CallSuper
+    override fun onResume() {
+        super.onResume()
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(needToShowBackArrow())
+    }
 
     protected fun showLoading() {
         (activity as? BaseActivity)?.showLoading()
@@ -23,4 +33,5 @@ open class BaseFragment(layoutId: Int): Fragment(layoutId) {
     protected fun hideLoading() {
         (activity as? BaseActivity)?.hideLoading()
     }
+
 }
