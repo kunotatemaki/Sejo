@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentFactory
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
+import com.rookia.android.sejo.ui.register.name.PersonalInfoFragment
 import com.rookia.android.sejo.ui.register.number.ValidatePhoneNumberFragment
 import com.rookia.android.sejo.ui.register.pincreation.PinCreationStep1Fragment
 import com.rookia.android.sejo.ui.register.pincreation.PinCreationStep2Fragment
@@ -46,6 +47,9 @@ class RegisterFragmentFactory @Inject constructor(
             )
             PinCreationStep2Fragment::class.java -> PinCreationStep2Fragment(
                 resourcesManager,
+                viewModelFactory
+            )
+            PersonalInfoFragment::class.java -> PersonalInfoFragment(
                 viewModelFactory
             )
             else -> super.instantiate(classLoader, className)

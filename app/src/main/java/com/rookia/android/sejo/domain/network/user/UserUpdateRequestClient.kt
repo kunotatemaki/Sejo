@@ -15,6 +15,6 @@ package com.rookia.android.sejo.domain.network.user
 data class UserUpdateRequestClient(
     val phonePrefix: String,
     val phoneNumber: String,
-    val pin: Int,
-    val token: String
+    val pin: Int?,
+    val name: String?
 )

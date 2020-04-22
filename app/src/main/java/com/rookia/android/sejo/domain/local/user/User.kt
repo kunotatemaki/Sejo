@@ -15,6 +15,5 @@ package com.rookia.android.sejo.domain.local.user
 data class User(
     val phonePrefix: String,
     val phoneNumber: String,
-    val pin: Int,
-    val token: String
+    val name: String
 )

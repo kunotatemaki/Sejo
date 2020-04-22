@@ -60,11 +60,13 @@ object Constants {
     //region NAVIGATION
     const val NAVIGATION_VALIDATED_PHONE_TAG = "NAVIGATION_VALIDATED_PHONE_NUMBER_TAG"
     const val NAVIGATION_PIN_SENT_TAG = "NAVIGATION_PASSWORD_TAG"
+    const val NAVIGATION_PERSONAL_INFO_TAG = "NAVIGATION_PERSONAL_INFO_TAG"
 
     //endregion
 
     //region USER DATA
     const val USER_TOKEN_TAG = "USER_TOKEN_TAG"
+    const val USER_NAME_TAG = "USER_NAME_TAG"
     const val USER_PIN_TAG = "USER_PASSWORD_TAG"
     const val USER_PIN_ALIAS = "com.rookia.android.sejo"
     const val USER_BIOMETRICS_TAG = "USER_BIOMETRICS_TAG"

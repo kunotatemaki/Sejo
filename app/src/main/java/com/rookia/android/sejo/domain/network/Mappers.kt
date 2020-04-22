@@ -2,8 +2,10 @@ package com.rookia.android.sejo.domain.network
 
 import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
 import com.rookia.android.sejo.domain.local.user.TokenReceived
+import com.rookia.android.sejo.domain.local.user.User
 import com.rookia.android.sejo.domain.network.login.LoginRequestServer
 import com.rookia.android.sejo.domain.network.smscode.SmsCodeValidationServer
+import com.rookia.android.sejo.domain.network.user.UserUpdateRequestClient
 
 
 /**
@@ -22,3 +24,9 @@ fun SmsCodeValidationServer.toSmsCodeValidation(): SmsCodeValidation =
 
 fun LoginRequestServer.toTokenReceived(): TokenReceived =
     TokenReceived(result = this.result, token = this.token)
+
+fun User.toUserUpdateRequestClient(): UserUpdateRequestClient =
+    UserUpdateRequestClient(this.phonePrefix, this.phoneNumber, null, this.name)
+
+fun User.toUserUpdateRequestClient(pin: Int): UserUpdateRequestClient =
+    UserUpdateRequestClient(this.phonePrefix, this.phoneNumber, pin, this.name)

@@ -101,6 +101,9 @@
     <style name="SimpleTextLabelMediumDark" parent="SimpleTextLabelMedium">
         <item name="android:textColor">@color/grey_500</item>
     </style>
+    <style name="SimpleTextLabelMediumBlack" parent="SimpleTextLabelMedium">
+        <item name="android:textColor">@color/black</item>
+    </style>
 
     <style name="ComponentBulletsContainer">
         <item name="android:layout_marginTop">@dimen/component_bullets_textviews_margin</item>

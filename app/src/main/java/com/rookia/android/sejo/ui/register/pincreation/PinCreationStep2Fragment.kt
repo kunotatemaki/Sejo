@@ -51,7 +51,7 @@ class PinCreationStep2Fragment @Inject constructor(
                 when(it.status){
                     Result.Status.SUCCESS -> {
                         hideLoading()
-                        navigateToDashboard()
+                        navigateToPersonalInfo()
                     }
                     Result.Status.ERROR -> hideLoading()
                     Result.Status.LOADING -> showLoading()
@@ -89,11 +89,9 @@ class PinCreationStep2Fragment @Inject constructor(
         activity?.invalidateOptionsMenu()
     }
 
-    private fun navigateToDashboard() {
-        viewModel.storePinCreated()
-        val direction = PinCreationStep2FragmentDirections.actionPinCreationStep2FragmentToMainActivity()
+    private fun navigateToPersonalInfo() {
+        val direction = PinCreationStep2FragmentDirections.actionPinCreationStep2FragmentToPersonalInfoFragment()
         findNavController().navigate(direction)
-        activity?.finish()
     }
 
 

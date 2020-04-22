@@ -29,8 +29,11 @@ class ValidatePhoneNumberFragment @Inject constructor(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val validatedPin = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PIN_SENT_TAG)
         val validatedPhone = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG)
-        if(validatedPhone){
+        if(validatedPin && validatedPhone){
+            navigateToPersonalInfo()
+        } else if(validatedPhone) {
             navigateToPinCreation()
         }
     }
@@ -85,6 +88,12 @@ class ValidatePhoneNumberFragment @Inject constructor(
     private fun navigateToPinCreation() {
         (activity as RegisterActivity).hideKeyboard()
         val direction = ValidatePhoneNumberFragmentDirections.actionValidateNumberFragmentToPinCreationStep1Fragment()
+        findNavController().navigate(direction)
+    }
+
+    private fun navigateToPersonalInfo() {
+        (activity as RegisterActivity).hideKeyboard()
+        val direction = ValidatePhoneNumberFragmentDirections.actionValidateNumberFragmentToPersonalInfoFragment()
         findNavController().navigate(direction)
     }
 

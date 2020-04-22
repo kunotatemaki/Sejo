@@ -9,10 +9,7 @@ import com.rookia.android.sejo.data.repository.SmsCodeRepository
 import com.rookia.android.sejo.data.repository.UserRepository
 import com.rookia.android.sejo.framework.network.NetworkServiceFactory
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
-import com.rookia.android.sejo.usecases.CreateUserUseCase
-import com.rookia.android.sejo.usecases.LoginUseCase
-import com.rookia.android.sejo.usecases.RequestSmsCodeUseCase
-import com.rookia.android.sejo.usecases.ValidateSmsCodeUseCase
+import com.rookia.android.sejo.usecases.*
 import com.rookia.android.sejo.utils.TextFormatUtils
 import dagger.Module
 import dagger.Provides
@@ -55,6 +52,10 @@ class ProvidesModule {
     @Provides
     fun providesLoginUseCase(repository: UserRepository): LoginUseCase =
         LoginUseCase(repository)
+
+    @Provides
+    fun providesUpdatePersonalInfoUseCase(repository: UserRepository): UpdatePersonalInfoUseCase =
+        UpdatePersonalInfoUseCase(repository)
 
     @Singleton
     @Provides

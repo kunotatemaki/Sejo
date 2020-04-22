@@ -3,6 +3,7 @@ package com.rookia.android.sejo.di.modules
 import androidx.lifecycle.ViewModel
 import com.rookia.android.androidutils.di.interfaces.ViewModelKey
 import com.rookia.android.sejo.ui.login.LoginViewModel
+import com.rookia.android.sejo.ui.register.name.PersonalInfoViewModel
 import com.rookia.android.sejo.ui.register.number.ValidatePhoneViewModel
 import com.rookia.android.sejo.ui.register.pincreation.PinCreationStep2ViewModel
 import com.rookia.android.sejo.ui.register.sms.ValidateSmsViewModel
@@ -39,6 +40,11 @@ internal abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
     internal abstract fun bindLoginViewModel(loginViewModel: LoginViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PersonalInfoViewModel::class)
+    internal abstract fun bindPersonalInfoViewModel(personalInfoViewModel: PersonalInfoViewModel): ViewModel
 
     @Binds
     @IntoMap

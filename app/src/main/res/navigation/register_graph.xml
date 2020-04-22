@@ -29,6 +29,11 @@
             app:popExitAnim="@anim/navigation_right_exit"
             app:popUpTo="@id/validateNumberFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_validateNumberFragment_to_personalInfoFragment"
+            app:destination="@id/personalInfoFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -87,8 +92,16 @@
             android:name="code"
             app:argType="string" />
         <action
-            android:id="@+id/action_pinCreationStep2Fragment_to_mainActivity"
-            app:destination="@id/mainActivity"
-            app:enterAnim="@anim/navigation_bottom_enter" />
+            android:id="@+id/action_pinCreationStep2Fragment_to_personalInfoFragment"
+            app:destination="@id/personalInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalInfoFragment"
+        android:name="com.rookia.android.sejo.ui.register.name.PersonalInfoFragment"
+        tools:layout="@layout/fragment_personal_info"
+        android:label="PersonalInfoFragment" >
+        <action
+            android:id="@+id/action_personalInfoFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
     </fragment>
 </navigation>
