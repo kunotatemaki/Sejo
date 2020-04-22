@@ -10,7 +10,7 @@ import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
-import com.rookia.android.sejo.databinding.ValidateNumberFragmentBinding
+import com.rookia.android.sejo.databinding.FragmentValidateNumberBinding
 import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.register.RegisterActivity
 import com.rookia.android.sejo.ui.views.PhoneNumberView
@@ -20,9 +20,9 @@ class ValidatePhoneNumberFragment @Inject constructor(
     private val viewModelFactory: ViewModelFactory,
     private val resourcesManager: ResourcesManager,
     private val preferencesManager: PreferencesManager
-) : BaseFragment(R.layout.validate_number_fragment) {
+) : BaseFragment(R.layout.fragment_validate_number) {
 
-    private lateinit var binding: ValidateNumberFragmentBinding
+    private lateinit var binding: FragmentValidateNumberBinding
     private lateinit var viewModel: ValidatePhoneViewModel
 
     override fun needToShowBackArrow() : Boolean = false
@@ -37,7 +37,7 @@ class ValidatePhoneNumberFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = ValidateNumberFragmentBinding.bind(view)
+        binding = FragmentValidateNumberBinding.bind(view)
         viewModel = injectViewModel(viewModelFactory)
         binding.validatePhoneNumberContinueButton.setOnClickListener {
             navigateToSmsValidation(

@@ -10,7 +10,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.sejo.R
-import com.rookia.android.sejo.databinding.RegisterActivityBinding
+import com.rookia.android.sejo.databinding.ActivityRegisterBinding
 import com.rookia.android.sejo.ui.common.BaseActivity
 import com.rookia.android.sejo.ui.fragmentfactories.RegisterFragmentFactory
 import javax.inject.Inject
@@ -20,13 +20,13 @@ class RegisterActivity : BaseActivity() {
     @Inject
     lateinit var fragmentFactory: RegisterFragmentFactory
 
-    private lateinit var binding: RegisterActivityBinding
+    private lateinit var binding: ActivityRegisterBinding
 
     override fun getFragmentFactory(): FragmentFactory? = fragmentFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.register_activity)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_register)
 
     }
 

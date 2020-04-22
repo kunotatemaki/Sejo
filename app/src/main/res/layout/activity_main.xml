@@ -9,7 +9,7 @@
         tools:context=".ui.main.MainActivity">
 
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -19,7 +19,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:defaultNavHost="true"
-            app:navGraph="@navigation/register_graph"/>
+            app:navGraph="@navigation/main_graph"/>
 
         <com.rookia.android.sejo.ui.views.LoadingView
             android:id="@+id/loading_view"

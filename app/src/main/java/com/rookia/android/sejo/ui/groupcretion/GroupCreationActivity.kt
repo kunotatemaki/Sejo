@@ -1,4 +1,4 @@
-package com.rookia.android.sejo.ui.common
+package com.rookia.android.sejo.ui.groupcretion
 
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -10,24 +10,24 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.sejo.R
-import com.rookia.android.sejo.databinding.ActivityMainBinding
-import com.rookia.android.sejo.ui.fragmentfactories.MainFragmentFactory
+import com.rookia.android.sejo.databinding.ActivityCreationGroupBinding
+import com.rookia.android.sejo.ui.common.BaseActivity
+import com.rookia.android.sejo.ui.fragmentfactories.GroupCreationFragmentFactory
 import javax.inject.Inject
 
-class MainActivity : BaseActivity() {
+class GroupCreationActivity : BaseActivity() {
 
     @Inject
-    lateinit var fragmentFactory: MainFragmentFactory
+    lateinit var fragmentFactory: GroupCreationFragmentFactory
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityCreationGroupBinding
 
     override fun getFragmentFactory(): FragmentFactory? = fragmentFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_register)
+
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {

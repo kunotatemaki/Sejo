@@ -16,7 +16,7 @@ import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.Constants.SMS_PIN_LENGTH
 import com.rookia.android.sejo.Constants.SMS_RESEND_WAITING_TIME
 import com.rookia.android.sejo.R
-import com.rookia.android.sejo.databinding.ValidateSmsFragmentBinding
+import com.rookia.android.sejo.databinding.FragmentValidateSmsBinding
 import com.rookia.android.sejo.ui.common.BaseActivity
 import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.views.SmsCodeView
@@ -29,9 +29,9 @@ import javax.inject.Inject
 class ValidateSmsFragment @Inject constructor(
     private val viewModelFactory: ViewModelFactory,
     private val textFormatUtils: TextFormatUtils
-) : BaseFragment(R.layout.validate_sms_fragment), SmsCodeView.OnTextChangeListener {
+) : BaseFragment(R.layout.fragment_validate_sms), SmsCodeView.OnTextChangeListener {
 
-    private lateinit var binding: ValidateSmsFragmentBinding
+    private lateinit var binding: FragmentValidateSmsBinding
     private lateinit var viewModel: ValidateSmsViewModel
     private lateinit var phoneNumber: String
     private lateinit var phonePrefix: String
@@ -71,7 +71,7 @@ class ValidateSmsFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = ValidateSmsFragmentBinding.bind(view)
+        binding = FragmentValidateSmsBinding.bind(view)
         binding.textFormatUtils = textFormatUtils
         binding.fragmentValidateSmsView.setOnTextChangeListener(this)
         binding.fragmentValidateSmsView.setPhoneText(phonePrefix, phoneNumber)

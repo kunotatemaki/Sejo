@@ -14,7 +14,7 @@ import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
-import com.rookia.android.sejo.databinding.LoginFragmentBinding
+import com.rookia.android.sejo.databinding.FragmentLoginBinding
 import com.rookia.android.sejo.framework.utils.FingerprintUtils
 import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.views.PinScreen
@@ -28,10 +28,10 @@ class LoginFragment @Inject constructor(
     private val biometricInfo: BiometricPrompt.PromptInfo,
     private val preferencesManager: PreferencesManager,
     private val resourcesManager: ResourcesManager
-) : BaseFragment(R.layout.login_fragment), PinScreen.BiometricHelper,
+) : BaseFragment(R.layout.fragment_login), PinScreen.BiometricHelper,
     PinScreen.PinValidator {
 
-    private lateinit var binding: LoginFragmentBinding
+    private lateinit var binding: FragmentLoginBinding
     private lateinit var viewModel: LoginViewModel
 
     private lateinit var executor: Executor
@@ -52,7 +52,7 @@ class LoginFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = LoginFragmentBinding.bind(view)
+        binding = FragmentLoginBinding.bind(view)
         binding.loginPinScreen.apply {
             setBiometricHelper(this@LoginFragment)
             setPinValidator(this@LoginFragment)
