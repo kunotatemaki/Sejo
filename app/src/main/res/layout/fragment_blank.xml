@@ -17,15 +17,15 @@
 
 
     <Button
-        android:id="@+id/show"
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="show"
+        android:text="create group"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
     <Button
-        android:id="@+id/hide"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="hide"
@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
     <Button
-        android:id="@+id/test"
+        android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="error"

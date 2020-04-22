@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.rookia.android.sejo.R
+import kotlinx.android.synthetic.main.fragment_blank.*
 
 class BlankFragment : Fragment() {
 
@@ -21,9 +22,9 @@ class BlankFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 //        test.setText("623")
-//        show.setOnClickListener {
+        button1.setOnClickListener {
 //            test.showPassword()
-//        }
+        }
 //        hide.setOnClickListener {
 //            test.hidePassword()
 //        }
