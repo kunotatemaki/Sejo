@@ -9,6 +9,28 @@
         android:id="@+id/groupMainInfoFragment"
         android:name="com.rookia.android.sejo.ui.groupcretion.GroupMainInfoFragment"
         tools:layout="@layout/fragment_group_main_info"
-        android:label="GroupMainInfoFragment" />
+        android:label="GroupMainInfoFragment" >
+        <action
+            android:id="@+id/action_groupMainInfoFragment_to_groupMembersFragment"
+            app:destination="@id/groupMembersFragment"
+            app:enterAnim="@anim/navigation_right_enter"
+            app:exitAnim="@anim/navigation_left_exit"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/navigation_left_enter"
+            app:popExitAnim="@anim/navigation_right_exit"
+            app:popUpTo="@id/groupMainInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/groupMembersFragment"
+        android:name="com.rookia.android.sejo.ui.groupcretion.GroupMembersFragment"
+        android:label="fragment_group_members"
+        tools:layout="@layout/fragment_group_members" >
+        <argument
+            android:name="groupName"
+            app:argType="string" />
+        <argument
+            android:name="admins"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

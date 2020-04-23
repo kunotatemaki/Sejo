@@ -65,7 +65,6 @@
     </style>
 
     <style name="SimpleTextLabel">
-        <item name="android:gravity">center_horizontal</item>
         <item name="android:lineSpacingExtra">6sp</item>
         <item name="android:fontFamily">@font/avertastdperegular</item>
     </style>
@@ -120,6 +119,11 @@
     <style name="SimpleTextLabelVeryBigBlack_Semibold" parent="SimpleTextLabelVeryBigBlack">
         <item name="android:fontFamily">@font/avertastdpesemibold</item>
     </style>
+
+    <style name="SimpleTextLabelBigBlack_Semibold" parent="SimpleTextLabelBigBlack">
+        <item name="android:fontFamily">@font/avertastdpesemibold</item>
+    </style>
+
     <style name="SimpleTextLabelVeryBigBlack" parent="SimpleTextLabelVeryBig">
         <item name="android:textColor">@color/black</item>
     </style>

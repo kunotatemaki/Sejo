@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_group_members_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/fragment_group_members_image"
+            app:layout_constraintBottom_toTopOf="@+id/fragment_group_members_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_contact_selection"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/fragment_group_members_header"
+            style="@style/SimpleTextLabelBigBlack_Semibold"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/fragment_group_members_subheader"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_group_members_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/fragment_group_members_header_text" />
+
+        <TextView
+            android:id="@+id/fragment_group_members_subheader"
+            style="@style/SimpleTextLabelMediumDark"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/fragment_group_members_permissions_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_group_members_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/fragment_group_members_subheader_text" />
+
+        <Button
+            android:id="@+id/fragment_group_members_permissions_button"
+            style="@style/SejoButton.Candy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/fragment_group_members_permissions_button_caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

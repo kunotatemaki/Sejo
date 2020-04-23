@@ -31,7 +31,7 @@ class LoginViewModel @Inject constructor(
     ) {
         _login = loginUseCase.login(phonePrefix, phoneNumber, pin).asLiveData(dispatcher)
         loginResult.addSource(_login) {
-            loginResult.value = _login.value
+            loginResult.value = it
             if (it.status != Result.Status.LOADING) {
                 loginResult.removeSource(_login)
             }

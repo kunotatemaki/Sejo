@@ -3,4 +3,6 @@
     <string name="date_utils_day_abrev">d</string>
     <string name="date_utils_hour_abrev">h</string>
     <string name="date_utils_minute_abrev">min</string>
+    <string name="permission_explanation">Permiso requerido</string>
+    <string name="ok_dialog" />
 </resources>
