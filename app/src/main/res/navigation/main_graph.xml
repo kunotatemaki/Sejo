@@ -9,7 +9,12 @@
         android:id="@+id/blankFragment"
         android:name="com.rookia.android.sejo.ui.BlankFragment"
         android:label="fragment_blank"
-        tools:layout="@layout/fragment_blank" />
+        tools:layout="@layout/fragment_blank" >
+        <action
+            android:id="@+id/action_blankFragment_to_groupCreationActivity"
+            app:destination="@id/groupCreationActivity"
+            app:enterAnim="@anim/navigation_bottom_enter" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         tools:layout="@layout/fragment_login"
@@ -25,8 +30,13 @@
     </fragment>
     <activity
         android:id="@+id/registerActivity"
-        tools:layout="@layout/fragment_validate_number"
+        tools:layout="@layout/activity_register"
         android:name="com.rookia.android.sejo.ui.register.RegisterActivity"
         android:label="RegisterActivity" />
+    <activity
+        android:id="@+id/groupCreationActivity"
+        tools:layout="@layout/activity_creation_group"
+        android:name="com.rookia.android.sejo.ui.groupcretion.GroupCreationActivity"
+        android:label="GroupCreationActivity" />
 
 </navigation>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.rookia.android.sejo.R
 import kotlinx.android.synthetic.main.fragment_blank.*
 
@@ -23,6 +24,7 @@ class BlankFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 //        test.setText("623")
         button1.setOnClickListener {
+            navigateToGroupCreation()
 //            test.showPassword()
         }
 //        hide.setOnClickListener {
@@ -34,4 +36,8 @@ class BlankFragment : Fragment() {
     }
 
 
+    private fun navigateToGroupCreation(){
+        val direction = BlankFragmentDirections.actionBlankFragmentToGroupCreationActivity()
+        findNavController().navigate(direction)
+    }
 }

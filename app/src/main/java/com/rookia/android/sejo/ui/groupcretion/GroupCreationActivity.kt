@@ -26,7 +26,7 @@ class GroupCreationActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_register)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_creation_group)
 
     }
 

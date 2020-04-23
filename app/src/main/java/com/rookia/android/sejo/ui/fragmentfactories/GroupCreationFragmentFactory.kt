@@ -7,7 +7,7 @@ import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.framework.utils.FingerprintUtils
-import com.rookia.android.sejo.ui.login.LoginFragment
+import com.rookia.android.sejo.ui.groupcretion.GroupMainInfoFragment
 import javax.inject.Inject
 
 
@@ -31,12 +31,7 @@ class GroupCreationFragmentFactory @Inject constructor(
 ) : FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when (loadFragmentClass(classLoader, className)) {
-            LoginFragment::class.java -> LoginFragment(
-                viewModelFactory,
-                fingerprintUtils,
-                biometricDialog,
-                preferencesManager,
-                resourcesManager
+            GroupMainInfoFragment::class.java -> GroupMainInfoFragment(
             )
             else -> super.instantiate(classLoader, className)
         }
