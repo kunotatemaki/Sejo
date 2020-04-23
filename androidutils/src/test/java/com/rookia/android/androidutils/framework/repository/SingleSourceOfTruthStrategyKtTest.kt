@@ -198,7 +198,7 @@ class SingleSourceOfTruthStrategyKtTest {
             responseFromNetwork
         )
         runBlockingTest {
-            val testFlow = resultOnlyFromNetworkInFlow {
+            val testFlow = resultOnlyFromOneSourceInFlow {
                 singleSourceOfTruthOnlyNetworkFlowTestClass.networkCall()
             }
 
@@ -220,7 +220,7 @@ class SingleSourceOfTruthStrategyKtTest {
             null
         )
         runBlockingTest {
-            val testFlow = resultOnlyFromNetworkInFlow {
+            val testFlow = resultOnlyFromOneSourceInFlow {
                 singleSourceOfTruthOnlyNetworkFlowTestClass.networkCall()
             }
 

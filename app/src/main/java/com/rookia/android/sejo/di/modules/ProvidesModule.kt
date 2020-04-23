@@ -5,6 +5,7 @@ import androidx.biometric.BiometricPrompt
 import androidx.lifecycle.MutableLiveData
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.SejoApplication
+import com.rookia.android.sejo.data.repository.ContactsRepository
 import com.rookia.android.sejo.data.repository.SmsCodeRepository
 import com.rookia.android.sejo.data.repository.UserRepository
 import com.rookia.android.sejo.framework.network.NetworkServiceFactory
@@ -37,18 +38,22 @@ class ProvidesModule {
     ): SMSBroadcastReceiver =
         SMSBroadcastReceiver(code, textFormatUtils)
 
+    @Singleton
     @Provides
     fun providesRequestSmsCodeUseCase(repository: SmsCodeRepository): RequestSmsCodeUseCase =
         RequestSmsCodeUseCase(repository)
 
+    @Singleton
     @Provides
     fun providesValidateSmsCodeUseCase(repository: SmsCodeRepository): ValidateSmsCodeUseCase =
         ValidateSmsCodeUseCase(repository)
 
+    @Singleton
     @Provides
     fun providesCreateUserUseCase(repository: UserRepository): CreateUserUseCase =
         CreateUserUseCase(repository)
 
+    @Singleton
     @Provides
     fun providesLoginUseCase(repository: UserRepository): LoginUseCase =
         LoginUseCase(repository)
@@ -56,6 +61,10 @@ class ProvidesModule {
     @Provides
     fun providesUpdatePersonalInfoUseCase(repository: UserRepository): UpdatePersonalInfoUseCase =
         UpdatePersonalInfoUseCase(repository)
+
+    @Provides
+    fun providesGetContactsUseCase(repository: ContactsRepository): GetContactsUseCase =
+        GetContactsUseCase(repository)
 
     @Singleton
     @Provides

@@ -2,7 +2,7 @@ package com.rookia.android.sejo.framework.repository
 
 import androidx.annotation.VisibleForTesting
 import com.rookia.android.androidutils.domain.vo.Result
-import com.rookia.android.androidutils.framework.repository.resultOnlyFromNetworkInFlow
+import com.rookia.android.androidutils.framework.repository.resultOnlyFromOneSourceInFlow
 import com.rookia.android.sejo.data.repository.SmsCodeRepository
 import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
 import com.rookia.android.sejo.domain.network.smscode.SmsCodeRequestClient
@@ -28,7 +28,7 @@ class SmsCodeRepositoryImpl @Inject constructor(
     private val networkServiceFactory: NetworkServiceFactory
 ) : SmsCodeRepository {
     override fun askForSmsCode(phonePrefix: String, phoneNumber: String): Flow<Result<Int>> =
-        resultOnlyFromNetworkInFlow {
+        resultOnlyFromOneSourceInFlow {
             requestSmsFromServer(phonePrefix, phoneNumber)
         }
 
@@ -52,7 +52,7 @@ class SmsCodeRepositoryImpl @Inject constructor(
         phoneNumber: String,
         smsCode: String
     ): Flow<Result<SmsCodeValidation>> =
-        resultOnlyFromNetworkInFlow {
+        resultOnlyFromOneSourceInFlow {
             validateSmsFromServer(phonePrefix, phoneNumber, smsCode)
         }
 

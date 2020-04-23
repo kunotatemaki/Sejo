@@ -1,7 +1,9 @@
 package com.rookia.android.sejo.di.modules
 
+import com.rookia.android.sejo.data.repository.ContactsRepository
 import com.rookia.android.sejo.data.repository.SmsCodeRepository
 import com.rookia.android.sejo.data.repository.UserRepository
+import com.rookia.android.sejo.framework.repository.ContactsRepositoryImpl
 import com.rookia.android.sejo.framework.repository.SmsCodeRepositoryImpl
 import com.rookia.android.sejo.framework.repository.UserRepositoryImpl
 import dagger.Binds
@@ -16,5 +18,8 @@ abstract class BindsModule {
 
     @Binds
     abstract fun providesUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
+
+    @Binds
+    abstract fun providesContactsRepository(contactsRepository: ContactsRepositoryImpl): ContactsRepository
 
 }

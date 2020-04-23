@@ -39,15 +39,15 @@ fun <T, A> resultFromPersistenceAndNetworkInFlow(
     }
 
 
-fun <T> resultOnlyFromNetworkInFlow(
-    networkCall: suspend () -> Result<T>
+fun <T> resultOnlyFromOneSourceInFlow(
+    sourceCall: suspend () -> Result<T>
 ): Flow<Result<T>> =
     flow {
         emit(
             Result.loading(null)
         )
         emit(
-            networkCall.invoke()
+            sourceCall.invoke()
         )
     }
 

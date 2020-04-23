@@ -31,7 +31,7 @@ class GroupCreationFragmentFactory @Inject constructor(
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when (loadFragmentClass(classLoader, className)) {
             GroupMainInfoFragment::class.java -> GroupMainInfoFragment(resourcesManager)
-            GroupMembersFragment::class.java -> GroupMembersFragment(permissionManager)
+            GroupMembersFragment::class.java -> GroupMembersFragment(viewModelFactory, permissionManager)
             else -> super.instantiate(classLoader, className)
         }
     }

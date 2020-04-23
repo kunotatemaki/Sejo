@@ -3,7 +3,7 @@ package com.rookia.android.sejo.framework.repository
 import androidx.annotation.VisibleForTesting
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
-import com.rookia.android.androidutils.framework.repository.resultOnlyFromNetworkInFlow
+import com.rookia.android.androidutils.framework.repository.resultOnlyFromOneSourceInFlow
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.data.repository.UserRepository
 import com.rookia.android.sejo.domain.local.user.TokenReceived
@@ -33,7 +33,7 @@ class UserRepositoryImpl @Inject constructor(
     private val preferencesManager: PreferencesManager
 ) : UserRepository {
     override fun createUser(phonePrefix: String, phoneNumber: String, pin: Int): Flow<Result<Int>> =
-        resultOnlyFromNetworkInFlow {
+        resultOnlyFromOneSourceInFlow {
             createUserInServer(phonePrefix, phoneNumber, pin)
         }
 
@@ -58,7 +58,7 @@ class UserRepositoryImpl @Inject constructor(
 
 
     override fun updateUser(user: User): Flow<Result<Int>> =
-        resultOnlyFromNetworkInFlow {
+        resultOnlyFromOneSourceInFlow {
             updateUserInServer(user)
         }
 
@@ -83,7 +83,7 @@ class UserRepositoryImpl @Inject constructor(
         phoneNumber: String,
         pin: Int
     ): Flow<Result<TokenReceived>> =
-        resultOnlyFromNetworkInFlow {
+        resultOnlyFromOneSourceInFlow {
             loginInServer(phonePrefix, phoneNumber, pin)
         }
 
