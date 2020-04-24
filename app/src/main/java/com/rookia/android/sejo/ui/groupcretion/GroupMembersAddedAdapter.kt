@@ -26,7 +26,7 @@ import com.rookia.android.sejo.domain.local.PhoneContact
 
 class GroupMembersAddedAdapter constructor(private val listener: GroupMemberAddedList): RecyclerView.Adapter<GroupMembersAddedAdapter.GroupMemberViewHolder>() {
 
-    private var phoneContacts: MutableList<PhoneContact> = mutableListOf()
+    private val phoneContacts: MutableList<PhoneContact> = mutableListOf()
     private val positionsToAnimateWhenAdded = mutableListOf<Int>()
 
     interface GroupMemberAddedList {
@@ -71,6 +71,17 @@ class GroupMembersAddedAdapter constructor(private val listener: GroupMemberAdde
     fun removePhoneContact(contact: PhoneContact, position: Int) {
         phoneContacts.remove(contact)
         notifyItemRemoved(position)
+    }
+
+    fun getContactsAdded(): List<PhoneContact> = phoneContacts
+
+    fun addListOfContacts(contacts: List<PhoneContact>?) {
+        contacts?.let {
+            positionsToAnimateWhenAdded.clear()
+            phoneContacts.clear()
+            phoneContacts.addAll(contacts)
+            notifyDataSetChanged()
+        }
     }
 
     class GroupMemberViewHolder(private val binding: ComponentPhoneContactThumbnailBinding, private val listener: GroupMemberAddedList) :

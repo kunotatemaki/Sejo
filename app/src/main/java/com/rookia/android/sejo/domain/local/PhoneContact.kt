@@ -1,5 +1,8 @@
 package com.rookia.android.sejo.domain.local
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 
 /**
  * Copyright (C) Rookia - All Rights Reserved
@@ -12,9 +15,10 @@ package com.rookia.android.sejo.domain.local
  *
  */
 
+@Parcelize
 data class PhoneContact (
     val id: String,
     val phoneNumber: String,
     val name: String,
     val photoUrl: String?
-)
+) : Parcelable

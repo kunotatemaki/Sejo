@@ -23,7 +23,8 @@ class GroupMembersViewModel @Inject constructor(
         try {
             _phoneContactsList = getContactsUseCase.loadContacts().asLiveData(dispatcher)
             phoneContactsList.addSource(_phoneContactsList) {
-                phoneContactsList.value = Result.from(it.status, it.data?.sortedBy { contact-> contact.name })
+                phoneContactsList.value =
+                    Result.from(it.status, it.data?.sortedBy { contact -> contact.name })
                 if (it.status != Result.Status.LOADING) {
                     phoneContactsList.removeSource(_phoneContactsList)
                 }

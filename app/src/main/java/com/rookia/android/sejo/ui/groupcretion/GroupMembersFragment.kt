@@ -2,6 +2,7 @@ package com.rookia.android.sejo.ui.groupcretion
 
 import android.Manifest
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -17,6 +18,7 @@ import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentGroupMembersBinding
 import com.rookia.android.sejo.domain.local.PhoneContact
 import com.rookia.android.sejo.ui.common.BaseFragment
+import java.util.*
 
 
 class GroupMembersFragment constructor(
@@ -28,9 +30,8 @@ class GroupMembersFragment constructor(
 
     companion object {
         private const val CONTACTS_PERMISSION_CODE = 1234
+        private const val CONTACTS_ADDED = "CONTACTS_ADDED"
     }
-
-
 
     private lateinit var binding: FragmentGroupMembersBinding
     private lateinit var viewModel: GroupMembersViewModel
@@ -50,14 +51,7 @@ class GroupMembersFragment constructor(
             loadContacts()
         }
         binding.fragmentGroupMembersPermissionsButton.setOnClickListener {
-            permissionManager.requestPermissions(
-                fragment = this,
-                callbackAllPermissionsGranted = ::permissionGranted,
-                permissions = listOf(Manifest.permission.READ_CONTACTS),
-                code = CONTACTS_PERMISSION_CODE,
-                showRationaleMessageIfNeeded = false
-
-            )
+            loadContacts()
         }
         viewModel.phoneContactsList.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -77,6 +71,11 @@ class GroupMembersFragment constructor(
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.fragmentGroupMembersAddedList.adapter = contactsAddedAdapter
         binding.fragmentGroupMembersAddedList.layoutManager = horizontalLayoutManager
+        savedInstanceState?.let {
+            if(it.containsKey(CONTACTS_ADDED)) {
+                contactsAddedAdapter.addListOfContacts(it.getParcelableArrayList<PhoneContact>(CONTACTS_ADDED)?.toList())
+            }
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -91,7 +90,11 @@ class GroupMembersFragment constructor(
                 }
             }
         }
+    }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelableArrayList(CONTACTS_ADDED, contactsAddedAdapter.getContactsAdded() as? ArrayList<out Parcelable>)
+        super.onSaveInstanceState(outState)
     }
 
     private fun loadContacts() {
