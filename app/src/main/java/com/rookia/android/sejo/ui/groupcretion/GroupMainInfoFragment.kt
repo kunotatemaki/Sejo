@@ -38,6 +38,7 @@ class GroupMainInfoFragment constructor(private val resourcesManager: ResourcesM
     }
 
     private fun navigateToMembersScreen() {
+        (activity as? BaseActivity)?.hideKeyboard()
         var adminsOk = true
         var numberOfAdmins = 0
         try {

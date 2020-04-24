@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/group_creation_graph"
-    app:startDestination="@id/groupMembersFragment">
+    app:startDestination="@id/groupMainInfoFragment">
 
     <fragment
         android:id="@+id/groupMainInfoFragment"
@@ -13,11 +13,11 @@
         <action
             android:id="@+id/action_groupMainInfoFragment_to_groupMembersFragment"
             app:destination="@id/groupMembersFragment"
-            app:enterAnim="@anim/navigation_right_enter"
-            app:exitAnim="@anim/navigation_left_exit"
+            app:enterAnim="@anim/navigation_fragment_enter"
+            app:exitAnim="@anim/navigation_fragment_exit"
             app:launchSingleTop="true"
-            app:popEnterAnim="@anim/navigation_left_enter"
-            app:popExitAnim="@anim/navigation_right_exit"
+            app:popEnterAnim="@anim/navigation_fragment_pop_enter"
+            app:popExitAnim="@anim/navigation_fragment_pop_exit"
             app:popUpTo="@id/groupMainInfoFragment" />
     </fragment>
     <fragment

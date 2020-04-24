@@ -109,7 +109,7 @@
             style="@style/SejoButton.Candy"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:enabled="false"
+            android:enabled="true"
             android:text="@string/fragment_group_main_info_button_caption"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
