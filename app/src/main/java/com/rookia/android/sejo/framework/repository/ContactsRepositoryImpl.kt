@@ -46,9 +46,14 @@ class ContactsRepositoryImpl @Inject constructor(private val context: Context) :
                     )
                 )
                 if (hasNumber == 0.toShort()) continue
-                val phoneNumber = phones.getString(
+                val phoneNumberNormalized = phones.getString(
                     phones.getColumnIndex(
                         ContactsContract.CommonDataKinds.Phone.NORMALIZED_NUMBER
+                    )
+                ) ?: continue
+                val phoneNumber = phones.getString(
+                    phones.getColumnIndex(
+                        ContactsContract.CommonDataKinds.Phone.NUMBER
                     )
                 ) ?: continue
                 val contactName = phones.getString(
@@ -69,6 +74,7 @@ class ContactsRepositoryImpl @Inject constructor(private val context: Context) :
                 phoneList.add(
                     PhoneContact(
                         phoneNumber = phoneNumber,
+                        phoneNumberNormalized = phoneNumberNormalized,
                         name = contactName,
                         photoUrl = thumbnail,
                         id = id

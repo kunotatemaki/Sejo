@@ -19,6 +19,7 @@ import kotlinx.android.parcel.Parcelize
 data class PhoneContact (
     val id: String,
     val phoneNumber: String,
+    val phoneNumberNormalized: String,
     val name: String,
     val photoUrl: String?
 ) : Parcelable
