@@ -18,14 +18,18 @@ import com.rookia.android.sejo.domain.local.PhoneContact
  *
  */
 
-class GroupMembersAdapter : RecyclerView.Adapter<GroupMembersAdapter.GroupMemberViewHolder>() {
+class GroupMembersAdapter constructor(private val listener: GroupMemberListed): RecyclerView.Adapter<GroupMembersAdapter.GroupMemberViewHolder>() {
 
     private var phoneContacts: List<PhoneContact> = listOf()
+
+    interface GroupMemberListed {
+        fun onPhoneContactMember(contact: PhoneContact)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupMemberViewHolder {
         val binding =
             ComponentPhoneContactBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return GroupMemberViewHolder(binding)
+        return GroupMemberViewHolder(binding, listener)
     }
 
     override fun getItemCount(): Int = phoneContacts.size
@@ -41,15 +45,13 @@ class GroupMembersAdapter : RecyclerView.Adapter<GroupMembersAdapter.GroupMember
         }
     }
 
-    class GroupMemberViewHolder(private val binding: ComponentPhoneContactBinding) :
+    class GroupMemberViewHolder(private val binding: ComponentPhoneContactBinding, private val listener: GroupMemberListed) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(contact: PhoneContact) {
             binding.contact = contact
-//            if(contact.photoUrl == null){
-//                binding.componentPhoneContactImage.setImageResource(R.drawable.ic_contact)
-//            } else {
-//                BindingAdapters.setImageUrlRounded(binding.componentPhoneContactImage, contact.photoUrl, null)
-//            }
+            binding.root.setOnClickListener {
+                listener.onPhoneContactMember(contact)
+            }
         }
     }
 }
