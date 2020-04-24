@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 import javax.inject.Named
 
-class GroupMembersViewModel @Inject constructor(
+class GroupCreationMembersViewModel @Inject constructor(
     private val getContactsUseCase: GetContactsUseCase,
     @Named("IO") private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {

@@ -15,42 +15,42 @@ import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.androidutils.framework.utils.PermissionManager
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.R
-import com.rookia.android.sejo.databinding.FragmentGroupMembersBinding
+import com.rookia.android.sejo.databinding.FragmentGroupCreationMembersBinding
 import com.rookia.android.sejo.domain.local.PhoneContact
 import com.rookia.android.sejo.ui.common.BaseFragment
 import java.util.*
 
 
-class GroupMembersFragment constructor(
+class GroupCreationMembersFragment constructor(
     private val viewModelFactory: ViewModelFactory,
     private val permissionManager: PermissionManager
 ) :
-    BaseFragment(R.layout.fragment_group_members), GroupMembersAdapter.GroupMemberListed,
-    GroupMembersAddedAdapter.GroupMemberAddedList {
+    BaseFragment(R.layout.fragment_group_creation_members), GroupCreationMembersAdapter.GroupMemberListed,
+    GroupCreationMembersAddedAdapter.GroupMemberAddedList {
 
     companion object {
         private const val CONTACTS_PERMISSION_CODE = 1234
         private const val CONTACTS_ADDED = "CONTACTS_ADDED"
     }
 
-    private lateinit var binding: FragmentGroupMembersBinding
-    private lateinit var viewModel: GroupMembersViewModel
-    private val contactsAdapter = GroupMembersAdapter(this)
-    private val contactsAddedAdapter = GroupMembersAddedAdapter(this)
+    private lateinit var binding: FragmentGroupCreationMembersBinding
+    private lateinit var viewModel: GroupCreationMembersViewModel
+    private val contactsAdapter = GroupCreationMembersAdapter(this)
+    private val contactsAddedAdapter = GroupCreationMembersAddedAdapter(this)
 
     override fun needToShowBackArrow(): Boolean = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentGroupMembersBinding.bind(view)
+        binding = FragmentGroupCreationMembersBinding.bind(view)
         viewModel = injectViewModel(viewModelFactory)
         if (permissionManager.isPermissionGranted(this, Manifest.permission.READ_CONTACTS).not()) {
-            binding.fragmentGroupMembersNoContactsContainer.visible()
-            binding.fragmentGroupMembersListContainer.gone()
+            binding.fragmentGroupCreationMembersNoContactsContainer.visible()
+            binding.fragmentGroupCreationMembersListContainer.gone()
         } else {
             loadContacts()
         }
-        binding.fragmentGroupMembersPermissionsButton.setOnClickListener {
+        binding.fragmentGroupCreationMembersPermissionsButton.setOnClickListener {
             loadContacts()
         }
         viewModel.phoneContactsList.observe(viewLifecycleOwner, Observer {
@@ -66,11 +66,11 @@ class GroupMembersFragment constructor(
             }
         })
 
-        binding.fragmentGroupMembersList.adapter = contactsAdapter
+        binding.fragmentGroupCreationMembersList.adapter = contactsAdapter
         val horizontalLayoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.fragmentGroupMembersAddedList.adapter = contactsAddedAdapter
-        binding.fragmentGroupMembersAddedList.layoutManager = horizontalLayoutManager
+        binding.fragmentGroupCreationMembersAddedList.adapter = contactsAddedAdapter
+        binding.fragmentGroupCreationMembersAddedList.layoutManager = horizontalLayoutManager
         savedInstanceState?.let {
             if(it.containsKey(CONTACTS_ADDED)) {
                 contactsAddedAdapter.addListOfContacts(it.getParcelableArrayList<PhoneContact>(CONTACTS_ADDED)?.toList())
@@ -109,14 +109,14 @@ class GroupMembersFragment constructor(
     }
 
     private fun permissionGranted() {
-        binding.fragmentGroupMembersNoContactsContainer.gone()
-        binding.fragmentGroupMembersListContainer.visible()
+        binding.fragmentGroupCreationMembersNoContactsContainer.gone()
+        binding.fragmentGroupCreationMembersListContainer.visible()
         viewModel.loadPhoneContacts()
     }
 
     override fun onPhoneContactMember(contact: PhoneContact) {
         contactsAddedAdapter.addPhoneContact(contact)
-        binding.fragmentGroupMembersAddedList.smoothScrollToPosition(contactsAddedAdapter.itemCount)
+        binding.fragmentGroupCreationMembersAddedList.smoothScrollToPosition(contactsAddedAdapter.itemCount)
     }
 
     override fun onPhoneContactMemberAdded(view: View, contact: PhoneContact, position: Int) {

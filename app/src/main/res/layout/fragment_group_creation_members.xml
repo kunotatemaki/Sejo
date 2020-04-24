@@ -8,7 +8,7 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/fragment_group_members_no_contacts_container"
+            android:id="@+id/fragment_group_creation_members_no_contacts_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="16dp"
@@ -16,11 +16,11 @@
             tools:visibility="visible">
 
             <ImageView
-                android:id="@+id/fragment_group_members_image"
+                android:id="@+id/fragment_group_creation_members_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/img_contact_selection"
-                app:layout_constraintBottom_toTopOf="@+id/fragment_group_members_header"
+                app:layout_constraintBottom_toTopOf="@+id/fragment_group_creation_members_header"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -28,37 +28,37 @@
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:id="@+id/fragment_group_members_header"
+                android:id="@+id/fragment_group_creation_members_header"
                 style="@style/SimpleTextLabelBigBlack_Semibold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@string/fragment_group_members_header_text"
+                android:text="@string/fragment_group_creation_members_header_text"
                 android:textAlignment="center"
-                app:layout_constraintBottom_toTopOf="@+id/fragment_group_members_subheader"
+                app:layout_constraintBottom_toTopOf="@+id/fragment_group_creation_members_subheader"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_group_members_image" />
+                app:layout_constraintTop_toBottomOf="@+id/fragment_group_creation_members_image" />
 
             <TextView
-                android:id="@+id/fragment_group_members_subheader"
+                android:id="@+id/fragment_group_creation_members_subheader"
                 style="@style/SimpleTextLabelMediumDark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/fragment_group_members_subheader_text"
+                android:text="@string/fragment_group_creation_members_subheader_text"
                 android:textAlignment="center"
-                app:layout_constraintBottom_toTopOf="@+id/fragment_group_members_permissions_button"
+                app:layout_constraintBottom_toTopOf="@+id/fragment_group_creation_members_permissions_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_group_members_header" />
+                app:layout_constraintTop_toBottomOf="@+id/fragment_group_creation_members_header" />
 
             <Button
-                android:id="@+id/fragment_group_members_permissions_button"
+                android:id="@+id/fragment_group_creation_members_permissions_button"
                 style="@style/SejoButton.Candy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_group_members_permissions_button_caption"
+                android:text="@string/fragment_group_creation_members_permissions_button_caption"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -67,12 +67,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/fragment_group_members_list_container"
+            android:id="@+id/fragment_group_creation_members_list_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fragment_group_members_added_list"
+                android:id="@+id/fragment_group_creation_members_added_list"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
@@ -83,13 +83,13 @@
                 />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fragment_group_members_list"
+                android:id="@+id/fragment_group_creation_members_list"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragment_group_members_added_list"
+                app:layout_constraintTop_toBottomOf="@id/fragment_group_creation_members_added_list"
                 tools:listitem="@layout/component_phone_contact"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 />

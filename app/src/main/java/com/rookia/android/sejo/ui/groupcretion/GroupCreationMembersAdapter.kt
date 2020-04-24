@@ -18,7 +18,7 @@ import com.rookia.android.sejo.domain.local.PhoneContact
  *
  */
 
-class GroupMembersAdapter constructor(private val listener: GroupMemberListed): RecyclerView.Adapter<GroupMembersAdapter.GroupMemberViewHolder>() {
+class GroupCreationMembersAdapter constructor(private val listener: GroupMemberListed): RecyclerView.Adapter<GroupCreationMembersAdapter.GroupMemberViewHolder>() {
 
     private var phoneContacts: List<PhoneContact> = listOf()
 

@@ -39,14 +39,14 @@
     <string name="fragment_personal_info_header">Por último, introduzca su nombre:</string>
     <string name="fragment_personal_info_button_caption">Finalizar</string>
     <!--  Group Main info -->
-    <string name="fragment_group_main_info_header">¿Cómo quieres que se llame tu grupo?</string>
-    <string name="fragment_group_main_info_button_caption">Continuar</string>
-    <string name="fragment_group_main_info_name_hint">nombre</string>
-    <string name="fragment_group_main_info_admins_hint">Admins</string>
-    <string name="fragment_group_main_admins_header">Los administradores se encargan de validar peticiones de dinero del bote por parte de los usuarios, así como pagos que pudiera hacer un usuario al bote desde fuera de la aplicación, bien sea con dinero en efectivo o con cualquier otro método de pago</string>
-    <string name="fragment_group_main_admins_error">Valor incorrecto</string>
+    <string name="fragment_group_creation_main_info_header">¿Cómo quieres que se llame tu grupo?</string>
+    <string name="fragment_group_creation_main_info_button_caption">Continuar</string>
+    <string name="fragment_group_creation_main_info_name_hint">nombre</string>
+    <string name="fragment_group_creation_main_info_admins_hint">nº de admins</string>
+    <string name="fragment_group_creation_main_admins_header">Los administradores se encargan de validar peticiones de dinero del bote por parte de los usuarios, así como pagos que pudiera hacer un usuario al bote desde fuera de la aplicación, bien sea con dinero en efectivo o con cualquier otro método de pago</string>
+    <string name="fragment_group_creation_main_admins_error">Valor incorrecto</string>
     <!-- Group Members -->
-    <string name="fragment_group_members_header_text">Acceso a los contactos</string>
-    <string name="fragment_group_members_subheader_text">Para poder añadir amigos a tu grupo necesitas permitir acceso a los contactos de tu teléfono</string>
-    <string name="fragment_group_members_permissions_button_caption">Permitir Acceso</string>
+    <string name="fragment_group_creation_members_header_text">Acceso a los contactos</string>
+    <string name="fragment_group_creation_members_subheader_text">Para poder añadir amigos a tu grupo necesitas permitir acceso a los contactos de tu teléfono</string>
+    <string name="fragment_group_creation_members_permissions_button_caption">Permitir Acceso</string>
 </resources>

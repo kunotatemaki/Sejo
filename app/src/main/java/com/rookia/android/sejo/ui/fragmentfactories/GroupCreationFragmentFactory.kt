@@ -6,8 +6,8 @@ import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.androidutils.framework.utils.PermissionManager
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
-import com.rookia.android.sejo.ui.groupcretion.GroupMainInfoFragment
-import com.rookia.android.sejo.ui.groupcretion.GroupMembersFragment
+import com.rookia.android.sejo.ui.groupcretion.GroupCreationMainInfoFragment
+import com.rookia.android.sejo.ui.groupcretion.GroupCreationMembersFragment
 import javax.inject.Inject
 
 
@@ -30,8 +30,8 @@ class GroupCreationFragmentFactory @Inject constructor(
 ) : FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when (loadFragmentClass(classLoader, className)) {
-            GroupMainInfoFragment::class.java -> GroupMainInfoFragment(resourcesManager)
-            GroupMembersFragment::class.java -> GroupMembersFragment(viewModelFactory, permissionManager)
+            GroupCreationMainInfoFragment::class.java -> GroupCreationMainInfoFragment(resourcesManager)
+            GroupCreationMembersFragment::class.java -> GroupCreationMembersFragment(viewModelFactory, permissionManager)
             else -> super.instantiate(classLoader, className)
         }
     }

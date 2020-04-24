@@ -3,28 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/group_creation_graph"
-    app:startDestination="@id/groupMainInfoFragment">
+    app:startDestination="@id/groupCreationMainInfoFragment">
 
     <fragment
-        android:id="@+id/groupMainInfoFragment"
-        android:name="com.rookia.android.sejo.ui.groupcretion.GroupMainInfoFragment"
-        tools:layout="@layout/fragment_group_main_info"
-        android:label="GroupMainInfoFragment" >
+        android:id="@+id/groupCreationMainInfoFragment"
+        android:name="com.rookia.android.sejo.ui.groupcretion.GroupCreationMainInfoFragment"
+        tools:layout="@layout/fragment_group_creation_main_info"
+        android:label="GroupCreationMainInfoFragment" >
         <action
-            android:id="@+id/action_groupMainInfoFragment_to_groupMembersFragment"
-            app:destination="@id/groupMembersFragment"
+            android:id="@+id/action_groupCreationMainInfoFragment_to_groupCreationMembersFragment"
+            app:destination="@id/groupCreationMembersFragment"
             app:enterAnim="@anim/navigation_fragment_enter"
             app:exitAnim="@anim/navigation_fragment_exit"
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/navigation_fragment_pop_enter"
             app:popExitAnim="@anim/navigation_fragment_pop_exit"
-            app:popUpTo="@id/groupMainInfoFragment" />
+            app:popUpTo="@id/groupCreationMainInfoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/groupMembersFragment"
-        android:name="com.rookia.android.sejo.ui.groupcretion.GroupMembersFragment"
+        android:id="@+id/groupCreationMembersFragment"
+        android:name="com.rookia.android.sejo.ui.groupcretion.GroupCreationMembersFragment"
         android:label="fragment_group_members"
-        tools:layout="@layout/fragment_group_members" >
+        tools:layout="@layout/fragment_group_creation_members" >
         <argument
             android:name="groupName"
             app:argType="string" />

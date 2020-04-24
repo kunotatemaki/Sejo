@@ -24,7 +24,7 @@ import com.rookia.android.sejo.domain.local.PhoneContact
  *
  */
 
-class GroupMembersAddedAdapter constructor(private val listener: GroupMemberAddedList): RecyclerView.Adapter<GroupMembersAddedAdapter.GroupMemberViewHolder>() {
+class GroupCreationMembersAddedAdapter constructor(private val listener: GroupMemberAddedList): RecyclerView.Adapter<GroupCreationMembersAddedAdapter.GroupMemberViewHolder>() {
 
     private val phoneContacts: MutableList<PhoneContact> = mutableListOf()
     private val positionsToAnimateWhenAdded = mutableListOf<Int>()

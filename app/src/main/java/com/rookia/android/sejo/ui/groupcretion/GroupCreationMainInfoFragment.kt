@@ -6,27 +6,27 @@ import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.sejo.R
-import com.rookia.android.sejo.databinding.FragmentGroupMainInfoBinding
+import com.rookia.android.sejo.databinding.FragmentGroupCreationMainInfoBinding
 import com.rookia.android.sejo.ui.common.BaseActivity
 import com.rookia.android.sejo.ui.common.BaseFragment
 
 
-class GroupMainInfoFragment constructor(private val resourcesManager: ResourcesManager): BaseFragment(R.layout.fragment_group_main_info) {
+class GroupCreationMainInfoFragment constructor(private val resourcesManager: ResourcesManager): BaseFragment(R.layout.fragment_group_creation_main_info) {
 
-    lateinit var binding: FragmentGroupMainInfoBinding
+    lateinit var binding: FragmentGroupCreationMainInfoBinding
 
     override fun needToShowBackArrow(): Boolean = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentGroupMainInfoBinding.bind(view). also {
-            it.fragmentGroupMainInfoButton.setOnClickListener {
+        binding = FragmentGroupCreationMainInfoBinding.bind(view).also {
+            it.fragmentGroupCreationMainInfoButton.setOnClickListener {
                 navigateToMembersScreen()
             }
-            it.fragmentGroupMainInfoAdmins.addTextChangedListener {
+            it.fragmentGroupCreationMainInfoAdmins.addTextChangedListener {
                 checkButton()
             }
-            it.fragmentGroupMainInfoName.addTextChangedListener {
+            it.fragmentGroupCreationMainInfoName.addTextChangedListener {
                 checkButton()
             }
         }
@@ -42,7 +42,7 @@ class GroupMainInfoFragment constructor(private val resourcesManager: ResourcesM
         var adminsOk = true
         var numberOfAdmins = 0
         try {
-            numberOfAdmins = binding.fragmentGroupMainInfoAdmins.text.toString().toInt()
+            numberOfAdmins = binding.fragmentGroupCreationMainInfoAdmins.text.toString().toInt()
             if(numberOfAdmins <= 0){
                 adminsOk = false
             }
@@ -50,25 +50,25 @@ class GroupMainInfoFragment constructor(private val resourcesManager: ResourcesM
             adminsOk = false
         }
         if(adminsOk){
-            val direction = GroupMainInfoFragmentDirections.actionGroupMainInfoFragmentToGroupMembersFragment(
-                binding.fragmentGroupMainInfoName.text.toString(), numberOfAdmins
+            val direction = GroupCreationMainInfoFragmentDirections.actionGroupCreationMainInfoFragmentToGroupCreationMembersFragment(
+                binding.fragmentGroupCreationMainInfoName.text.toString(), numberOfAdmins
             )
             findNavController().navigate(direction)
         } else {
-            binding.fragmentGroupMainInfoAdminsContainer.error = resourcesManager.getString(R.string.fragment_group_main_admins_error)
+            binding.fragmentGroupCreationMainInfoAdminsContainer.error = resourcesManager.getString(R.string.fragment_group_creation_main_admins_error)
         }
 
     }
 
     private fun checkButton() {
         var enabled = true
-        if(binding.fragmentGroupMainInfoAdmins.text.isNullOrBlank()){
+        if(binding.fragmentGroupCreationMainInfoAdmins.text.isNullOrBlank()){
             enabled = false
         }
-        if(binding.fragmentGroupMainInfoName.text.isNullOrBlank()){
+        if(binding.fragmentGroupCreationMainInfoName.text.isNullOrBlank()){
             enabled = false
         }
-        binding.fragmentGroupMainInfoButton.isEnabled = enabled
-        binding.fragmentGroupMainInfoAdminsContainer.error = null
+        binding.fragmentGroupCreationMainInfoButton.isEnabled = enabled
+        binding.fragmentGroupCreationMainInfoAdminsContainer.error = null
     }
 }

@@ -7,14 +7,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        tools:context=".ui.groupcretion.GroupMainInfoFragment">
+        tools:context=".ui.groupcretion.GroupCreationMainInfoFragment">
 
         <ScrollView
-            android:id="@+id/fragment_group_main_info_scrollable_container"
+            android:id="@+id/fragment_group_creation_main_info_scrollable_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@id/fragment_group_main_info_button"
+            app:layout_constraintBottom_toTopOf="@id/fragment_group_creation_main_info_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -24,13 +24,13 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/fragment_group_main_info_name_header"
+                    android:id="@+id/fragment_group_creation_main_info_name_header"
                     style="@style/SimpleTextLabelMediumBlack"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="@string/fragment_group_main_info_header"
-                    app:layout_constraintBottom_toTopOf="@+id/fragment_group_main_info_name_container"
+                    android:text="@string/fragment_group_creation_main_info_header"
+                    app:layout_constraintBottom_toTopOf="@+id/fragment_group_creation_main_info_name_container"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -38,21 +38,21 @@
                     app:layout_constraintVertical_chainStyle="packed" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/fragment_group_main_info_name_container"
+                    android:id="@+id/fragment_group_creation_main_info_name_container"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="24dp"
-                    android:hint="@string/fragment_group_main_info_name_hint"
-                    app:layout_constraintBottom_toTopOf="@+id/fragment_group_main_info_admins_header"
+                    android:hint="@string/fragment_group_creation_main_info_name_hint"
+                    app:layout_constraintBottom_toTopOf="@+id/fragment_group_creation_main_info_admins_header"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_group_main_info_name_header">
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_group_creation_main_info_name_header">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/fragment_group_main_info_name"
+                        android:id="@+id/fragment_group_creation_main_info_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:importantForAutofill="no"
@@ -62,37 +62,37 @@
 
 
                 <TextView
-                    android:id="@+id/fragment_group_main_info_admins_header"
+                    android:id="@+id/fragment_group_creation_main_info_admins_header"
                     style="@style/SimpleTextLabelMediumBlack"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:layout_marginBottom="16dp"
-                    android:text="@string/fragment_group_main_admins_header"
-                    app:layout_constraintBottom_toTopOf="@+id/fragment_group_main_info_admins_container"
+                    android:text="@string/fragment_group_creation_main_admins_header"
+                    app:layout_constraintBottom_toTopOf="@+id/fragment_group_creation_main_info_admins_container"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_group_main_info_name_container"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_group_creation_main_info_name_container"
                     app:layout_constraintVertical_bias="1" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/fragment_group_main_info_admins_container"
+                    android:id="@+id/fragment_group_creation_main_info_admins_container"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="24dp"
-                    android:hint="@string/fragment_group_main_info_admins_hint"
+                    android:hint="@string/fragment_group_creation_main_info_admins_hint"
                     app:flow_verticalBias="0"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_group_main_info_admins_header">
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_group_creation_main_info_admins_header">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/fragment_group_main_info_admins"
+                        android:id="@+id/fragment_group_creation_main_info_admins"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:importantForAutofill="no"
@@ -105,16 +105,16 @@
         </ScrollView>
 
         <Button
-            android:id="@+id/fragment_group_main_info_button"
+            android:id="@+id/fragment_group_creation_main_info_button"
             style="@style/SejoButton.Candy"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:enabled="true"
-            android:text="@string/fragment_group_main_info_button_caption"
+            android:text="@string/fragment_group_creation_main_info_button_caption"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_group_main_info_scrollable_container"
+            app:layout_constraintTop_toBottomOf="@id/fragment_group_creation_main_info_scrollable_container"
             app:layout_constraintVertical_bias="1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
