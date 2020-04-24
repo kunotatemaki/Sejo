@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:background="?android:selectableItemBackground"
+        android:background="?android:selectableItemBackgroundBorderless"
         android:padding="12dp">
 
         <ImageView
