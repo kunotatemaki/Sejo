@@ -1,6 +1,7 @@
 package com.rookia.android.androidutils.databinding
 
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.text.Html
@@ -20,73 +21,95 @@ import java.io.File
 class BindingAdapters {
 
     companion object {
-        @BindingAdapter("imageRounded")
-        fun setImageUrlRounded(view: ImageView, url: String?) {
+
+        @BindingAdapter(value = ["imageRounded", "defaultImage"], requireAll = false)
+        @JvmStatic
+        fun setImageUrlRounded(view: ImageView, url: String?, defaultImage: Drawable?) {
             //circle images
-            url?.let {
-                Glide.with(view.context)
-                    .load(url)
-                    .apply(
-                        RequestOptions()
-                            .circleCrop()
-                    )
-                    .into(view)
+            val options = if (defaultImage == null) {
+                RequestOptions()
+                    .circleCrop()
+            } else {
+                RequestOptions()
+                    .circleCrop()
+                    .placeholder(defaultImage)
             }
+
+            Glide.with(view.context)
+                .load(url)
+                .apply(
+                    options
+                )
+                .into(view)
         }
 
-        @BindingAdapter("imageAsId")
-        fun setImageFromId(view: ImageView, id: Int?) {
-            //circle images
-            id?.let {
-                Glide.with(view.context)
-                    .load(id)
-                    .into(view)
+        @JvmStatic
+        @BindingAdapter(value = ["imageCenterAndCropped", "defaultImage"], requireAll = false)
+        fun setImageUrlCenterAndCropped(view: ImageView, url: String?, defaultImage: Drawable?) {
+            val options = if (defaultImage == null) {
+                RequestOptions()
+                    .centerCrop()
+            } else {
+                RequestOptions()
+                    .centerCrop()
+                    .placeholder(defaultImage)
             }
-        }
-
-
-        @BindingAdapter("imageCenterCropped")
-        fun setImageUrlCenterAndCropped(view: ImageView, url: String?) {
             //cropped images
             url?.let {
                 Glide.with(view.context)
                     .load(url)
                     .apply(
-                        RequestOptions()
-                            .centerCrop()
+                        options
                     )
                     .into(view)
             }
         }
 
-        @BindingAdapter("imageCenterCropped")
-        fun setImageFileCenterAndCropped(view: ImageView, file: File?) {
+        @JvmStatic
+        @BindingAdapter(value = ["imageCenterAndCropped", "defaultImage"], requireAll = false)
+        fun setImageFileCenterAndCropped(view: ImageView, file: File?, defaultImage: Drawable?) {
+            val options = if (defaultImage == null) {
+                RequestOptions()
+                    .centerCrop()
+            } else {
+                RequestOptions()
+                    .centerCrop()
+                    .placeholder(defaultImage)
+            }
             //cropped images
             file?.let {
                 Glide.with(view.context)
                     .load(file)
                     .apply(
-                        RequestOptions()
-                            .centerCrop()
+                        options
                     )
                     .into(view)
             }
         }
 
-        @BindingAdapter("imageCenterCropped")
-        fun setImageUriCenterAndCropped(view: ImageView, uri: Uri?) {
+        @JvmStatic
+        @BindingAdapter(value = ["imageCenterAndCropped", "defaultImage"], requireAll = false)
+        fun setImageUriCenterAndCropped(view: ImageView, uri: Uri?, defaultImage: Drawable?) {
+            val options = if (defaultImage == null) {
+                RequestOptions()
+                    .centerCrop()
+            } else {
+                RequestOptions()
+                    .centerCrop()
+                    .placeholder(defaultImage)
+            }
             //cropped images
             uri?.let {
                 Glide.with(view.context)
                     .load(uri)
                     .apply(
-                        RequestOptions()
-                            .centerCrop()
+                        options
                     )
                     .into(view)
             }
         }
 
+        @JvmStatic
         @BindingAdapter("isVisibleOrGone")
         fun <T> setIsVisibleOrGone(view: View, isVisible: T?) {
             isVisible?.let {
@@ -101,6 +124,7 @@ class BindingAdapters {
             view.gone()
         }
 
+        @JvmStatic
         @BindingAdapter("isVisibleOrInvisible")
         fun <T> setIsVisibleOrInvisible(view: View, isVisible: T?) {
             isVisible?.let {
@@ -115,6 +139,7 @@ class BindingAdapters {
             view.invisible()
         }
 
+        @JvmStatic
         @BindingAdapter("isBoldOrNot")
         fun <T> setIsBoldOrNot(textView: TextView, isBold: T?) {
             isBold?.let {
@@ -126,6 +151,7 @@ class BindingAdapters {
             textView.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL)
         }
 
+        @JvmStatic
         @BindingAdapter("setBackground")
         fun <T> setBackground(view: View, background: T?) {
             background?.let {
@@ -135,6 +161,7 @@ class BindingAdapters {
             }
         }
 
+        @JvmStatic
         @BindingAdapter("setBackgroundOnTextView")
         fun <T> setBackgroundOnTextView(textView: View, background: T?) {
             background?.let {
@@ -144,6 +171,7 @@ class BindingAdapters {
             }
         }
 
+        @JvmStatic
         @BindingAdapter("setBackgroundOnTextView")
         fun <T> setTextColorOnTextView(textView: TextView, color: T?) {
             color?.let {

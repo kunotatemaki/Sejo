@@ -27,6 +27,7 @@ class GroupMembersFragment constructor(
 
     private lateinit var binding: FragmentGroupMembersBinding
     private lateinit var viewModel: GroupMembersViewModel
+    private val adapter = GroupMembersAdapter()
 
     override fun needToShowBackArrow(): Boolean = true
 
@@ -35,7 +36,7 @@ class GroupMembersFragment constructor(
         binding = FragmentGroupMembersBinding.bind(view)
         viewModel = injectViewModel(viewModelFactory)
         if (permissionManager.isPermissionGranted(this, Manifest.permission.READ_CONTACTS).not()) {
-            binding.fragmentGroupMembersContainer.visible()
+            binding.fragmentGroupMembersNoContactsContainer.visible()
         } else {
             loadContacts()
         }
@@ -47,12 +48,15 @@ class GroupMembersFragment constructor(
                 when(it.status){
                     Result.Status.SUCCESS -> {
                         hideLoading()
+                        adapter.setPhoneContacts(it.data)
                     }
                     Result.Status.ERROR -> hideLoading()
                     Result.Status.LOADING -> showLoading()
                 }
             }
         })
+
+        binding.fragmentGroupMembersList.adapter = adapter
     }
 
     override fun onRequestPermissionsResult(
@@ -70,7 +74,7 @@ class GroupMembersFragment constructor(
 
     }
 
-    fun loadContacts(){
+    private fun loadContacts(){
         permissionManager.requestPermissions(
             fragment = this,
             callbackAllPermissionsGranted = ::permissionGranted,
@@ -82,7 +86,7 @@ class GroupMembersFragment constructor(
     }
 
     private fun permissionGranted() {
-        binding.fragmentGroupMembersContainer.gone()
+        binding.fragmentGroupMembersNoContactsContainer.gone()
         viewModel.loadPhoneContacts()
     }
 

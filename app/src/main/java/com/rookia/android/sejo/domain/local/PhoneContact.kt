@@ -14,7 +14,7 @@ package com.rookia.android.sejo.domain.local
 
 data class PhoneContact (
     val id: String,
-    val phone: String,
+    val phoneNumber: String,
     val name: String,
     val photoUrl: String?
 )

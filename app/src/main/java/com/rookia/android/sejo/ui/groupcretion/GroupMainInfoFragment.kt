@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentGroupMainInfoBinding
+import com.rookia.android.sejo.ui.common.BaseActivity
 import com.rookia.android.sejo.ui.common.BaseFragment
 
 
@@ -29,7 +30,11 @@ class GroupMainInfoFragment constructor(private val resourcesManager: ResourcesM
                 checkButton()
             }
         }
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (activity as? BaseActivity)?.hideKeyboard()
     }
 
     private fun navigateToMembersScreen() {

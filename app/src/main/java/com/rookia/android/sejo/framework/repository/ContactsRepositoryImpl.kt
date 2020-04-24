@@ -68,7 +68,7 @@ class ContactsRepositoryImpl @Inject constructor(private val context: Context) :
                 ) ?: continue
                 phoneList.add(
                     PhoneContact(
-                        phone = phoneNumber,
+                        phoneNumber = phoneNumber,
                         name = contactName,
                         photoUrl = thumbnail,
                         id = id
