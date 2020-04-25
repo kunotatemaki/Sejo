@@ -49,12 +49,12 @@ class GroupCreationMembersAddedAdapter constructor(private val listener: GroupMe
         val animate = positionsToAnimateWhenAdded.contains(position)
         holder.bind(contact = phoneContacts[position])
         if(animate) {
-            setExpandAnimation(holder.itemView, position)
+            setExpandAnimation(holder.itemView)
             positionsToAnimateWhenAdded.remove(position)
         }
     }
 
-    private fun setExpandAnimation(viewToAnimate: View, position: Int) {
+    private fun setExpandAnimation(viewToAnimate: View) {
         val animation: Animation =
             AnimationUtils.loadAnimation(viewToAnimate.context, R.anim.expand)
         viewToAnimate.startAnimation(animation)

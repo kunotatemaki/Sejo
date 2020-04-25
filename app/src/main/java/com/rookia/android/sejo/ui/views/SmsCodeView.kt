@@ -54,22 +54,22 @@ class SmsCodeView : ConstraintLayout {
     private fun init(context: Context) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         binding = ComponentSmsCodeBinding.inflate(inflater, this, true)
-        binding.componentSmsCodeHiddenEdittext.addTextChangedListener(object :
-            TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-            }
-
-            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-            }
-
-            override fun afterTextChanged(editable: Editable) {
-                val cleanText = editable.toString().replace("[^\\d]".toRegex(), "")
-                setUIForText(cleanText)
-                listener?.onText(cleanText)
-            }
-        })
 
         with(binding.componentSmsCodeHiddenEdittext) {
+            addTextChangedListener(object :
+                TextWatcher {
+                override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+                }
+
+                override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+                }
+
+                override fun afterTextChanged(editable: Editable) {
+                    val cleanText = editable.toString().replace("[^\\d]".toRegex(), "")
+                    setUIForText(cleanText)
+                    listener?.onText(cleanText)
+                }
+            })
             postDelayed({
                 clearFocus()
                 requestFocus()

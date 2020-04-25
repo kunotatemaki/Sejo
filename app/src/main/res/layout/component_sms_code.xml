@@ -24,7 +24,7 @@
         android:paddingRight="24dp"
         android:paddingTop="8dp">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:visibility="gone"
             tools:visibility="visible"
             android:id="@+id/component_sms_code_error"
@@ -61,7 +61,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/component_sms_code_text_1_label_container"
                 app:layout_constraintStart_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/component_sms_code_text_0_label"
                     style="@style/SMSEditTextNumber"
                     android:layout_width="wrap_content"
@@ -71,7 +71,7 @@
                     tools:text="0"
                     tools:ignore="HardcodedText" />
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/component_sms_code_text_0_bullet"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
@@ -89,7 +89,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/component_sms_code_text_2_label_container"
                 app:layout_constraintStart_toEndOf="@+id/component_sms_code_text_0_label_container"
                 app:layout_constraintTop_toTopOf="parent">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/component_sms_code_text_1_label"
                     style="@style/SMSEditTextNumber"
                     android:layout_width="wrap_content"
@@ -99,7 +99,7 @@
                     tools:text="1"
                     tools:ignore="HardcodedText" />
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/component_sms_code_text_1_bullet"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
@@ -117,7 +117,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/component_sms_code_text_dash_label"
                 app:layout_constraintStart_toEndOf="@+id/component_sms_code_text_1_label_container"
                 app:layout_constraintTop_toTopOf="parent">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/component_sms_code_text_2_label"
                     style="@style/SMSEditTextNumber"
                     android:layout_width="wrap_content"
@@ -127,7 +127,7 @@
                     tools:text="2"
                     tools:ignore="HardcodedText" />
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/component_sms_code_text_2_bullet"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
@@ -160,7 +160,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/component_sms_code_text_4_label_container"
                 app:layout_constraintStart_toEndOf="@+id/component_sms_code_text_dash_label"
                 app:layout_constraintTop_toTopOf="parent">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/component_sms_code_text_3_label"
                     style="@style/SMSEditTextNumber"
                     android:layout_width="wrap_content"
@@ -170,7 +170,7 @@
                     tools:text="3"
                     tools:ignore="HardcodedText" />
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/component_sms_code_text_3_bullet"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
@@ -188,7 +188,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/component_sms_code_text_5_label_container"
                 app:layout_constraintStart_toEndOf="@+id/component_sms_code_text_3_label_container"
                 app:layout_constraintTop_toTopOf="parent">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/component_sms_code_text_4_label"
                     style="@style/SMSEditTextNumber"
                     android:layout_width="wrap_content"
@@ -198,7 +198,7 @@
                     tools:text="4"
                     tools:ignore="HardcodedText" />
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/component_sms_code_text_4_bullet"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
@@ -217,7 +217,7 @@
                 app:layout_constraintStart_toEndOf="@+id/component_sms_code_text_4_label_container"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/component_sms_code_text_5_label"
                     style="@style/SMSEditTextNumber"
                     android:layout_width="wrap_content"
@@ -227,7 +227,7 @@
                     tools:text="5"
                     tools:ignore="HardcodedText" />
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/component_sms_code_text_5_bullet"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
@@ -237,7 +237,7 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/component_sms_code_phone_number"
             style="@style/SimpleTextLabelSmall"
             android:layout_width="0dp"

@@ -3,8 +3,8 @@ package com.rookia.android.sejo.ui.common
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.android.material.appbar.MaterialToolbar
 
 
 /**
@@ -28,10 +28,15 @@ abstract class BaseFragment(layoutId: Int): Fragment(layoutId) {
         hideLoading()
     }
 
-    @CallSuper
-    override fun onResume() {
-        super.onResume()
-        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(needToShowBackArrow())
+    protected fun setToolbar(toolbar: MaterialToolbar, showBackArrow: Boolean, title: String? = null){
+        (activity as? BaseActivity)?.apply {
+            setSupportActionBar(toolbar)
+            supportActionBar?.let {
+                it.setDisplayHomeAsUpEnabled(showBackArrow)
+                it.setDisplayShowTitleEnabled(title != null)
+                it.title = title
+            }
+        }
     }
 
     protected fun showLoading() {
