@@ -16,6 +16,7 @@ import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentLoginBinding
+import com.rookia.android.sejo.domain.network.LoginResponse
 import com.rookia.android.sejo.framework.utils.FingerprintUtils
 import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.views.PinScreen
@@ -78,8 +79,14 @@ class LoginFragment @Inject constructor(
                 when (it.status) {
                     Result.Status.SUCCESS -> {
                         hideLoading()
-                        viewModel.storeToken(it.data?.token)
-                        navigateToDashboard()
+                        if(it.data?.result == LoginResponse.NO_USER.code){
+                            preferencesManager.setBooleanIntoPreferences(Constants.NAVIGATION_PERSONAL_INFO_TAG, false)
+                            preferencesManager.setBooleanIntoPreferences(Constants.NAVIGATION_PIN_SENT_TAG, false)
+                            navigateToRegisterFlow()
+                        } else {
+                            viewModel.storeToken(it.data?.token)
+                            navigateToDashboard()
+                        }
                     }
                     Result.Status.ERROR -> {
                         hideLoading()
@@ -121,6 +128,7 @@ class LoginFragment @Inject constructor(
     private fun navigateToRegisterFlow() {
         val direction = LoginFragmentDirections.actionLoginFragmentToRegisterActivity()
         findNavController().navigate(direction)
+        activity?.finish()
     }
 
     private fun navigateToDashboard() {
@@ -130,6 +138,7 @@ class LoginFragment @Inject constructor(
             LoginFragmentDirections.actionLoginFragmentToBiometricPermissionFragment()
         }
         findNavController().navigate(direction)
+        activity?.finish()
     }
 
     private fun login(pin: String? = null) {
@@ -152,6 +161,3 @@ class LoginFragment @Inject constructor(
     }
 
 }
-
-
-//todo si el usuario se ha borrado, devolverlo del servidor y lanzar el proceso de registro desde el principio

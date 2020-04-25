@@ -34,7 +34,6 @@ class RegisterFragmentFactory @Inject constructor(
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when (loadFragmentClass(classLoader, className)) {
             ValidatePhoneNumberFragment::class.java -> ValidatePhoneNumberFragment(
-                viewModelFactory,
                 resourcesManager,
                 preferencesManager
             )

@@ -5,7 +5,6 @@ import com.rookia.android.androidutils.di.interfaces.ViewModelKey
 import com.rookia.android.sejo.ui.groupcretion.GroupCreationMembersViewModel
 import com.rookia.android.sejo.ui.login.LoginViewModel
 import com.rookia.android.sejo.ui.register.name.PersonalInfoViewModel
-import com.rookia.android.sejo.ui.register.number.ValidatePhoneViewModel
 import com.rookia.android.sejo.ui.register.pincreation.PinCreationStep2ViewModel
 import com.rookia.android.sejo.ui.register.sms.ValidateSmsViewModel
 import dagger.Binds
@@ -31,11 +30,6 @@ internal abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ValidateSmsViewModel::class)
     internal abstract fun bindValidateSmsViewModel(validateSmsViewModel: ValidateSmsViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(ValidatePhoneViewModel::class)
-    internal abstract fun bindValidatePhoneViewModel(validatePhoneViewModel: ValidatePhoneViewModel): ViewModel
 
     @Binds
     @IntoMap

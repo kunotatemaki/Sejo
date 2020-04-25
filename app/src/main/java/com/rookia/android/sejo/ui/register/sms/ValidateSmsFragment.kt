@@ -224,5 +224,3 @@ class ValidateSmsFragment @Inject constructor(
 
 
 }
-
-//todo poner el número en la pantalla para ver a dónde se va a mandar el sms

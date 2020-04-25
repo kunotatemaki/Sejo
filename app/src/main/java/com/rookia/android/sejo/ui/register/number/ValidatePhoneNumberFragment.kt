@@ -6,8 +6,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.data.resources.ResourcesManager
-import com.rookia.android.androidutils.di.injectViewModel
-import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentValidateNumberBinding
@@ -17,23 +15,23 @@ import com.rookia.android.sejo.ui.views.PhoneNumberView
 import javax.inject.Inject
 
 class ValidatePhoneNumberFragment @Inject constructor(
-    private val viewModelFactory: ViewModelFactory,
     private val resourcesManager: ResourcesManager,
     private val preferencesManager: PreferencesManager
 ) : BaseFragment(R.layout.fragment_validate_number) {
 
     private lateinit var binding: FragmentValidateNumberBinding
-    private lateinit var viewModel: ValidatePhoneViewModel
 
-    override fun needToShowBackArrow() : Boolean = false
+    override fun needToShowBackArrow(): Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val validatedPin = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PIN_SENT_TAG)
-        val validatedPhone = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG)
-        if(validatedPin && validatedPhone){
+        val validatedPin =
+            preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PIN_SENT_TAG)
+        val validatedPhone =
+            preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG)
+        if (validatedPin && validatedPhone) {
             navigateToPersonalInfo()
-        } else if(validatedPhone) {
+        } else if (validatedPhone) {
             navigateToPinCreation()
         }
     }
@@ -41,7 +39,6 @@ class ValidatePhoneNumberFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentValidateNumberBinding.bind(view)
-        viewModel = injectViewModel(viewModelFactory)
         binding.validatePhoneNumberContinueButton.setOnClickListener {
             navigateToSmsValidation(
                 binding.validatePhoneNumberPhoneNumber.phonePrefix,
@@ -80,20 +77,22 @@ class ValidatePhoneNumberFragment @Inject constructor(
         findNavController().navigate(
             ValidatePhoneNumberFragmentDirections.actionValidateNumberFragmentToValidateSmsFragment(
                 phonePrefix,
-                phoneNumber.replace("\\s+".toRegex(),"")
+                phoneNumber.replace("\\s+".toRegex(), "")
             )
         )
     }
 
     private fun navigateToPinCreation() {
         (activity as RegisterActivity).hideKeyboard()
-        val direction = ValidatePhoneNumberFragmentDirections.actionValidateNumberFragmentToPinCreationStep1Fragment()
+        val direction =
+            ValidatePhoneNumberFragmentDirections.actionValidateNumberFragmentToPinCreationStep1Fragment()
         findNavController().navigate(direction)
     }
 
     private fun navigateToPersonalInfo() {
         (activity as RegisterActivity).hideKeyboard()
-        val direction = ValidatePhoneNumberFragmentDirections.actionValidateNumberFragmentToPersonalInfoFragment()
+        val direction =
+            ValidatePhoneNumberFragmentDirections.actionValidateNumberFragmentToPersonalInfoFragment()
         findNavController().navigate(direction)
     }
 
