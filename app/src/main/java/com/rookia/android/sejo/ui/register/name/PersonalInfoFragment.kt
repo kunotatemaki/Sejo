@@ -20,6 +20,11 @@ class PersonalInfoFragment constructor(private val viewModelFactory: ViewModelFa
     private lateinit var binding: FragmentPersonalInfoBinding
     private lateinit var viewModel: PersonalInfoViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+       setHasOptionsMenu(true)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPersonalInfoBinding.bind(view)
@@ -59,5 +64,6 @@ class PersonalInfoFragment constructor(private val viewModelFactory: ViewModelFa
         findNavController().navigate(direction)
         activity?.finish()
     }
+
 
 }

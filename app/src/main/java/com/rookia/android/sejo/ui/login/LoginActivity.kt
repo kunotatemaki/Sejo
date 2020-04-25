@@ -1,4 +1,4 @@
-package com.rookia.android.sejo.ui.common
+package com.rookia.android.sejo.ui.login
 
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -10,23 +10,26 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.sejo.R
-import com.rookia.android.sejo.databinding.ActivityMainBinding
-import com.rookia.android.sejo.ui.fragmentfactories.MainFragmentFactory
+import com.rookia.android.sejo.databinding.ActivityLoginBinding
+import com.rookia.android.sejo.ui.common.BaseActivity
+import com.rookia.android.sejo.ui.fragmentfactories.LoginFragmentFactory
 import javax.inject.Inject
 
-class MainActivity : BaseActivity() {
+class LoginActivity : BaseActivity() {
+
 
     @Inject
-    lateinit var fragmentFactory: MainFragmentFactory
+    lateinit var fragmentFactory: LoginFragmentFactory
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityLoginBinding
 
     override fun getFragmentFactory(): FragmentFactory? = fragmentFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
@@ -51,5 +54,4 @@ class MainActivity : BaseActivity() {
     override fun hideLoading() {
         binding.loadingView.gone()
     }
-
 }

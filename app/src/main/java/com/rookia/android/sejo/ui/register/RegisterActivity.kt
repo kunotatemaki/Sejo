@@ -30,6 +30,13 @@ class RegisterActivity : BaseActivity() {
 
     }
 
+    override fun onNavigateUp(): Boolean {
+        return super.onNavigateUp()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return super.onSupportNavigateUp()
+    }
     override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onPostCreate(savedInstanceState, persistentState)
         supportFragmentManager.findFragmentById(R.id.fragment_container)?.findNavController()
@@ -39,10 +46,12 @@ class RegisterActivity : BaseActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
+        return if (item.itemId == android.R.id.home) {
             onBackPressed()
+            true
+        } else {
+            super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun showLoading() {

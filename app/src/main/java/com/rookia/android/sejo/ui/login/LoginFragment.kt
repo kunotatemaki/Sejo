@@ -114,7 +114,7 @@ class LoginFragment @Inject constructor(
     }
 
     private fun navigateToDashboard() {
-        val direction = LoginFragmentDirections.actionLoginFragmentToBlankFragment()
+        val direction = LoginFragmentDirections.actionLoginFragmentToMainActivity()
         findNavController().navigate(direction)
     }
 
@@ -140,3 +140,4 @@ class LoginFragment @Inject constructor(
 }
 
 
+//todo si el usuario se ha borrado, devolverlo del servidor y lanzar el proceso de registro desde el principio

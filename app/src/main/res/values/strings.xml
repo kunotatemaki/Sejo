@@ -49,4 +49,11 @@
     <string name="fragment_group_creation_members_header_text">Acceso a los contactos</string>
     <string name="fragment_group_creation_members_subheader_text">Para poder añadir amigos a tu grupo necesitas permitir acceso a los contactos de tu teléfono</string>
     <string name="fragment_group_creation_members_permissions_button_caption">Permitir Acceso</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
 </resources>

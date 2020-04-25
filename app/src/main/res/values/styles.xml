@@ -32,27 +32,27 @@
     </style>
 
     <style name="SejoButton.Candy">
-            <item name="android:background">@drawable/bg_component_button_selector_candy</item>
+        <item name="android:background">@drawable/bg_component_button_selector_candy</item>
     </style>
 
     <style name="SejoButton.Blue">
-            <item name="android:background">@drawable/bg_component_button_selector_blue</item>
+        <item name="android:background">@drawable/bg_component_button_selector_blue</item>
     </style>
 
     <style name="SejoButton.Green">
-            <item name="android:background">@drawable/bg_component_button_selector_green</item>
+        <item name="android:background">@drawable/bg_component_button_selector_green</item>
     </style>
 
     <style name="SejoButton.Grey">
-            <item name="android:background">@drawable/bg_component_button_selector_grey</item>
+        <item name="android:background">@drawable/bg_component_button_selector_grey</item>
     </style>
 
     <style name="SejoButton.Colors">
-            <item name="android:background">@drawable/bg_component_button_selector_colors</item>
+        <item name="android:background">@drawable/bg_component_button_selector_colors</item>
     </style>
 
     <style name="SejoButton.Red">
-            <item name="android:background">@drawable/bg_component_button_selector_red</item>
+        <item name="android:background">@drawable/bg_component_button_selector_red</item>
     </style>
 
     <style name="SimpleTextLabelBigBlack" parent="SimpleTextLabelBig">
@@ -76,19 +76,23 @@
     <style name="SimpleTextLabelSmallError" parent="SimpleTextLabelSmall">
         <item name="android:textColor">@color/red_600</item>
     </style>
+
     <style name="SimpleTextLabelSmall" parent="SimpleTextLabel">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/grey_400</item>
     </style>
+
     <style name="SimpleTextLabelSmallLink" parent="SimpleTextLabelSmall">
         <item name="android:selectable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:padding">4dp</item>
         <item name="android:textColor">@color/text_link</item>
     </style>
+
     <style name="SimpleTextLabelMediumError" parent="SimpleTextLabelMedium">
         <item name="android:textColor">@color/red_600</item>
     </style>
+
     <style name="SimpleTextLabelMedium" parent="SimpleTextLabel">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/grey_400</item>
@@ -104,6 +108,7 @@
     <style name="SimpleTextLabelMediumDark" parent="SimpleTextLabelMedium">
         <item name="android:textColor">@color/grey_500</item>
     </style>
+
     <style name="SimpleTextLabelMediumBlack" parent="SimpleTextLabelMedium">
         <item name="android:textColor">@color/black</item>
     </style>
@@ -114,12 +119,14 @@
         <item name="android:layout_marginBottom">@dimen/component_bullets_textviews_margin</item>
         <item name="android:layout_marginEnd">@dimen/component_bullets_textviews_margin</item>
     </style>
+
     <style name="ComponentBulletsTextViewBullet">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:src">@drawable/ic_bullet</item>
     </style>
+
     <style name="SimpleTextLabelVeryBigBlack_Semibold" parent="SimpleTextLabelVeryBigBlack">
         <item name="android:fontFamily">@font/avertastdpesemibold</item>
     </style>
@@ -131,10 +138,12 @@
     <style name="SimpleTextLabelVeryBigBlack" parent="SimpleTextLabelVeryBig">
         <item name="android:textColor">@color/black</item>
     </style>
+
     <style name="SimpleTextLabelVeryBig" parent="SimpleTextLabel">
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/grey_400</item>
     </style>
+
     <style name="ComponentLoginKeyboardViewNumberContainer">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
@@ -144,8 +153,9 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:fontFamily">@font/avertastdperegular</item>
         <item name="android:background">@drawable/ic_circular_ripple_32dp</item>
-<!--        <item name="android:background">?actionBarItemBackground</item>-->
+        <!--        <item name="android:background">?actionBarItemBackground</item>-->
     </style>
+
     <style name="ComponentLoginKeyboardViewInner">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

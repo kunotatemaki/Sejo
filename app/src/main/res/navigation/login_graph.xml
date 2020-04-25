@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.rookia.android.sejo.ui.login.LoginFragment"
+        tools:layout="@layout/fragment_login"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerActivity"
+            app:destination="@id/registerActivity"
+            app:enterAnim="@anim/navigation_activity_right_enter"
+            app:exitAnim="@anim/navigation_activity_exit"
+            app:launchSingleTop="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainActivity"
+            app:destination="@id/mainActivity"
+            app:enterAnim="@anim/navigation_activity_right_enter"
+            app:exitAnim="@anim/navigation_activity_exit"
+            app:launchSingleTop="true" />
+    </fragment>
+    <activity
+        android:id="@+id/registerActivity"
+        android:name="com.rookia.android.sejo.ui.register.RegisterActivity"
+        tools:layout="@layout/activity_register"
+        android:label="RegisterActivity" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.rookia.android.sejo.ui.common.MainActivity"
+        tools:layout="@layout/activity_main"
+        android:label="MainActivity" />
+</navigation>

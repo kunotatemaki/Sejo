@@ -1,5 +1,7 @@
 package com.rookia.android.sejo.ui.common
 
+import android.os.Bundle
+import android.view.View
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -19,6 +21,12 @@ import androidx.fragment.app.Fragment
 abstract class BaseFragment(layoutId: Int): Fragment(layoutId) {
 
     abstract fun needToShowBackArrow() : Boolean
+
+    @CallSuper
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        hideLoading()
+    }
 
     @CallSuper
     override fun onResume() {

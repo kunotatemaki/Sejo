@@ -14,27 +14,8 @@
             android:id="@+id/action_blankFragment_to_groupCreationActivity"
             app:destination="@id/groupCreationActivity"
             app:enterAnim="@anim/navigation_activity_right_enter"
-            app:exitAnim="@anim/navigation_activity_exit"
-            app:popExitAnim="@anim/navigation_fragment_exit" />
+            app:exitAnim="@anim/navigation_activity_exit" />
     </fragment>
-    <fragment
-        android:id="@+id/loginFragment"
-        tools:layout="@layout/fragment_login"
-        android:name="com.rookia.android.sejo.ui.login.LoginFragment"
-        android:label="LoginFragment" >
-        <action
-            android:id="@+id/action_loginFragment_to_registerActivity"
-            app:destination="@id/registerActivity"
-            app:enterAnim="@anim/navigation_bottom_enter" />
-        <action
-            android:id="@+id/action_loginFragment_to_blankFragment"
-            app:destination="@id/blankFragment" />
-    </fragment>
-    <activity
-        android:id="@+id/registerActivity"
-        tools:layout="@layout/activity_register"
-        android:name="com.rookia.android.sejo.ui.register.RegisterActivity"
-        android:label="RegisterActivity" />
     <activity
         android:id="@+id/groupCreationActivity"
         tools:layout="@layout/activity_creation_group"

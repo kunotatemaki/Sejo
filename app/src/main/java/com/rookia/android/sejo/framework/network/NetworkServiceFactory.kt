@@ -18,8 +18,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 open class NetworkServiceFactory {
 
     companion object {
-        const val ROOKIA_EXPENSES_SERVER_BASE_URL = "http://10.0.2.2:8080"
-//        const val ROOKIA_EXPENSES_SERVER_BASE_URL = "http://192.168.1.34:8080"
+//        const val ROOKIA_EXPENSES_SERVER_BASE_URL = "http://10.0.2.2:8080"
+        const val ROOKIA_EXPENSES_SERVER_BASE_URL = "http://192.168.1.34:8080"
 
     }
 
