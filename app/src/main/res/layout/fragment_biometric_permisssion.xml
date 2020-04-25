@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_biometric_permission_main_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.login.BiometricPermissionFragment"
+        android:padding="16dp">
+
+
+        <ImageView
+            android:id="@+id/fragment_biometric_permission_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/img_fragment_biometric_permission"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/fragment_biometric_permission_header"
+            style="@style/SimpleTextLabelBigBlack_Semibold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:textAlignment="center"
+            android:text="@string/fragment_biometric_permission_header_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_biometric_permission_image" />
+
+        <TextView
+            android:id="@+id/fragment_biometric_permission_subheader"
+            style="@style/SimpleTextLabelMediumDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/fragment_biometric_permission_subheader_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_biometric_permission_header" />
+
+        <Button
+            android:id="@+id/fragment_biometric_permission_not_now_button"
+            style="@style/SejoButton.Grey"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:padding="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/fragment_biometric_permission_activate_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/fragment_biometric_permission_not_now_button_caption" />
+
+        <Button
+            android:id="@+id/fragment_biometric_permission_activate_button"
+            style="@style/SejoButton.Candy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/fragment_biometric_permission_activate_button_caption" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

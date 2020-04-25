@@ -84,7 +84,7 @@ class ProvidesModule {
     fun providesDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
 
     @Provides
-    @Singleton
+//    @Singleton
     fun providesBiometricPromptInfoDialog(context: Context): BiometricPrompt.PromptInfo =
         BiometricPrompt.PromptInfo.Builder()
             .setTitle(context.getString(R.string.fragment_login_with_fingerprint_text))

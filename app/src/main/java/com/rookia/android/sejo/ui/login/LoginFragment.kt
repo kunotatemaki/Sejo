@@ -2,6 +2,7 @@ package com.rookia.android.sejo.ui.login
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
@@ -44,8 +45,9 @@ class LoginFragment @Inject constructor(
         val pinSet = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PIN_SENT_TAG)
         val phoneValidated =
             preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG)
-        val personalInfo = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PERSONAL_INFO_TAG)
-        if (pinSet.not() || phoneValidated.not() || personalInfo.not() ) {
+        val personalInfo =
+            preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PERSONAL_INFO_TAG)
+        if (pinSet.not() || phoneValidated.not() || personalInfo.not()) {
             navigateToRegisterFlow()
             activity?.finish()
         }
@@ -64,19 +66,16 @@ class LoginFragment @Inject constructor(
         executor = ContextCompat.getMainExecutor(context)
         biometricPrompt = BiometricPrompt(this, executor,
             object : BiometricPrompt.AuthenticationCallback() {
-                override fun onAuthenticationError(
-                    errorCode: Int,
-                    errString: CharSequence
-                ) {
-                    super.onAuthenticationError(errorCode, errString)
-                    login(null)
-                }
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+                    login()
 
+                }
             })
 
         viewModel.loginResult.observe(viewLifecycleOwner, Observer {
             it?.let {
-                when(it.status){
+                when (it.status) {
                     Result.Status.SUCCESS -> {
                         hideLoading()
                         viewModel.storeToken(it.data?.token)
@@ -91,6 +90,17 @@ class LoginFragment @Inject constructor(
             }
         })
 
+
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Handler().postDelayed({
+            if (shouldShowFingerPrintScreen() && binding.loginPinScreen.getPin().isBlank()) {
+                showBiometricsLogin()
+            }
+        }, 300)
     }
 
     override fun onPinChanged(pin: String, isCompleted: Boolean) {
@@ -102,7 +112,7 @@ class LoginFragment @Inject constructor(
     }
 
     override fun showBiometricsLogin() {
-        biometricPrompt.authenticate(biometricInfo)
+            biometricPrompt.authenticate(biometricInfo)
     }
 
     override fun shouldShowFingerPrintScreen(): Boolean =
@@ -114,11 +124,15 @@ class LoginFragment @Inject constructor(
     }
 
     private fun navigateToDashboard() {
-        val direction = LoginFragmentDirections.actionLoginFragmentToMainActivity()
+        val direction = if (preferencesManager.containsKey(Constants.USER_BIOMETRICS_TAG)) {
+            LoginFragmentDirections.actionLoginFragmentToMainActivity()
+        } else {
+            LoginFragmentDirections.actionLoginFragmentToBiometricPermissionFragment()
+        }
         findNavController().navigate(direction)
     }
 
-    private fun login(pin: String?) {
+    private fun login(pin: String? = null) {
         val phoneNumber =
             preferencesManager.getStringFromPreferences(Constants.USER_PHONE_NUMBER_TAG) ?: ""
         val phonePrefix =

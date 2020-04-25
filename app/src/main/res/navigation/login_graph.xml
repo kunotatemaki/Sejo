@@ -23,6 +23,16 @@
             app:enterAnim="@anim/navigation_activity_right_enter"
             app:exitAnim="@anim/navigation_activity_exit"
             app:launchSingleTop="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_biometricPermissionFragment"
+            app:destination="@id/biometricPermissionFragment"
+            app:enterAnim="@anim/navigation_fragment_enter"
+            app:exitAnim="@anim/navigation_fragment_exit"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/navigation_fragment_pop_enter"
+            app:popExitAnim="@anim/navigation_fragment_pop_exit"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <activity
         android:id="@+id/registerActivity"
@@ -34,4 +44,15 @@
         android:name="com.rookia.android.sejo.ui.common.MainActivity"
         tools:layout="@layout/activity_main"
         android:label="MainActivity" />
+    <fragment
+        android:id="@+id/biometricPermissionFragment"
+        android:name="com.rookia.android.sejo.ui.login.BiometricPermissionFragment"
+        android:label="BiometricPermissionFragment" >
+        <action
+            android:id="@+id/action_biometricPermissionFragment_to_mainActivity"
+            app:destination="@id/mainActivity"
+            app:enterAnim="@anim/navigation_activity_right_enter"
+            app:exitAnim="@anim/navigation_activity_exit"
+            app:launchSingleTop="true" />
+    </fragment>
 </navigation>

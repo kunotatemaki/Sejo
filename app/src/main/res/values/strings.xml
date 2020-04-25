@@ -55,5 +55,9 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="fragment_biometric_permission_header_text">Iniciar la sesión con reconocimiento biométrico</string>
+    <string name="fragment_biometric_permission_subheader_text">Activa la huella dactilar para acceder a tus grupos de manera más rápida y segura</string>
+    <string name="fragment_biometric_permission_activate_button_caption">Activar Biometría</string>
+    <string name="fragment_biometric_permission_not_now_button_caption">Por ahora no</string>
 
 </resources>
