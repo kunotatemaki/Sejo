@@ -26,9 +26,10 @@ class LoginActivity : BaseActivity() {
     override fun getFragmentFactory(): FragmentFactory? = fragmentFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
+        setTheme(R.style.AppTheme_NoActionBar)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        loginStatus.loginLaunched()
 
     }
 

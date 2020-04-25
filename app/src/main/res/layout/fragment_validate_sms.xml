@@ -15,7 +15,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.views.register.number.ValidateSmsFragment">
+        tools:context=".ui.views.register.number.ValidateSmsFragment"
+        android:padding="16dp">
 
 
         <com.rookia.android.sejo.ui.views.SmsCodeView
@@ -34,7 +35,6 @@
             style="@style/SimpleTextLabelMediumDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             app:htmlText="@{@string/validate_sms_footer_resend_text}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,9 +46,7 @@
             style="@style/SimpleTextLabelMediumDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             android:text="@{@string/validate_sms_footer_waiting_text(textFormatUtils.toMinuteSeconds(remainingTime))}"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

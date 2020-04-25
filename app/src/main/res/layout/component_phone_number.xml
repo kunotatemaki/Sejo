@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Spinner
+        <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/component_phone_prefix"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -16,7 +16,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBaseline_toBaselineOf="@id/component_phone_number" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/component_phone_number"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="LabelFor"/>
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/component_error"
             style="@style/SimpleTextLabelSmallError"
             android:layout_width="0dp"

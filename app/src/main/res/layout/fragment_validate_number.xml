@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.register.number.ValidatePhoneNumberFragment">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/validate_phone_number_phone_number"
@@ -37,7 +37,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/validate_phone_number_continue_button"
             style="@style/SejoButton.Candy"
             android:layout_width="0dp"

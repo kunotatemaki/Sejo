@@ -252,7 +252,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/component_sms_code_hidden_edittext"
             android:layout_width="1px"
             android:layout_height="1px"

@@ -59,7 +59,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/fragment_biometric_permission_not_now_button_caption" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/fragment_biometric_permission_activate_button"
             style="@style/SejoButton.Candy"
             android:layout_width="match_parent"

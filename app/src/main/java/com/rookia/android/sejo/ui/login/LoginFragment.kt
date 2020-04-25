@@ -82,6 +82,7 @@ class LoginFragment @Inject constructor(
                         if(it.data?.result == LoginResponse.NO_USER.code){
                             preferencesManager.setBooleanIntoPreferences(Constants.NAVIGATION_PERSONAL_INFO_TAG, false)
                             preferencesManager.setBooleanIntoPreferences(Constants.NAVIGATION_PIN_SENT_TAG, false)
+                            preferencesManager.setBooleanIntoPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG, false)
                             navigateToRegisterFlow()
                         } else {
                             viewModel.storeToken(it.data?.token)

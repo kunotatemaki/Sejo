@@ -17,10 +17,10 @@ import javax.inject.Inject
 abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector {
 
     @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
+    protected lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     @Inject
-    lateinit var loginStatus: LoginStatus
+    protected lateinit var loginStatus: LoginStatus
 
     override fun androidInjector(): AndroidInjector<Any> {
         return androidInjector
