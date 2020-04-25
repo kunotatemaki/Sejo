@@ -11,13 +11,13 @@ class RateLimiter {
      * @return true if the info need to be fetched again, false otherwise
      */
     @Synchronized
-    fun shouldFetch(lastFetched: Long, timeout: Int, timeUnit: TimeUnit): Boolean {
+    fun expired(timeToCheck: Long, timeout: Int, timeUnit: TimeUnit): Boolean {
         val timeoutFormatted: Long = timeUnit.toMillis(timeout.toLong())
         val now = now()
-        if (lastFetched == 0L) {
+        if (timeToCheck == 0L) {
             return true
         }
-        return now - lastFetched > timeoutFormatted
+        return now - timeToCheck > timeoutFormatted
     }
 
     private fun now(): Long {

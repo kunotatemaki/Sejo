@@ -211,7 +211,7 @@ class ValidateSmsFragment @Inject constructor(
 
     private fun navigateToDashboard() {
         (activity as? BaseActivity)?.hideKeyboard()
-        val direction = ValidateSmsFragmentDirections.actionValidateSmsFragmentToMainActivity()
+        val direction = ValidateSmsFragmentDirections.actionValidateSmsFragmentToLoginActivity()
         findNavController().navigate(direction)
         activity?.finish()
     }

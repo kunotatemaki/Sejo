@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.domain.local.user.TokenReceived
 import com.rookia.android.sejo.usecases.LoginUseCase
@@ -14,7 +13,7 @@ import javax.inject.Named
 
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
-    private val preferencesManager: PreferencesManager,
+    private val loginStatus: LoginStatus,
     @Named("IO") private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
@@ -32,6 +31,14 @@ class LoginViewModel @Inject constructor(
         _login = loginUseCase.login(phonePrefix, phoneNumber, pin).asLiveData(dispatcher)
         loginResult.addSource(_login) {
             loginResult.value = it
+            when(it.status){
+                Result.Status.SUCCESS -> {
+                    loginResult.removeSource(_login)
+                    loginStatus.loginLaunched()
+                }
+                Result.Status.ERROR -> loginResult.removeSource(_login)
+                Result.Status.LOADING -> {}
+            }
             if (it.status != Result.Status.LOADING) {
                 loginResult.removeSource(_login)
             }

@@ -32,6 +32,10 @@ class LoginActivity : BaseActivity() {
 
     }
 
+    override fun onBackPressed() {
+
+    }
+
     override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onPostCreate(savedInstanceState, persistentState)
         supportFragmentManager.findFragmentById(R.id.fragment_container)?.findNavController()

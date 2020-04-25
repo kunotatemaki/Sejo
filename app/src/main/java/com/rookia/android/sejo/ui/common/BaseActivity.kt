@@ -1,10 +1,13 @@
 package com.rookia.android.sejo.ui.common
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentFactory
+import com.rookia.android.sejo.ui.login.LoginActivity
+import com.rookia.android.sejo.ui.login.LoginStatus
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -15,6 +18,9 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector {
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
+
+    @Inject
+    lateinit var loginStatus: LoginStatus
 
     override fun androidInjector(): AndroidInjector<Any> {
         return androidInjector
@@ -28,6 +34,15 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector {
             supportFragmentManager.fragmentFactory = it
         }
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if(loginStatus.needToLogin()){
+            loginStatus.loginLaunched()
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun hideKeyboard() {

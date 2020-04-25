@@ -60,7 +60,7 @@ class PersonalInfoFragment constructor(private val viewModelFactory: ViewModelFa
     override fun needToShowBackArrow(): Boolean = true
 
     private fun navigateToDashboard() {
-        val direction = PersonalInfoFragmentDirections.actionPersonalInfoFragmentToMainActivity()
+        val direction = PersonalInfoFragmentDirections.actionPersonalInfoFragmentToLoginActivity()
         findNavController().navigate(direction)
         activity?.finish()
     }

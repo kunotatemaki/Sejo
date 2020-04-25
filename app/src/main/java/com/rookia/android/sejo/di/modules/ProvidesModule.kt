@@ -10,6 +10,7 @@ import com.rookia.android.sejo.data.repository.SmsCodeRepository
 import com.rookia.android.sejo.data.repository.UserRepository
 import com.rookia.android.sejo.framework.network.NetworkServiceFactory
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
+import com.rookia.android.sejo.ui.login.LoginStatus
 import com.rookia.android.sejo.usecases.*
 import com.rookia.android.sejo.utils.TextFormatUtils
 import dagger.Module
@@ -90,5 +91,8 @@ class ProvidesModule {
             .setNegativeButtonText(context.getString(R.string.fragment_login_with_fingerprint_use_pin_text))
             .build()
 
+    @Provides
+    @Singleton
+    fun providesLoginStatus(application: SejoApplication): LoginStatus = application.loginStatus
 
 }

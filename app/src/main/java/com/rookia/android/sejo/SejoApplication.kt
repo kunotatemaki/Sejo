@@ -1,8 +1,13 @@
 package com.rookia.android.sejo
 
 import android.util.Log
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.rookia.android.sejo.di.components.AppComponent
 import com.rookia.android.sejo.di.components.ComponentFactory
+import com.rookia.android.sejo.ui.login.LoginStatus
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import timber.log.Timber
@@ -19,7 +24,9 @@ import timber.log.Timber
  *
  */
 
-class SejoApplication  : DaggerApplication() {
+class SejoApplication  : DaggerApplication(), LifecycleObserver {
+
+    val loginStatus = LoginStatus()
 
     override fun applicationInjector(): AndroidInjector<SejoApplication> {
         val mComponent: AppComponent = ComponentFactory.component(this)
@@ -35,6 +42,7 @@ class SejoApplication  : DaggerApplication() {
         } else {
             Timber.plant(CrashReportingTree())
         }
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this);
     }
 
     /** A tree which logs important information for crash reporting. (Tiber) */
@@ -44,5 +52,10 @@ class SejoApplication  : DaggerApplication() {
                 return
             }
         }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun onMoveToBackground() {
+        loginStatus.launchLogin()
     }
 }
