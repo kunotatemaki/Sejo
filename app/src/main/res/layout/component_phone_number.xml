@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="LabelFor"/>
 
-        <com.google.android.material.textview.MaterialTextView
+        <TextView
             android:id="@+id/component_error"
             style="@style/SimpleTextLabelSmallError"
             android:layout_width="0dp"

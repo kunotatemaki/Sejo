@@ -28,8 +28,6 @@ class PinCreationStep2Fragment @Inject constructor(
 
     private var previousCode: String? = null
 
-    override fun needToShowBackArrow() : Boolean = true
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -42,8 +40,9 @@ class PinCreationStep2Fragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPinCreationStep2Binding.bind(view)
-        binding.fragmentPinCreationPinScreen.setHeader(resourcesManager.getString(R.string.fragment_pin_creation_step_2_header))
-        binding.fragmentPinCreationPinScreen.setPinValidator(this)
+        binding.fragmentPinCreationStep2PinScreen.setHeader(resourcesManager.getString(R.string.fragment_pin_creation_step_2_header))
+        binding.fragmentPinCreationStep2PinScreen.setPinValidator(this)
+        setToolbar(binding.fragmentPinCreationStep2Toolbar, true, resourcesManager.getString(R.string.fragment_pin_creation_toolbar_title))
         viewModel = injectViewModel(viewModelFactory)
 
         viewModel.pinSentToServer.observe(viewLifecycleOwner, Observer {
@@ -63,7 +62,7 @@ class PinCreationStep2Fragment @Inject constructor(
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.create_pin_menu, menu)
         menu.findItem(R.id.create_pin_menu_item)?.let {
-            it.isEnabled = binding.fragmentPinCreationPinScreen.isPinSet()
+            it.isEnabled = binding.fragmentPinCreationStep2PinScreen.isPinSet()
         }
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -71,7 +70,7 @@ class PinCreationStep2Fragment @Inject constructor(
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
         when(item.itemId){
             R.id.create_pin_menu_item -> {
-                with(binding.fragmentPinCreationPinScreen) {
+                with(binding.fragmentPinCreationStep2PinScreen) {
                 previousCode?.let {
                     if (viewModel.validatePin(it, getPin())) {
                         viewModel.sendPinInfo(getPin())

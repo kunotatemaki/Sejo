@@ -38,8 +38,6 @@ class GroupCreationMembersFragment constructor(
     private val contactsAdapter = GroupCreationMembersAdapter(this)
     private val contactsAddedAdapter = GroupCreationMembersAddedAdapter(this)
 
-    override fun needToShowBackArrow(): Boolean = true
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentGroupCreationMembersBinding.bind(view)

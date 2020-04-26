@@ -27,8 +27,8 @@
 
 
     <!--  Create Pin  -->
-    <string name="fragment_pin_creation_step_1_header">Crear Pin</string>
-    <string name="fragment_pin_creation_step_1_subheader">Elegir un Pin de 4 dígitos</string>
+    <string name="fragment_pin_creation_toolbar_title">Crear Pin</string>
+    <string name="fragment_pin_creation_step_1_header">Elegir un Pin de 4 dígitos</string>
     <string name="fragment_pin_creation_step_2_header">Vuelve a introducir tu Pin</string>
     <string name="create_pin_menu_item">OK</string>
 

@@ -7,13 +7,21 @@
         android:layout_height="match_parent"
         tools:context=".ui.register.pincreation.PinCreationStep1Fragment">
 
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/fragment_pin_creation_step1_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
         <com.rookia.android.sejo.ui.views.PinScreen
-            android:id="@+id/fragment_pin_creation_pin_screen"
+            android:id="@+id/fragment_pin_creation_step1_pin_screen"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:vibrate="true"
             app:show_pin="true"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_pin_creation_step1_toolbar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>

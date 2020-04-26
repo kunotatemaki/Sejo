@@ -16,7 +16,6 @@ import com.rookia.android.sejo.ui.common.BaseFragment
 class BiometricPermissionFragment constructor(private val preferencesManager: PreferencesManager) :
     BaseFragment(R.layout.fragment_biometric_permisssion) {
 
-    override fun needToShowBackArrow(): Boolean = true
     private lateinit var binding: FragmentBiometricPermisssionBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

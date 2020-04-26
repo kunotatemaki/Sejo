@@ -15,8 +15,6 @@ class GroupCreationMainInfoFragment constructor(private val resourcesManager: Re
 
     lateinit var binding: FragmentGroupCreationMainInfoBinding
 
-    override fun needToShowBackArrow(): Boolean = true
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentGroupCreationMainInfoBinding.bind(view).also {
@@ -30,6 +28,7 @@ class GroupCreationMainInfoFragment constructor(private val resourcesManager: Re
                 checkButton()
             }
         }
+        setToolbar(binding.fragmentGroupCreationMainInfoToolbar, true)
     }
 
     override fun onDestroyView() {

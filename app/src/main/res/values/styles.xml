@@ -85,7 +85,7 @@
         <item name="android:textColor">@color/grey_400</item>
     </style>
 
-    <style name="SimpleTextLabel">
+    <style name="SimpleTextLabel" parent="Widget.MaterialComponents.TextView">
         <item name="android:lineSpacingExtra">6sp</item>
         <item name="android:fontFamily">@font/avertastdperegular</item>
     </style>

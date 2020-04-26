@@ -21,8 +21,6 @@ class PinCreationStep1Fragment @Inject constructor(
 
     private lateinit var binding: FragmentPinCreationStep1Binding
 
-    override fun needToShowBackArrow() : Boolean = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -31,17 +29,17 @@ class PinCreationStep1Fragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPinCreationStep1Binding.bind(view)
-        binding.fragmentPinCreationPinScreen.apply {
+        binding.fragmentPinCreationStep1PinScreen.apply {
             setPinValidator(this@PinCreationStep1Fragment)
             setHeader(resourcesManager.getString(R.string.fragment_pin_creation_step_1_header))
-            setSubHeader(resourcesManager.getString(R.string.fragment_pin_creation_step_1_subheader))
         }
+        setToolbar(binding.fragmentPinCreationStep1Toolbar, false, resourcesManager.getString(R.string.fragment_pin_creation_toolbar_title))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.create_pin_menu, menu)
         menu.findItem(R.id.create_pin_menu_item)?.let {
-            it.isEnabled = binding.fragmentPinCreationPinScreen.isPinSet()
+            it.isEnabled = binding.fragmentPinCreationStep1PinScreen.isPinSet()
         }
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -62,7 +60,7 @@ class PinCreationStep1Fragment @Inject constructor(
     private fun navigateToPinConfirmationScreen() {
         val direction =
             PinCreationStep1FragmentDirections.actionPinCreationStep1FragmentToPinCreationStep2Fragment(
-                binding.fragmentPinCreationPinScreen.getPin()
+                binding.fragmentPinCreationStep1PinScreen.getPin()
             )
         findNavController().navigate(direction)
     }

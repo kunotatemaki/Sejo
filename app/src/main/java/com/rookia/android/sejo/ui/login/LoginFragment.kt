@@ -39,8 +39,6 @@ class LoginFragment @Inject constructor(
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
 
-    override fun needToShowBackArrow(): Boolean = false
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         val pinSet = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PIN_SENT_TAG)

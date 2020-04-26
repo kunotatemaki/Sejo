@@ -84,6 +84,6 @@ class ContactsRepositoryImpl @Inject constructor(private val context: Context) :
         }
         phones?.close()
 
-        return Result.success(phoneList)
+        return Result.success(phoneList.distinctBy { it.id })
     }
 }

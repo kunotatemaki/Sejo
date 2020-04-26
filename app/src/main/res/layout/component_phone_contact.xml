@@ -55,7 +55,7 @@
             android:layout_marginStart="16dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@{contact.phoneNumber}"
+            android:text="@{contact.phoneNumberNormalized}"
             android:textAlignment="textStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -20,8 +20,6 @@ import com.google.android.material.appbar.MaterialToolbar
 
 abstract class BaseFragment(layoutId: Int): Fragment(layoutId) {
 
-    abstract fun needToShowBackArrow() : Boolean
-
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

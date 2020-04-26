@@ -28,6 +28,7 @@ class PersonalInfoFragment constructor(private val viewModelFactory: ViewModelFa
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPersonalInfoBinding.bind(view)
+        setToolbar(binding.fragmentPersonalInfoToolbar, true)
         viewModel = injectViewModel(viewModelFactory)
         binding.fragmentPersonalInfoName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
@@ -56,8 +57,6 @@ class PersonalInfoFragment constructor(private val viewModelFactory: ViewModelFa
             }
         })
     }
-
-    override fun needToShowBackArrow(): Boolean = true
 
     private fun navigateToDashboard() {
         val direction = PersonalInfoFragmentDirections.actionPersonalInfoFragmentToLoginActivity()

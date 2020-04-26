@@ -142,12 +142,12 @@ class PinScreen : ConstraintLayout {
         checkFingerprintIcon()
     }
 
-    fun setHeader(text: String) {
-        binding.componentPinScreenHeader.text = text
+    fun setHeader(text0: String) {
+        binding.componentPinScreenHeader.text = text0
     }
 
-    fun setSubHeader(text: String) {
-        binding.componentPinScreenSubheader.text = text
+    fun setSubHeader(text0: String) {
+        binding.componentPinScreenSubheader.text = text0
     }
 
     fun showError() {
