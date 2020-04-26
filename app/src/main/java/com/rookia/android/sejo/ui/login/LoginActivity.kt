@@ -2,7 +2,6 @@ package com.rookia.android.sejo.ui.login
 
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentFactory
 import androidx.navigation.fragment.findNavController
@@ -43,13 +42,6 @@ class LoginActivity : BaseActivity() {
             ?.let { navController ->
                 setupActionBarWithNavController(navController)
             }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            onBackPressed()
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun showLoading() {

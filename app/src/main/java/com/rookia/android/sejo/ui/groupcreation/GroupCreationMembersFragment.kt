@@ -1,4 +1,4 @@
-package com.rookia.android.sejo.ui.groupcretion
+package com.rookia.android.sejo.ui.groupcreation
 
 import android.Manifest
 import android.os.Bundle
@@ -41,6 +41,7 @@ class GroupCreationMembersFragment constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentGroupCreationMembersBinding.bind(view)
+        setToolbar(binding.fragmentGroupCreationMembersToolbar, true)
         viewModel = injectViewModel(viewModelFactory)
         if (permissionManager.isPermissionGranted(this, Manifest.permission.READ_CONTACTS).not()) {
             binding.fragmentGroupCreationMembersNoContactsContainer.visible()

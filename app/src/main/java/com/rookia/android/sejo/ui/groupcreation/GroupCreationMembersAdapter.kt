@@ -1,4 +1,4 @@
-package com.rookia.android.sejo.ui.groupcretion
+package com.rookia.android.sejo.ui.groupcreation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -2,7 +2,7 @@ package com.rookia.android.sejo.di.modules
 
 import androidx.lifecycle.ViewModel
 import com.rookia.android.androidutils.di.interfaces.ViewModelKey
-import com.rookia.android.sejo.ui.groupcretion.GroupCreationMembersViewModel
+import com.rookia.android.sejo.ui.groupcreation.GroupCreationMembersViewModel
 import com.rookia.android.sejo.ui.login.LoginViewModel
 import com.rookia.android.sejo.ui.register.name.PersonalInfoViewModel
 import com.rookia.android.sejo.ui.register.pincreation.PinCreationStep2ViewModel

@@ -47,7 +47,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_biometric_permission_header" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/fragment_biometric_permission_not_now_button"
             style="@style/SejoButton.Grey"
             android:layout_width="0dp"
@@ -59,7 +59,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/fragment_biometric_permission_not_now_button_caption" />
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/fragment_biometric_permission_activate_button"
             style="@style/SejoButton.Candy"
             android:layout_width="match_parent"

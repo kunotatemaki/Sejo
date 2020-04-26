@@ -85,7 +85,7 @@
         <item name="android:textColor">@color/grey_400</item>
     </style>
 
-    <style name="SimpleTextLabel" parent="Widget.MaterialComponents.TextView">
+    <style name="SimpleTextLabel" >
         <item name="android:lineSpacingExtra">6sp</item>
         <item name="android:fontFamily">@font/avertastdperegular</item>
     </style>
@@ -120,7 +120,7 @@
     </style>
 
     <style name="SMSEditTextNumber">
-        <item name="android:textSize">22dp</item>
+        <item name="android:textSize" tools:ignore="SpUsage">22dp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:paddingLeft">8dp</item>
         <item name="android:paddingRight">8dp</item>

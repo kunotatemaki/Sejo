@@ -48,7 +48,6 @@ class LoginFragment @Inject constructor(
             preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PERSONAL_INFO_TAG)
         if (pinSet.not() || phoneValidated.not() || personalInfo.not()) {
             navigateToRegisterFlow()
-            activity?.finish()
         }
     }
 
@@ -68,7 +67,6 @@ class LoginFragment @Inject constructor(
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
                     login()
-
                 }
             })
 
@@ -84,7 +82,11 @@ class LoginFragment @Inject constructor(
                             navigateToRegisterFlow()
                         } else {
                             viewModel.storeToken(it.data?.token)
-                            navigateToDashboard()
+                            if (shouldShowBiometricPermission()) {
+                                navigateToBiometricPermission()
+                            } else {
+                                navigateToDashboard()
+                            }
                         }
                     }
                     Result.Status.ERROR -> {
@@ -130,15 +132,21 @@ class LoginFragment @Inject constructor(
         activity?.finish()
     }
 
+    private fun shouldShowBiometricPermission(): Boolean =
+        fingerprintUtils.isFingerprintSupported() && preferencesManager.containsKey(Constants.USER_BIOMETRICS_TAG)
+
     private fun navigateToDashboard() {
-        val direction = if (preferencesManager.containsKey(Constants.USER_BIOMETRICS_TAG)) {
-            LoginFragmentDirections.actionLoginFragmentToMainActivity()
-        } else {
-            LoginFragmentDirections.actionLoginFragmentToBiometricPermissionFragment()
-        }
+        val direction = LoginFragmentDirections.actionLoginFragmentToMainActivity()
         findNavController().navigate(direction)
         activity?.finish()
     }
+
+    private fun navigateToBiometricPermission() {
+        val direction = LoginFragmentDirections.actionLoginFragmentToBiometricPermissionFragment()
+        findNavController().navigate(direction)
+    }
+
+
 
     private fun login(pin: String? = null) {
         val phoneNumber =

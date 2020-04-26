@@ -19,7 +19,7 @@
     <activity
         android:id="@+id/groupCreationActivity"
         tools:layout="@layout/activity_creation_group"
-        android:name="com.rookia.android.sejo.ui.groupcretion.GroupCreationActivity"
+        android:name="com.rookia.android.sejo.ui.groupcreation.GroupCreationActivity"
         android:label="GroupCreationActivity" />
 
 </navigation>
