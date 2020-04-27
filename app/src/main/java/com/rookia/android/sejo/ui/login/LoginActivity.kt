@@ -1,5 +1,6 @@
 package com.rookia.android.sejo.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.databinding.DataBindingUtil
@@ -16,6 +17,8 @@ import javax.inject.Inject
 
 class LoginActivity : BaseActivity() {
 
+    var loginFromAnywhere = false
+        private set
 
     @Inject
     lateinit var fragmentFactory: LoginFragmentFactory
@@ -29,9 +32,18 @@ class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         loginStatus.loginLaunched()
+        if (intent.hasExtra(REDIRECTED_TO_LOGIN)) {
+            loginFromAnywhere = intent.getBooleanExtra(REDIRECTED_TO_LOGIN, false)
+        }
 
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        if (intent?.hasExtra(REDIRECTED_TO_LOGIN) == true) {
+            loginFromAnywhere = intent.getBooleanExtra(REDIRECTED_TO_LOGIN, false)
+        }
+    }
     override fun onBackPressed() {
 
     }

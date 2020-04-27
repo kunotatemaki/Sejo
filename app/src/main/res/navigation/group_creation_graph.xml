@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/group_creation_graph"
-    app:startDestination="@id/groupCreationMembersFragment">
+    app:startDestination="@id/groupCreationMainInfoFragment">
 
     <fragment
         android:id="@+id/groupCreationMainInfoFragment"

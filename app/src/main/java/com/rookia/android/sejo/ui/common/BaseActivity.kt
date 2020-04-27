@@ -16,6 +16,10 @@ import javax.inject.Inject
 
 abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector {
 
+    companion object {
+        const val REDIRECTED_TO_LOGIN = "redirected_to_login_from_anywhere"
+    }
+
     @Inject
     protected lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
@@ -40,7 +44,9 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector {
         super.onStart()
         if(loginStatus.needToLogin()){
             loginStatus.loginLaunched()
-            val intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java).also {
+                it.putExtra(REDIRECTED_TO_LOGIN, true)
+            }
             startActivity(intent)
         }
     }

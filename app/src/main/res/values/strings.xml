@@ -61,5 +61,7 @@
     <string name="fragment_biometric_permission_activate_button_caption">Activar Biometría</string>
     <string name="fragment_biometric_permission_not_now_button_caption">Por ahora no</string>
     <string name="fragment_group_creation_members_add_members_error">\"Añade al menos un contacto\"</string>
+    <string name="fragment_group_creation_main_fee_header">Cuota de acceso al grupo</string>
+    <string name="fragment_group_creation_main_info_fee_hint">Cuota</string>
 
 </resources>

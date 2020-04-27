@@ -82,10 +82,16 @@ class LoginFragment @Inject constructor(
                             navigateToRegisterFlow()
                         } else {
                             viewModel.storeToken(it.data?.token)
-                            if (shouldShowBiometricPermission()) {
-                                navigateToBiometricPermission()
-                            } else {
-                                navigateToDashboard()
+                            when {
+                                (activity as? LoginActivity)?.loginFromAnywhere == true -> {
+                                    activity?.finish()
+                                }
+                                shouldShowBiometricPermission() -> {
+                                    navigateToBiometricPermission()
+                                }
+                                else -> {
+                                    navigateToDashboard()
+                                }
                             }
                         }
                     }
@@ -114,7 +120,17 @@ class LoginFragment @Inject constructor(
     override fun onPinChanged(pin: String, isCompleted: Boolean) {
         if (isCompleted) {
 //            login(pin)
-            navigateToDashboard()
+            when {
+                (activity as? LoginActivity)?.loginFromAnywhere == true -> {
+                    activity?.finish()
+                }
+                shouldShowBiometricPermission() -> {
+                    navigateToBiometricPermission()
+                }
+                else -> {
+                    navigateToDashboard()
+                }
+            }
         } else {
             binding.loginPinScreen.hideError()
         }

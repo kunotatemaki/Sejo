@@ -42,7 +42,7 @@ class GroupCreationMainInfoFragment constructor(private val resourcesManager: Re
         var numberOfAdmins = 0
         try {
             numberOfAdmins = binding.fragmentGroupCreationMainInfoAdmins.text.toString().toInt()
-            if(numberOfAdmins <= 0){
+            if(numberOfAdmins <= 1){
                 adminsOk = false
             }
         } catch (e: NumberFormatException){
