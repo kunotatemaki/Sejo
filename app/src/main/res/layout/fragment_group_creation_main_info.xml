@@ -55,7 +55,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="24dp"
                     android:hint="@string/fragment_group_creation_main_info_name_hint"
-                    app:layout_constraintBottom_toTopOf="@+id/fragment_group_creation_main_info_admins_header"
+                    app:layout_constraintBottom_toTopOf="@+id/fragment_group_creation_main_info_admins_explanation1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -66,24 +66,37 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:importantForAutofill="no"
-                        android:text="grupo"
                         android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-
                 <TextView
-                    android:id="@+id/fragment_group_creation_main_info_admins_header"
+                    android:id="@+id/fragment_group_creation_main_info_admins_explanation1"
                     style="@style/SimpleTextLabelMediumBlack"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:layout_marginBottom="8dp"
-                    android:text="@string/fragment_group_creation_main_admins_header"
-                    app:layout_constraintBottom_toTopOf="@+id/fragment_group_creation_main_info_admins_container"
+                    android:text="@string/fragment_group_creation_main_admins_explanation1"
+                    app:layout_constraintBottom_toTopOf="@+id/fragment_group_creation_main_info_admins_explanation2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_group_creation_main_info_name_container"
+                    app:layout_constraintVertical_bias="1" />
+
+                <TextView
+                    android:id="@+id/fragment_group_creation_main_info_admins_explanation2"
+                    style="@style/SimpleTextLabelMediumBlack"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/fragment_group_creation_main_admins_explanation2"
+                    app:layout_constraintBottom_toTopOf="@id/fragment_group_creation_main_info_admins_container"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_group_creation_main_info_admins_explanation1"
                     app:layout_constraintVertical_bias="1" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -99,7 +112,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_group_creation_main_info_admins_header">
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_group_creation_main_info_admins_explanation2">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/fragment_group_creation_main_info_admins"
@@ -107,7 +120,6 @@
                         android:layout_height="wrap_content"
                         android:importantForAutofill="no"
                         android:inputType="numberSigned"
-                        android:text="1"
                         android:textAlignment="center"
                         tools:ignore="LabelFor" />
                 </com.google.android.material.textfield.TextInputLayout>

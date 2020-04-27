@@ -23,5 +23,7 @@
     <color name="pin_bullet_pressed">@color/grey_600</color>
     <color name="text_link">@color/blue_A400</color>
     <color name="pin_eye">@color/grey_600</color>
+    <color name="toolbar_border_search" >@color/candy</color>
+    <color name="toolbar_border">@color/grey_500</color>
 
 </resources>

@@ -46,9 +46,9 @@ class LoginFragment @Inject constructor(
             preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG)
         val personalInfo =
             preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PERSONAL_INFO_TAG)
-        if (pinSet.not() || phoneValidated.not() || personalInfo.not()) {
-            navigateToRegisterFlow()
-        }
+//        if (pinSet.not() || phoneValidated.not() || personalInfo.not()) {
+//            navigateToRegisterFlow()
+//        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -113,7 +113,8 @@ class LoginFragment @Inject constructor(
 
     override fun onPinChanged(pin: String, isCompleted: Boolean) {
         if (isCompleted) {
-            login(pin)
+//            login(pin)
+            navigateToDashboard()
         } else {
             binding.loginPinScreen.hideError()
         }

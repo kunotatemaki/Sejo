@@ -43,7 +43,8 @@
     <string name="fragment_group_creation_main_info_button_caption">Continuar</string>
     <string name="fragment_group_creation_main_info_name_hint">nombre</string>
     <string name="fragment_group_creation_main_info_admins_hint">nº de admins</string>
-    <string name="fragment_group_creation_main_admins_header">Los administradores se encargan de validar peticiones de dinero del bote por parte de los usuarios, así como pagos que pudiera hacer un usuario al bote desde fuera de la aplicación, bien sea con dinero en efectivo o con cualquier otro método de pago</string>
+    <string name="fragment_group_creation_main_admins_explanation1">Los administradores se encargan de validar peticiones de dinero del bote por parte de los demás miembros, así como pagos que pudiera hacer un miembro al bote desde fuera de la aplicación, bien sea con dinero en efectivo o con cualquier otro método de pago.</string>
+    <string name="fragment_group_creation_main_admins_explanation2">Se necesita un mínimo de dos administradores por grupo, ya que un administrador no puede validarse sus propios movimientos.</string>
     <string name="fragment_group_creation_main_admins_error">Valor incorrecto</string>
     <!-- Group Members -->
     <string name="fragment_group_creation_members_header_text">Acceso a los contactos</string>
@@ -59,5 +60,6 @@
     <string name="fragment_biometric_permission_subheader_text">Activa la huella dactilar para acceder a tus grupos de manera más rápida y segura</string>
     <string name="fragment_biometric_permission_activate_button_caption">Activar Biometría</string>
     <string name="fragment_biometric_permission_not_now_button_caption">Por ahora no</string>
+    <string name="fragment_group_creation_members_add_members_error">\"Añade al menos un contacto\"</string>
 
 </resources>
