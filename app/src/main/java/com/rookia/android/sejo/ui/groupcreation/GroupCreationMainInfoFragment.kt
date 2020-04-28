@@ -49,10 +49,15 @@ class GroupCreationMainInfoFragment constructor(private val resourcesManager: Re
         } catch (e: NumberFormatException) {
             adminsOk = false
         }
+        val fee = try {
+            binding.fragmentGroupCreationMainInfoFee.text.toString().toInt()
+        } catch (e: NumberFormatException) {
+            0
+        }
         if (adminsOk) {
             val direction =
                 GroupCreationMainInfoFragmentDirections.actionGroupCreationMainInfoFragmentToGroupCreationMembersFragment(
-                    binding.fragmentGroupCreationMainInfoName.text.toString(), numberOfAdmins
+                    binding.fragmentGroupCreationMainInfoName.text.toString(), numberOfAdmins, fee
                 )
             findNavController().navigate(direction)
         } else {
