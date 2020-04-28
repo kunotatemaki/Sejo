@@ -11,7 +11,8 @@ import com.rookia.android.sejo.ui.common.BaseActivity
 import com.rookia.android.sejo.ui.common.BaseFragment
 
 
-class GroupCreationMainInfoFragment constructor(private val resourcesManager: ResourcesManager): BaseFragment(R.layout.fragment_group_creation_main_info) {
+class GroupCreationMainInfoFragment constructor(private val resourcesManager: ResourcesManager) :
+    BaseFragment(R.layout.fragment_group_creation_main_info) {
 
     lateinit var binding: FragmentGroupCreationMainInfoBinding
 
@@ -42,29 +43,31 @@ class GroupCreationMainInfoFragment constructor(private val resourcesManager: Re
         var numberOfAdmins = 0
         try {
             numberOfAdmins = binding.fragmentGroupCreationMainInfoAdmins.text.toString().toInt()
-            if(numberOfAdmins <= 1){
+            if (numberOfAdmins <= 1) {
                 adminsOk = false
             }
-        } catch (e: NumberFormatException){
+        } catch (e: NumberFormatException) {
             adminsOk = false
         }
-        if(adminsOk){
-            val direction = GroupCreationMainInfoFragmentDirections.actionGroupCreationMainInfoFragmentToGroupCreationMembersFragment(
-                binding.fragmentGroupCreationMainInfoName.text.toString(), numberOfAdmins
-            )
+        if (adminsOk) {
+            val direction =
+                GroupCreationMainInfoFragmentDirections.actionGroupCreationMainInfoFragmentToGroupCreationMembersFragment(
+                    binding.fragmentGroupCreationMainInfoName.text.toString(), numberOfAdmins
+                )
             findNavController().navigate(direction)
         } else {
-            binding.fragmentGroupCreationMainInfoAdminsContainer.error = resourcesManager.getString(R.string.fragment_group_creation_main_admins_error)
+            binding.fragmentGroupCreationMainInfoAdminsContainer.error =
+                resourcesManager.getString(R.string.fragment_group_creation_main_admins_error)
         }
 
     }
 
     private fun checkButton() {
         var enabled = true
-        if(binding.fragmentGroupCreationMainInfoAdmins.text.isNullOrBlank()){
+        if (binding.fragmentGroupCreationMainInfoAdmins.text.isNullOrBlank()) {
             enabled = false
         }
-        if(binding.fragmentGroupCreationMainInfoName.text.isNullOrBlank()){
+        if (binding.fragmentGroupCreationMainInfoName.text.isNullOrBlank()) {
             enabled = false
         }
         binding.fragmentGroupCreationMainInfoButton.isEnabled = enabled

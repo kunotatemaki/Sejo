@@ -150,7 +150,7 @@ class LoginFragment @Inject constructor(
     }
 
     private fun shouldShowBiometricPermission(): Boolean =
-        fingerprintUtils.isFingerprintSupported() && preferencesManager.containsKey(Constants.USER_BIOMETRICS_TAG)
+        fingerprintUtils.isFingerprintSupported() && preferencesManager.containsKey(Constants.USER_BIOMETRICS_TAG).not()
 
     private fun navigateToDashboard() {
         val direction = LoginFragmentDirections.actionLoginFragmentToMainActivity()
