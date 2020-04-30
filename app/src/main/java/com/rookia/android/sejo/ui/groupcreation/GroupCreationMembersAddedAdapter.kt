@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
+import com.rookia.android.androidutils.data.resources.ResourcesManager
+import com.rookia.android.androidutils.extensions.gone
+import com.rookia.android.androidutils.extensions.invisible
 import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ComponentPhoneContactThumbnailBinding
@@ -24,14 +27,17 @@ import com.rookia.android.sejo.domain.local.PhoneContact
  *
  */
 
-class GroupCreationMembersAddedAdapter constructor(private val listener: GroupMemberRemovedList): RecyclerView.Adapter<GroupCreationMembersAddedAdapter.GroupMemberViewHolder>() {
+class GroupCreationMembersAddedAdapter constructor(
+    private val listener: GroupMemberRemovedList,
+    private val resourcesManager: ResourcesManager
+) : RecyclerView.Adapter<GroupCreationMembersAddedAdapter.GroupMemberViewHolder>() {
 
     private val phoneContacts: MutableList<PhoneContact> = mutableListOf()
     private val positionsToAnimateWhenAdded = mutableListOf<Int>()
-    private val adminToggleListener: AdminToggle = object : AdminToggle{
+    private val adminToggleListener: AdminToggle = object : AdminToggle {
         override fun onAdminToggle(checked: Boolean, position: Int) {
-            if(phoneContacts.lastIndex >= position) {
-                phoneContacts[position].isAdmin = checked
+            if (phoneContacts.lastIndex >= position - 1) {
+                phoneContacts[position - 1].isAdmin = checked
             }
         }
     }
@@ -54,14 +60,18 @@ class GroupCreationMembersAddedAdapter constructor(private val listener: GroupMe
         return GroupMemberViewHolder(binding, listener, adminToggleListener)
     }
 
-    override fun getItemCount(): Int = phoneContacts.size
+    override fun getItemCount(): Int = phoneContacts.size + 1
 
     fun getNumberOfAdmins(): Int = phoneContacts.count { it.isAdmin }
 
     override fun onBindViewHolder(holder: GroupMemberViewHolder, position: Int) {
         val animate = positionsToAnimateWhenAdded.contains(position)
-        holder.bind(contact = phoneContacts[position])
-        if(animate) {
+        if (position == 0) {
+            holder.bindMyself(resourcesManager.getString(R.string.component_phone_contact_thumbnail_myself))
+        } else {
+            holder.bind(contact = phoneContacts[position - 1])
+        }
+        if (animate) {
             setExpandAnimation(holder.itemView)
             positionsToAnimateWhenAdded.remove(position)
         }
@@ -74,10 +84,10 @@ class GroupCreationMembersAddedAdapter constructor(private val listener: GroupMe
     }
 
     fun addPhoneContact(contact: PhoneContact) {
-        if(!phoneContacts.contains(contact)) {
-            positionsToAnimateWhenAdded.add(phoneContacts.size)
+        if (!phoneContacts.contains(contact)) {
+            positionsToAnimateWhenAdded.add(phoneContacts.size + 1)
             phoneContacts.add(contact)
-            notifyItemInserted(phoneContacts.lastIndex)
+            notifyItemInserted(phoneContacts.lastIndex + 1)
         }
     }
 
@@ -104,19 +114,39 @@ class GroupCreationMembersAddedAdapter constructor(private val listener: GroupMe
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(contact: PhoneContact) {
-            binding.root.visible()
-            binding.contact = contact
-            binding.root.setOnClickListener {
-                val position = if (adapterPosition != RecyclerView.NO_POSITION) adapterPosition else layoutPosition
-                listener.onPhoneContactMemberRemoved(it, contact, position)
-            }
-
-            binding.componentPhoneContactAdmin.apply{
-                isChecked = contact.isAdmin
-                setOnCheckedChangeListener { _, checked ->
-                    val position = if (adapterPosition != RecyclerView.NO_POSITION) adapterPosition else layoutPosition
-                    adminToggleListener.onAdminToggle(checked, position)
+            with(binding) {
+                root.visible()
+                componentPhoneContactAdmin.visible()
+                componentPhoneContactMyself.gone()
+                componentPhoneContactClose.visible()
+                this.name = contact.name
+                this.photoUrl = contact.photoUrl
+                root.setOnClickListener {
+                    val positionInList =
+                        if (adapterPosition != RecyclerView.NO_POSITION) adapterPosition else layoutPosition
+                    listener.onPhoneContactMemberRemoved(it, contact, positionInList)
                 }
+                componentPhoneContactAdmin.apply {
+                    isChecked = contact.isAdmin
+                    setOnCheckedChangeListener { _, checked ->
+                        val positionInList =
+                            if (adapterPosition != RecyclerView.NO_POSITION) adapterPosition else layoutPosition
+                        adminToggleListener.onAdminToggle(checked, positionInList)
+                    }
+                }
+            }
+        }
+
+        fun bindMyself(myName: String) {
+            with(binding) {
+                root.visible()
+                componentPhoneContactAdmin.invisible()
+                componentPhoneContactMyself.visible()
+                componentPhoneContactClose.gone()
+                this.name = myName
+                this.photoUrl = null
+                root.setOnClickListener(null)
+
             }
         }
     }

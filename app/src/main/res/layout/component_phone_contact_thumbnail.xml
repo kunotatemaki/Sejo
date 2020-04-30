@@ -6,8 +6,11 @@
 
     <data>
         <variable
-            name="contact"
-            type="com.rookia.android.sejo.domain.local.PhoneContact" />
+            name="name"
+            type="String" />
+        <variable
+            name="photoUrl"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +28,7 @@
             android:padding="2dp"
             tools:src="@drawable/ic_contact"
             defaultImage="@{@drawable/ic_contact}"
-            imageRounded="@{contact.photoUrl}"
+            imageRounded="@{photoUrl}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/component_phone_contact_thumbnail_name"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,6 +55,7 @@
             />
 
         <ImageView
+            android:id="@+id/component_phone_contact_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_component_phone_contact_thumbnail_delete_24dp"
@@ -69,7 +73,7 @@
             tools:text="Raúl"
             android:maxLines="1"
             android:ellipsize="end"
-            android:text="@{contact.name}"
+            android:text="@{name}"
             android:textAlignment="center"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="8dp"
@@ -80,6 +84,7 @@
             android:id="@+id/component_phone_contact_admin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/SimpleTextLabelSmallDark"
             android:text="@string/component_phone_contact_thumbnail_admin"
             android:paddingEnd="8dp"
             android:paddingStart="4dp"
@@ -87,6 +92,22 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/component_phone_contact_myself"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/SimpleTextLabelSmallDark"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:textAlignment="center"
+            android:text="@string/component_phone_contact_thumbnail_admin"
+            app:layout_constraintTop_toBottomOf="@id/component_phone_contact_thumbnail_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

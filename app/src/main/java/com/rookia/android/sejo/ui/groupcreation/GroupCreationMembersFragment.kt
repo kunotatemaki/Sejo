@@ -50,7 +50,7 @@ class GroupCreationMembersFragment constructor(
     private lateinit var binding: FragmentGroupCreationMembersBinding
     private lateinit var viewModel: GroupCreationMembersViewModel
     private val contactsAdapter = GroupCreationMembersAdapter(this)
-    private val contactsAddedAdapter = GroupCreationMembersAddedAdapter(this)
+    private val contactsAddedAdapter = GroupCreationMembersAddedAdapter(this, resourcesManager)
     private var searchMenuItem: MenuItem? = null
     private lateinit var groupName: String
     private var fee: Int = 0
