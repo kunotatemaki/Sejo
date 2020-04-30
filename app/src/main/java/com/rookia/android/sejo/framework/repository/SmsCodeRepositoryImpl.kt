@@ -39,7 +39,7 @@ class SmsCodeRepositoryImpl @Inject constructor(
             val smsCodeRequest = SmsCodeRequestClient(phonePrefix, phoneNumber)
             val resp = api.requestSmsCode(smsCodeRequest)
             if (resp.isSuccessful && resp.body() != null) {
-                Result.success(resp.body()?.result)
+                Result.success(resp.body()?.code)
             } else {
                 Result.error(resp.message())
             }

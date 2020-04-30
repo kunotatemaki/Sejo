@@ -48,7 +48,7 @@ class UserRepositoryImpl @Inject constructor(
             val userRequest = UserCreationRequestClient(phonePrefix, phoneNumber, pin)
             val resp = api.addUser(userRequest)
             if (resp.isSuccessful && resp.body() != null) {
-                Result.success(resp.body()?.result)
+                Result.success(resp.body()?.code)
             } else {
                 Result.error(resp.message())
             }
@@ -70,7 +70,7 @@ class UserRepositoryImpl @Inject constructor(
             val updateUserValidation = user.toUserUpdateRequestClient()
             val resp = api.updateUser(updateUserValidation)
             if (resp.isSuccessful && resp.body() != null) {
-                Result.success(resp.body()?.result)
+                Result.success(resp.body()?.code)
             } else {
                 Result.error(resp.message())
             }

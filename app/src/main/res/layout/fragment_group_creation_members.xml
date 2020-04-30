@@ -134,6 +134,7 @@
                 android:layout_height="wrap_content"
                 app:fabSize="normal"
                 style="@style/FabStyle"
+                android:visibility="gone"
                 app:srcCompat="@drawable/ic_arrow_forward_white_24dp"
                 android:layout_gravity="bottom|end"
                 />

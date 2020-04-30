@@ -13,6 +13,12 @@ package com.rookia.android.sejo.domain.network.login
  */
 
 data class LoginRequestServer(
-    val result: Int,
-    val token: String? = null
-)
+    val code: Int,
+    val message: String,
+    val data: LoginRequestResponse? = null
+
+){
+    data class LoginRequestResponse (
+        val token: String? = null
+    )
+}

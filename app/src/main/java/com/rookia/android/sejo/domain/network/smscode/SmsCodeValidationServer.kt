@@ -13,7 +13,12 @@ package com.rookia.android.sejo.domain.network.smscode
  */
 
 data class SmsCodeValidationServer(
-    val result: Int,
-    val userExists: Boolean
-)
+    val code: Int,
+    val message: String,
+    val data: SmsCodeValidationResponse
+){
+    data class SmsCodeValidationResponse(
+        val userExists: Boolean
+    )
+}
  

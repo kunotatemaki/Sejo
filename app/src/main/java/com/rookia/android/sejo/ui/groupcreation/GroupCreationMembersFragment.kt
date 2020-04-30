@@ -70,8 +70,10 @@ class GroupCreationMembersFragment constructor(
         if (permissionManager.isPermissionGranted(this, Manifest.permission.READ_CONTACTS).not()) {
             binding.fragmentGroupCreationMembersNoContactsContainer.visible()
             binding.fragmentGroupCreationMembersListContainer.gone()
+            binding.fragmentGroupCreationMembersContinueButton.gone()
         } else {
             loadContacts()
+            binding.fragmentGroupCreationMembersContinueButton.show()
         }
         binding.fragmentGroupCreationMembersPermissionsButton.setOnClickListener {
             loadContacts()
@@ -203,6 +205,7 @@ class GroupCreationMembersFragment constructor(
     private fun permissionGranted() {
         binding.fragmentGroupCreationMembersNoContactsContainer.gone()
         binding.fragmentGroupCreationMembersListContainer.visible()
+        binding.fragmentGroupCreationMembersContinueButton.show()
         viewModel.loadPhoneContacts()
     }
 

@@ -13,5 +13,6 @@ package com.rookia.android.sejo.domain.network.user
  */
 
 data class UserCreationRequestServer(
-    val result: Int
+    val code: Int,
+    val message: String
 )
