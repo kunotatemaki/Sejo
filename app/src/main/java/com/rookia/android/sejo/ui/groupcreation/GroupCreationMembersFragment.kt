@@ -23,6 +23,7 @@ import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.androidutils.framework.utils.PermissionManager
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.androidutils.utils.DeviceUtils
+import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentGroupCreationMembersBinding
 import com.rookia.android.sejo.domain.local.PhoneContact
@@ -39,7 +40,7 @@ class GroupCreationMembersFragment constructor(
 ) :
     BaseFragment(R.layout.fragment_group_creation_members),
     GroupCreationMembersAdapter.GroupMemberListed,
-    GroupCreationMembersAddedAdapter.GroupMemberAddedList {
+    GroupCreationMembersAddedAdapter.GroupMemberRemovedList {
 
     companion object {
         private const val CONTACTS_PERMISSION_CODE = 1234
@@ -51,10 +52,19 @@ class GroupCreationMembersFragment constructor(
     private val contactsAdapter = GroupCreationMembersAdapter(this)
     private val contactsAddedAdapter = GroupCreationMembersAddedAdapter(this)
     private var searchMenuItem: MenuItem? = null
+    private lateinit var groupName: String
+    private var fee: Int = 0
+    private var numberOfAdmins: Int = Constants.DEFAULT_NUMBER_OF_ADMINS
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        arguments?.apply {
+            val safeArgs = GroupCreationMembersFragmentArgs.fromBundle(this)
+            groupName = safeArgs.groupName
+            fee = safeArgs.fee
+            numberOfAdmins = safeArgs.admins
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -92,7 +102,7 @@ class GroupCreationMembersFragment constructor(
         })
 
         binding.fragmentGroupCreationMembersContinueButton.setOnClickListener {
-            onFabClicked()
+            onCreateGroupButtonClicked()
         }
 
         binding.fragmentGroupCreationMembersList.adapter = contactsAdapter
@@ -209,11 +219,20 @@ class GroupCreationMembersFragment constructor(
         viewModel.loadPhoneContacts()
     }
 
-    private fun onFabClicked() {
+    private fun onCreateGroupButtonClicked() {
         if (contactsAddedAdapter.getContactsAdded().isEmpty()) {
             Snackbar.make(
                 requireView(),
                 resourcesManager.getString(R.string.fragment_group_creation_members_add_members_error),
+                Snackbar.LENGTH_LONG
+            ).show()
+        } else if (contactsAddedAdapter.getNumberOfAdmins() < numberOfAdmins - 1) { //no including myself
+            Snackbar.make(
+                requireView(),
+                String.format(
+                    resourcesManager.getString(R.string.fragment_group_creation_members_min_admins_error),
+                    numberOfAdmins
+                ),
                 Snackbar.LENGTH_LONG
             ).show()
         }
@@ -224,7 +243,7 @@ class GroupCreationMembersFragment constructor(
         binding.fragmentGroupCreationMembersAddedList.smoothScrollToPosition(contactsAddedAdapter.itemCount)
     }
 
-    override fun onPhoneContactMemberAdded(view: View, contact: PhoneContact, position: Int) {
+    override fun onPhoneContactMemberRemoved(view: View, contact: PhoneContact, position: Int) {
 
         val anim: Animation = AnimationUtils.loadAnimation(
             requireContext(),

@@ -6,8 +6,8 @@
 
     <!--    Validate Phone Number -->
     <string name="validate_phone_number_button_caption">Continuar</string>
-    <string name="component_phone_nuber_prefix_es">+34</string>
-    <string name="component_phone_nuber_error">Formato incorrecto</string>
+    <string name="component_phone_number_prefix_es">+34</string>
+    <string name="component_phone_number_error">Formato incorrecto</string>
 
     <!-- validate sms -->
     <string name="validate_sms_error_label">Código erróneo</string>
@@ -51,17 +51,17 @@
     <string name="fragment_group_creation_members_subheader_text">Para poder añadir amigos a tu grupo necesitas permitir acceso a los contactos de tu teléfono</string>
     <string name="fragment_group_creation_members_permissions_button_caption">Permitir Acceso</string>
     <string name="title_activity_login">LoginActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+
     <string name="fragment_biometric_permission_header_text">Iniciar la sesión con reconocimiento biométrico</string>
     <string name="fragment_biometric_permission_subheader_text">Activa la huella dactilar para acceder a tus grupos de manera más rápida y segura</string>
     <string name="fragment_biometric_permission_activate_button_caption">Activar Biometría</string>
     <string name="fragment_biometric_permission_not_now_button_caption">Por ahora no</string>
-    <string name="fragment_group_creation_members_add_members_error">\"Añade al menos un contacto\"</string>
+
+    <string name="fragment_group_creation_members_add_members_error">Añade al menos un contacto</string>
+    <string name="fragment_group_creation_members_min_admins_error">Debes añadir más administradores</string>
     <string name="fragment_group_creation_main_fee_header">Cuota de acceso al grupo</string>
     <string name="fragment_group_creation_main_info_fee_hint">Cuota</string>
+    <string name="component_phone_contact_thumbnail_admin">Admin</string>
+
 
 </resources>

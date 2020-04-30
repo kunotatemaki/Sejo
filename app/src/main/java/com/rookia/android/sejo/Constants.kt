@@ -75,4 +75,7 @@ object Constants {
 
 
     //endregion
+
+    //region GROUPS
+    const val DEFAULT_NUMBER_OF_ADMINS = 2
 }

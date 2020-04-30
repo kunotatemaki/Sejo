@@ -60,7 +60,7 @@ class ValidatePhoneNumberFragment @Inject constructor(
                             binding.buttonEnabled = false
                             binding.validatePhoneNumberPhoneNumber.showError(
                                 resourcesManager.getString(
-                                    R.string.component_phone_nuber_error
+                                    R.string.component_phone_number_error
                                 )
                             )
                         }

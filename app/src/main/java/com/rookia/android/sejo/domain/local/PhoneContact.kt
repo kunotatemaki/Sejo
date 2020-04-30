@@ -21,5 +21,6 @@ data class PhoneContact (
     val phoneNumber: String,
     val phoneNumberNormalized: String,
     val name: String,
-    val photoUrl: String?
+    val photoUrl: String?,
+    var isAdmin: Boolean = false
 ) : Parcelable

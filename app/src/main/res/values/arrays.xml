@@ -2,7 +2,7 @@
 <resources>
 
     <array name="component_bnext_edittext_edittext_phone_prefix">
-        <item>@string/component_phone_nuber_prefix_es</item>
+        <item>@string/component_phone_number_prefix_es</item>
     </array>
 
 </resources>
