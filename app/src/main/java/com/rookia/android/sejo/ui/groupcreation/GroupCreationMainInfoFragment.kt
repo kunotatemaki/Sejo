@@ -22,9 +22,6 @@ class GroupCreationMainInfoFragment constructor(private val resourcesManager: Re
             it.fragmentGroupCreationMainInfoButton.setOnClickListener {
                 navigateToMembersScreen()
             }
-            it.fragmentGroupCreationMainInfoAdmins.addTextChangedListener {
-                checkButton()
-            }
             it.fragmentGroupCreationMainInfoName.addTextChangedListener {
                 checkButton()
             }
@@ -39,43 +36,24 @@ class GroupCreationMainInfoFragment constructor(private val resourcesManager: Re
 
     private fun navigateToMembersScreen() {
         (activity as? BaseActivity)?.hideKeyboard()
-        var adminsOk = true
-        var numberOfAdmins = 0
-        try {
-            numberOfAdmins = binding.fragmentGroupCreationMainInfoAdmins.text.toString().toInt()
-            if (numberOfAdmins <= 1) {
-                adminsOk = false
-            }
-        } catch (e: NumberFormatException) {
-            adminsOk = false
-        }
         val fee = try {
             binding.fragmentGroupCreationMainInfoFee.text.toString().toInt()
         } catch (e: NumberFormatException) {
             0
         }
-        if (adminsOk) {
-            val direction =
+        val direction =
                 GroupCreationMainInfoFragmentDirections.actionGroupCreationMainInfoFragmentToGroupCreationMembersFragment(
-                    binding.fragmentGroupCreationMainInfoName.text.toString(), numberOfAdmins, fee
+                    binding.fragmentGroupCreationMainInfoName.text.toString(), fee
                 )
             findNavController().navigate(direction)
-        } else {
-            binding.fragmentGroupCreationMainInfoAdminsContainer.error =
-                resourcesManager.getString(R.string.fragment_group_creation_main_admins_error)
-        }
 
     }
 
     private fun checkButton() {
         var enabled = true
-        if (binding.fragmentGroupCreationMainInfoAdmins.text.isNullOrBlank()) {
-            enabled = false
-        }
         if (binding.fragmentGroupCreationMainInfoName.text.isNullOrBlank()) {
             enabled = false
         }
         binding.fragmentGroupCreationMainInfoButton.isEnabled = enabled
-        binding.fragmentGroupCreationMainInfoAdminsContainer.error = null
     }
 }

@@ -61,8 +61,7 @@
     <string name="fragment_group_creation_members_min_admins_error">El número mínimo de administradores es %1$s</string>
     <string name="fragment_group_creation_main_fee_header">Cuota de acceso al grupo</string>
     <string name="fragment_group_creation_main_info_fee_hint">Cuota</string>
-    <string name="component_phone_contact_thumbnail_admin">Admin</string>
-    <string name="component_phone_contact_thumbnail_myself">Yo</string>
+    <string name="component_phone_contact_thumbnail_owner">Yo</string>
 
 
 </resources>

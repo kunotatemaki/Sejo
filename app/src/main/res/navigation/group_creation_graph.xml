@@ -29,9 +29,6 @@
             android:name="groupName"
             app:argType="string" />
         <argument
-            android:name="admins"
-            app:argType="integer" />
-        <argument
             android:name="fee"
             app:argType="integer" />
     </fragment>

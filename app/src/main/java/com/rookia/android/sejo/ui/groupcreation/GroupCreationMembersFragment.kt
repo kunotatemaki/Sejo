@@ -23,7 +23,6 @@ import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.androidutils.framework.utils.PermissionManager
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.androidutils.utils.DeviceUtils
-import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentGroupCreationMembersBinding
 import com.rookia.android.sejo.domain.local.PhoneContact
@@ -54,7 +53,6 @@ class GroupCreationMembersFragment constructor(
     private var searchMenuItem: MenuItem? = null
     private lateinit var groupName: String
     private var fee: Int = 0
-    private var numberOfAdmins: Int = Constants.DEFAULT_NUMBER_OF_ADMINS
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +61,6 @@ class GroupCreationMembersFragment constructor(
             val safeArgs = GroupCreationMembersFragmentArgs.fromBundle(this)
             groupName = safeArgs.groupName
             fee = safeArgs.fee
-            numberOfAdmins = safeArgs.admins
         }
     }
 
@@ -220,6 +217,7 @@ class GroupCreationMembersFragment constructor(
     }
 
     private fun onCreateGroupButtonClicked() {
+            //todo confirmar antes de crear grupo
         when {
             contactsAddedAdapter.getContactsAdded().isEmpty() -> {
                 Snackbar.make(
@@ -228,16 +226,16 @@ class GroupCreationMembersFragment constructor(
                     Snackbar.LENGTH_LONG
                 ).show()
             }
-            contactsAddedAdapter.getNumberOfAdmins() < numberOfAdmins - 1 -> { //not including myself
-                Snackbar.make(
-                    requireView(),
-                    String.format(
-                        resourcesManager.getString(R.string.fragment_group_creation_members_min_admins_error),
-                        numberOfAdmins
-                    ),
-                    Snackbar.LENGTH_LONG
-                ).show()
-            }
+//            contactsAddedAdapter.getNumberOfAdmins() < numberOfAdmins - 1 -> { //not including myself
+//                Snackbar.make(
+//                    requireView(),
+//                    String.format(
+//                        resourcesManager.getString(R.string.fragment_group_creation_members_min_admins_error),
+//                        numberOfAdmins
+//                    ),
+//                    Snackbar.LENGTH_LONG
+//                ).show()
+//            }
             else -> {
                 viewModel.createGroup(
                     name = groupName,

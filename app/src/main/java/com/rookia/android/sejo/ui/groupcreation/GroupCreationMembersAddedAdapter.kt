@@ -9,7 +9,6 @@ import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.androidutils.extensions.gone
-import com.rookia.android.androidutils.extensions.invisible
 import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ComponentPhoneContactThumbnailBinding
@@ -34,20 +33,9 @@ class GroupCreationMembersAddedAdapter constructor(
 
     private val phoneContacts: MutableList<PhoneContact> = mutableListOf()
     private val positionsToAnimateWhenAdded = mutableListOf<Int>()
-    private val adminToggleListener: AdminToggle = object : AdminToggle {
-        override fun onAdminToggle(checked: Boolean, position: Int) {
-            if (phoneContacts.lastIndex >= position - 1) {
-                phoneContacts[position - 1].isAdmin = checked
-            }
-        }
-    }
 
     interface GroupMemberRemovedList {
         fun onPhoneContactMemberRemoved(view: View, contact: PhoneContact, position: Int)
-    }
-
-    interface AdminToggle {
-        fun onAdminToggle(checked: Boolean, position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupMemberViewHolder {
@@ -57,7 +45,7 @@ class GroupCreationMembersAddedAdapter constructor(
                 parent,
                 false
             )
-        return GroupMemberViewHolder(binding, listener, adminToggleListener)
+        return GroupMemberViewHolder(binding, listener)
     }
 
     override fun getItemCount(): Int = phoneContacts.size + 1
@@ -67,7 +55,7 @@ class GroupCreationMembersAddedAdapter constructor(
     override fun onBindViewHolder(holder: GroupMemberViewHolder, position: Int) {
         val animate = positionsToAnimateWhenAdded.contains(position)
         if (position == 0) {
-            holder.bindMyself(resourcesManager.getString(R.string.component_phone_contact_thumbnail_myself))
+            holder.bindMyself(resourcesManager.getString(R.string.component_phone_contact_thumbnail_owner))
         } else {
             holder.bind(contact = phoneContacts[position - 1])
         }
@@ -109,15 +97,12 @@ class GroupCreationMembersAddedAdapter constructor(
 
     class GroupMemberViewHolder(
         private val binding: ComponentPhoneContactThumbnailBinding,
-        private val listener: GroupMemberRemovedList,
-        private val adminToggleListener: AdminToggle
+        private val listener: GroupMemberRemovedList
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(contact: PhoneContact) {
             with(binding) {
                 root.visible()
-                componentPhoneContactAdmin.visible()
-                componentPhoneContactMyself.gone()
                 componentPhoneContactClose.visible()
                 this.name = contact.name
                 this.photoUrl = contact.photoUrl
@@ -126,22 +111,13 @@ class GroupCreationMembersAddedAdapter constructor(
                         if (adapterPosition != RecyclerView.NO_POSITION) adapterPosition else layoutPosition
                     listener.onPhoneContactMemberRemoved(it, contact, positionInList)
                 }
-                componentPhoneContactAdmin.apply {
-                    isChecked = contact.isAdmin
-                    setOnCheckedChangeListener { _, checked ->
-                        val positionInList =
-                            if (adapterPosition != RecyclerView.NO_POSITION) adapterPosition else layoutPosition
-                        adminToggleListener.onAdminToggle(checked, positionInList)
-                    }
-                }
+
             }
         }
 
         fun bindMyself(myName: String) {
             with(binding) {
                 root.visible()
-                componentPhoneContactAdmin.invisible()
-                componentPhoneContactMyself.visible()
                 componentPhoneContactClose.gone()
                 this.name = myName
                 this.photoUrl = null
