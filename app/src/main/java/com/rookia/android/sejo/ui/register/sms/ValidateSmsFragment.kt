@@ -104,7 +104,7 @@ class ValidateSmsFragment @Inject constructor(
                     Result.Status.SUCCESS -> {
                         hideLoading()
                         when (it.data?.result) {
-                            Constants.SMS_CODE_OK -> {
+                            Constants.ResponseCodes.OK.code -> {
                                 viewModel.storeValidatedPhone(phonePrefix, phoneNumber)
                                 binding.fragmentValidateSmsView.hideError()
                                 if(it.data?.userExists == false) {
@@ -114,7 +114,7 @@ class ValidateSmsFragment @Inject constructor(
                                     navigateToDashboard()
                                 }
                             }
-                            Constants.SMS_CODE_EXPIRED -> binding.fragmentValidateSmsView.displayExpiredCode()
+                            Constants.ResponseCodes.EXPIRED_SMS_CODE.code -> binding.fragmentValidateSmsView.displayExpiredCode()
                             else -> binding.fragmentValidateSmsView.displayWrongCode()
                         }
                     }

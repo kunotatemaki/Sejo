@@ -50,11 +50,14 @@ object Constants {
     //endregion
 
     //region SERVER RESPONSE CODES
-    const val GENERAL_RESPONSE_OK = -1
-    const val GENERAL_RESPONSE_ERROR = 1
-    const val SMS_CODE_OK = 0
-    const val SMS_CODE_ERROR = 1
-    const val SMS_CODE_EXPIRED = 2
+    enum class ResponseCodes constructor(val code: Int){
+        OK(-1),
+        ERROR(1),
+        WRONG_SMS_CODE(2),
+        EXPIRED_SMS_CODE(3),
+        LOGIN_NOT_AUTHORIZED(4),
+        LOGIN_NO_USER(5);
+    }
     //endregion
 
     //region NAVIGATION
@@ -72,6 +75,7 @@ object Constants {
     const val USER_BIOMETRICS_TAG = "USER_BIOMETRICS_TAG"
     const val USER_PHONE_NUMBER_TAG = "USER_PHONE_NUMBER_TAG"
     const val USER_PHONE_PREFIX_TAG = "USER_PHONE_PREFIX_TAG"
+    const val USER_ID_TAG = "USER_ID_TAG"
 
 
     //endregion

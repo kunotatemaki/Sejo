@@ -13,6 +13,7 @@ package com.rookia.android.sejo.domain.local.user
  */
 
 data class User(
+    val userId: String,
     val phonePrefix: String,
     val phoneNumber: String,
     val name: String

@@ -32,7 +32,7 @@ class UserRepositoryImpl @Inject constructor(
     private val networkServiceFactory: NetworkServiceFactory,
     private val preferencesManager: PreferencesManager
 ) : UserRepository {
-    override fun createUser(phonePrefix: String, phoneNumber: String, pin: Int): Flow<Result<Int>> =
+    override fun createUser(phonePrefix: String, phoneNumber: String, pin: Int): Flow<Result<TokenReceived>> =
         resultOnlyFromOneSourceInFlow {
             createUserInServer(phonePrefix, phoneNumber, pin)
         }
@@ -42,13 +42,13 @@ class UserRepositoryImpl @Inject constructor(
         phonePrefix: String,
         phoneNumber: String,
         pin: Int
-    ): Result<Int> =
+    ): Result<TokenReceived> =
         try {
             val api = networkServiceFactory.getUserInstance()
             val userRequest = UserCreationRequestClient(phonePrefix, phoneNumber, pin)
             val resp = api.addUser(userRequest)
             if (resp.isSuccessful && resp.body() != null) {
-                Result.success(resp.body()?.code)
+                Result.success(resp.body()?.toTokenReceived())
             } else {
                 Result.error(resp.message())
             }
@@ -79,23 +79,21 @@ class UserRepositoryImpl @Inject constructor(
         }
 
     override fun login(
-        phonePrefix: String,
-        phoneNumber: String,
+        userId: String,
         pin: Int
     ): Flow<Result<TokenReceived>> =
         resultOnlyFromOneSourceInFlow {
-            loginInServer(phonePrefix, phoneNumber, pin)
+            loginInServer(userId, pin)
         }
 
     @VisibleForTesting
     suspend fun loginInServer(
-        phonePrefix: String,
-        phoneNumber: String,
+        userId: String,
         pin: Int
     ): Result<TokenReceived> =
         try {
             val api = networkServiceFactory.getUserInstance()
-            val loginRequest = LoginRequestClient(phonePrefix, phoneNumber, pin)
+            val loginRequest = LoginRequestClient(pin = pin, userId = userId)
             val resp = api.login(loginRequest)
             if (resp.isSuccessful && resp.body() != null) {
                 Result.success(resp.body()?.toTokenReceived())

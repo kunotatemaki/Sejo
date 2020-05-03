@@ -13,7 +13,6 @@ package com.rookia.android.sejo.domain.network.login
  */
 
 data class LoginRequestClient(
-    val phonePrefix: String,
-    val phoneNumber: String,
-    val pin: Int
+    val pin: Int,
+    val userId: String
 )

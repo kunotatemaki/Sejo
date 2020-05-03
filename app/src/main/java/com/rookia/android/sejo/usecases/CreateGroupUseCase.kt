@@ -17,15 +17,14 @@ import kotlinx.coroutines.flow.Flow
  *
  */
 
-class LoginUseCase constructor(private val repository: UserRepository) {
+class CreateGroupUseCase constructor(
+    private val repository: UserRepository) {
 
-    fun login(userId: String, pin: Int): Flow<Result<TokenReceived>> =
-        repository.login(userId, pin)
-
-    fun storeToken(token: String?) {
-        token?.let {
-            repository.storeToken(token)
-        }
-    }
+    fun createUSer(
+        phonePrefix: String,
+        phoneNumber: String,
+        pin: Int
+    ): Flow<Result<TokenReceived>> =
+        repository.createUser(phonePrefix, phoneNumber, pin)
 
 }

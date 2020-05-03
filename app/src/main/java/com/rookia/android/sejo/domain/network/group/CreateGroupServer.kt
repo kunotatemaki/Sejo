@@ -15,16 +15,23 @@ package com.rookia.android.sejo.domain.network.group
 data class CreateGroupServer(
     val code: Int,
     val message: String,
-    val data: CreateGroupResponses? = null
+    val data: CreateGroupResponse? = null
 ) {
 
-    data class CreateGroupResponses(
+    data class CreateGroupResponse(
         val groupId: Int,
         val name: String,
         val fee: Int,
         val nAdmins: Int,
         val date: Long,
-        var members: List<String> = listOf(),
+        var members: List<Member> = listOf(),
         var membersInApp: List<String> = listOf()
     )
+
+    data class Member(
+        val id: String,
+        val isAdmin: Boolean,
+        val isAppUser: Boolean
+    )
+
 }

@@ -12,7 +12,7 @@ package com.rookia.android.sejo.domain.network
  *
  */
 
-enum class LoginResponse constructor(val code: Int){
+enum class LoginResponseCodes constructor(val code: Int){
     OK(0),
     ERROR(1),
     NOT_AUTHORIZED(2),

@@ -7,18 +7,19 @@ package com.rookia.android.sejo.domain.network.user
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
  *
- * Written by Roll <raulfeliz@gmail.com>, April 2020
+ * Written by Roll <raulfeliz@gmail.com>, May 2020
  *
  *
  */
 
-data class UserCreationRequestServer(
+data class UserAdminStatusServer (
     val code: Int,
     val message: String,
-    val data: UserCreationRequestResponse? = null
+    val data: UserAdminStatusResponse? = null
 ){
-    data class UserCreationRequestResponse(
-        val userId: String,
-        val token: String
+    data class UserAdminStatusResponse(
+        val groupId: Int,
+        val memberId: String,
+        val isAdmin: Boolean
     )
 }

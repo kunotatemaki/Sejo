@@ -16,5 +16,10 @@ data class CreateGroupClient (
     val name: String,
     val fee: Int,
     val nAdmins: Int,
-    val members: List<String>
-)
+    val members: List<Contact>
+){
+    data class Contact(
+        val id: String,
+        val isAdmin: Boolean
+    )
+}

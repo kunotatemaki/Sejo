@@ -16,7 +16,7 @@ import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentLoginBinding
-import com.rookia.android.sejo.domain.network.LoginResponse
+import com.rookia.android.sejo.domain.network.LoginResponseCodes
 import com.rookia.android.sejo.framework.utils.FingerprintUtils
 import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.views.PinScreen
@@ -46,9 +46,9 @@ class LoginFragment @Inject constructor(
             preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG)
         val personalInfo =
             preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PERSONAL_INFO_TAG)
-//        if (pinSet.not() || phoneValidated.not() || personalInfo.not()) {
-//            navigateToRegisterFlow()
-//        }
+        if (pinSet.not() || phoneValidated.not() || personalInfo.not()) {
+            navigateToRegisterFlow()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,7 +75,7 @@ class LoginFragment @Inject constructor(
                 when (it.status) {
                     Result.Status.SUCCESS -> {
                         hideLoading()
-                        if(it.data?.result == LoginResponse.NO_USER.code){
+                        if(it.data?.result == LoginResponseCodes.NO_USER.code){
                             preferencesManager.setBooleanIntoPreferences(Constants.NAVIGATION_PERSONAL_INFO_TAG, false)
                             preferencesManager.setBooleanIntoPreferences(Constants.NAVIGATION_PIN_SENT_TAG, false)
                             preferencesManager.setBooleanIntoPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG, false)
@@ -119,18 +119,18 @@ class LoginFragment @Inject constructor(
 
     override fun onPinChanged(pin: String, isCompleted: Boolean) {
         if (isCompleted) {
-//            login(pin)
-            when {
-                (activity as? LoginActivity)?.loginFromAnywhere == true -> {
-                    activity?.finish()
-                }
-                shouldShowBiometricPermission() -> {
-                    navigateToBiometricPermission()
-                }
-                else -> {
-                    navigateToDashboard()
-                }
-            }
+            login(pin)
+//            when {
+//                (activity as? LoginActivity)?.loginFromAnywhere == true -> {
+//                    activity?.finish()
+//                }
+//                shouldShowBiometricPermission() -> {
+//                    navigateToBiometricPermission()
+//                }
+//                else -> {
+//                    navigateToDashboard()
+//                }
+//            }
         } else {
             binding.loginPinScreen.hideError()
         }
@@ -179,7 +179,7 @@ class LoginFragment @Inject constructor(
 
         try {
             val nPin = pinToBeSent?.toInt() ?: 0
-            viewModel.login(phonePrefix, phoneNumber, nPin)
+            viewModel.login(nPin)
         } catch (e: NumberFormatException) {
         }
     }

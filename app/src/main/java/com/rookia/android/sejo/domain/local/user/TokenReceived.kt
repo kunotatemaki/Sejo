@@ -11,5 +11,9 @@ package com.rookia.android.sejo.domain.local.user
  *
  *
  */
- 
- data class TokenReceived(val result: Int, val token: String? = null)
+
+data class TokenReceived(
+    val result: Int,
+    val token: String? = null,
+    val userId: String?
+)

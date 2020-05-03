@@ -30,13 +30,16 @@ class PersonalInfoViewModel @Inject constructor(
             val phoneNumber =
                 preferencesManager.getStringFromPreferences(Constants.USER_PHONE_NUMBER_TAG)
                     ?: return
-            val user = User(phonePrefix, phoneNumber, name)
+            val userId =
+                preferencesManager.getStringFromPreferences(Constants.USER_ID_TAG)
+                    ?: return
+            val user = User(userId = userId, phonePrefix = phonePrefix, phoneNumber = phoneNumber,  name = name)
             _userSentToServer =
                 userUseCase.updateUser(user).asLiveData(dispatcher)
             userSentToServer.addSource(_userSentToServer) {
                 it?.let { result ->
                     userSentToServer.value =
-                        Result.from(result.status, result.data == Constants.GENERAL_RESPONSE_OK)
+                        Result.from(result.status, result.data == Constants.ResponseCodes.OK.code)
                 }
                 when(it.status){
                     Result.Status.SUCCESS -> {

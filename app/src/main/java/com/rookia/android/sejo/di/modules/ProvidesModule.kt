@@ -3,6 +3,7 @@ package com.rookia.android.sejo.di.modules
 import android.content.Context
 import androidx.biometric.BiometricPrompt
 import androidx.lifecycle.MutableLiveData
+import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.SejoApplication
 import com.rookia.android.sejo.data.repository.ContactsRepository
@@ -67,9 +68,13 @@ class ProvidesModule {
     fun providesGetContactsUseCase(repository: ContactsRepository): GetContactsUseCase =
         GetContactsUseCase(repository)
 
+    @Provides
+    fun providesCreateGroupUseCase(repository: UserRepository): CreateGroupUseCase =
+        CreateGroupUseCase(repository)
+
     @Singleton
     @Provides
-    fun provideNetworkServiceFactory(): NetworkServiceFactory = NetworkServiceFactory()
+    fun provideNetworkServiceFactory(preferencesManager: PreferencesManager): NetworkServiceFactory = NetworkServiceFactory(preferencesManager)
 
     @Provides
     @Named("Main")

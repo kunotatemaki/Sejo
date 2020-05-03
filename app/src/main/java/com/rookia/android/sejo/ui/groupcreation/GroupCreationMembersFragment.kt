@@ -220,21 +220,32 @@ class GroupCreationMembersFragment constructor(
     }
 
     private fun onCreateGroupButtonClicked() {
-        if (contactsAddedAdapter.getContactsAdded().isEmpty()) {
-            Snackbar.make(
-                requireView(),
-                resourcesManager.getString(R.string.fragment_group_creation_members_add_members_error),
-                Snackbar.LENGTH_LONG
-            ).show()
-        } else if (contactsAddedAdapter.getNumberOfAdmins() < numberOfAdmins - 1) { //no including myself
-            Snackbar.make(
-                requireView(),
-                String.format(
-                    resourcesManager.getString(R.string.fragment_group_creation_members_min_admins_error),
-                    numberOfAdmins
-                ),
-                Snackbar.LENGTH_LONG
-            ).show()
+        when {
+            contactsAddedAdapter.getContactsAdded().isEmpty() -> {
+                Snackbar.make(
+                    requireView(),
+                    resourcesManager.getString(R.string.fragment_group_creation_members_add_members_error),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+            contactsAddedAdapter.getNumberOfAdmins() < numberOfAdmins - 1 -> { //not including myself
+                Snackbar.make(
+                    requireView(),
+                    String.format(
+                        resourcesManager.getString(R.string.fragment_group_creation_members_min_admins_error),
+                        numberOfAdmins
+                    ),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+            else -> {
+                viewModel.createGroup(
+                    name = groupName,
+                    fee = fee,
+                    nAdmins = contactsAddedAdapter.getNumberOfAdmins(),
+                    members = contactsAddedAdapter.getContactsAdded()
+                )
+            }
         }
     }
 

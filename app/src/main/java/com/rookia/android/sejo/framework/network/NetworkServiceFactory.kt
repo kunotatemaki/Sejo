@@ -1,5 +1,11 @@
 package com.rookia.android.sejo.framework.network
 
+import com.rookia.android.androidutils.data.preferences.PreferencesManager
+import com.rookia.android.sejo.Constants
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -15,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  *
  */
 
-open class NetworkServiceFactory {
+open class NetworkServiceFactory constructor(private val preferencesManager: PreferencesManager) {
 
     companion object {
         const val ROOKIA_EXPENSES_SERVER_BASE_URL = "http://10.0.2.2:8080"
@@ -32,18 +38,42 @@ open class NetworkServiceFactory {
     open fun getSmsCodeCodeInstance(): SmsCodeApi =
         smsCodeCodeInstance ?: buildSmsCodeNetworkService().also { smsCodeCodeInstance = it }
 
-    open fun getUserInstance(): UserApi =
-        userInstance ?: buildUserNetworkService().also { userInstance = it }
+    open fun getUserInstance(): UserApi {
+        val bearer = preferencesManager.getStringFromPreferences(Constants.USER_TOKEN_TAG)
+
+        return userInstance ?: buildUserNetworkService(bearer).also { userApi->
+            bearer?.let { userInstance = userApi }
+        }
+    }
 
     private fun buildSmsCodeNetworkService(): SmsCodeApi = Retrofit.Builder()
         .baseUrl(ROOKIA_EXPENSES_SERVER_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build().create(SmsCodeApi::class.java)
 
-    private fun buildUserNetworkService(): UserApi = Retrofit.Builder()
+    private fun buildUserNetworkService(bearer: String?): UserApi =
+        Retrofit.Builder()
             .baseUrl(ROOKIA_EXPENSES_SERVER_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(getInterceptorForAuthentication(bearer))
             .build().create(UserApi::class.java)
+
+
+    private fun getInterceptorForAuthentication(bearer: String?): OkHttpClient {
+        val httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
+
+        httpClient.addInterceptor(object : Interceptor {
+
+            override fun intercept(chain: Interceptor.Chain): Response {
+                val request: Request.Builder = chain.request().newBuilder()
+                bearer?.let {
+                    request.addHeader("Authorization", bearer)
+                }
+                return chain.proceed(request.build())
+            }
+        })
+        return httpClient.build()
+    }
 
 
 }
