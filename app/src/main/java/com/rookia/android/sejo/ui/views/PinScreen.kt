@@ -110,18 +110,22 @@ class PinScreen : ConstraintLayout {
     private fun init(context: Context) {
         val inflater =
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = ComponentPinWithKeyboardBinding.inflate(inflater, this, true)
-        actions.vibrate = vibrate
-        binding.componentPinScreenNumericKeyboard.setAction(actions)
-        with(binding.componentPinScreenNumericKeyboard) {
-            if (showRecoverPin) {
-                showRecoverPin()
-            } else {
-                hideRecoverPin()
-            }
+        if(isInEditMode) {
+            inflater.inflate(R.layout.component_pin_with_keyboard, this, true)
+        } else {
+            binding = ComponentPinWithKeyboardBinding.inflate(inflater, this, true)
+            actions.vibrate = vibrate
+            binding.componentPinScreenNumericKeyboard.setAction(actions)
+
+                if (showRecoverPin) {
+                    binding.componentPinScreenRecoverPassword.visible()
+                } else {
+                    binding.componentPinScreenRecoverPassword.gone()
+                }
+
+            binding.componentPinScreenBullets.showPinButtonVisibility(visible = showPinButton)
+            checkFingerprintIcon()
         }
-        binding.componentPinScreenBullets.showPinButtonVisibility(visible = showPinButton)
-        checkFingerprintIcon()
     }
 
     private fun checkFingerprintIcon() {

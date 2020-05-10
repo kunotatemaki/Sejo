@@ -18,7 +18,8 @@
         android:paddingBottom="8dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
-        android:paddingTop="8dp">
+        android:paddingTop="8dp"
+        tools:context=".ui.views.SmsCodeView">
 
         <TextView
             android:visibility="gone"
@@ -64,7 +65,9 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:visibility="invisible"
+                    tools:visibility="visible"
                     tools:text="0"
+                    android:maxLength="1"
                     tools:ignore="HardcodedText" />
 
                 <ImageView
@@ -92,7 +95,9 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:visibility="invisible"
+                    tools:visibility="visible"
                     tools:text="1"
+                    android:maxLength="1"
                     tools:ignore="HardcodedText" />
 
                 <ImageView
@@ -120,7 +125,9 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:visibility="invisible"
+                    tools:visibility="visible"
                     tools:text="2"
+                    android:maxLength="1"
                     tools:ignore="HardcodedText" />
 
                 <ImageView
@@ -164,6 +171,7 @@
                     android:text="0"
                     android:visibility="invisible"
                     tools:text="3"
+                    android:maxLength="1"
                     tools:ignore="HardcodedText" />
 
                 <ImageView
@@ -192,6 +200,7 @@
                     android:text="0"
                     android:visibility="invisible"
                     tools:text="4"
+                    android:maxLength="1"
                     tools:ignore="HardcodedText" />
 
                 <ImageView
@@ -221,6 +230,7 @@
                     android:text="0"
                     android:visibility="invisible"
                     tools:text="5"
+                    android:maxLength="1"
                     tools:ignore="HardcodedText" />
 
                 <ImageView
@@ -248,16 +258,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/component_sms_code_hidden_edittext"
-            android:layout_width="1px"
-            android:layout_height="1px"
-            android:inputType="phone"
-            android:background="@android:color/transparent"
-            android:maxLength="@{Constants.SMS_PIN_LENGTH}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/component_sms_code_hidden_edittext"-->
+<!--            android:layout_width="1px"-->
+<!--            android:layout_height="1px"-->
+<!--            android:inputType="phone"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:maxLength="@{Constants.SMS_PIN_LENGTH}"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"/>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

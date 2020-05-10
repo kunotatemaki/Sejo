@@ -13,8 +13,8 @@
             style="@style/SimpleTextLabelMediumDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin"
             android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,8 +26,8 @@
             style="@style/SimpleTextLabelSmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/default_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,10 +40,10 @@
             style="@style/SimpleTextLabelMediumError"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginBottom="8dp"
             android:text="@string/component_pin_screen_subheader_error_text"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/component_pin_screen_bullets"
@@ -62,18 +62,31 @@
             android:id="@+id/component_pin_screen_numeric_keyboard"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/component_pin_screen_recover_password"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline2"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5"
-            app:layout_constraintGuide_begin="20dp" />
+            app:layout_constraintGuide_begin="20dp"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/component_pin_screen_recover_password"
+            style="@style/SimpleTextLabelSmallLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:text="@string/component_numeric_keyboard_reset_pin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/component_pin_screen_numeric_keyboard" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

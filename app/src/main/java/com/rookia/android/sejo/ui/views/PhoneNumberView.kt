@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.rookia.android.sejo.Constants
+import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ComponentPhoneNumberBinding
 import com.rookia.android.sejo.utils.PhoneUtils
 import kotlin.math.min
@@ -66,58 +67,75 @@ class PhoneNumberView : ConstraintLayout {
 
     private fun init(context: Context) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = ComponentPhoneNumberBinding.inflate(inflater, this, true)
+        if (isInEditMode) {
+            inflater.inflate(R.layout.component_phone_number, this, true)
+        } else {
+            binding = ComponentPhoneNumberBinding.inflate(inflater, this, true)
 
-        binding.componentPhoneNumber.addTextChangedListener(object : TextWatcher {
-            var lastText = ""
-            var deletingSpace = false
-            override fun afterTextChanged(text: Editable?) {
-                if (text?.toString() != lastText && text?.length ?: 0 > 3) {
-                    val cleanPhoneNumber = text?.replace("[\\s]".toRegex(), "") ?: ""
-                    var cursorPosition = binding.componentPhoneNumber.selectionStart
-                    val cutText: CharSequence?
-                    if (deletingSpace || cleanPhoneNumber.length > Constants.SPANISH_PHONE_NUMBER_MAX_LENGTH_WITHOUT_SPACES) {
-                        cutText = text?.removeRange(cursorPosition - 1 until cursorPosition)
-                        cursorPosition -= 1
-                    } else {
-                        cutText = text?.trim()
-                    }
-                    deletingSpace = false
-                    lastText = phoneUtils.formatWithSpaces(phonePrefix, cutText.toString(), false)
-                    binding.componentPhoneNumber.setText(lastText)
-                    val cleanPhoneNumberAfter = cutText?.replace("[\\s]".toRegex(), "") ?: ""
-                    val isValidPhone =
-                        phoneUtils.isValidPhoneNumber(phonePrefix, cleanPhoneNumberAfter)
-                    _validPhone.value = when {
-                        isValidPhone -> PhoneNumberFormat.OK
-                        isValidPhone.not() && cleanPhoneNumberAfter.length == Constants.SPANISH_PHONE_NUMBER_MAX_LENGTH_WITHOUT_SPACES -> PhoneNumberFormat.WRONG
-                        else -> PhoneNumberFormat.INCOMPLETE
-                    }
+            binding.componentPhoneNumber.addTextChangedListener(object : TextWatcher {
+                var lastText = ""
+                var deletingSpace = false
+                override fun afterTextChanged(text: Editable?) {
+                    if (text?.toString() != lastText && text?.length ?: 0 > 3) {
+                        val cleanPhoneNumber = text?.replace("[\\s]".toRegex(), "") ?: ""
+                        var cursorPosition = binding.componentPhoneNumber.selectionStart
+                        val cutText: CharSequence?
+                        if (deletingSpace || cleanPhoneNumber.length > Constants.SPANISH_PHONE_NUMBER_MAX_LENGTH_WITHOUT_SPACES) {
+                            cutText = text?.removeRange(cursorPosition - 1 until cursorPosition)
+                            cursorPosition -= 1
+                        } else {
+                            cutText = text?.trim()
+                        }
+                        deletingSpace = false
+                        lastText =
+                            phoneUtils.formatWithSpaces(phonePrefix, cutText.toString(), false)
+                        binding.componentPhoneNumber.setText(lastText)
+                        val cleanPhoneNumberAfter = cutText?.replace("[\\s]".toRegex(), "") ?: ""
+                        val isValidPhone =
+                            phoneUtils.isValidPhoneNumber(phonePrefix, cleanPhoneNumberAfter)
+                        _validPhone.value = when {
+                            isValidPhone -> PhoneNumberFormat.OK
+                            isValidPhone.not() && cleanPhoneNumberAfter.length == Constants.SPANISH_PHONE_NUMBER_MAX_LENGTH_WITHOUT_SPACES -> PhoneNumberFormat.WRONG
+                            else -> PhoneNumberFormat.INCOMPLETE
+                        }
 
-                    val spacesBefore =
-                        text?.subSequence(0, cursorPosition)?.count { it == ' ' } ?: 0
-                    val spacesAfter = lastText.subSequence(0, min(cursorPosition, lastText.length))
-                        .count { it == ' ' }
-                    cursorPosition += spacesAfter - spacesBefore
-                    binding.componentPhoneNumber.setSelection(
-                        min(
-                            cursorPosition,
-                            lastText.length
+                        val spacesBefore =
+                            text?.subSequence(0, cursorPosition)?.count { it == ' ' } ?: 0
+                        val spacesAfter =
+                            lastText.subSequence(0, min(cursorPosition, lastText.length))
+                                .count { it == ' ' }
+                        cursorPosition += spacesAfter - spacesBefore
+                        binding.componentPhoneNumber.setSelection(
+                            min(
+                                cursorPosition,
+                                lastText.length
+                            )
                         )
-                    )
+                    }
                 }
-            }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                if (start < s?.length ?: 0 && after < count && s?.get(start) == ' ') {
-                    deletingSpace = true
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                    if (start < s?.length ?: 0 && after < count && s?.get(start) == ' ') {
+                        deletingSpace = true
+                    }
                 }
-            }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int
+                ) {
+                }
 
-        })
+            })
+        }
     }
 
     fun showError(message: String) {

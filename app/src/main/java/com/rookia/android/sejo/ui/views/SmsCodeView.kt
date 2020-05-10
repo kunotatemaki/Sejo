@@ -2,12 +2,10 @@ package com.rookia.android.sejo.ui.views
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.text.Editable
-import android.text.SpannableStringBuilder
-import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
@@ -18,6 +16,7 @@ import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ComponentSmsCodeBinding
+import com.rookia.android.sejo.utils.VibrationUtils
 
 
 /**
@@ -33,12 +32,7 @@ import com.rookia.android.sejo.databinding.ComponentSmsCodeBinding
 
 class SmsCodeView : ConstraintLayout {
     private lateinit var binding: ComponentSmsCodeBinding
-    private val introducedPin: SpannableStringBuilder? = null
-    private var listener: OnTextChangeListener? = null
-
-    interface OnTextChangeListener {
-        fun onText(newText: String)
-    }
+    private var introducedPin: String = ""
 
     constructor(context: Context) : super(context) {
         init(context)
@@ -53,40 +47,22 @@ class SmsCodeView : ConstraintLayout {
 
     private fun init(context: Context) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = ComponentSmsCodeBinding.inflate(inflater, this, true)
+        if (isInEditMode) {
+            inflater.inflate(R.layout.component_sms_code, this, true)
+        } else {
+            binding = ComponentSmsCodeBinding.inflate(inflater, this, true)
 
-        with(binding.componentSmsCodeHiddenEdittext) {
-            addTextChangedListener(object :
-                TextWatcher {
-                override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                }
-
-                override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                }
-
-                override fun afterTextChanged(editable: Editable) {
-                    val cleanText = editable.toString().replace("[^\\d]".toRegex(), "")
-                    setUIForText(cleanText)
-                    listener?.onText(cleanText)
-                }
-            })
-            postDelayed({
-                clearFocus()
-                requestFocus()
-            }, 0)
         }
     }
 
     var text: String
-        get() = introducedPin.toString()
+        get() = introducedPin
         set(text) {
-            binding.componentSmsCodeHiddenEdittext.setText(text)
-            binding.componentSmsCodeHiddenEdittext.setSelection(text.length)
+            if (text.toIntOrNull() != null) {
+                introducedPin = text
+                setUIForText()
+            }
         }
-
-    fun setOnTextChangeListener(listener: OnTextChangeListener?) {
-        this.listener = listener
-    }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -101,50 +77,50 @@ class SmsCodeView : ConstraintLayout {
         return true
     }
 
-    fun setUIForText(text: String) {
+    private fun setUIForText() {
 
         //Set text wherever necessary
-        for (i in text.indices) {
+        for (i in introducedPin.indices) {
             with(binding) {
                 when (i) {
                     0 -> {
                         setDigit(
-                            text[i].toString(),
+                            introducedPin[i].toString(),
                             componentSmsCodeText0Label,
                             componentSmsCodeText0Bullet
                         )
                     }
                     1 -> {
                         setDigit(
-                            text[i].toString(),
+                            introducedPin[i].toString(),
                             componentSmsCodeText1Label,
                             componentSmsCodeText1Bullet
                         )
                     }
                     2 -> {
                         setDigit(
-                            text[i].toString(),
+                            introducedPin[i].toString(),
                             componentSmsCodeText2Label,
                             componentSmsCodeText2Bullet
                         )
                     }
                     3 -> {
                         setDigit(
-                            text[i].toString(),
+                            introducedPin[i].toString(),
                             componentSmsCodeText3Label,
                             componentSmsCodeText3Bullet
                         )
                     }
                     4 -> {
                         setDigit(
-                            text[i].toString(),
+                            introducedPin[i].toString(),
                             componentSmsCodeText4Label,
                             componentSmsCodeText4Bullet
                         )
                     }
                     5 -> {
                         setDigit(
-                            text[i].toString(),
+                            introducedPin[i].toString(),
                             componentSmsCodeText5Label,
                             componentSmsCodeText5Bullet
                         )
@@ -154,7 +130,7 @@ class SmsCodeView : ConstraintLayout {
         }
 
         //Set remaining bullets for the remaining text
-        for (i in text.length until Constants.SMS_PIN_LENGTH) {
+        for (i in introducedPin.length until Constants.SMS_PIN_LENGTH) {
             with(binding) {
                 when (i) {
                     0 -> setBullet(
@@ -218,6 +194,8 @@ class SmsCodeView : ConstraintLayout {
         displayColorInDigit(binding.componentSmsCodeText3Label, R.color.red_error)
         displayColorInDigit(binding.componentSmsCodeText4Label, R.color.red_error)
         displayColorInDigit(binding.componentSmsCodeText5Label, R.color.red_error)
+        startAnimation(AnimationUtils.loadAnimation(context, R.anim.shake))
+        VibrationUtils.patternVibrate(context, Constants.ERROR_VIBRATION_PATTERN)
     }
 
     private fun displayColorInDigit(view: TextView, colorResValue: Int) {
@@ -251,8 +229,28 @@ class SmsCodeView : ConstraintLayout {
         binding.componentSmsCodeBoxContainer.setPadding(left, top, right, bottom)
     }
 
-    fun setPhoneText(phonePrefix: String, phoneNumber: String){
-        binding.phoneNumber = String.format(resources.getString(R.string.component_validate_sms_title), "$phonePrefix$phoneNumber")
+    fun setPhoneText(phonePrefix: String, phoneNumber: String) {
+        binding.phoneNumber = String.format(
+            resources.getString(R.string.component_validate_sms_title),
+            "$phonePrefix$phoneNumber"
+        )
+    }
+
+    fun addDigit(digit: Char) {
+        introducedPin += digit
+        setUIForText()
+    }
+
+    fun deleteDigit() {
+        if (introducedPin.isNotEmpty()) {
+            introducedPin = introducedPin.dropLast(1)
+        }
+        setUIForText()
+    }
+
+    fun deletePin() {
+        introducedPin = ""
+        setUIForText()
     }
 
 }

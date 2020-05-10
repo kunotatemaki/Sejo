@@ -19,7 +19,7 @@ import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentValidateSmsBinding
 import com.rookia.android.sejo.ui.common.BaseActivity
 import com.rookia.android.sejo.ui.common.BaseFragment
-import com.rookia.android.sejo.ui.views.SmsCodeView
+import com.rookia.android.sejo.ui.views.numerickeyboard.NumericKeyboardActions
 import com.rookia.android.sejo.utils.TextFormatUtils
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
@@ -29,7 +29,7 @@ import javax.inject.Inject
 class ValidateSmsFragment @Inject constructor(
     private val viewModelFactory: ViewModelFactory,
     private val textFormatUtils: TextFormatUtils
-) : BaseFragment(R.layout.fragment_validate_sms), SmsCodeView.OnTextChangeListener {
+) : BaseFragment(R.layout.fragment_validate_sms) {
 
     private lateinit var binding: FragmentValidateSmsBinding
     private lateinit var viewModel: ValidateSmsViewModel
@@ -41,6 +41,8 @@ class ValidateSmsFragment @Inject constructor(
 
     private val countDownHandler: Handler = Handler()
     private var remainingSeconds: Int = SMS_RESEND_WAITING_TIME
+
+    private lateinit var actions: NumericKeyboardActions
 
     private val countDownRunnable: Runnable = object : Runnable {
         override fun run() {
@@ -71,10 +73,33 @@ class ValidateSmsFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentValidateSmsBinding.bind(view)
         binding.textFormatUtils = textFormatUtils
-        binding.fragmentValidateSmsView.setOnTextChangeListener(this)
         binding.fragmentValidateSmsView.setPhoneText(phonePrefix, phoneNumber)
         setToolbar(binding.fragmentValidateSmsToolbar, showBackArrow = true)
         viewModel = injectViewModel(viewModelFactory)
+
+        //keyboard listener
+        context?.let {
+            binding.fragmentValidateSmsNumericKeyboard.setAction(object : NumericKeyboardActions(it) {
+
+                override fun onKeyPressed(key: KeyPressed?) {
+                    super.onKeyPressed(key)
+                    key ?: return
+                    if (key == KeyPressed.KEY_BACK_FINGER) {
+                        binding.fragmentValidateSmsView.deleteDigit()
+                    } else {
+                        binding.fragmentValidateSmsView.addDigit(key.value.toString().single())
+                    }
+                    checkText(binding.fragmentValidateSmsView.text)
+
+                }
+
+                override fun onLongDeleteKeyPressed(): Boolean {
+                    this.onKeyPressed(KeyPressed.KEY_BACK_FINGER)
+                    binding.fragmentValidateSmsView.deletePin()
+                    return super.onLongDeleteKeyPressed()
+                }
+            })
+        }
 
         requestSmsCode()
 
@@ -176,7 +201,7 @@ class ValidateSmsFragment @Inject constructor(
         countDownHandler.removeCallbacks(countDownRunnable)
     }
 
-    override fun onText(newText: String) {
+    fun checkText(newText: String) {
         if (newText.length >= SMS_PIN_LENGTH && argumentsInitialized()) {
             viewModel.validateCode(
                 phonePrefix,
@@ -215,9 +240,10 @@ class ValidateSmsFragment @Inject constructor(
         activity?.finish()
     }
 
-    private fun navigateToCreatePin(){
+    private fun navigateToCreatePin() {
         (activity as? BaseActivity)?.hideKeyboard()
-        val direction = ValidateSmsFragmentDirections.actionValidateSmsFragmentToPinCreationStep1Fragment()
+        val direction =
+            ValidateSmsFragmentDirections.actionValidateSmsFragmentToPinCreationStep1Fragment()
         findNavController().navigate(direction)
     }
 

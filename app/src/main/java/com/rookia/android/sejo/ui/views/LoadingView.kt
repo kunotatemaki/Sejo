@@ -3,10 +3,10 @@ package com.rookia.android.sejo.ui.views
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.FrameLayout
 import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.visible
+import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ComponentLoadingBinding
 
 
@@ -46,7 +46,12 @@ class LoadingView : FrameLayout {
     private fun init(context: Context) {
         val inflater =
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = ComponentLoadingBinding.inflate(inflater, this, true)
+        if(isInEditMode){
+            inflater.inflate(R.layout.component_loading, this, true)
+        } else {
+            binding = ComponentLoadingBinding.inflate(inflater, this, true)
+        }
+
     }
 
     fun setText(text: String?) {

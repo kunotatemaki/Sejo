@@ -43,10 +43,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="8dp"
             android:visibility="invisible"
             app:htmlText="@{@string/validate_sms_footer_resend_text}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guideline2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="@string/validate_sms_footer_resend_text" />
@@ -58,9 +58,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="8dp"
             android:text="@{@string/validate_sms_footer_waiting_text(textFormatUtils.toMinuteSeconds(remainingTime))}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guideline2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="@string/validate_sms_footer_waiting_text" />
@@ -72,6 +72,22 @@
             app:barrierDirection="top"
             app:constraint_referenced_ids="fragment_validate_sms_footer_resend,fragment_validate_sms_footer_wait"
             tools:layout_editor_absoluteY="731dp" />
+        <com.rookia.android.sejo.ui.views.numerickeyboard.NumericKeyboardView
+            android:id="@+id/fragment_validate_sms_numeric_keyboard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline2"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5"
+            app:layout_constraintGuide_begin="20dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

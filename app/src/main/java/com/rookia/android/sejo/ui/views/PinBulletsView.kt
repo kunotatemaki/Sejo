@@ -95,17 +95,22 @@ class PinBulletsView : ConstraintLayout {
 
 
     private fun init(context: Context) {
-        isSaveEnabled = true
-        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = ComponentPinBulletsBinding.inflate(inflater, this, true)
-        setPinVisibility()
+        val inflater =
+            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        if(isInEditMode){
+            inflater.inflate(R.layout.component_pin_bullets, this, true)
+        } else {
+            isSaveEnabled = true
+            binding = ComponentPinBulletsBinding.inflate(inflater, this, true)
+            setPinVisibility()
 
-        binding.componentBulletsEyePassVisibility.apply {
-            setOnClickListener {
-                showPin = showPin.not()
-                setPinVisibility()
+            binding.componentBulletsEyePassVisibility.apply {
+                setOnClickListener {
+                    showPin = showPin.not()
+                    setPinVisibility()
+                }
+
             }
-
         }
     }
 
