@@ -1,5 +1,9 @@
 package com.rookia.android.sejo.data.repository
 
+import com.rookia.android.androidutils.domain.vo.Result
+import com.rookia.android.sejo.domain.local.Group
+import com.rookia.android.sejo.domain.local.PhoneContact
+import kotlinx.coroutines.flow.Flow
 
 
 /**
@@ -13,5 +17,6 @@ package com.rookia.android.sejo.data.repository
  *
  */
 
-//interface GroupRepository {
-//    fun createGroup(group: Group)ñlp
+interface GroupRepository {
+    fun createGroup(name: String, fee: Int, owner: String, members: List<PhoneContact>): Flow<Result<Group>>
+}

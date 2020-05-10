@@ -15,11 +15,10 @@ package com.rookia.android.sejo.domain.network.group
 data class CreateGroupClient (
     val name: String,
     val fee: Int,
-    val nAdmins: Int,
+    val owner: String,
     val members: List<Contact>
 ){
     data class Contact(
-        val id: String,
-        val isAdmin: Boolean
+        val numberId: String
     )
 }

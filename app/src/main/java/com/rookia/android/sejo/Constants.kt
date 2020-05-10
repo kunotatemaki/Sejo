@@ -81,5 +81,8 @@ object Constants {
     //endregion
 
     //region GROUPS
-    const val DEFAULT_NUMBER_OF_ADMINS = 2
+    enum class MemberStates(val code: Int) {
+        OWNER(0), VALIDATED(1), PENDING(2), GUESS(3)
+    }
+    //endregion
 }

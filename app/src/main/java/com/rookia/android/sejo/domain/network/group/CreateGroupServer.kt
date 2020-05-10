@@ -22,16 +22,14 @@ data class CreateGroupServer(
         val groupId: Int,
         val name: String,
         val fee: Int,
-        val nAdmins: Int,
+        val owner: String,
         val date: Long,
-        var members: List<Member> = listOf(),
-        var membersInApp: List<String> = listOf()
+        val balance: Double,
+        var members: List<Member> = listOf()
     )
 
     data class Member(
-        val id: String,
-        val isAdmin: Boolean,
-        val isAppUser: Boolean
+        val numberId: String,
+        val memberStatus: Int?
     )
-
 }

@@ -35,14 +35,25 @@ open class NetworkServiceFactory constructor(private val preferencesManager: Pre
     @Volatile
     private var userInstance: UserApi? = null
 
+    @Volatile
+    private var groupInstance: GroupApi? = null
+
     open fun getSmsCodeCodeInstance(): SmsCodeApi =
         smsCodeCodeInstance ?: buildSmsCodeNetworkService().also { smsCodeCodeInstance = it }
 
     open fun getUserInstance(): UserApi {
         val bearer = preferencesManager.getStringFromPreferences(Constants.USER_TOKEN_TAG)
 
-        return userInstance ?: buildUserNetworkService(bearer).also { userApi->
+        return userInstance ?: buildUserNetworkService(bearer).also { userApi ->
             bearer?.let { userInstance = userApi }
+        }
+    }
+
+    open fun getGroupInstance(): GroupApi {
+        val bearer = preferencesManager.getStringFromPreferences(Constants.USER_TOKEN_TAG)
+
+        return groupInstance ?: buildGroupNetworkService(bearer).also { groupApi ->
+            bearer?.let { groupInstance = groupApi }
         }
     }
 
@@ -57,6 +68,14 @@ open class NetworkServiceFactory constructor(private val preferencesManager: Pre
             .addConverterFactory(GsonConverterFactory.create())
             .client(getInterceptorForAuthentication(bearer))
             .build().create(UserApi::class.java)
+
+
+    private fun buildGroupNetworkService(bearer: String?): GroupApi =
+        Retrofit.Builder()
+            .baseUrl(ROOKIA_EXPENSES_SERVER_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(getInterceptorForAuthentication(bearer))
+            .build().create(GroupApi::class.java)
 
 
     private fun getInterceptorForAuthentication(bearer: String?): OkHttpClient {

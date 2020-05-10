@@ -14,6 +14,6 @@ package com.rookia.android.sejo.domain.local.smscode
 
 data class SmsCodeValidation(
     val result: Int,
-    val userExists: Boolean
+    val userId: String?
 )
  

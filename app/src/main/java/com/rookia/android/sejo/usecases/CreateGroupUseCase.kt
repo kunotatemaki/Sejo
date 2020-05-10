@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.Flow
 class CreateGroupUseCase constructor(
     private val repository: UserRepository) {
 
-    fun createUSer(
+    fun createGroup(
         phonePrefix: String,
         phoneNumber: String,
         pin: Int

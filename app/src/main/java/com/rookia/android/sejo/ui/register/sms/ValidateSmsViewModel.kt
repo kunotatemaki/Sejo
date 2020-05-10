@@ -8,6 +8,7 @@ import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.Constants.NAVIGATION_PIN_SENT_TAG
 import com.rookia.android.sejo.Constants.NAVIGATION_VALIDATED_PHONE_TAG
+import com.rookia.android.sejo.Constants.USER_ID_TAG
 import com.rookia.android.sejo.Constants.USER_PHONE_NUMBER_TAG
 import com.rookia.android.sejo.Constants.USER_PHONE_PREFIX_TAG
 import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
@@ -55,8 +56,9 @@ class ValidateSmsViewModel @Inject constructor(
         }
     }
 
-    fun setPinSet() {
+    fun setPinSet(userId: String) {
         preferencesManager.setBooleanIntoPreferences(NAVIGATION_PIN_SENT_TAG, true)
+        preferencesManager.setStringIntoPreferences(USER_ID_TAG, userId)
     }
 
 

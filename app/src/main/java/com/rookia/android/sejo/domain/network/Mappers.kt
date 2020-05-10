@@ -1,8 +1,13 @@
 package com.rookia.android.sejo.domain.network
 
+import com.rookia.android.sejo.Constants
+import com.rookia.android.sejo.domain.local.Group
+import com.rookia.android.sejo.domain.local.PhoneContact
 import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
 import com.rookia.android.sejo.domain.local.user.TokenReceived
 import com.rookia.android.sejo.domain.local.user.User
+import com.rookia.android.sejo.domain.network.group.CreateGroupClient
+import com.rookia.android.sejo.domain.network.group.CreateGroupServer
 import com.rookia.android.sejo.domain.network.login.LoginRequestServer
 import com.rookia.android.sejo.domain.network.smscode.SmsCodeValidationServer
 import com.rookia.android.sejo.domain.network.user.UserCreationRequestServer
@@ -21,7 +26,7 @@ import com.rookia.android.sejo.domain.network.user.UserUpdateRequestClient
  */
  
 fun SmsCodeValidationServer.toSmsCodeValidation(): SmsCodeValidation =
-    SmsCodeValidation(result = this.code, userExists = this.data.userExists)
+    SmsCodeValidation(result = this.code, userId = this.data.userId)
 
 fun LoginRequestServer.toTokenReceived(): TokenReceived =
     TokenReceived(result = this.code, token = this.data?.token, userId = null)
@@ -34,3 +39,12 @@ fun User.toUserUpdateRequestClient(): UserUpdateRequestClient =
 
 fun User.toUserUpdateRequestClient(pin: Int): UserUpdateRequestClient =
     UserUpdateRequestClient(pin = pin, userId = userId, name = this.name)
+
+fun PhoneContact.toCreateGroupContact(): CreateGroupClient.Contact =
+    CreateGroupClient.Contact(this.phoneNumberNormalized)
+
+fun CreateGroupServer.CreateGroupResponse.toGroup(): Group =
+    Group(this.groupId, this.name, this.fee, this.owner, this.balance, this.members.map { it.toMember() })
+
+fun CreateGroupServer.Member.toMember(): Group.Member =
+    Group.Member(this.numberId, this.memberStatus ?: Constants.MemberStates.GUESS.code)

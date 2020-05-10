@@ -107,12 +107,11 @@ class ValidateSmsFragment @Inject constructor(
                             Constants.ResponseCodes.OK.code -> {
                                 viewModel.storeValidatedPhone(phonePrefix, phoneNumber)
                                 binding.fragmentValidateSmsView.hideError()
-                                if(it.data?.userExists == false) {
-                                    navigateToCreatePin()
-                                }else{
-                                    viewModel.setPinSet()
+                                it.data?.userId?.let {
+                                    viewModel.setPinSet(it)
                                     navigateToDashboard()
-                                }
+                                } ?: navigateToCreatePin()
+
                             }
                             Constants.ResponseCodes.EXPIRED_SMS_CODE.code -> binding.fragmentValidateSmsView.displayExpiredCode()
                             else -> binding.fragmentValidateSmsView.displayWrongCode()
