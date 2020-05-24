@@ -30,6 +30,7 @@ data class CreateGroupServer(
 
     data class Member(
         val numberId: String,
-        val memberStatus: Int?
+        val memberStatus: Int?,
+        val isAdmin: Boolean
     )
 }

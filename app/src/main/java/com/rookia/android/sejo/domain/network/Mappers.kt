@@ -12,6 +12,7 @@ import com.rookia.android.sejo.domain.network.login.LoginRequestServer
 import com.rookia.android.sejo.domain.network.smscode.SmsCodeValidationServer
 import com.rookia.android.sejo.domain.network.user.UserCreationRequestServer
 import com.rookia.android.sejo.domain.network.user.UserUpdateRequestClient
+import java.util.*
 
 
 /**
@@ -24,27 +25,34 @@ import com.rookia.android.sejo.domain.network.user.UserUpdateRequestClient
  *
  *
  */
- 
+
 fun SmsCodeValidationServer.toSmsCodeValidation(): SmsCodeValidation =
-    SmsCodeValidation(result = this.code, userId = this.data.userId)
+    SmsCodeValidation(result = code, userId = data.userId)
 
 fun LoginRequestServer.toTokenReceived(): TokenReceived =
-    TokenReceived(result = this.code, token = this.data?.token, userId = null)
+    TokenReceived(result = code, token = data?.token, userId = null)
 
 fun UserCreationRequestServer.toTokenReceived(): TokenReceived =
-    TokenReceived(result = this.code, token = this.data?.token, userId = this.data?.userId)
+    TokenReceived(result = code, token = data?.token, userId = data?.userId)
 
 fun User.toUserUpdateRequestClient(): UserUpdateRequestClient =
-    UserUpdateRequestClient(pin = null, userId = userId, name = this.name)
+    UserUpdateRequestClient(pin = null, userId = userId, name = name)
 
 fun User.toUserUpdateRequestClient(pin: Int): UserUpdateRequestClient =
-    UserUpdateRequestClient(pin = pin, userId = userId, name = this.name)
+    UserUpdateRequestClient(pin = pin, userId = userId, name = name)
 
 fun PhoneContact.toCreateGroupContact(): CreateGroupClient.Contact =
-    CreateGroupClient.Contact(this.phoneNumberNormalized)
+    CreateGroupClient.Contact(numberId = phoneNumberNormalized)
 
 fun CreateGroupServer.CreateGroupResponse.toGroup(): Group =
-    Group(this.groupId, this.name, this.fee, this.owner, this.balance, this.members.map { it.toMember() })
+    Group(
+        groupId = groupId,
+        name = name,
+        fee = fee,
+        owner = owner,
+        balance = balance,
+        date = Date(date),
+        members = members.map { it.toMember() })
 
 fun CreateGroupServer.Member.toMember(): Group.Member =
-    Group.Member(this.numberId, this.memberStatus ?: Constants.MemberStates.GUESS.code)
+    Group.Member(numberId = numberId, memberStatus = memberStatus ?: Constants.MemberStates.GUESS.code, isAdmin = isAdmin)

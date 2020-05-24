@@ -44,9 +44,7 @@ class LoginFragment @Inject constructor(
         val pinSet = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PIN_SENT_TAG)
         val phoneValidated =
             preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG)
-        val personalInfo =
-            preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PERSONAL_INFO_TAG)
-        if (pinSet.not() || phoneValidated.not() || personalInfo.not()) {
+        if (pinSet.not() || phoneValidated.not()) {
             navigateToRegisterFlow()
         }
     }
@@ -88,6 +86,9 @@ class LoginFragment @Inject constructor(
                                 }
                                 shouldShowBiometricPermission() -> {
                                     navigateToBiometricPermission()
+                                }
+                                preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PERSONAL_INFO_TAG).not() -> {
+                                    navigateToRegisterFlow()
                                 }
                                 else -> {
                                     navigateToDashboard()

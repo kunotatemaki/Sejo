@@ -1,8 +1,10 @@
 package com.rookia.android.sejo.framework.repository
 
 import androidx.annotation.VisibleForTesting
+import androidx.lifecycle.LiveData
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.framework.repository.resultOnlyFromOneSourceInFlow
+import com.rookia.android.sejo.data.persistence.PersistenceManager
 import com.rookia.android.sejo.data.repository.GroupRepository
 import com.rookia.android.sejo.domain.local.Group
 import com.rookia.android.sejo.domain.local.PhoneContact
@@ -26,7 +28,8 @@ import javax.inject.Inject
  */
 
 class GroupRepositoryImpl @Inject constructor(
-    private val networkServiceFactory: NetworkServiceFactory
+    private val networkServiceFactory: NetworkServiceFactory,
+    private val persistenceManager: PersistenceManager
 ) : GroupRepository {
     override fun createGroup(
         name: String,
@@ -63,6 +66,13 @@ class GroupRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             Result.error(e.message)
         }
+
+    override suspend fun saveGroup(group: Group) {
+        persistenceManager.saveGroup(group)
+    }
+
+    override fun getGroups(): LiveData<List<Group>> =
+        persistenceManager.getGroups()
 
 
 }

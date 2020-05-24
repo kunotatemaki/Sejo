@@ -42,8 +42,6 @@ class ValidateSmsFragment @Inject constructor(
     private val countDownHandler: Handler = Handler()
     private var remainingSeconds: Int = SMS_RESEND_WAITING_TIME
 
-    private lateinit var actions: NumericKeyboardActions
-
     private val countDownRunnable: Runnable = object : Runnable {
         override fun run() {
             try {
@@ -79,7 +77,8 @@ class ValidateSmsFragment @Inject constructor(
 
         //keyboard listener
         context?.let {
-            binding.fragmentValidateSmsNumericKeyboard.setAction(object : NumericKeyboardActions(it) {
+            binding.fragmentValidateSmsNumericKeyboard.setAction(object :
+                NumericKeyboardActions(it) {
 
                 override fun onKeyPressed(key: KeyPressed?) {
                     super.onKeyPressed(key)
@@ -132,8 +131,8 @@ class ValidateSmsFragment @Inject constructor(
                             Constants.ResponseCodes.OK.code -> {
                                 viewModel.storeValidatedPhone(phonePrefix, phoneNumber)
                                 binding.fragmentValidateSmsView.hideError()
-                                it.data?.userId?.let {
-                                    viewModel.setPinSet(it)
+                                it.data?.userId?.let { userId ->
+                                    viewModel.setPinSet(userId)
                                     navigateToDashboard()
                                 } ?: navigateToCreatePin()
 
@@ -186,17 +185,17 @@ class ValidateSmsFragment @Inject constructor(
         binding.fragmentValidateSmsFooterResend.visible()
     }
 
-    fun hideResendMessage() {
+    private fun hideResendMessage() {
         binding.fragmentValidateSmsFooterWait.visible()
         binding.fragmentValidateSmsFooterResend.invisible()
     }
 
-    fun startCountDown() {
+    private fun startCountDown() {
         remainingSeconds = SMS_RESEND_WAITING_TIME
         countDownRunnable.run()
     }
 
-    fun stopCountDown() {
+    private fun stopCountDown() {
         remainingSeconds = 0
         countDownHandler.removeCallbacks(countDownRunnable)
     }
@@ -216,7 +215,7 @@ class ValidateSmsFragment @Inject constructor(
     private fun argumentsInitialized(): Boolean =
         ::phonePrefix.isInitialized && ::phoneNumber.isInitialized
 
-    fun requestSmsCode() {
+    private fun requestSmsCode() {
         if (argumentsInitialized()) {
             hideResendMessage()
             viewModel.requestSms(phonePrefix, phoneNumber).observe(viewLifecycleOwner, Observer {
@@ -246,6 +245,5 @@ class ValidateSmsFragment @Inject constructor(
             ValidateSmsFragmentDirections.actionValidateSmsFragmentToPinCreationStep1Fragment()
         findNavController().navigate(direction)
     }
-
 
 }

@@ -1,10 +1,7 @@
-package com.rookia.android.sejo.data.repository
+package com.rookia.android.sejo.data.persistence
 
 import androidx.lifecycle.LiveData
-import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.domain.local.Group
-import com.rookia.android.sejo.domain.local.PhoneContact
-import kotlinx.coroutines.flow.Flow
 
 
 /**
@@ -18,14 +15,7 @@ import kotlinx.coroutines.flow.Flow
  *
  */
 
-interface GroupRepository {
-    fun createGroup(
-        name: String,
-        fee: Int,
-        owner: String,
-        members: List<PhoneContact>
-    ): Flow<Result<Group>>
-
+interface PersistenceManager {
     suspend fun saveGroup(group: Group)
     fun getGroups(): LiveData<List<Group>>
 }

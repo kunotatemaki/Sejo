@@ -8,6 +8,6 @@ import retrofit2.http.POST
 
 interface GroupApi {
 
-    @POST("add-user")
+    @POST("create-group")
     suspend fun createGroup(@Body createGroupClient: CreateGroupClient): Response<CreateGroupServer>
 }

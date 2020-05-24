@@ -1,27 +1,23 @@
 package com.rookia.android.sejo.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.rookia.android.sejo.R
+import com.rookia.android.sejo.data.repository.GroupRepository
+import com.rookia.android.sejo.ui.common.BaseFragment
 import kotlinx.android.synthetic.main.fragment_blank.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import timber.log.Timber
 
-class BlankFragment : Fragment() {
+class BlankFragment constructor(private val repository: GroupRepository) :
+    BaseFragment(R.layout.fragment_blank), CoroutineScope by MainScope() {
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 //        test.setText("623")
         button1.setOnClickListener {
             navigateToGroupCreation()
@@ -33,10 +29,16 @@ class BlankFragment : Fragment() {
 //        error.setOnClickListener {
 //            test.showErrorFeedback()
 //        }
+
+        repository.getGroups().observe(viewLifecycleOwner, Observer {
+            Timber.d("")
+        }
+        )
+
     }
 
 
-    private fun navigateToGroupCreation(){
+    private fun navigateToGroupCreation() {
         val direction = BlankFragmentDirections.actionBlankFragmentToGroupCreationActivity()
         findNavController().navigate(direction)
     }

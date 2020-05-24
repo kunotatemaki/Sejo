@@ -50,8 +50,6 @@ class GroupCreationMembersAddedAdapter constructor(
 
     override fun getItemCount(): Int = phoneContacts.size + 1
 
-    fun getNumberOfAdmins(): Int = phoneContacts.count { it.isAdmin }
-
     override fun onBindViewHolder(holder: GroupMemberViewHolder, position: Int) {
         val animate = positionsToAnimateWhenAdded.contains(position)
         if (position == 0) {

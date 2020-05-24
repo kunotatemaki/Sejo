@@ -1,10 +1,7 @@
 package com.rookia.android.sejo.usecases
 
-import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.data.repository.GroupRepository
 import com.rookia.android.sejo.domain.local.Group
-import com.rookia.android.sejo.domain.local.PhoneContact
-import kotlinx.coroutines.flow.Flow
 
 
 /**
@@ -18,16 +15,12 @@ import kotlinx.coroutines.flow.Flow
  *
  */
 
-class CreateGroupUseCase constructor(
+class SaveGroupUseCase constructor(
     private val repository: GroupRepository
 ) {
 
-    fun createGroup(
-        name: String,
-        fee: Int,
-        owner: String,
-        members: List<PhoneContact>
-    ): Flow<Result<Group>> =
-        repository.createGroup(name, fee, owner, members)
+    suspend fun saveGroup(group: Group) {
+        repository.saveGroup(group)
+    }
 
 }

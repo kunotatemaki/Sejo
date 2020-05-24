@@ -97,6 +97,21 @@ class GroupCreationMembersFragment constructor(
                 }
             }
         })
+        viewModel.groupCreationResponse.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                when (it.status) {
+                    Result.Status.SUCCESS -> {
+                        hideLoading()
+                        it.data?.let { group ->
+                            viewModel.saveGroup(group)
+                        }
+                        navigateToDashboard()
+                    }
+                    Result.Status.ERROR -> hideLoading()
+                    Result.Status.LOADING -> showLoading()
+                }
+            }
+        })
 
         binding.fragmentGroupCreationMembersContinueButton.setOnClickListener {
             onCreateGroupButtonClicked()
@@ -217,7 +232,7 @@ class GroupCreationMembersFragment constructor(
     }
 
     private fun onCreateGroupButtonClicked() {
-            //todo confirmar antes de crear grupo
+        //todo confirmar antes de crear grupo
         when {
             contactsAddedAdapter.getContactsAdded().isEmpty() -> {
                 Snackbar.make(
@@ -226,21 +241,10 @@ class GroupCreationMembersFragment constructor(
                     Snackbar.LENGTH_LONG
                 ).show()
             }
-//            contactsAddedAdapter.getNumberOfAdmins() < numberOfAdmins - 1 -> { //not including myself
-//                Snackbar.make(
-//                    requireView(),
-//                    String.format(
-//                        resourcesManager.getString(R.string.fragment_group_creation_members_min_admins_error),
-//                        numberOfAdmins
-//                    ),
-//                    Snackbar.LENGTH_LONG
-//                ).show()
-//            }
             else -> {
                 viewModel.createGroup(
                     name = groupName,
                     fee = fee,
-                    nAdmins = contactsAddedAdapter.getNumberOfAdmins(),
                     members = contactsAddedAdapter.getContactsAdded()
                 )
             }
@@ -274,4 +278,7 @@ class GroupCreationMembersFragment constructor(
         view.startAnimation(anim)
     }
 
+    private fun navigateToDashboard() {
+        activity?.finish()
+    }
 }

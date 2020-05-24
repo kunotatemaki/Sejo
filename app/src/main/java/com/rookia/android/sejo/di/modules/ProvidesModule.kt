@@ -7,9 +7,11 @@ import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.SejoApplication
 import com.rookia.android.sejo.data.repository.ContactsRepository
+import com.rookia.android.sejo.data.repository.GroupRepository
 import com.rookia.android.sejo.data.repository.SmsCodeRepository
 import com.rookia.android.sejo.data.repository.UserRepository
 import com.rookia.android.sejo.framework.network.NetworkServiceFactory
+import com.rookia.android.sejo.framework.persistence.databases.AppDatabase
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
 import com.rookia.android.sejo.ui.login.LoginStatus
 import com.rookia.android.sejo.usecases.*
@@ -60,17 +62,25 @@ class ProvidesModule {
     fun providesLoginUseCase(repository: UserRepository): LoginUseCase =
         LoginUseCase(repository)
 
+    @Singleton
     @Provides
     fun providesUpdatePersonalInfoUseCase(repository: UserRepository): UpdatePersonalInfoUseCase =
         UpdatePersonalInfoUseCase(repository)
 
+    @Singleton
     @Provides
     fun providesGetContactsUseCase(repository: ContactsRepository): GetContactsUseCase =
         GetContactsUseCase(repository)
 
+    @Singleton
     @Provides
-    fun providesCreateGroupUseCase(repository: UserRepository): CreateGroupUseCase =
+    fun providesCreateGroupUseCase(repository: GroupRepository): CreateGroupUseCase =
         CreateGroupUseCase(repository)
+
+    @Singleton
+    @Provides
+    fun providesSaveGroupUseCase(repository: GroupRepository): SaveGroupUseCase =
+        SaveGroupUseCase(repository)
 
     @Singleton
     @Provides
@@ -99,5 +109,11 @@ class ProvidesModule {
     @Provides
     @Singleton
     fun providesLoginStatus(application: SejoApplication): LoginStatus = application.loginStatus
+
+    @Singleton
+    @Provides
+    fun provideDb(
+        context: Context
+    ): AppDatabase = AppDatabase.getInstance(context)
 
 }
