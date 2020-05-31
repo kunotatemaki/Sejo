@@ -121,17 +121,6 @@ class LoginFragment @Inject constructor(
     override fun onPinChanged(pin: String, isCompleted: Boolean) {
         if (isCompleted) {
             login(pin)
-//            when {
-//                (activity as? LoginActivity)?.loginFromAnywhere == true -> {
-//                    activity?.finish()
-//                }
-//                shouldShowBiometricPermission() -> {
-//                    navigateToBiometricPermission()
-//                }
-//                else -> {
-//                    navigateToDashboard()
-//                }
-//            }
         } else {
             binding.loginPinScreen.hideError()
         }
@@ -167,11 +156,6 @@ class LoginFragment @Inject constructor(
 
 
     private fun login(pin: String? = null) {
-        val phoneNumber =
-            preferencesManager.getStringFromPreferences(Constants.USER_PHONE_NUMBER_TAG) ?: ""
-        val phonePrefix =
-            preferencesManager.getStringFromPreferences(Constants.USER_PHONE_PREFIX_TAG) ?: ""
-
         val pinToBeSent = pin
             ?: preferencesManager.getEncryptedStringFromPreferences(
                 Constants.USER_PIN_TAG,

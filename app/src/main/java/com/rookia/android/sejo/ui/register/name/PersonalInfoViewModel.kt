@@ -33,7 +33,8 @@ class PersonalInfoViewModel @Inject constructor(
             val userId =
                 preferencesManager.getStringFromPreferences(Constants.USER_ID_TAG)
                     ?: return
-            val user = User(userId = userId, phonePrefix = phonePrefix, phoneNumber = phoneNumber,  name = name)
+            val pushToken = preferencesManager.getStringFromPreferences(Constants.PUSH_TOKEN_TAG)
+            val user = User(userId = userId, phonePrefix = phonePrefix, phoneNumber = phoneNumber,  name = name, pushToken = pushToken)
             _userSentToServer =
                 userUseCase.updateUser(user).asLiveData(dispatcher)
             userSentToServer.addSource(_userSentToServer) {

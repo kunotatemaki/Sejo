@@ -30,7 +30,8 @@ class LoginViewModel @Inject constructor(
         pin: Int
     ) {
         val userId = preferencesManager.getStringFromPreferences(Constants.USER_ID_TAG) ?: ""
-        _login = loginUseCase.login(userId, pin).asLiveData(dispatcher)
+        val pushToken = preferencesManager.getStringFromPreferences(Constants.USER_ID_TAG) ?: ""
+        _login = loginUseCase.login(userId, pin, pushToken).asLiveData(dispatcher)
         loginResult.addSource(_login) {
             loginResult.value = it
             when (it.status) {

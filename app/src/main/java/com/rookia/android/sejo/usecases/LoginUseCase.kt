@@ -19,8 +19,8 @@ import kotlinx.coroutines.flow.Flow
 
 class LoginUseCase constructor(private val repository: UserRepository) {
 
-    fun login(userId: String, pin: Int): Flow<Result<TokenReceived>> =
-        repository.login(userId, pin)
+    fun login(userId: String, pin: Int, pushToken: String?): Flow<Result<TokenReceived>> =
+        repository.login(userId, pin, pushToken)
 
     fun storeToken(token: String?) {
         token?.let {

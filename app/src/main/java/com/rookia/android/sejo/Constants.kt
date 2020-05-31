@@ -76,6 +76,7 @@ object Constants {
     const val USER_PHONE_NUMBER_TAG = "USER_PHONE_NUMBER_TAG"
     const val USER_PHONE_PREFIX_TAG = "USER_PHONE_PREFIX_TAG"
     const val USER_ID_TAG = "USER_ID_TAG"
+    const val PUSH_TOKEN_TAG = "PUSH_TOKEN_TAG"
 
 
     //endregion

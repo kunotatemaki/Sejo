@@ -33,7 +33,21 @@ class BiometricPermissionFragment constructor(private val preferencesManager: Pr
     }
 
     private fun navigate() {
+        if(preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PERSONAL_INFO_TAG).not()){
+            navigateToRegisterFlow()
+        } else {
+            navigateToDashboard()
+        }
+    }
+
+    private fun navigateToDashboard() {
         val direction = BiometricPermissionFragmentDirections.actionBiometricPermissionFragmentToMainActivity()
         findNavController().navigate(direction)
+    }
+
+    private fun navigateToRegisterFlow() {
+        val direction = BiometricPermissionFragmentDirections.actionBiometricPermissionFragmentToRegisterActivity()
+        findNavController().navigate(direction)
+        activity?.finish()
     }
 }

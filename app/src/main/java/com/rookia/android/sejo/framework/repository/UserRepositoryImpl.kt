@@ -32,7 +32,11 @@ class UserRepositoryImpl @Inject constructor(
     private val networkServiceFactory: NetworkServiceFactory,
     private val preferencesManager: PreferencesManager
 ) : UserRepository {
-    override fun createUser(phonePrefix: String, phoneNumber: String, pin: Int): Flow<Result<TokenReceived>> =
+    override fun createUser(
+        phonePrefix: String,
+        phoneNumber: String,
+        pin: Int
+    ): Flow<Result<TokenReceived>> =
         resultOnlyFromOneSourceInFlow {
             createUserInServer(phonePrefix, phoneNumber, pin)
         }
@@ -80,20 +84,22 @@ class UserRepositoryImpl @Inject constructor(
 
     override fun login(
         userId: String,
-        pin: Int
+        pin: Int,
+        pushToken: String?
     ): Flow<Result<TokenReceived>> =
         resultOnlyFromOneSourceInFlow {
-            loginInServer(userId, pin)
+            loginInServer(userId, pin, pushToken)
         }
 
     @VisibleForTesting
     suspend fun loginInServer(
         userId: String,
-        pin: Int
+        pin: Int,
+        pushToken: String?
     ): Result<TokenReceived> =
         try {
             val api = networkServiceFactory.getUserInstance()
-            val loginRequest = LoginRequestClient(pin = pin, userId = userId)
+            val loginRequest = LoginRequestClient(pin = pin, userId = userId, pushToken = pushToken)
             val resp = api.login(loginRequest)
             if (resp.isSuccessful && resp.body() != null) {
                 Result.success(resp.body()?.toTokenReceived())
@@ -107,4 +113,5 @@ class UserRepositoryImpl @Inject constructor(
     override fun storeToken(token: String) {
         preferencesManager.setStringIntoPreferences(Constants.USER_TOKEN_TAG, token)
     }
+
 }

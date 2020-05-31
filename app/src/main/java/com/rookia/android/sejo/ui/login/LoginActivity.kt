@@ -36,6 +36,7 @@ class LoginActivity : BaseActivity() {
             loginFromAnywhere = intent.getBooleanExtra(REDIRECTED_TO_LOGIN, false)
         }
 
+
     }
 
     override fun onNewIntent(intent: Intent?) {

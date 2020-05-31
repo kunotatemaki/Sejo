@@ -5,6 +5,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
+import com.google.firebase.FirebaseApp
 import com.rookia.android.sejo.di.components.AppComponent
 import com.rookia.android.sejo.di.components.ComponentFactory
 import com.rookia.android.sejo.ui.login.LoginStatus
@@ -42,7 +43,8 @@ class SejoApplication  : DaggerApplication(), LifecycleObserver {
         } else {
             Timber.plant(CrashReportingTree())
         }
-        ProcessLifecycleOwner.get().lifecycle.addObserver(this);
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
+        FirebaseApp.initializeApp(this)
     }
 
     /** A tree which logs important information for crash reporting. (Tiber) */

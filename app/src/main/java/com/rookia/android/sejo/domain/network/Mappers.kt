@@ -35,11 +35,11 @@ fun LoginRequestServer.toTokenReceived(): TokenReceived =
 fun UserCreationRequestServer.toTokenReceived(): TokenReceived =
     TokenReceived(result = code, token = data?.token, userId = data?.userId)
 
-fun User.toUserUpdateRequestClient(): UserUpdateRequestClient =
-    UserUpdateRequestClient(pin = null, userId = userId, name = name)
-
-fun User.toUserUpdateRequestClient(pin: Int): UserUpdateRequestClient =
-    UserUpdateRequestClient(pin = pin, userId = userId, name = name)
+fun User.toUserUpdateRequestClient(
+    pin: Int? = null,
+    pushToken: String? = null
+): UserUpdateRequestClient =
+    UserUpdateRequestClient(pin = pin, userId = userId, name = name, pushToken = pushToken)
 
 fun PhoneContact.toCreateGroupContact(): CreateGroupClient.Contact =
     CreateGroupClient.Contact(numberId = phoneNumberNormalized)
@@ -52,7 +52,12 @@ fun CreateGroupServer.CreateGroupResponse.toGroup(): Group =
         owner = owner,
         balance = balance,
         date = Date(date),
-        members = members.map { it.toMember() })
+        members = members.map { it.toMember() }
+    )
 
 fun CreateGroupServer.Member.toMember(): Group.Member =
-    Group.Member(numberId = numberId, memberStatus = memberStatus ?: Constants.MemberStates.GUESS.code, isAdmin = isAdmin)
+    Group.Member(
+        numberId = numberId,
+        memberStatus = memberStatus ?: Constants.MemberStates.GUESS.code,
+        isAdmin = isAdmin
+    )

@@ -20,6 +20,6 @@ import kotlinx.coroutines.flow.Flow
 interface UserRepository {
     fun createUser(phonePrefix: String, phoneNumber: String, pin: Int): Flow<Result<TokenReceived>>
     fun updateUser(user: User): Flow<Result<Int>>
-    fun login(userId: String, pin: Int): Flow<Result<TokenReceived>>
+    fun login(userId: String, pin: Int, pushToken: String?): Flow<Result<TokenReceived>>
     fun storeToken(token: String)
 }

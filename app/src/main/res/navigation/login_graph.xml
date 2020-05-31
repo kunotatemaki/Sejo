@@ -54,5 +54,8 @@
             app:enterAnim="@anim/navigation_activity_right_enter"
             app:exitAnim="@anim/navigation_activity_exit"
             app:launchSingleTop="true" />
+        <action
+            android:id="@+id/action_biometricPermissionFragment_to_registerActivity"
+            app:destination="@id/registerActivity" />
     </fragment>
 </navigation>
