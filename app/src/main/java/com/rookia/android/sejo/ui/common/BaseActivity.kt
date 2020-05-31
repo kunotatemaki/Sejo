@@ -3,6 +3,7 @@ package com.rookia.android.sejo.ui.common
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Debug
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentFactory
@@ -37,7 +38,10 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector {
         getFragmentFactory()?.let {
             supportFragmentManager.fragmentFactory = it
         }
+        Debug.waitForDebugger()
         super.onCreate(savedInstanceState)
+
+        //todo handle push notifications
     }
 
     override fun onStart() {

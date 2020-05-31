@@ -36,6 +36,6 @@ class FingerprintUtils @Inject constructor(
             preferencesManager.getBooleanFromPreferences(Constants.USER_BIOMETRICS_TAG)
         val isFingerprintSupported = isFingerprintSupported()
         val pwdBytes = preferencesManager.getEncryptedStringFromPreferences(Constants.USER_PIN_TAG, Constants.USER_PIN_ALIAS)
-        return useFingerPrint && isFingerprintSupported && pwdBytes != null
+        return useFingerPrint && isFingerprintSupported && pwdBytes.isNullOrBlank().not()
     }
 }

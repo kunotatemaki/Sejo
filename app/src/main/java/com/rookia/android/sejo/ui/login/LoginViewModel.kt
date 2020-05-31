@@ -30,12 +30,13 @@ class LoginViewModel @Inject constructor(
         pin: Int
     ) {
         val userId = preferencesManager.getStringFromPreferences(Constants.USER_ID_TAG) ?: ""
-        val pushToken = preferencesManager.getStringFromPreferences(Constants.USER_ID_TAG) ?: ""
+        val pushToken = preferencesManager.getStringFromPreferences(Constants.PUSH_TOKEN_TAG) ?: ""
         _login = loginUseCase.login(userId, pin, pushToken).asLiveData(dispatcher)
         loginResult.addSource(_login) {
             loginResult.value = it
             when (it.status) {
                 Result.Status.SUCCESS -> {
+                    preferencesManager.setEncryptedStringIntoPreferences(Constants.USER_PIN_TAG, pin.toString(), Constants.USER_PIN_ALIAS)
                     loginResult.removeSource(_login)
                     loginStatus.loginLaunched()
                 }
