@@ -36,8 +36,9 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
-    dataBinding {
-        enabled = true
+
+    buildFeatures {
+        dataBinding = true
     }
 // To inline the bytecode built with JVM target 1.8 into
 // bytecode that is being built with JVM target 1.6. (e.g. navArgs)
@@ -46,7 +47,7 @@ android {
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.core:core-ktx:1.3.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta6'
     implementation project(path: ':androidutils')

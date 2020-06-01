@@ -1,4 +1,4 @@
-package com.rookia.android.sejo.ui
+package com.rookia.android.sejo.ui.main
 
 import android.os.Bundle
 import android.view.View
@@ -39,7 +39,8 @@ class BlankFragment constructor(private val repository: GroupRepository) :
 
 
     private fun navigateToGroupCreation() {
-        val direction = BlankFragmentDirections.actionBlankFragmentToGroupCreationActivity()
+        val direction =
+            BlankFragmentDirections.actionBlankFragmentToGroupCreationActivity()
         findNavController().navigate(direction)
     }
 }

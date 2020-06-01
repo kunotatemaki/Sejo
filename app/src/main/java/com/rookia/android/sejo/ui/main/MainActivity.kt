@@ -1,4 +1,4 @@
-package com.rookia.android.sejo.ui.common
+package com.rookia.android.sejo.ui.main
 
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -11,6 +11,7 @@ import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ActivityMainBinding
+import com.rookia.android.sejo.ui.common.BaseActivity
 import com.rookia.android.sejo.ui.fragmentfactories.MainFragmentFactory
 import javax.inject.Inject
 

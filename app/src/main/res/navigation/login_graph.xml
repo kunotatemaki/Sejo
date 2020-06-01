@@ -41,7 +41,7 @@
         android:label="RegisterActivity" />
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.rookia.android.sejo.ui.common.MainActivity"
+        android:name="com.rookia.android.sejo.ui.main.MainActivity"
         tools:layout="@layout/activity_main"
         android:label="MainActivity" />
     <fragment
