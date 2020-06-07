@@ -1,15 +1,9 @@
 package com.rookia.android.sejo.di.modules
 
 import com.rookia.android.sejo.data.persistence.PersistenceManager
-import com.rookia.android.sejo.data.repository.ContactsRepository
-import com.rookia.android.sejo.data.repository.GroupRepository
-import com.rookia.android.sejo.data.repository.SmsCodeRepository
-import com.rookia.android.sejo.data.repository.UserRepository
+import com.rookia.android.sejo.data.repository.*
 import com.rookia.android.sejo.framework.persistence.PersistenceManagerImpl
-import com.rookia.android.sejo.framework.repository.ContactsRepositoryImpl
-import com.rookia.android.sejo.framework.repository.GroupRepositoryImpl
-import com.rookia.android.sejo.framework.repository.SmsCodeRepositoryImpl
-import com.rookia.android.sejo.framework.repository.UserRepositoryImpl
+import com.rookia.android.sejo.framework.repository.*
 import dagger.Binds
 import dagger.Module
 
@@ -22,6 +16,9 @@ abstract class BindsModule {
 
     @Binds
     abstract fun providesUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
+
+    @Binds
+    abstract fun providesLoginRepository(loginRepositoryImpl: LoginRepositoryImpl): LoginRepository
 
     @Binds
     abstract fun providesContactsRepository(contactsRepository: ContactsRepositoryImpl): ContactsRepository

@@ -6,10 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.SejoApplication
-import com.rookia.android.sejo.data.repository.ContactsRepository
-import com.rookia.android.sejo.data.repository.GroupRepository
-import com.rookia.android.sejo.data.repository.SmsCodeRepository
-import com.rookia.android.sejo.data.repository.UserRepository
+import com.rookia.android.sejo.data.repository.*
 import com.rookia.android.sejo.framework.network.NetworkServiceFactory
 import com.rookia.android.sejo.framework.persistence.databases.AppDatabase
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
@@ -59,7 +56,7 @@ class ProvidesModule {
 
     @Singleton
     @Provides
-    fun providesLoginUseCase(repository: UserRepository): LoginUseCase =
+    fun providesLoginUseCase(repository: LoginRepository): LoginUseCase =
         LoginUseCase(repository)
 
     @Singleton

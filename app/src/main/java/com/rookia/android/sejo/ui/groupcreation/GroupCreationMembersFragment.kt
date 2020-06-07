@@ -27,6 +27,7 @@ import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentGroupCreationMembersBinding
 import com.rookia.android.sejo.domain.local.PhoneContact
 import com.rookia.android.sejo.ui.common.BaseFragment
+import com.rookia.android.sejo.ui.login.LoginStatus
 import timber.log.Timber
 import java.util.*
 
@@ -35,9 +36,10 @@ class GroupCreationMembersFragment constructor(
     private val viewModelFactory: ViewModelFactory,
     private val permissionManager: PermissionManager,
     private val resourcesManager: ResourcesManager,
-    private val deviceUtils: DeviceUtils
+    private val deviceUtils: DeviceUtils,
+    loginStatus: LoginStatus
 ) :
-    BaseFragment(R.layout.fragment_group_creation_members),
+    BaseFragment(R.layout.fragment_group_creation_members, loginStatus),
     GroupCreationMembersAdapter.GroupMemberListed,
     GroupCreationMembersAddedAdapter.GroupMemberRemovedList {
 

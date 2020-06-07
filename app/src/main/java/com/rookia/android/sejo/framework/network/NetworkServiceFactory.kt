@@ -38,10 +38,13 @@ open class NetworkServiceFactory constructor(private val preferencesManager: Pre
     @Volatile
     private var groupInstance: GroupApi? = null
 
-    open fun getSmsCodeCodeInstance(): SmsCodeApi =
+    @Volatile
+    private var loginInstance: LoginApi? = null
+
+    fun getSmsCodeCodeInstance(): SmsCodeApi =
         smsCodeCodeInstance ?: buildSmsCodeNetworkService().also { smsCodeCodeInstance = it }
 
-    open fun getUserInstance(): UserApi {
+    fun getUserInstance(): UserApi {
         val bearer = preferencesManager.getStringFromPreferences(Constants.USER_TOKEN_TAG)
 
         return userInstance ?: buildUserNetworkService(bearer).also { userApi ->
@@ -49,12 +52,26 @@ open class NetworkServiceFactory constructor(private val preferencesManager: Pre
         }
     }
 
-    open fun getGroupInstance(): GroupApi {
+    fun getLoginInstance(): LoginApi {
+        val bearer = preferencesManager.getStringFromPreferences(Constants.USER_TOKEN_TAG)
+
+        return loginInstance ?: buildLoginNetworkService(bearer).also { loginApi ->
+            bearer?.let { loginInstance = loginApi }
+        }
+    }
+
+    fun getGroupInstance(): GroupApi {
         val bearer = preferencesManager.getStringFromPreferences(Constants.USER_TOKEN_TAG)
 
         return groupInstance ?: buildGroupNetworkService(bearer).also { groupApi ->
             bearer?.let { groupInstance = groupApi }
         }
+    }
+
+    fun newTokenReceived() {
+        smsCodeCodeInstance = null
+        userInstance = null
+        groupInstance = null
     }
 
     private fun buildSmsCodeNetworkService(): SmsCodeApi = Retrofit.Builder()
@@ -68,6 +85,14 @@ open class NetworkServiceFactory constructor(private val preferencesManager: Pre
             .addConverterFactory(GsonConverterFactory.create())
             .client(getInterceptorForAuthentication(bearer))
             .build().create(UserApi::class.java)
+
+
+    private fun buildLoginNetworkService(bearer: String?): LoginApi =
+        Retrofit.Builder()
+            .baseUrl(ROOKIA_EXPENSES_SERVER_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(getInterceptorForAuthentication(bearer))
+            .build().create(LoginApi::class.java)
 
 
     private fun buildGroupNetworkService(bearer: String?): GroupApi =

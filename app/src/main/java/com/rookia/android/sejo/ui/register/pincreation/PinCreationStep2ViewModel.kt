@@ -48,7 +48,6 @@ class PinCreationStep2ViewModel @Inject constructor(
                         preferencesManager.setBooleanIntoPreferences(Constants.NAVIGATION_PIN_SENT_TAG, true)
                         it.data?.let { tokenReceived ->
                             preferencesManager.setStringIntoPreferences(Constants.USER_ID_TAG, tokenReceived.userId)
-                            preferencesManager.setStringIntoPreferences(Constants.USER_TOKEN_TAG, tokenReceived.token)
                         }
                     }
                     Result.Status.ERROR -> pinSentToServer.removeSource(_pinSentToServer)

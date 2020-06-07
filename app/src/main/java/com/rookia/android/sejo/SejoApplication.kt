@@ -58,6 +58,6 @@ class SejoApplication  : DaggerApplication(), LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     fun onMoveToBackground() {
-        loginStatus.launchLogin()
+        loginStatus.forceNavigationThroughLogin()
     }
 }

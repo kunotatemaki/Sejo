@@ -5,12 +5,10 @@ import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.framework.repository.resultOnlyFromOneSourceInFlow
 import com.rookia.android.sejo.Constants
-import com.rookia.android.sejo.data.repository.UserRepository
+import com.rookia.android.sejo.data.repository.LoginRepository
 import com.rookia.android.sejo.domain.local.user.TokenReceived
-import com.rookia.android.sejo.domain.local.user.User
+import com.rookia.android.sejo.domain.network.login.LoginRequestClient
 import com.rookia.android.sejo.domain.network.toTokenReceived
-import com.rookia.android.sejo.domain.network.toUserUpdateRequestClient
-import com.rookia.android.sejo.domain.network.user.UserCreationRequestClient
 import com.rookia.android.sejo.framework.network.NetworkServiceFactory
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -27,29 +25,30 @@ import javax.inject.Inject
  *
  */
 
-class UserRepositoryImpl @Inject constructor(
+class LoginRepositoryImpl @Inject constructor(
     private val networkServiceFactory: NetworkServiceFactory,
     private val preferencesManager: PreferencesManager
-) : UserRepository {
-    override fun createUser(
-        phonePrefix: String,
-        phoneNumber: String,
-        pin: Int
+) : LoginRepository {
+
+    override fun login(
+        userId: String,
+        pin: Int,
+        pushToken: String?
     ): Flow<Result<TokenReceived>> =
         resultOnlyFromOneSourceInFlow {
-            createUserInServer(phonePrefix, phoneNumber, pin)
+            loginInServer(userId, pin, pushToken)
         }
 
     @VisibleForTesting
-    suspend fun createUserInServer(
-        phonePrefix: String,
-        phoneNumber: String,
-        pin: Int
+    suspend fun loginInServer(
+        userId: String,
+        pin: Int,
+        pushToken: String?
     ): Result<TokenReceived> =
         try {
-            val api = networkServiceFactory.getUserInstance()
-            val userRequest = UserCreationRequestClient(phonePrefix, phoneNumber, pin)
-            val resp = api.addUser(userRequest)
+            val api = networkServiceFactory.getLoginInstance()
+            val loginRequest = LoginRequestClient(pin = pin, userId = userId, pushToken = pushToken)
+            val resp = api.login(loginRequest)
             if (resp.isSuccessful && resp.body() != null) {
                 Result.success(
                     resp.body()?.toTokenReceived().also {
@@ -57,28 +56,6 @@ class UserRepositoryImpl @Inject constructor(
                         networkServiceFactory.newTokenReceived()
                     }
                 )
-            } else {
-                Result.error(resp.message())
-            }
-        } catch (e: Exception) {
-            Result.error(e.message)
-        }
-
-
-    override fun updateUser(user: User): Flow<Result<Int>> =
-        resultOnlyFromOneSourceInFlow {
-            updateUserInServer(user)
-        }
-
-
-    @VisibleForTesting
-    suspend fun updateUserInServer(user: User): Result<Int> =
-        try {
-            val api = networkServiceFactory.getUserInstance()
-            val updateUserValidation = user.toUserUpdateRequestClient()
-            val resp = api.updateUser(updateUserValidation)
-            if (resp.isSuccessful && resp.body() != null) {
-                Result.success(resp.body()?.code)
             } else {
                 Result.error(resp.message())
             }

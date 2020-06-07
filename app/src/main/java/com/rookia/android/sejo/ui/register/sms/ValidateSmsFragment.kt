@@ -19,6 +19,7 @@ import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentValidateSmsBinding
 import com.rookia.android.sejo.ui.common.BaseActivity
 import com.rookia.android.sejo.ui.common.BaseFragment
+import com.rookia.android.sejo.ui.login.LoginStatus
 import com.rookia.android.sejo.ui.views.numerickeyboard.NumericKeyboardActions
 import com.rookia.android.sejo.utils.TextFormatUtils
 import timber.log.Timber
@@ -28,8 +29,9 @@ import javax.inject.Inject
 
 class ValidateSmsFragment @Inject constructor(
     private val viewModelFactory: ViewModelFactory,
-    private val textFormatUtils: TextFormatUtils
-) : BaseFragment(R.layout.fragment_validate_sms) {
+    private val textFormatUtils: TextFormatUtils,
+    loginStatus: LoginStatus
+) : BaseFragment(R.layout.fragment_validate_sms, loginStatus) {
 
     private lateinit var binding: FragmentValidateSmsBinding
     private lateinit var viewModel: ValidateSmsViewModel
@@ -133,7 +135,7 @@ class ValidateSmsFragment @Inject constructor(
                                 binding.fragmentValidateSmsView.hideError()
                                 it.data?.userId?.let { userId ->
                                     viewModel.setPinSet(userId)
-                                    navigateToDashboard()
+                                    navigateToInfoFragment()
                                 } ?: navigateToCreatePin()
 
                             }
@@ -232,11 +234,11 @@ class ValidateSmsFragment @Inject constructor(
         }
     }
 
-    private fun navigateToDashboard() {
+    private fun navigateToInfoFragment() {
         (activity as? BaseActivity)?.hideKeyboard()
-        val direction = ValidateSmsFragmentDirections.actionValidateSmsFragmentToLoginActivity()
+        loginStatus.forceNavigationThroughLogin()
+        val direction = ValidateSmsFragmentDirections.actionValidateSmsFragmentToPersonalInfoFragment()
         findNavController().navigate(direction)
-        activity?.finish()
     }
 
     private fun navigateToCreatePin() {

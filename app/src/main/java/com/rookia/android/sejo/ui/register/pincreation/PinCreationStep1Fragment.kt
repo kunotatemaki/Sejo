@@ -10,13 +10,15 @@ import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentPinCreationStep1Binding
 import com.rookia.android.sejo.ui.common.BaseFragment
+import com.rookia.android.sejo.ui.login.LoginStatus
 import com.rookia.android.sejo.ui.views.PinScreen
 import javax.inject.Inject
 
 
 class PinCreationStep1Fragment @Inject constructor(
-    private val resourcesManager: ResourcesManager
-) : BaseFragment(R.layout.fragment_pin_creation_step1),
+    private val resourcesManager: ResourcesManager,
+    loginStatus: LoginStatus
+) : BaseFragment(R.layout.fragment_pin_creation_step1, loginStatus),
     PinScreen.PinValidator {
 
     private lateinit var binding: FragmentPinCreationStep1Binding
@@ -33,7 +35,12 @@ class PinCreationStep1Fragment @Inject constructor(
             setPinValidator(this@PinCreationStep1Fragment)
             setHeader(resourcesManager.getString(R.string.fragment_pin_creation_step_1_header))
         }
-        setToolbar(binding.fragmentPinCreationStep1Toolbar, false, resourcesManager.getString(R.string.fragment_pin_creation_toolbar_title))
+        setToolbar(
+            binding.fragmentPinCreationStep1Toolbar,
+            false,
+            resourcesManager.getString(R.string.fragment_pin_creation_toolbar_title)
+        )
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -45,7 +52,7 @@ class PinCreationStep1Fragment @Inject constructor(
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
-        when(item.itemId){
+        when (item.itemId) {
             R.id.create_pin_menu_item -> {
                 navigateToPinConfirmationScreen()
                 true
@@ -64,5 +71,6 @@ class PinCreationStep1Fragment @Inject constructor(
             )
         findNavController().navigate(direction)
     }
+
 
 }

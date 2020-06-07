@@ -20,28 +20,6 @@
             app:popExitAnim="@anim/navigation_fragment_pop_exit"
             app:popUpTo="@id/validateNumberFragment"
             app:popUpToInclusive="false" />
-        <action
-            android:id="@+id/action_validateNumberFragment_to_pinCreationStep1Fragment"
-            app:destination="@id/pinCreationStep1Fragment"
-
-            app:enterAnim="@anim/navigation_fragment_enter"
-            app:exitAnim="@anim/navigation_fragment_exit"
-
-            app:launchSingleTop="true"
-            app:popEnterAnim="@anim/navigation_fragment_pop_enter"
-            app:popExitAnim="@anim/navigation_fragment_pop_exit"
-            app:popUpTo="@id/validateNumberFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_validateNumberFragment_to_personalInfoFragment"
-            app:destination="@id/personalInfoFragment"
-            app:enterAnim="@anim/navigation_fragment_enter"
-            app:exitAnim="@anim/navigation_fragment_exit"
-            app:launchSingleTop="true"
-            app:popEnterAnim="@anim/navigation_fragment_pop_enter"
-            app:popExitAnim="@anim/navigation_fragment_pop_exit"
-            app:popUpTo="@id/validateNumberFragment"
-            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -56,28 +34,19 @@
             android:name="phoneNumber"
             app:argType="string" />
         <action
-            android:id="@+id/action_validateSmsFragment_to_loginActivity"
-            app:destination="@id/loginActivity"
-            app:launchSingleTop="true"
-            app:enterAnim="@anim/navigation_activity_right_enter"
-            app:exitAnim="@anim/navigation_activity_exit"/>
-        <action
             android:id="@+id/action_validateSmsFragment_to_pinCreationStep1Fragment"
             app:destination="@id/pinCreationStep1Fragment"
 
-            app:popUpTo="@id/validateNumberFragment"
-            app:popUpToInclusive="true"
             app:enterAnim="@anim/navigation_fragment_enter"
             app:exitAnim="@anim/navigation_fragment_exit"
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/navigation_fragment_pop_enter"
-            app:popExitAnim="@anim/navigation_fragment_pop_exit"/>
+            app:popExitAnim="@anim/navigation_fragment_pop_exit"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_validateSmsFragment_to_personalInfoFragment"
+            app:destination="@id/personalInfoFragment" />
     </fragment>
-    <activity
-        android:id="@+id/loginActivity"
-        android:name="com.rookia.android.sejo.ui.login.LoginActivity"
-        android:label="LoginActivity"
-        tools:layout="@layout/activity_login" />
     <fragment
         android:id="@+id/pinCreationStep1Fragment"
         android:name="com.rookia.android.sejo.ui.register.pincreation.PinCreationStep1Fragment"
@@ -117,11 +86,6 @@
         android:id="@+id/personalInfoFragment"
         android:name="com.rookia.android.sejo.ui.register.name.PersonalInfoFragment"
         android:label="PersonalInfoFragment"
-        tools:layout="@layout/fragment_personal_info">
-        <action
-            android:id="@+id/action_personalInfoFragment_to_loginActivity"
-            app:destination="@id/loginActivity"
-            app:enterAnim="@anim/navigation_activity_right_enter"
-            app:exitAnim="@anim/navigation_activity_exit"/>
-    </fragment>
+        tools:layout="@layout/fragment_personal_info"/>
+
 </navigation>

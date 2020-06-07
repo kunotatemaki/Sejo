@@ -7,13 +7,14 @@ import androidx.navigation.fragment.findNavController
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.data.repository.GroupRepository
 import com.rookia.android.sejo.ui.common.BaseFragment
+import com.rookia.android.sejo.ui.login.LoginStatus
 import kotlinx.android.synthetic.main.fragment_blank.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import timber.log.Timber
 
-class BlankFragment constructor(private val repository: GroupRepository) :
-    BaseFragment(R.layout.fragment_blank), CoroutineScope by MainScope() {
+class BlankFragment constructor(private val repository: GroupRepository, loginStatus: LoginStatus) :
+    BaseFragment(R.layout.fragment_blank, loginStatus), CoroutineScope by MainScope() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

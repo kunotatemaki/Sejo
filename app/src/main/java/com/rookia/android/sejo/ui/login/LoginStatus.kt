@@ -16,10 +16,10 @@ class LoginStatus {
 
     private var _launchLogin = true
     fun needToLogin(): Boolean = _launchLogin
-    fun loginLaunched() {
+    fun avoidGoingToLogin() {
         _launchLogin = false
     }
-    fun launchLogin() {
+    fun forceNavigationThroughLogin() {
         _launchLogin = true
     }
 

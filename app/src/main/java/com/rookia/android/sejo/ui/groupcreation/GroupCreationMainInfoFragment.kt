@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
-import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentGroupCreationMainInfoBinding
 import com.rookia.android.sejo.ui.common.BaseActivity
 import com.rookia.android.sejo.ui.common.BaseFragment
+import com.rookia.android.sejo.ui.login.LoginStatus
 
 
-class GroupCreationMainInfoFragment constructor(private val resourcesManager: ResourcesManager) :
-    BaseFragment(R.layout.fragment_group_creation_main_info) {
+class GroupCreationMainInfoFragment constructor(loginStatus: LoginStatus) :
+    BaseFragment(R.layout.fragment_group_creation_main_info, loginStatus) {
 
     lateinit var binding: FragmentGroupCreationMainInfoBinding
 

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentFactory
+import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.sejo.ui.login.LoginActivity
 import com.rookia.android.sejo.ui.login.LoginStatus
 import dagger.android.AndroidInjection
@@ -26,6 +27,9 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector {
     @Inject
     protected lateinit var loginStatus: LoginStatus
 
+    @Inject
+    protected lateinit var preferencesManager: PreferencesManager
+
     override fun androidInjector(): AndroidInjector<Any> {
         return androidInjector
     }
@@ -39,13 +43,15 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector {
         }
         super.onCreate(savedInstanceState)
 
+
+
         //todo handle push notifications
     }
 
     override fun onStart() {
         super.onStart()
-        if(loginStatus.needToLogin()){
-            loginStatus.loginLaunched()
+        if (loginStatus.needToLogin()) {
+            loginStatus.avoidGoingToLogin()
             val intent = Intent(this, LoginActivity::class.java).also {
                 it.putExtra(REDIRECTED_TO_LOGIN, true)
             }
@@ -60,7 +66,7 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector {
         }
     }
 
-    fun showKeyboard(){
+    fun showKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.toggleSoftInput(
             InputMethodManager.SHOW_IMPLICIT,

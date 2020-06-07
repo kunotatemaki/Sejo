@@ -12,17 +12,20 @@ import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentPersonalInfoBinding
 import com.rookia.android.sejo.ui.common.BaseFragment
+import com.rookia.android.sejo.ui.login.LoginStatus
+import com.rookia.android.sejo.ui.main.MainActivity
 
 
-class PersonalInfoFragment constructor(private val viewModelFactory: ViewModelFactory) :
-    BaseFragment(R.layout.fragment_personal_info) {
+class PersonalInfoFragment constructor(private val viewModelFactory: ViewModelFactory, loginStatus: LoginStatus) :
+    BaseFragment(R.layout.fragment_personal_info, loginStatus) {
 
     private lateinit var binding: FragmentPersonalInfoBinding
     private lateinit var viewModel: PersonalInfoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       setHasOptionsMenu(true)
+        setHasOptionsMenu(true)
+        forceLoginBeforeLaunchingThisFragment = true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,7 +52,7 @@ class PersonalInfoFragment constructor(private val viewModelFactory: ViewModelFa
                 when (it.status) {
                     Result.Status.SUCCESS -> {
                         hideLoading()
-                        navigateToDashboard()
+                        finishRegister()
                     }
                     Result.Status.ERROR -> hideLoading()
                     Result.Status.LOADING -> showLoading()
@@ -58,10 +61,14 @@ class PersonalInfoFragment constructor(private val viewModelFactory: ViewModelFa
         })
     }
 
-    private fun navigateToDashboard() {
-        val direction = PersonalInfoFragmentDirections.actionPersonalInfoFragmentToLoginActivity()
-        findNavController().navigate(direction)
-        activity?.finish()
+    private fun finishRegister() {
+        val registrationEntryPoints = MainActivity.Companion.RegisterScreens.values()
+        registrationEntryPoints.forEach {
+            if(findNavController().popBackStack(it.id, true)){
+                return
+            }
+        }
+        findNavController().popBackStack()
     }
 
 

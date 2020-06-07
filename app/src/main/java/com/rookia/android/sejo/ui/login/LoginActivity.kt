@@ -31,7 +31,7 @@ class LoginActivity : BaseActivity() {
         setTheme(R.style.AppTheme_NoActionBar)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-        loginStatus.loginLaunched()
+        loginStatus.avoidGoingToLogin()
         if (intent.hasExtra(REDIRECTED_TO_LOGIN)) {
             loginFromAnywhere = intent.getBooleanExtra(REDIRECTED_TO_LOGIN, false)
         }

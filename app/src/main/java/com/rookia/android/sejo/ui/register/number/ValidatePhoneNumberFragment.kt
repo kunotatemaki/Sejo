@@ -6,32 +6,33 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.data.resources.ResourcesManager
-import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentValidateNumberBinding
 import com.rookia.android.sejo.ui.common.BaseFragment
-import com.rookia.android.sejo.ui.register.RegisterActivity
+import com.rookia.android.sejo.ui.login.LoginStatus
+import com.rookia.android.sejo.ui.main.MainActivity
 import com.rookia.android.sejo.ui.views.PhoneNumberView
 import javax.inject.Inject
 
 class ValidatePhoneNumberFragment @Inject constructor(
     private val resourcesManager: ResourcesManager,
-    private val preferencesManager: PreferencesManager
-) : BaseFragment(R.layout.fragment_validate_number) {
+    private val preferencesManager: PreferencesManager,
+    loginStatus: LoginStatus
+) : BaseFragment(R.layout.fragment_validate_number, loginStatus) {
 
     private lateinit var binding: FragmentValidateNumberBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val validatedPin =
-            preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PIN_SENT_TAG)
-        val validatedPhone =
-            preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG)
-        if (validatedPin && validatedPhone) {
-            navigateToPersonalInfo()
-        } else if (validatedPhone) {
-            navigateToPinCreation()
-        }
+//        val validatedPin =
+//            preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PIN_SENT_TAG)
+//        val validatedPhone =
+//            preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG)
+//        if (validatedPin && validatedPhone) {
+//            navigateToPersonalInfo()
+//        } else if (validatedPhone) {
+//            navigateToPinCreation()
+//        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,11 +54,11 @@ class ValidatePhoneNumberFragment @Inject constructor(
                             binding.validatePhoneNumberPhoneNumber.hideError()
                         }
                         PhoneNumberView.PhoneNumberFormat.INCOMPLETE -> {
-                            binding.buttonEnabled = false
+                            binding.buttonEnabled = true
                             binding.validatePhoneNumberPhoneNumber.hideError()
                         }
                         PhoneNumberView.PhoneNumberFormat.WRONG -> {
-                            binding.buttonEnabled = false
+                            binding.buttonEnabled = true
                             binding.validatePhoneNumberPhoneNumber.showError(
                                 resourcesManager.getString(
                                     R.string.component_phone_number_error
@@ -68,10 +69,11 @@ class ValidatePhoneNumberFragment @Inject constructor(
                 }
             })
 
+
     }
 
     private fun navigateToSmsValidation(phonePrefix: String, phoneNumber: String) {
-        (activity as RegisterActivity).hideKeyboard()
+        (activity as MainActivity).hideKeyboard()
         findNavController().navigate(
             ValidatePhoneNumberFragmentDirections.actionValidateNumberFragmentToValidateSmsFragment(
                 phonePrefix,
@@ -80,18 +82,8 @@ class ValidatePhoneNumberFragment @Inject constructor(
         )
     }
 
-    private fun navigateToPinCreation() {
-        (activity as RegisterActivity).hideKeyboard()
-        val direction =
-            ValidatePhoneNumberFragmentDirections.actionValidateNumberFragmentToPinCreationStep1Fragment()
-        findNavController().navigate(direction)
-    }
-
-    private fun navigateToPersonalInfo() {
-        (activity as RegisterActivity).hideKeyboard()
-        val direction =
-            ValidatePhoneNumberFragmentDirections.actionValidateNumberFragmentToPersonalInfoFragment()
-        findNavController().navigate(direction)
+    override fun doOnBackPressed() {
+        activity?.finish()
     }
 
 }

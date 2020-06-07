@@ -22,4 +22,11 @@
         android:name="com.rookia.android.sejo.ui.groupcreation.GroupCreationActivity"
         android:label="GroupCreationActivity" />
 
+    <include app:graph="@navigation/register_graph"/>
+    <action android:id="@+id/action_global_validateNumberFragment" app:destination="@id/register_graph"/>
+
+    <include app:graph="@navigation/login_graph" />
+    <action android:id="@+id/action_global_loginFragment" app:destination="@id/login_graph"/>
+
+
 </navigation>

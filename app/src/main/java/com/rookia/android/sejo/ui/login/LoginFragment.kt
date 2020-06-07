@@ -1,6 +1,5 @@
 package com.rookia.android.sejo.ui.login
 
-import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -29,8 +28,9 @@ class LoginFragment @Inject constructor(
     private val fingerprintUtils: FingerprintUtils,
     private val biometricInfo: BiometricPrompt.PromptInfo,
     private val preferencesManager: PreferencesManager,
-    private val resourcesManager: ResourcesManager
-) : BaseFragment(R.layout.fragment_login), PinScreen.BiometricHelper,
+    private val resourcesManager: ResourcesManager,
+    loginStatus: LoginStatus
+) : BaseFragment(R.layout.fragment_login, loginStatus), PinScreen.BiometricHelper,
     PinScreen.PinValidator {
 
     private lateinit var binding: FragmentLoginBinding
@@ -39,15 +39,6 @@ class LoginFragment @Inject constructor(
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        val pinSet = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PIN_SENT_TAG)
-        val phoneValidated =
-            preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG)
-        if (pinSet.not() || phoneValidated.not()) {
-            navigateToRegisterFlow()
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -73,25 +64,26 @@ class LoginFragment @Inject constructor(
                 when (it.status) {
                     Result.Status.SUCCESS -> {
                         hideLoading()
-                        if(it.data?.result == LoginResponseCodes.NO_USER.code){
-                            preferencesManager.setBooleanIntoPreferences(Constants.NAVIGATION_PERSONAL_INFO_TAG, false)
-                            preferencesManager.setBooleanIntoPreferences(Constants.NAVIGATION_PIN_SENT_TAG, false)
-                            preferencesManager.setBooleanIntoPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG, false)
-                            navigateToRegisterFlow()
+                        if (it.data?.result == LoginResponseCodes.NO_USER.code) {
+                            preferencesManager.setBooleanIntoPreferences(
+                                Constants.NAVIGATION_PERSONAL_INFO_TAG,
+                                false
+                            )
+                            preferencesManager.setBooleanIntoPreferences(
+                                Constants.NAVIGATION_PIN_SENT_TAG,
+                                false
+                            )
+                            preferencesManager.setBooleanIntoPreferences(
+                                Constants.NAVIGATION_VALIDATED_PHONE_TAG,
+                                false
+                            )
                         } else {
-                            viewModel.storeToken(it.data?.token)
                             when {
-                                (activity as? LoginActivity)?.loginFromAnywhere == true -> {
-                                    activity?.finish()
-                                }
                                 shouldShowBiometricPermission() -> {
                                     navigateToBiometricPermission()
                                 }
-                                preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PERSONAL_INFO_TAG).not() -> {
-                                    navigateToRegisterFlow()
-                                }
                                 else -> {
-                                    navigateToDashboard()
+                                    findNavController().popBackStack()
                                 }
                             }
                         }
@@ -104,8 +96,6 @@ class LoginFragment @Inject constructor(
                 }
             }
         })
-
-
 
     }
 
@@ -127,32 +117,21 @@ class LoginFragment @Inject constructor(
     }
 
     override fun showBiometricsLogin() {
-            biometricPrompt.authenticate(biometricInfo)
+        biometricPrompt.authenticate(biometricInfo)
     }
 
     override fun shouldShowFingerPrintScreen(): Boolean =
         fingerprintUtils.shouldShowFingerPrintScreen()
 
-    private fun navigateToRegisterFlow() {
-        val direction = LoginFragmentDirections.actionLoginFragmentToRegisterActivity()
-        findNavController().navigate(direction)
-        activity?.finish()
-    }
-
     private fun shouldShowBiometricPermission(): Boolean =
-        fingerprintUtils.isFingerprintSupported() && preferencesManager.containsKey(Constants.USER_BIOMETRICS_TAG).not()
-
-    private fun navigateToDashboard() {
-        val direction = LoginFragmentDirections.actionLoginFragmentToMainActivity()
-        findNavController().navigate(direction)
-        activity?.finish()
-    }
+        fingerprintUtils.isFingerprintSupported() && preferencesManager.containsKey(Constants.USER_BIOMETRICS_TAG)
+            .not()
 
     private fun navigateToBiometricPermission() {
+        viewModel.loginResult.removeObservers(viewLifecycleOwner)
         val direction = LoginFragmentDirections.actionLoginFragmentToBiometricPermissionFragment()
         findNavController().navigate(direction)
     }
-
 
 
     private fun login(pin: String? = null) {

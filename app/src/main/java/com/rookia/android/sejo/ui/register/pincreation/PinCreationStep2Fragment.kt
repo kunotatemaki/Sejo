@@ -14,13 +14,15 @@ import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentPinCreationStep2Binding
 import com.rookia.android.sejo.ui.common.BaseFragment
+import com.rookia.android.sejo.ui.login.LoginStatus
 import com.rookia.android.sejo.ui.views.PinScreen
 import javax.inject.Inject
 
 class PinCreationStep2Fragment @Inject constructor(
     private val resourcesManager: ResourcesManager,
-    private val viewModelFactory: ViewModelFactory
-) : BaseFragment(R.layout.fragment_pin_creation_step2), PinScreen.PinValidator {
+    private val viewModelFactory: ViewModelFactory,
+    loginStatus: LoginStatus
+) : BaseFragment(R.layout.fragment_pin_creation_step2, loginStatus), PinScreen.PinValidator {
 
     private lateinit var binding: FragmentPinCreationStep2Binding
 

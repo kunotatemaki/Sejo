@@ -2,7 +2,6 @@ package com.rookia.android.sejo.ui.register
 
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentFactory
 import androidx.navigation.fragment.findNavController
@@ -45,14 +44,7 @@ class RegisterActivity : BaseActivity() {
             }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == android.R.id.home) {
-            onBackPressed()
-            true
-        } else {
-            super.onOptionsItemSelected(item)
-        }
-    }
+
 
     override fun showLoading() {
         binding.loadingView.visible()

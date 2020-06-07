@@ -2,7 +2,6 @@ package com.rookia.android.sejo.ui.login
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.sejo.Constants
@@ -10,11 +9,9 @@ import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentBiometricPermisssionBinding
 import com.rookia.android.sejo.ui.common.BaseFragment
 
-/**
- * A simple [Fragment] subclass.
- */
-class BiometricPermissionFragment constructor(private val preferencesManager: PreferencesManager) :
-    BaseFragment(R.layout.fragment_biometric_permisssion) {
+
+class BiometricPermissionFragment constructor(private val preferencesManager: PreferencesManager, loginStatus: LoginStatus) :
+    BaseFragment(R.layout.fragment_biometric_permisssion, loginStatus) {
 
     private lateinit var binding: FragmentBiometricPermisssionBinding
 
@@ -33,21 +30,9 @@ class BiometricPermissionFragment constructor(private val preferencesManager: Pr
     }
 
     private fun navigate() {
-        if(preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PERSONAL_INFO_TAG).not()){
-            navigateToRegisterFlow()
-        } else {
-            navigateToDashboard()
-        }
+        findNavController().popBackStack(R.id.loginFragment, true)
     }
 
-    private fun navigateToDashboard() {
-        val direction = BiometricPermissionFragmentDirections.actionBiometricPermissionFragmentToMainActivity()
-        findNavController().navigate(direction)
-    }
-
-    private fun navigateToRegisterFlow() {
-        val direction = BiometricPermissionFragmentDirections.actionBiometricPermissionFragmentToRegisterActivity()
-        findNavController().navigate(direction)
-        activity?.finish()
+    override fun doOnBackPressed() {
     }
 }

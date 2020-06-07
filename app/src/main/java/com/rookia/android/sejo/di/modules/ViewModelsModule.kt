@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.rookia.android.androidutils.di.interfaces.ViewModelKey
 import com.rookia.android.sejo.ui.groupcreation.GroupCreationMembersViewModel
 import com.rookia.android.sejo.ui.login.LoginViewModel
+import com.rookia.android.sejo.ui.main.MainViewModel
 import com.rookia.android.sejo.ui.register.name.PersonalInfoViewModel
 import com.rookia.android.sejo.ui.register.pincreation.PinCreationStep2ViewModel
 import com.rookia.android.sejo.ui.register.sms.ValidateSmsViewModel
@@ -50,4 +51,9 @@ internal abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PinCreationStep2ViewModel::class)
     internal abstract fun bindPinCreationStep2ViewModel(pinCreationStep2ViewModel: PinCreationStep2ViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    internal abstract fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
 }

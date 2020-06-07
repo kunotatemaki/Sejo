@@ -23,9 +23,6 @@ class LoginViewModel @Inject constructor(
     val loginResult: MediatorLiveData<Result<TokenReceived>> = MediatorLiveData()
     private lateinit var _login: LiveData<Result<TokenReceived>>
 
-    fun storeToken(token: String?) =
-        loginUseCase.storeToken(token)
-
     fun login(
         pin: Int
     ) {
@@ -38,7 +35,7 @@ class LoginViewModel @Inject constructor(
                 Result.Status.SUCCESS -> {
                     preferencesManager.setEncryptedStringIntoPreferences(Constants.USER_PIN_TAG, pin.toString(), Constants.USER_PIN_ALIAS)
                     loginResult.removeSource(_login)
-                    loginStatus.loginLaunched()
+                    loginStatus.avoidGoingToLogin()
                 }
                 Result.Status.ERROR -> loginResult.removeSource(_login)
                 Result.Status.LOADING -> {
@@ -49,6 +46,5 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
-
 
 }
