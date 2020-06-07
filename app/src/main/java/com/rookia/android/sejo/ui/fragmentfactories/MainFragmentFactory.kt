@@ -57,7 +57,6 @@ class MainFragmentFactory @Inject constructor(
             //region REGISTER
             ValidatePhoneNumberFragment::class.java -> ValidatePhoneNumberFragment(
                 resourcesManager,
-                preferencesManager,
                 loginStatus
             )
             ValidateSmsFragment::class.java -> ValidateSmsFragment(

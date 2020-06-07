@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentValidateNumberBinding
@@ -16,7 +15,6 @@ import javax.inject.Inject
 
 class ValidatePhoneNumberFragment @Inject constructor(
     private val resourcesManager: ResourcesManager,
-    private val preferencesManager: PreferencesManager,
     loginStatus: LoginStatus
 ) : BaseFragment(R.layout.fragment_validate_number, loginStatus) {
 
@@ -41,11 +39,11 @@ class ValidatePhoneNumberFragment @Inject constructor(
                             binding.validatePhoneNumberPhoneNumber.hideError()
                         }
                         PhoneNumberView.PhoneNumberFormat.INCOMPLETE -> {
-                            binding.buttonEnabled = true
+                            binding.buttonEnabled = false
                             binding.validatePhoneNumberPhoneNumber.hideError()
                         }
                         PhoneNumberView.PhoneNumberFormat.WRONG -> {
-                            binding.buttonEnabled = true
+                            binding.buttonEnabled = false
                             binding.validatePhoneNumberPhoneNumber.showError(
                                 resourcesManager.getString(
                                     R.string.component_phone_number_error
