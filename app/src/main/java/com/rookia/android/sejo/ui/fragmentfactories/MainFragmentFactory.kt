@@ -5,9 +5,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.data.resources.ResourcesManager
+import com.rookia.android.androidutils.framework.utils.PermissionManager
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
+import com.rookia.android.androidutils.utils.DeviceUtils
 import com.rookia.android.sejo.data.repository.GroupRepository
 import com.rookia.android.sejo.framework.utils.FingerprintUtils
+import com.rookia.android.sejo.ui.groupcreation.GroupCreationMainInfoFragment
+import com.rookia.android.sejo.ui.groupcreation.GroupCreationMembersFragment
 import com.rookia.android.sejo.ui.login.BiometricPermissionFragment
 import com.rookia.android.sejo.ui.login.LoginFragment
 import com.rookia.android.sejo.ui.login.LoginStatus
@@ -40,7 +44,9 @@ class MainFragmentFactory @Inject constructor(
     private val preferencesManager: PreferencesManager,
     private val fingerprintUtils: FingerprintUtils,
     private val biometricDialog: BiometricPrompt.PromptInfo,
-    private val loginStatus: LoginStatus
+    private val permissionManager: PermissionManager,
+    private val loginStatus: LoginStatus,
+    private val deviceUtils: DeviceUtils
 ) : FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when (loadFragmentClass(classLoader, className)) {
@@ -86,6 +92,10 @@ class MainFragmentFactory @Inject constructor(
                 preferencesManager,
                 loginStatus
             )
+            //endregion
+            //region GROUP CREATION
+            GroupCreationMainInfoFragment::class.java -> GroupCreationMainInfoFragment(loginStatus)
+            GroupCreationMembersFragment::class.java -> GroupCreationMembersFragment(viewModelFactory, permissionManager, resourcesManager, deviceUtils, loginStatus)
             //endregion
             else -> super.instantiate(classLoader, className)
         }

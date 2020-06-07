@@ -14,6 +14,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.androidutils.di.injectViewModel
@@ -281,6 +282,6 @@ class GroupCreationMembersFragment constructor(
     }
 
     private fun navigateToDashboard() {
-        activity?.finish()
+        findNavController().popBackStack(R.id.groupCreationMainInfoFragment, true)
     }
 }

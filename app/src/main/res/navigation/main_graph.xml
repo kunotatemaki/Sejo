@@ -12,21 +12,31 @@
         tools:layout="@layout/fragment_blank" >
         <action
             android:id="@+id/action_blankFragment_to_groupCreationActivity"
-            app:destination="@id/groupCreationActivity"
-            app:enterAnim="@anim/navigation_activity_right_enter"
-            app:exitAnim="@anim/navigation_activity_exit" />
+            app:destination="@id/group_creation_graph"
+            app:enterAnim="@anim/navigation_new_graph_enter"
+            app:exitAnim="@anim/navigation_new_graph_exit"
+            app:popExitAnim="@anim/navigation_new_graph_pop_exit"
+            app:popEnterAnim="@anim/navigation_new_graph_pop_enter"/>
     </fragment>
-    <activity
-        android:id="@+id/groupCreationActivity"
-        tools:layout="@layout/activity_creation_group"
-        android:name="com.rookia.android.sejo.ui.groupcreation.GroupCreationActivity"
-        android:label="GroupCreationActivity" />
+
+    <include app:graph="@navigation/group_creation_graph"/>
+
 
     <include app:graph="@navigation/register_graph"/>
-    <action android:id="@+id/action_global_validateNumberFragment" app:destination="@id/register_graph"/>
+    <action android:id="@+id/action_global_validateNumberFragment"
+        app:destination="@id/register_graph"
+        app:enterAnim="@anim/navigation_new_graph_enter"
+        app:exitAnim="@anim/navigation_new_graph_exit"
+        app:popExitAnim="@anim/navigation_new_graph_pop_exit"
+        app:popEnterAnim="@anim/navigation_new_graph_pop_enter"/>
 
     <include app:graph="@navigation/login_graph" />
-    <action android:id="@+id/action_global_loginFragment" app:destination="@id/login_graph"/>
+    <action android:id="@+id/action_global_loginFragment"
+        app:destination="@id/login_graph"
+        app:enterAnim="@anim/navigation_new_graph_enter"
+        app:exitAnim="@anim/navigation_new_graph_exit"
+        app:popExitAnim="@anim/navigation_new_graph_pop_exit"
+        app:popEnterAnim="@anim/navigation_new_graph_pop_enter"/>
 
 
 </navigation>

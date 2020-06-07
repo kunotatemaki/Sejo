@@ -17,9 +17,9 @@ import com.rookia.android.sejo.Constants.SMS_PIN_LENGTH
 import com.rookia.android.sejo.Constants.SMS_RESEND_WAITING_TIME
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentValidateSmsBinding
-import com.rookia.android.sejo.ui.common.BaseActivity
 import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.login.LoginStatus
+import com.rookia.android.sejo.ui.main.MainActivity
 import com.rookia.android.sejo.ui.views.numerickeyboard.NumericKeyboardActions
 import com.rookia.android.sejo.utils.TextFormatUtils
 import timber.log.Timber
@@ -235,14 +235,14 @@ class ValidateSmsFragment @Inject constructor(
     }
 
     private fun navigateToInfoFragment() {
-        (activity as? BaseActivity)?.hideKeyboard()
+        (activity as? MainActivity)?.hideKeyboard()
         loginStatus.forceNavigationThroughLogin()
         val direction = ValidateSmsFragmentDirections.actionValidateSmsFragmentToPersonalInfoFragment()
         findNavController().navigate(direction)
     }
 
     private fun navigateToCreatePin() {
-        (activity as? BaseActivity)?.hideKeyboard()
+        (activity as? MainActivity)?.hideKeyboard()
         val direction =
             ValidateSmsFragmentDirections.actionValidateSmsFragmentToPinCreationStep1Fragment()
         findNavController().navigate(direction)

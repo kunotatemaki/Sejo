@@ -19,7 +19,7 @@
             app:popEnterAnim="@anim/navigation_fragment_pop_enter"
             app:popExitAnim="@anim/navigation_fragment_pop_exit"
             app:popUpTo="@id/validateNumberFragment"
-            app:popUpToInclusive="false"></action>
+            app:popUpToInclusive="false"/>
     </fragment>
 
     <fragment
@@ -36,7 +36,6 @@
         <action
             android:id="@+id/action_validateSmsFragment_to_pinCreationStep1Fragment"
             app:destination="@id/pinCreationStep1Fragment"
-
             app:enterAnim="@anim/navigation_fragment_enter"
             app:exitAnim="@anim/navigation_fragment_exit"
             app:launchSingleTop="true"

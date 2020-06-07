@@ -6,9 +6,9 @@ import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentGroupCreationMainInfoBinding
-import com.rookia.android.sejo.ui.common.BaseActivity
 import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.login.LoginStatus
+import com.rookia.android.sejo.ui.main.MainActivity
 
 
 class GroupCreationMainInfoFragment constructor(loginStatus: LoginStatus) :
@@ -31,11 +31,11 @@ class GroupCreationMainInfoFragment constructor(loginStatus: LoginStatus) :
 
     override fun onDestroyView() {
         super.onDestroyView()
-        (activity as? BaseActivity)?.hideKeyboard()
+        (activity as? MainActivity)?.hideKeyboard()
     }
 
     private fun navigateToMembersScreen() {
-        (activity as? BaseActivity)?.hideKeyboard()
+        (activity as? MainActivity)?.hideKeyboard()
         val fee = try {
             binding.fragmentGroupCreationMainInfoFee.text.toString().toInt()
         } catch (e: NumberFormatException) {
