@@ -21,11 +21,12 @@ class PersonalInfoFragment constructor(private val viewModelFactory: ViewModelFa
 
     private lateinit var binding: FragmentPersonalInfoBinding
     private lateinit var viewModel: PersonalInfoViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        forceLoginBeforeLaunchingThisFragment = true
+        arguments?.apply {
+            forceLoginBeforeLaunchingThisFragment = PersonalInfoFragmentArgs.fromBundle(this).forceLogin
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

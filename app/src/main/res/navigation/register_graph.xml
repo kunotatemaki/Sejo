@@ -19,7 +19,7 @@
             app:popEnterAnim="@anim/navigation_fragment_pop_enter"
             app:popExitAnim="@anim/navigation_fragment_pop_exit"
             app:popUpTo="@id/validateNumberFragment"
-            app:popUpToInclusive="false" />
+            app:popUpToInclusive="false"></action>
     </fragment>
 
     <fragment
@@ -80,12 +80,22 @@
             app:popEnterAnim="@anim/navigation_fragment_pop_enter"
             app:popExitAnim="@anim/navigation_fragment_pop_exit"
             app:popUpTo="@id/pinCreationStep1Fragment"
-            app:popUpToInclusive="false" />
+            app:popUpToInclusive="false">
+            <argument
+                android:name="forceLogin"
+                android:defaultValue="false"
+                app:argType="boolean" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/personalInfoFragment"
         android:name="com.rookia.android.sejo.ui.register.name.PersonalInfoFragment"
         android:label="PersonalInfoFragment"
-        tools:layout="@layout/fragment_personal_info"/>
+        tools:layout="@layout/fragment_personal_info">
+        <argument
+            android:name="forceLogin"
+            android:defaultValue="true"
+            app:argType="boolean" />
+    </fragment>
 
 </navigation>

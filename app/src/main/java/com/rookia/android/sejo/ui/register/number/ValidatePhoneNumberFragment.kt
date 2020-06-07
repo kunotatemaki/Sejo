@@ -22,19 +22,6 @@ class ValidatePhoneNumberFragment @Inject constructor(
 
     private lateinit var binding: FragmentValidateNumberBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        val validatedPin =
-//            preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PIN_SENT_TAG)
-//        val validatedPhone =
-//            preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG)
-//        if (validatedPin && validatedPhone) {
-//            navigateToPersonalInfo()
-//        } else if (validatedPhone) {
-//            navigateToPinCreation()
-//        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentValidateNumberBinding.bind(view)

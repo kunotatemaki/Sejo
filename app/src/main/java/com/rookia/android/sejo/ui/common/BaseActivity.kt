@@ -1,13 +1,11 @@
 package com.rookia.android.sejo.ui.common
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentFactory
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
-import com.rookia.android.sejo.ui.login.LoginActivity
 import com.rookia.android.sejo.ui.login.LoginStatus
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -48,16 +46,7 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector {
         //todo handle push notifications
     }
 
-    override fun onStart() {
-        super.onStart()
-        if (loginStatus.needToLogin()) {
-            loginStatus.avoidGoingToLogin()
-            val intent = Intent(this, LoginActivity::class.java).also {
-                it.putExtra(REDIRECTED_TO_LOGIN, true)
-            }
-            startActivity(intent)
-        }
-    }
+
 
     fun hideKeyboard() {
         this.currentFocus?.let { view ->

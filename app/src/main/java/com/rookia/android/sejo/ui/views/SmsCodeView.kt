@@ -237,8 +237,10 @@ class SmsCodeView : ConstraintLayout {
     }
 
     fun addDigit(digit: Char) {
-        introducedPin += digit
-        setUIForText()
+        if(introducedPin.length < 6) {
+            introducedPin += digit
+            setUIForText()
+        }
     }
 
     fun deleteDigit() {
