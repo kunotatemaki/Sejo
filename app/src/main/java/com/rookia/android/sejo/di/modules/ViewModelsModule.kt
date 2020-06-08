@@ -2,6 +2,8 @@ package com.rookia.android.sejo.di.modules
 
 import androidx.lifecycle.ViewModel
 import com.rookia.android.androidutils.di.interfaces.ViewModelKey
+import com.rookia.android.sejo.ui.dashboard.MembersViewModel
+import com.rookia.android.sejo.ui.dashboard.PaymentsViewModel
 import com.rookia.android.sejo.ui.groupcreation.GroupCreationMembersViewModel
 import com.rookia.android.sejo.ui.login.LoginViewModel
 import com.rookia.android.sejo.ui.main.MainViewModel
@@ -56,4 +58,14 @@ internal abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MainViewModel::class)
     internal abstract fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PaymentsViewModel::class)
+    internal abstract fun bindPaymentsViewModel(paymentsViewModel: PaymentsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MembersViewModel::class)
+    internal abstract fun bindMembersViewModel(membersViewModel: MembersViewModel): ViewModel
 }

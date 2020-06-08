@@ -9,8 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavGraph
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.extensions.gone
@@ -29,9 +31,11 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
-    companion object{
-        enum class RegisterScreens(val id: Int){
-            VALIDATE_PHONE(R.id.validateNumberFragment), CREATE_PIN(R.id.pinCreationStep1Fragment), SET_PERSONAL_INFO(R.id.personalInfoFragment)
+    companion object {
+        enum class RegisterScreens(val id: Int) {
+            VALIDATE_PHONE(R.id.validateNumberFragment), CREATE_PIN(R.id.pinCreationStep1Fragment), SET_PERSONAL_INFO(
+                R.id.personalInfoFragment
+            )
         }
     }
 
@@ -66,6 +70,10 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         viewModel = injectViewModel(viewModelFactory)
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
+        val navController = navHostFragment.navController
+        binding.bottomNavigation.setupWithNavController(navController)
 
 
     }

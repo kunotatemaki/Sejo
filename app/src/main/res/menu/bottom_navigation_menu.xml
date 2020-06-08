@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/generalFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_group_creation_members_search_24dp"
+        android:title="@string/bottom_menu_general"/>
+    <item
+        android:id="@+id/membersFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_group_creation_members_search_24dp"
+        android:title="@string/bottom_menu_members"/>
+    <item
+        android:id="@+id/paymentsFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_group_creation_members_search_24dp"
+        android:title="@string/bottom_menu_pagos"/>
+</menu>

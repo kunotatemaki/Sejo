@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/blankFragment">
+    app:startDestination="@id/generalFragment">
 
     <fragment
-        android:id="@+id/blankFragment"
-        android:name="com.rookia.android.sejo.ui.main.BlankFragment"
+        android:id="@+id/generalFragment"
+        android:name="com.rookia.android.sejo.ui.dashboard.GeneralFragment"
         android:label="fragment_blank"
-        tools:layout="@layout/fragment_blank" >
+        tools:layout="@layout/fragment_general" >
         <action
             android:id="@+id/action_blankFragment_to_groupCreationActivity"
             app:destination="@id/group_creation_graph"
@@ -37,6 +37,17 @@
         app:exitAnim="@anim/navigation_new_graph_exit"
         app:popExitAnim="@anim/navigation_new_graph_pop_exit"
         app:popEnterAnim="@anim/navigation_new_graph_pop_enter"/>
+
+    <fragment
+        android:id="@+id/paymentsFragment"
+        android:name="com.rookia.android.sejo.ui.dashboard.PaymentsFragment"
+        android:label="payments_fragment"
+        tools:layout="@layout/payments_fragment" />
+    <fragment
+        android:id="@+id/membersFragment"
+        android:name="com.rookia.android.sejo.ui.dashboard.MembersFragment"
+        android:label="members_fragment"
+        tools:layout="@layout/members_fragment" />
 
 
 </navigation>

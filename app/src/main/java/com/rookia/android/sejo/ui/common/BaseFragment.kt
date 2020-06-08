@@ -11,7 +11,8 @@ import com.rookia.android.sejo.MainGraphDirections
 import com.rookia.android.sejo.ui.login.LoginFragment
 import com.rookia.android.sejo.ui.login.LoginStatus
 import com.rookia.android.sejo.ui.main.MainActivity
-import timber.log.Timber
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
 
 
 /**
@@ -26,7 +27,7 @@ import timber.log.Timber
  */
 
 abstract class BaseFragment(layoutId: Int, protected val loginStatus: LoginStatus) :
-    Fragment(layoutId) {
+    Fragment(layoutId), CoroutineScope by MainScope() {
 
     protected var forceLoginBeforeLaunchingThisFragment = false
 
@@ -35,7 +36,6 @@ abstract class BaseFragment(layoutId: Int, protected val loginStatus: LoginStatu
         super.onViewCreated(view, savedInstanceState)
         hideLoading()
         //navigate to login if needed
-        Timber.d("cretino base checks ${this.javaClass.simpleName}: ${loginStatus.needToLogin()} - ${this !is LoginFragment} - ${(activity as? MainActivity)?.needToNavigateToRegister() != true}")
         if (forceLoginBeforeLaunchingThisFragment || (loginStatus.needToLogin() && this !is LoginFragment && (activity as? MainActivity)?.needToNavigateToRegister() != true)) {
             forceLoginBeforeLaunchingThisFragment = false
             findNavController().navigate(MainGraphDirections.actionGlobalLoginFragment())

@@ -10,12 +10,14 @@ import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.androidutils.utils.DeviceUtils
 import com.rookia.android.sejo.data.repository.GroupRepository
 import com.rookia.android.sejo.framework.utils.FingerprintUtils
+import com.rookia.android.sejo.ui.dashboard.GeneralFragment
+import com.rookia.android.sejo.ui.dashboard.MembersFragment
+import com.rookia.android.sejo.ui.dashboard.PaymentsFragment
 import com.rookia.android.sejo.ui.groupcreation.GroupCreationMainInfoFragment
 import com.rookia.android.sejo.ui.groupcreation.GroupCreationMembersFragment
 import com.rookia.android.sejo.ui.login.BiometricPermissionFragment
 import com.rookia.android.sejo.ui.login.LoginFragment
 import com.rookia.android.sejo.ui.login.LoginStatus
-import com.rookia.android.sejo.ui.main.BlankFragment
 import com.rookia.android.sejo.ui.register.name.PersonalInfoFragment
 import com.rookia.android.sejo.ui.register.number.ValidatePhoneNumberFragment
 import com.rookia.android.sejo.ui.register.pincreation.PinCreationStep1Fragment
@@ -50,10 +52,6 @@ class MainFragmentFactory @Inject constructor(
 ) : FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when (loadFragmentClass(classLoader, className)) {
-            BlankFragment::class.java -> BlankFragment(
-                groupRepository,
-                loginStatus
-            )
             //region REGISTER
             ValidatePhoneNumberFragment::class.java -> ValidatePhoneNumberFragment(
                 resourcesManager,
@@ -96,6 +94,21 @@ class MainFragmentFactory @Inject constructor(
             GroupCreationMainInfoFragment::class.java -> GroupCreationMainInfoFragment(loginStatus)
             GroupCreationMembersFragment::class.java -> GroupCreationMembersFragment(viewModelFactory, permissionManager, resourcesManager, deviceUtils, loginStatus)
             //endregion
+            GeneralFragment::class.java -> GeneralFragment(
+                groupRepository,
+                viewModelFactory,
+                loginStatus
+            )
+            MembersFragment::class.java -> MembersFragment(
+                viewModelFactory,
+                loginStatus
+            )
+            PaymentsFragment::class.java -> PaymentsFragment(
+                viewModelFactory,
+                loginStatus
+            )
+            //region DASHBOARD
+
             else -> super.instantiate(classLoader, className)
         }
     }
