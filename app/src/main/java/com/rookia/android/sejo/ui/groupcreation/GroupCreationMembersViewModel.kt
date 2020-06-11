@@ -5,13 +5,10 @@ import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.extensions.normalizedString
 import com.rookia.android.sejo.Constants
-import com.rookia.android.sejo.domain.local.Group
 import com.rookia.android.sejo.domain.local.PhoneContact
 import com.rookia.android.sejo.usecases.CreateGroupUseCase
 import com.rookia.android.sejo.usecases.GetContactsUseCase
-import com.rookia.android.sejo.usecases.SaveGroupUseCase
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Named
@@ -19,7 +16,6 @@ import javax.inject.Named
 class GroupCreationMembersViewModel @Inject constructor(
     private val getContactsUseCase: GetContactsUseCase,
     private val createGroupUseCase: CreateGroupUseCase,
-    private val saveGroupUseCase: SaveGroupUseCase,
     private val preferencesManager: PreferencesManager,
     @Named("IO") private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
@@ -28,8 +24,8 @@ class GroupCreationMembersViewModel @Inject constructor(
     val phoneContactsList: MediatorLiveData<Result<List<PhoneContact>>> = MediatorLiveData()
     private val _query: MutableLiveData<String> = MutableLiveData()
 
-    private lateinit var _groupCreationResponse: LiveData<Result<Group>>
-    val groupCreationResponse: MediatorLiveData<Result<Group>> = MediatorLiveData()
+    private lateinit var _groupCreationResponse: LiveData<Result<Unit>>
+    val groupCreationResponse: MediatorLiveData<Result<Unit>> = MediatorLiveData()
 
 
     init {
@@ -73,12 +69,6 @@ class GroupCreationMembersViewModel @Inject constructor(
             groupCreationResponse.addSource(_groupCreationResponse) {
                 groupCreationResponse.value = it
             }
-        }
-    }
-
-    fun saveGroup(group: Group) {
-        viewModelScope.launch(dispatcher) {
-            saveGroupUseCase.saveGroup(group)
         }
     }
 

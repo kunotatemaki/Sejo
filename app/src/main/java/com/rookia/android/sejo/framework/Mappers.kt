@@ -1,9 +1,11 @@
 package com.rookia.android.sejo.framework
 
+import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.domain.local.Group
 import com.rookia.android.sejo.framework.persistence.entities.GroupEntity
 import com.rookia.android.sejo.framework.persistence.entities.MemberEntity
 import com.rookia.android.sejo.framework.persistence.model.GroupWithMembers
+import java.util.*
 
 
 /**
@@ -19,35 +21,37 @@ import com.rookia.android.sejo.framework.persistence.model.GroupWithMembers
 
 fun Group.toEntity(): GroupEntity =
     GroupEntity(
-        groupId = groupId,
+        groupId = groupId ?: 0,
         name = name,
         fee = fee,
         owner = owner,
         balance = balance,
-        date = date
+        dateCreation = Date(dateCreation ?: 0L),
+        dateModification = Date(dateModification ?: 0L)
     )
 
-fun GroupEntity.toGroup(membert: List<Group.Member>): Group =
+fun GroupEntity.toGroup(member: List<Group.GroupContact>): Group =
     Group(
         groupId = groupId,
         name = name,
         fee = fee,
         owner = owner,
         balance = balance,
-        date = date,
-        members = membert
+        dateCreation = dateCreation.time,
+        members = member,
+        dateModification = dateModification.time
     )
 
-fun Group.Member.toEntity(groupId: Int): MemberEntity =
+fun Group.GroupContact.toEntity(groupId: Int): MemberEntity =
     MemberEntity(
         groupId = groupId,
         numberId = numberId,
-        admin = isAdmin,
-        memberStatus = memberStatus
+        admin = isAdmin ?: false,
+        memberStatus = memberStatus ?: Constants.MemberStates.GUESS.code
     )
 
-fun MemberEntity.toEntity(): Group.Member =
-    Group.Member(numberId = numberId, isAdmin = admin, memberStatus = memberStatus)
+fun MemberEntity.toEntity(): Group.GroupContact =
+    Group.GroupContact(numberId = numberId, isAdmin = admin, memberStatus = memberStatus)
 
 fun GroupWithMembers.toGroup(): Group {
     val members = this.members.map { it.toEntity() }

@@ -1,6 +1,5 @@
 package com.rookia.android.sejo.framework.persistence.daos
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
@@ -29,6 +28,6 @@ abstract class GroupDao: BaseDao<GroupEntity>() {
 
     @Transaction
     @Query("SELECT * FROM `group`")
-    abstract fun getAllGroups(): LiveData<List<GroupWithMembers>>
+    abstract fun getAllGroups(): List<GroupWithMembers>
 
 }

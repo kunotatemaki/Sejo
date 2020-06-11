@@ -105,9 +105,6 @@ class GroupCreationMembersFragment constructor(
                 when (it.status) {
                     Result.Status.SUCCESS -> {
                         hideLoading()
-                        it.data?.let { group ->
-                            viewModel.saveGroup(group)
-                        }
                         navigateToDashboard()
                     }
                     Result.Status.ERROR -> hideLoading()

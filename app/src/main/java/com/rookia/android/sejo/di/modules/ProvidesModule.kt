@@ -71,13 +71,13 @@ class ProvidesModule {
 
     @Singleton
     @Provides
-    fun providesCreateGroupUseCase(repository: GroupRepository): CreateGroupUseCase =
-        CreateGroupUseCase(repository)
+    fun providesGetGroupsUseCase(repository: GroupRepository): GetGroupsUseCase =
+        GetGroupsUseCase(repository)
 
     @Singleton
     @Provides
-    fun providesSaveGroupUseCase(repository: GroupRepository): SaveGroupUseCase =
-        SaveGroupUseCase(repository)
+    fun providesCreateGroupUseCase(repository: GroupRepository): CreateGroupUseCase =
+        CreateGroupUseCase(repository)
 
     @Singleton
     @Provides

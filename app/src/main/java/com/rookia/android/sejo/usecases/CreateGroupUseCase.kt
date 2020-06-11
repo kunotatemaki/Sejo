@@ -2,7 +2,6 @@ package com.rookia.android.sejo.usecases
 
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.data.repository.GroupRepository
-import com.rookia.android.sejo.domain.local.Group
 import com.rookia.android.sejo.domain.local.PhoneContact
 import kotlinx.coroutines.flow.Flow
 
@@ -27,7 +26,7 @@ class CreateGroupUseCase constructor(
         fee: Int,
         owner: String,
         members: List<PhoneContact>
-    ): Flow<Result<Group>> =
+    ): Flow<Result<Unit>> =
         repository.createGroup(name, fee, owner, members)
 
 }

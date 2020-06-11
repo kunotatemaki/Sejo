@@ -1,6 +1,5 @@
 package com.rookia.android.sejo.data.persistence
 
-import androidx.lifecycle.LiveData
 import com.rookia.android.sejo.domain.local.Group
 
 
@@ -16,6 +15,6 @@ import com.rookia.android.sejo.domain.local.Group
  */
 
 interface PersistenceManager {
-    suspend fun saveGroup(group: Group)
-    fun getGroups(): LiveData<List<Group>>
+    suspend fun saveGroups(groups: List<Group>)
+    fun getGroups(): List<Group>
 }

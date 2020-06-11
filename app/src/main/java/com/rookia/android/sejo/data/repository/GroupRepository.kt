@@ -1,6 +1,5 @@
 package com.rookia.android.sejo.data.repository
 
-import androidx.lifecycle.LiveData
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.domain.local.Group
 import com.rookia.android.sejo.domain.local.PhoneContact
@@ -24,8 +23,8 @@ interface GroupRepository {
         fee: Int,
         owner: String,
         members: List<PhoneContact>
-    ): Flow<Result<Group>>
+    ): Flow<Result<Unit>>
 
-    suspend fun saveGroup(group: Group)
-    fun getGroups(): LiveData<List<Group>>
+    suspend fun saveGroups(groups: List<Group>)
+    fun getGroups(userId: String, lastCheckedDate: Long): Flow<Result<List<Group>>>
 }

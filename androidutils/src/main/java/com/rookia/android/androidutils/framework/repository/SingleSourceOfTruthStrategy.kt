@@ -12,10 +12,9 @@ fun <T, A> resultFromPersistenceAndNetworkInFlow(
     isThePersistedInfoOutdated: (T?) -> Boolean
 ): Flow<Result<T>> =
     flow {
-        var needToGetInfoFromServer = false
 
         var cachedData = persistedDataQuery.invoke()
-        needToGetInfoFromServer = isThePersistedInfoOutdated(cachedData)
+        val needToGetInfoFromServer = isThePersistedInfoOutdated(cachedData)
         if (needToGetInfoFromServer) {
             //show data from db but keep the loading state, as a network call will be done
             emit(Result.loading(cachedData))

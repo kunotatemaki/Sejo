@@ -85,5 +85,6 @@ object Constants {
     enum class MemberStates(val code: Int) {
         OWNER(0), VALIDATED(1), PENDING(2), GUESS(3)
     }
+    const val LAST_CHECKED_TIMESTAMP = "LAST_CHECKED_TIMESTAMP"
     //endregion
 }

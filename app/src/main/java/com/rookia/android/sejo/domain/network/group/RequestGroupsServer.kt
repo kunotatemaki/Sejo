@@ -1,4 +1,6 @@
-package com.rookia.android.sejo.domain.network.user
+package com.rookia.android.sejo.domain.network.group
+
+import com.rookia.android.sejo.domain.local.Group
 
 
 /**
@@ -12,8 +14,8 @@ package com.rookia.android.sejo.domain.network.user
  *
  */
 
-data class UserUpdateRequestServer(
+data class RequestGroupsServer(
     val code: Int,
-    val message: String
+    val message: String,
+    val data: List<Group>? = null
 )
- 

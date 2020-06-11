@@ -1,4 +1,4 @@
-package com.rookia.android.sejo.domain.network.user
+package com.rookia.android.sejo.domain.network
 
 
 /**
@@ -7,12 +7,12 @@ package com.rookia.android.sejo.domain.network.user
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
  *
- * Written by Roll <raulfeliz@gmail.com>, May 2020
+ * Written by Roll <raulfeliz@gmail.com>, June 2020
  *
  *
  */
 
-data class UserPushTokenServer (
+class ResponseWithNoData(
     val code: Int,
     val message: String
 )

@@ -31,7 +31,9 @@ class GroupEntity constructor(
     val owner: String,
     @ColumnInfo(name = "balance")
     val balance: Double,
-    @ColumnInfo(name = "date")
-    val date: Date
+    @ColumnInfo(name = "date_creation")
+    val dateCreation: Date,
+    @ColumnInfo(name = "date_modification")
+    val dateModification: Date
 
 )

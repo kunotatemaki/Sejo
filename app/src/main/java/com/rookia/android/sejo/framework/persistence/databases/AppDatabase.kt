@@ -24,7 +24,7 @@ import com.rookia.android.sejo.framework.persistence.utils.PersistenceConstants
  *
  */
 
-@Database(entities = [(GroupEntity::class), (MemberEntity::class)], exportSchema = false, version = 1)
+@Database(entities = [(GroupEntity::class), (MemberEntity::class)], exportSchema = false, version = 2)
 @TypeConverters(DbConverters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun groupDao(): GroupDao

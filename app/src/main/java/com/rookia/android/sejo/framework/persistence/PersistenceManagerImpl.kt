@@ -1,11 +1,9 @@
 package com.rookia.android.sejo.framework.persistence
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.switchMap
 import com.rookia.android.sejo.data.persistence.PersistenceManager
 import com.rookia.android.sejo.domain.local.Group
 import com.rookia.android.sejo.framework.persistence.databases.AppDatabase
+import com.rookia.android.sejo.framework.persistence.entities.MemberEntity
 import com.rookia.android.sejo.framework.toEntity
 import com.rookia.android.sejo.framework.toGroup
 import javax.inject.Inject
@@ -23,13 +21,20 @@ import javax.inject.Inject
  */
 
 class PersistenceManagerImpl @Inject constructor(private val db: AppDatabase) : PersistenceManager {
-    override suspend fun saveGroup(group: Group) {
-        db.groupDao().insert(group.toEntity())
-        db.membersDao().insert(group.members.map { it.toEntity(groupId = group.groupId) })
+    override suspend fun saveGroups(groups: List<Group>) {
+        db.groupDao().insert(groups.map { it.toEntity() })
+        val contacts = mutableListOf<MemberEntity>()
+        groups.flatMapTo(
+            contacts
+        ) { group ->
+            group.members.map { member ->
+                member.toEntity(group.groupId ?: 0)
+            }
+        }
+        db.membersDao().insert(contacts)
     }
 
-    override fun getGroups(): LiveData<List<Group>> =
-        db.groupDao().getAllGroups().switchMap { list ->
-            MutableLiveData(list.map { group -> group.toGroup() })
-        }
+    override fun getGroups(): List<Group> =
+        db.groupDao().getAllGroups().map { group -> group.toGroup() }
+
 }

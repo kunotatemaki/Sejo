@@ -95,7 +95,6 @@ class MainFragmentFactory @Inject constructor(
             GroupCreationMembersFragment::class.java -> GroupCreationMembersFragment(viewModelFactory, permissionManager, resourcesManager, deviceUtils, loginStatus)
             //endregion
             GeneralFragment::class.java -> GeneralFragment(
-                groupRepository,
                 viewModelFactory,
                 loginStatus
             )

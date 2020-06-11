@@ -1,7 +1,5 @@
 package com.rookia.android.sejo.domain.local
 
-import java.util.*
-
 
 /**
  * Copyright (C) Rookia - All Rights Reserved
@@ -14,18 +12,19 @@ import java.util.*
  *
  */
 
-data class Group (
-    val groupId: Int,
+data class Group(
+    val groupId: Int? = null,
     val name: String,
     val fee: Int,
     val owner: String,
+    val dateCreation: Long? = null,
     val balance: Double,
-    val date: Date,
-    val members: List<Member>
+    var members: List<GroupContact>,
+    val dateModification: Long? = null
 ){
-    data class Member(
+    data class GroupContact(
         val numberId: String,
-        val memberStatus: Int,
-        val isAdmin: Boolean
+        val isAdmin: Boolean?,
+        val memberStatus: Int?
     )
 }
