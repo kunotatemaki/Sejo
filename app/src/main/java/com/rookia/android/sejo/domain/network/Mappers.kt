@@ -23,7 +23,7 @@ import com.rookia.android.sejo.domain.network.user.UserUpdateRequestClient
  */
 
 fun SmsCodeValidationServer.toSmsCodeValidation(): SmsCodeValidation =
-    SmsCodeValidation(result = code, userId = data.userId)
+    SmsCodeValidation(result = code, userId = data.userId, lastUsedGroup = data.lastUsedGroup)
 
 fun LoginRequestServer.toTokenReceived(): TokenReceived =
     TokenReceived(result = code, token = data?.token, userId = null)

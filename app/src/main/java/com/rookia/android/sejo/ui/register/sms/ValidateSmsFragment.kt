@@ -134,7 +134,7 @@ class ValidateSmsFragment @Inject constructor(
                                 viewModel.storeValidatedPhone(phonePrefix, phoneNumber)
                                 binding.fragmentValidateSmsView.hideError()
                                 it.data?.userId?.let { userId ->
-                                    viewModel.setPinSet(userId)
+                                    viewModel.setPinSet(userId, it.data?.lastUsedGroup)
                                     navigateToInfoFragment()
                                 } ?: navigateToCreatePin()
 

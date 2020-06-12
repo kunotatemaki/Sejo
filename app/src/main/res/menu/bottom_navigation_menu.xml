@@ -15,4 +15,9 @@
         android:enabled="true"
         android:icon="@drawable/ic_group_creation_members_search_24dp"
         android:title="@string/bottom_menu_pagos"/>
+    <item
+        android:id="@+id/moreFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_group_creation_members_search_24dp"
+        android:title="@string/bottom_menu_pagos"/>
 </menu>

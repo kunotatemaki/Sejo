@@ -18,7 +18,8 @@ data class SmsCodeValidationServer(
     val data: SmsCodeValidationResponse
 ){
     data class SmsCodeValidationResponse(
-        val userId: String?
+        val userId: String?,
+        val lastUsedGroup: Int?
     )
 }
  

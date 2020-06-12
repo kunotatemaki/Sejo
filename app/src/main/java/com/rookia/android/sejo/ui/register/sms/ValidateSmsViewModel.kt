@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
+import com.rookia.android.sejo.Constants.LAST_USED_GROUP_TAG
 import com.rookia.android.sejo.Constants.NAVIGATION_PIN_SENT_TAG
 import com.rookia.android.sejo.Constants.NAVIGATION_VALIDATED_PHONE_TAG
 import com.rookia.android.sejo.Constants.USER_ID_TAG
@@ -56,9 +57,12 @@ class ValidateSmsViewModel @Inject constructor(
         }
     }
 
-    fun setPinSet(userId: String) {
+    fun setPinSet(userId: String, lastUsedGroup: Int?) {
         preferencesManager.setBooleanIntoPreferences(NAVIGATION_PIN_SENT_TAG, true)
         preferencesManager.setStringIntoPreferences(USER_ID_TAG, userId)
+        lastUsedGroup?.let {
+            preferencesManager.setIntIntoPreferences(LAST_USED_GROUP_TAG, lastUsedGroup)
+        }
     }
 
 

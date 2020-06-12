@@ -33,9 +33,16 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
     companion object {
         enum class RegisterScreens(val id: Int) {
-            VALIDATE_PHONE(R.id.validateNumberFragment), CREATE_PIN(R.id.pinCreationStep1Fragment), SET_PERSONAL_INFO(
-                R.id.personalInfoFragment
-            )
+            VALIDATE_PHONE(R.id.validateNumberFragment),
+            CREATE_PIN(R.id.pinCreationStep1Fragment),
+            SET_PERSONAL_INFO(R.id.personalInfoFragment)
+        }
+
+        enum class BottomMenuType(val id: Int) {
+            DASHBOARD(R.id.generalFragment),
+            MEMBERS(R.id.membersFragment),
+            PAYMENTS(R.id.paymentsFragment),
+            MORE(R.id.moreFragment)
         }
     }
 
@@ -71,7 +78,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         viewModel = injectViewModel(viewModelFactory)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
         val navController = navHostFragment.navController
         binding.bottomNavigation.setupWithNavController(navController)
 
@@ -146,6 +154,17 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             }
             navigate(MainGraphDirections.actionGlobalValidateNumberFragment())
         }
+    }
+
+    fun showBadgeInBottomMenu(type: BottomMenuType, number: Int? = null) {
+        val badge = binding.bottomNavigation.getOrCreateBadge(type.id)
+        number?.let {
+            badge.number = number
+        }
+    }
+
+    fun removeBadgeFromBottomMenu(type: BottomMenuType) {
+        binding.bottomNavigation.removeBadge(type.id)
     }
 
 }
