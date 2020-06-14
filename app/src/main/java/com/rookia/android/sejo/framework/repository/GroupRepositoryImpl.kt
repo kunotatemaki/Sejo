@@ -89,30 +89,64 @@ class GroupRepositoryImpl @Inject constructor(
                     persistenceManager.saveGroups(it)
                 }
             },
-            isThePersistedInfoOutdated = {rateLimiter.expired(lastCheckedDate, 5, TimeUnit.MINUTES)}
+            isThePersistedInfoOutdated = {
+                rateLimiter.expired(
+                    lastCheckedDate,
+                    5,
+                    TimeUnit.MINUTES
+                )
+            }
         )
     }
 
-    private suspend fun getGroupsFromServer(userId: String): Result<List<Group>> =
-        try {
-            val dateModification =
-                preferencesManager.getLongFromPreferences(Constants.LAST_CHECKED_TIMESTAMP, 0L)
+    private suspend fun getGroupsFromServer(userId: String): Result<List<Group>> {
 
-            val api = networkServiceFactory.getGroupInstance()
+        val requestTimestamp = System.currentTimeMillis()
+        val api = networkServiceFactory.getGroupInstance()
 
-            val resp = api.getGroups(userId,dateModification,1,100)
-            if (resp.isSuccessful && resp.body() != null) {
-                val lastCheckedDate = resp.body()?.data?.maxBy { it.dateModification  ?: 0L}?.dateModification ?: 0L
-                if(dateModification < lastCheckedDate){
-                    preferencesManager.setLongIntoPreferences(Constants.LAST_CHECKED_TIMESTAMP, lastCheckedDate)
+        val listOfGroups = mutableListOf<Group>()
+        var needToRequest = true
+        while (needToRequest) {
+            val dateModification = getLastRequestedTime()
+            try {
+                val resp = api.getGroups(
+                    userId,
+                    dateModification,
+                    Constants.NUMBER_OF_GROUPS_PER_PAGE_QUERIED
+                )
+                if (resp.isSuccessful && resp.body() != null) {
+                    val lastCheckedDate =
+                        resp.body()?.data?.maxBy { it.dateModification ?: 0L }?.dateModification
+                            ?: 0L
+                    if (dateModification < lastCheckedDate) {
+                        saveLastRequestedTime(lastCheckedDate)
+                    }
+                    val listOfGroupsReturned = resp.body()?.data ?: listOf()
+                    listOfGroups.addAll(listOfGroupsReturned)
+                    if(listOfGroupsReturned.size < Constants.NUMBER_OF_GROUPS_PER_PAGE_QUERIED){
+                        needToRequest = false
+                        saveLastRequestedTime(lastCheckedDate)
+                    }
+                } else {
+                    return Result.error(resp.message(), listOfGroups)
                 }
-                Result.success(resp.body()?.data)
-            } else {
-                Result.error(resp.message())
+
+            } catch (e: Exception) {
+                return Result.error(e.message, listOfGroups)
             }
-        } catch (e: Exception) {
-            Result.error(e.message)
         }
 
+        return Result.success(listOfGroups)
+
+    }
+
+    private fun saveLastRequestedTime(timestamp: Long){
+        preferencesManager.setLongIntoPreferences(
+            Constants.LAST_CHECKED_TIMESTAMP,
+            timestamp
+        )
+    }
+
+    private fun getLastRequestedTime(): Long = preferencesManager.getLongFromPreferences(Constants.LAST_CHECKED_TIMESTAMP, 0L)
 
 }

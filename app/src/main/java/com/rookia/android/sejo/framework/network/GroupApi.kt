@@ -14,7 +14,6 @@ interface GroupApi {
     @GET("groups/{userId}")
     suspend fun getGroups(@Path("userId") userId: String,
                           @Query("dateModification") dateModification: Long,
-                          @Query("pageNumber") pageNumber: Int,
                           @Query("pageSize") pageSize: Int
                           ): Response<RequestGroupsServer>
 }

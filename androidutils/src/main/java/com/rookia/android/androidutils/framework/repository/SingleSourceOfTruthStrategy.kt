@@ -64,11 +64,11 @@ fun <T, A> resultFromPersistenceAndNetworkInLivePagedList(
             val responseStatus = networkCall.invoke()
             // Stop the previous emission to avoid dispatching the updated user
             // as `loading`.
+            persistCallResult.invoke(responseStatus.data)
+            cachedData = persistedDataQuery.invoke()
             if (responseStatus.status == Result.Status.ERROR) {
                 emitSource(cachedData.map {  Result.error(responseStatus.message, cachedData.value)})
             } else {
-                persistCallResult.invoke(responseStatus.data)
-                cachedData = persistedDataQuery.invoke()
                 emitSource(cachedData.map {  Result.success(cachedData.value)})
             }
         }
