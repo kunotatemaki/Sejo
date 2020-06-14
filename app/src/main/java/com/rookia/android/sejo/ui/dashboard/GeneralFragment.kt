@@ -8,6 +8,7 @@ import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.R
+import com.rookia.android.sejo.databinding.FragmentGeneralBinding
 import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.login.LoginStatus
 import kotlinx.android.synthetic.main.fragment_general.*
@@ -20,11 +21,16 @@ class GeneralFragment constructor(
     BaseFragment(R.layout.fragment_general, loginStatus) {
 
     private lateinit var viewModel: GeneralViewModel
+    private lateinit var adapter: GeneralAdapter
+
+    private lateinit var binding: FragmentGeneralBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentGeneralBinding.bind(view)
 
         viewModel = injectViewModel(viewModelFactory)
+        adapter = GeneralAdapter()
 //        test.setText("623")
         button1.setOnClickListener {
             navigateToGroupCreation()
@@ -36,23 +42,32 @@ class GeneralFragment constructor(
 //        error.setOnClickListener {
 //            test.showErrorFeedback()
 //        }
+        binding.list.adapter = adapter
 
         viewModel.groups.observe(viewLifecycleOwner, Observer {
             Timber.d("")
             when(it.status){
                 Result.Status.SUCCESS -> {
-                    Timber.d("")
+                    hideLoading()
+                    adapter.submitList(it.data)
                 }
-                Result.Status.ERROR -> {}
-                Result.Status.LOADING -> {}
+                Result.Status.LOADING -> {
+                    showLoading()
+                    adapter.submitList(it.data)
+                }
+                Result.Status.ERROR -> {
+                    hideLoading()
+                }
             }
+
+
         })
 
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.checkForNewGroups()
+        viewModel.loadGroups()
     }
 
     private fun navigateToGroupCreation() {

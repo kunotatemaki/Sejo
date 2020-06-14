@@ -29,10 +29,13 @@ import com.rookia.android.sejo.databinding.FragmentGroupCreationMembersBinding
 import com.rookia.android.sejo.domain.local.PhoneContact
 import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.login.LoginStatus
-import timber.log.Timber
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import java.util.*
 
 
+@FlowPreview
+@ExperimentalCoroutinesApi
 class GroupCreationMembersFragment constructor(
     private val viewModelFactory: ViewModelFactory,
     private val permissionManager: PermissionManager,
@@ -50,6 +53,7 @@ class GroupCreationMembersFragment constructor(
     }
 
     private lateinit var binding: FragmentGroupCreationMembersBinding
+
     private lateinit var viewModel: GroupCreationMembersViewModel
     private val contactsAdapter = GroupCreationMembersAdapter(this)
     private val contactsAddedAdapter = GroupCreationMembersAddedAdapter(this, resourcesManager)
@@ -158,9 +162,8 @@ class GroupCreationMembersFragment constructor(
                 SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(p0: String?): Boolean = true
 
-                override fun onQueryTextChange(text: String?): Boolean {
-                    Timber.d("")
-                    viewModel.query(text)
+                override fun onQueryTextChange(text: String): Boolean {
+                    viewModel.queryChannel.offer(text)
                     return true
                 }
 

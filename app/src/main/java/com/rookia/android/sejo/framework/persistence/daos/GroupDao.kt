@@ -1,5 +1,6 @@
 package com.rookia.android.sejo.framework.persistence.daos
 
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
@@ -27,7 +28,7 @@ abstract class GroupDao: BaseDao<GroupEntity>() {
     abstract fun getGroup(groupId: Int): GroupWithMembers?
 
     @Transaction
-    @Query("SELECT * FROM `group`")
-    abstract fun getAllGroups(): List<GroupWithMembers>
+    @Query("SELECT * FROM `group` ORDER BY date_modification DESC")
+    abstract fun getAllGroups(): DataSource.Factory<Int, GroupWithMembers>
 
 }

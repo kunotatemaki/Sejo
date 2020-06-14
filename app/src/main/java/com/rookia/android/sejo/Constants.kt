@@ -87,5 +87,6 @@ object Constants {
         OWNER(0), VALIDATED(1), PENDING(2), GUESS(3)
     }
     const val LAST_CHECKED_TIMESTAMP = "LAST_CHECKED_TIMESTAMP"
+    const val NUMBER_OF_GROUPS_PER_PAGE_QUERIED = 5
     //endregion
 }

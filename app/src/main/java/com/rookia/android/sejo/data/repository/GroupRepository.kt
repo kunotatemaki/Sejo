@@ -1,5 +1,7 @@
 package com.rookia.android.sejo.data.repository
 
+import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.domain.local.Group
 import com.rookia.android.sejo.domain.local.PhoneContact
@@ -26,5 +28,5 @@ interface GroupRepository {
     ): Flow<Result<Unit>>
 
     suspend fun saveGroups(groups: List<Group>)
-    fun getGroups(userId: String, lastCheckedDate: Long): Flow<Result<List<Group>>>
+    fun getGroups(userId: String): LiveData<Result<PagedList<Group>>>
 }

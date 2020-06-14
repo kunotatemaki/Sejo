@@ -1,9 +1,10 @@
 package com.rookia.android.sejo.usecases
 
+import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.data.repository.GroupRepository
 import com.rookia.android.sejo.domain.local.Group
-import kotlinx.coroutines.flow.Flow
 
 
 /**
@@ -21,10 +22,7 @@ class GetGroupsUseCase constructor(
     private val repository: GroupRepository
 ) {
 
-    fun getGroups(
-        userId: String,
-        lastCheckedDate: Long
-    ): Flow<Result<List<Group>>> =
-        repository.getGroups(userId, lastCheckedDate)
+    fun getGroups(userId: String): LiveData<Result<PagedList<Group>>> =
+        repository.getGroups(userId)
 
 }

@@ -1,5 +1,8 @@
 package com.rookia.android.sejo.framework.persistence
 
+import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
+import androidx.paging.toLiveData
 import com.rookia.android.sejo.data.persistence.PersistenceManager
 import com.rookia.android.sejo.domain.local.Group
 import com.rookia.android.sejo.framework.persistence.databases.AppDatabase
@@ -34,7 +37,9 @@ class PersistenceManagerImpl @Inject constructor(private val db: AppDatabase) : 
         db.membersDao().insert(contacts)
     }
 
-    override fun getGroups(): List<Group> =
-        db.groupDao().getAllGroups().map { group -> group.toGroup() }
+    override fun getGroups(): LiveData<PagedList<Group>> =
+        db.groupDao().getAllGroups()
+            .map { it.toGroup() }
+            .toLiveData(pageSize = 10)
 
 }

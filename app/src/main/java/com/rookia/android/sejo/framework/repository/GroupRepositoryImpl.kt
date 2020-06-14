@@ -1,9 +1,11 @@
 package com.rookia.android.sejo.framework.repository
 
 import androidx.annotation.VisibleForTesting
+import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
-import com.rookia.android.androidutils.framework.repository.resultFromPersistenceAndNetworkInFlow
+import com.rookia.android.androidutils.framework.repository.resultFromPersistenceAndNetworkInLivePagedList
 import com.rookia.android.androidutils.framework.repository.resultOnlyFromOneSourceInFlow
 import com.rookia.android.androidutils.utils.RateLimiter
 import com.rookia.android.sejo.Constants
@@ -76,10 +78,12 @@ class GroupRepositoryImpl @Inject constructor(
         persistenceManager.saveGroups(groups)
     }
 
-    override fun getGroups(userId: String, lastCheckedDate: Long): Flow<Result<List<Group>>> =
-        resultFromPersistenceAndNetworkInFlow(
+    override fun getGroups(userId: String): LiveData<Result<PagedList<Group>>> {
+        val lastCheckedDate =
+            preferencesManager.getLongFromPreferences(Constants.LAST_CHECKED_TIMESTAMP, 0L)
+        return resultFromPersistenceAndNetworkInLivePagedList(
             persistedDataQuery = { persistenceManager.getGroups() },
-            networkCall = { getGroupsFromServer(userId, lastCheckedDate) },
+            networkCall = { getGroupsFromServer(userId) },
             persistCallResult = { listOfGroups ->
                 listOfGroups?.let {
                     persistenceManager.saveGroups(it)
@@ -87,12 +91,16 @@ class GroupRepositoryImpl @Inject constructor(
             },
             isThePersistedInfoOutdated = {rateLimiter.expired(lastCheckedDate, 5, TimeUnit.MINUTES)}
         )
+    }
 
-    private suspend fun getGroupsFromServer(userId: String, dateModification: Long): Result<List<Group>> =
+    private suspend fun getGroupsFromServer(userId: String): Result<List<Group>> =
         try {
+            val dateModification =
+                preferencesManager.getLongFromPreferences(Constants.LAST_CHECKED_TIMESTAMP, 0L)
+
             val api = networkServiceFactory.getGroupInstance()
 
-            val resp = api.getGroups(userId, dateModification)
+            val resp = api.getGroups(userId,dateModification,1,100)
             if (resp.isSuccessful && resp.body() != null) {
                 val lastCheckedDate = resp.body()?.data?.maxBy { it.dateModification  ?: 0L}?.dateModification ?: 0L
                 if(dateModification < lastCheckedDate){
