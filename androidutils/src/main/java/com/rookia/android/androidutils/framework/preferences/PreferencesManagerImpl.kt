@@ -4,11 +4,13 @@ import android.content.Context
 import androidx.preference.PreferenceManager
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.utils.security.Encryption
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class PreferencesManagerImpl @Inject constructor(private var context: Context, private val encryption: Encryption?) :
+class PreferencesManagerImpl @Inject constructor(
+    @ApplicationContext private var context: Context,
+    private val encryption: Encryption?
+) :
     PreferencesManager {
 
     override fun getIntFromPreferences(key: String, default: Int): Int {
@@ -52,7 +54,11 @@ class PreferencesManagerImpl @Inject constructor(private var context: Context, p
         prefs.edit().putString(key, value).apply()
     }
 
-    override fun setEncryptedStringIntoPreferences(key: String, value: String, alias: String): Boolean {
+    override fun setEncryptedStringIntoPreferences(
+        key: String,
+        value: String,
+        alias: String
+    ): Boolean {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         val encryptedText = encryption?.encryptString(value, alias)
         return if (encryptedText.isNullOrBlank().not()) {

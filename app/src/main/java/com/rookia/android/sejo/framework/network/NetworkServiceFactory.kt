@@ -8,6 +8,7 @@ import okhttp3.Request
 import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 
 /**
@@ -21,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  *
  */
 
-open class NetworkServiceFactory constructor(private val preferencesManager: PreferencesManager) {
+open class NetworkServiceFactory @Inject constructor(private val preferencesManager: PreferencesManager) {
 
     companion object {
 //        const val ROOKIA_EXPENSES_SERVER_BASE_URL = "http://10.0.2.2:8080"

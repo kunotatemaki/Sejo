@@ -7,6 +7,7 @@ import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.framework.repository.resultOnlyFromOneSourceInFlow
 import com.rookia.android.sejo.data.repository.ContactsRepository
 import com.rookia.android.sejo.domain.local.PhoneContact
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -22,7 +23,7 @@ import javax.inject.Inject
  *
  */
 
-class ContactsRepositoryImpl @Inject constructor(private val context: Context) :
+class ContactsRepositoryImpl @Inject constructor(@ApplicationContext private val context: Context) :
     ContactsRepository {
 
     override fun loadContacts(): Flow<Result<List<PhoneContact>>> =

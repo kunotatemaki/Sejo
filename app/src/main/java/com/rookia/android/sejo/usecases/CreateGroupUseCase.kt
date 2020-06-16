@@ -4,6 +4,7 @@ import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.data.repository.GroupRepository
 import com.rookia.android.sejo.domain.local.PhoneContact
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 
 /**
@@ -17,7 +18,7 @@ import kotlinx.coroutines.flow.Flow
  *
  */
 
-class CreateGroupUseCase constructor(
+class CreateGroupUseCase @Inject constructor(
     private val repository: GroupRepository
 ) {
 

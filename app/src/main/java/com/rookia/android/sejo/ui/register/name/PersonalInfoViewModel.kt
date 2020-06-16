@@ -1,5 +1,6 @@
 package com.rookia.android.sejo.ui.register.name
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
@@ -7,16 +8,15 @@ import androidx.lifecycle.asLiveData
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
+import com.rookia.android.sejo.di.modules.ProvidesModule
 import com.rookia.android.sejo.domain.local.user.User
 import com.rookia.android.sejo.usecases.UpdatePersonalInfoUseCase
 import kotlinx.coroutines.CoroutineDispatcher
-import javax.inject.Inject
-import javax.inject.Named
 
-class PersonalInfoViewModel @Inject constructor(
+class PersonalInfoViewModel @ViewModelInject constructor(
     private val preferencesManager: PreferencesManager,
     private val userUseCase: UpdatePersonalInfoUseCase,
-    @Named("IO") private val dispatcher: CoroutineDispatcher
+    @ProvidesModule.IODispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private lateinit var _userSentToServer: LiveData<Result<Int>>

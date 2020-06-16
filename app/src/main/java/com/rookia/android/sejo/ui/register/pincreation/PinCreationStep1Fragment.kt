@@ -6,19 +6,15 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentPinCreationStep1Binding
 import com.rookia.android.sejo.ui.common.BaseFragment
-import com.rookia.android.sejo.ui.login.LoginStatus
 import com.rookia.android.sejo.ui.views.PinScreen
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
 
-class PinCreationStep1Fragment @Inject constructor(
-    private val resourcesManager: ResourcesManager,
-    loginStatus: LoginStatus
-) : BaseFragment(R.layout.fragment_pin_creation_step1, loginStatus),
+@AndroidEntryPoint
+class PinCreationStep1Fragment : BaseFragment(R.layout.fragment_pin_creation_step1),
     PinScreen.PinValidator {
 
     private lateinit var binding: FragmentPinCreationStep1Binding

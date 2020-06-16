@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavGraph
@@ -14,22 +15,17 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
-import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.visible
-import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.MainGraphDirections
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ActivityMainBinding
-import com.rookia.android.sejo.ui.fragmentfactories.MainFragmentFactory
 import com.rookia.android.sejo.ui.login.LoginStatus
-import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), HasAndroidInjector {
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
 
     companion object {
         enum class RegisterScreens(val id: Int) {
@@ -46,15 +42,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         }
     }
 
-    @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
-
-    @Inject
-    lateinit var fragmentFactory: MainFragmentFactory
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
     private lateinit var binding: ActivityMainBinding
 
     @Inject
@@ -63,20 +50,13 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     @Inject
     lateinit var preferencesManager: PreferencesManager
 
-    private lateinit var viewModel: MainViewModel
-
-    override fun androidInjector(): AndroidInjector<Any> {
-        return androidInjector
-    }
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme_NoActionBar)
-        AndroidInjection.inject(this)
-        supportFragmentManager.fragmentFactory = fragmentFactory
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        viewModel = injectViewModel(viewModelFactory)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
@@ -166,5 +146,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     fun removeBadgeFromBottomMenu(type: BottomMenuType) {
         binding.bottomNavigation.removeBadge(type.id)
     }
+
 
 }

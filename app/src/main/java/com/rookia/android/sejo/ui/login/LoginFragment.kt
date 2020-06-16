@@ -5,13 +5,10 @@ import android.os.Handler
 import android.view.View
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.rookia.android.androidutils.data.preferences.PreferencesManager
-import com.rookia.android.androidutils.data.resources.ResourcesManager
-import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.domain.vo.Result
-import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentLoginBinding
@@ -19,22 +16,22 @@ import com.rookia.android.sejo.domain.network.LoginResponseCodes
 import com.rookia.android.sejo.framework.utils.FingerprintUtils
 import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.views.PinScreen
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.Executor
 import javax.inject.Inject
 
-
-class LoginFragment @Inject constructor(
-    private val viewModelFactory: ViewModelFactory,
-    private val fingerprintUtils: FingerprintUtils,
-    private val biometricInfo: BiometricPrompt.PromptInfo,
-    private val preferencesManager: PreferencesManager,
-    private val resourcesManager: ResourcesManager,
-    loginStatus: LoginStatus
-) : BaseFragment(R.layout.fragment_login, loginStatus), PinScreen.BiometricHelper,
+@AndroidEntryPoint
+class LoginFragment : BaseFragment(R.layout.fragment_login), PinScreen.BiometricHelper,
     PinScreen.PinValidator {
 
+    @Inject
+    lateinit var fingerprintUtils: FingerprintUtils
+
+    @Inject
+    lateinit var biometricInfo: BiometricPrompt.PromptInfo
+
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel: LoginViewModel by viewModels()
 
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
@@ -48,7 +45,6 @@ class LoginFragment @Inject constructor(
             setPinValidator(this@LoginFragment)
             setHeader(resourcesManager.getString(R.string.fragment_login_title))
         }
-        viewModel = injectViewModel(viewModelFactory)
 
         executor = ContextCompat.getMainExecutor(context)
         biometricPrompt = BiometricPrompt(this, executor,

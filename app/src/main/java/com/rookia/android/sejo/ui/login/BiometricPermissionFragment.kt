@@ -3,15 +3,16 @@ package com.rookia.android.sejo.ui.login
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentBiometricPermisssionBinding
 import com.rookia.android.sejo.ui.common.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
 
-class BiometricPermissionFragment constructor(private val preferencesManager: PreferencesManager, loginStatus: LoginStatus) :
-    BaseFragment(R.layout.fragment_biometric_permisssion, loginStatus) {
+@AndroidEntryPoint
+class BiometricPermissionFragment :
+    BaseFragment(R.layout.fragment_biometric_permisssion) {
 
     private lateinit var binding: FragmentBiometricPermisssionBinding
 

@@ -5,28 +5,22 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.rookia.android.androidutils.data.resources.ResourcesManager
-import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.domain.vo.Result
-import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentPinCreationStep2Binding
 import com.rookia.android.sejo.ui.common.BaseFragment
-import com.rookia.android.sejo.ui.login.LoginStatus
 import com.rookia.android.sejo.ui.views.PinScreen
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-class PinCreationStep2Fragment @Inject constructor(
-    private val resourcesManager: ResourcesManager,
-    private val viewModelFactory: ViewModelFactory,
-    loginStatus: LoginStatus
-) : BaseFragment(R.layout.fragment_pin_creation_step2, loginStatus), PinScreen.PinValidator {
+@AndroidEntryPoint
+class PinCreationStep2Fragment : BaseFragment(R.layout.fragment_pin_creation_step2), PinScreen.PinValidator {
 
     private lateinit var binding: FragmentPinCreationStep2Binding
 
-    private lateinit var viewModel: PinCreationStep2ViewModel
+    private val viewModel: PinCreationStep2ViewModel by viewModels()
 
     private var previousCode: String? = null
 
@@ -45,7 +39,6 @@ class PinCreationStep2Fragment @Inject constructor(
         binding.fragmentPinCreationStep2PinScreen.setHeader(resourcesManager.getString(R.string.fragment_pin_creation_step_2_header))
         binding.fragmentPinCreationStep2PinScreen.setPinValidator(this)
         setToolbar(binding.fragmentPinCreationStep2Toolbar, true, resourcesManager.getString(R.string.fragment_pin_creation_toolbar_title))
-        viewModel = injectViewModel(viewModelFactory)
 
         viewModel.pinSentToServer.observe(viewLifecycleOwner, Observer {
             it?.let {

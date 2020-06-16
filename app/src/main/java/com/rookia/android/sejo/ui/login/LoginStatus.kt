@@ -1,5 +1,8 @@
 package com.rookia.android.sejo.ui.login
 
+import javax.inject.Inject
+import javax.inject.Singleton
+
 
 /**
  * Copyright (C) Rookia - All Rights Reserved
@@ -12,7 +15,8 @@ package com.rookia.android.sejo.ui.login
  *
  */
 
-class LoginStatus {
+@Singleton
+class LoginStatus @Inject constructor() {
 
     private var _launchLogin = true
     fun needToLogin(): Boolean = _launchLogin

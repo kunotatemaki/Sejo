@@ -3,6 +3,7 @@ package com.rookia.android.sejo.usecases
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.data.repository.SmsCodeRepository
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 
 /**
@@ -16,7 +17,7 @@ import kotlinx.coroutines.flow.Flow
  *
  */
 
-class RequestSmsCodeUseCase constructor(private val repository: SmsCodeRepository) {
+class RequestSmsCodeUseCase @Inject constructor(private val repository: SmsCodeRepository) {
 
     fun askForSmsCode(
         phonePrefix: String,

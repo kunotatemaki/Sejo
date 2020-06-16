@@ -1,10 +1,12 @@
 package com.rookia.android.sejo.ui.groupcreation
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.extensions.normalizedString
 import com.rookia.android.sejo.Constants
+import com.rookia.android.sejo.di.modules.ProvidesModule
 import com.rookia.android.sejo.domain.local.PhoneContact
 import com.rookia.android.sejo.usecases.CreateGroupUseCase
 import com.rookia.android.sejo.usecases.GetContactsUseCase
@@ -17,16 +19,14 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import java.util.*
-import javax.inject.Inject
-import javax.inject.Named
 
 @ExperimentalCoroutinesApi
 @FlowPreview
-class GroupCreationMembersViewModel @Inject constructor(
+class GroupCreationMembersViewModel @ViewModelInject constructor(
     private val getContactsUseCase: GetContactsUseCase,
     private val createGroupUseCase: CreateGroupUseCase,
     private val preferencesManager: PreferencesManager,
-    @Named("IO") private val dispatcher: CoroutineDispatcher
+    @ProvidesModule.IODispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     companion object {

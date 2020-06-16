@@ -6,11 +6,12 @@ import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.rookia.android.androidutils.data.resources.ResourcesManager
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ResourcesManagerImpl @Inject constructor(private val context: Context) : ResourcesManager {
+class ResourcesManagerImpl @Inject constructor(@ApplicationContext private val context: Context) : ResourcesManager {
 
     override fun getString(resId: Int): String {
         return context.getString(resId)

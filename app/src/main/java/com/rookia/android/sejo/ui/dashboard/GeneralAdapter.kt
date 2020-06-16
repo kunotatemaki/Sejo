@@ -51,7 +51,7 @@ class GroupViewHolder constructor(private val binding: ItemGroupBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(group: Group?) {
         group?.let {
-            binding.group.text = group.groupId.toString()
+            binding.group = group
 
         }
     }

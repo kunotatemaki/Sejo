@@ -4,6 +4,7 @@ import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.data.repository.ContactsRepository
 import com.rookia.android.sejo.domain.local.PhoneContact
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 
 /**
@@ -17,7 +18,7 @@ import kotlinx.coroutines.flow.Flow
  *
  */
 
-class GetContactsUseCase constructor(private val repository: ContactsRepository) {
+class GetContactsUseCase @Inject constructor(private val repository: ContactsRepository) {
 
     fun loadContacts(): Flow<Result<List<PhoneContact>>> = repository.loadContacts()
 

@@ -7,12 +7,10 @@ import androidx.navigation.fragment.findNavController
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentGroupCreationMainInfoBinding
 import com.rookia.android.sejo.ui.common.BaseFragment
-import com.rookia.android.sejo.ui.login.LoginStatus
 import com.rookia.android.sejo.ui.main.MainActivity
 
 
-class GroupCreationMainInfoFragment constructor(loginStatus: LoginStatus) :
-    BaseFragment(R.layout.fragment_group_creation_main_info, loginStatus) {
+class GroupCreationMainInfoFragment : BaseFragment(R.layout.fragment_group_creation_main_info) {
 
     lateinit var binding: FragmentGroupCreationMainInfoBinding
 

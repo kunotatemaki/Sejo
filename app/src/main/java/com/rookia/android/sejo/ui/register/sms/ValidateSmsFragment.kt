@@ -4,37 +4,36 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.phone.SmsRetriever
-import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.extensions.invisible
 import com.rookia.android.androidutils.extensions.visible
-import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.Constants.SMS_PIN_LENGTH
 import com.rookia.android.sejo.Constants.SMS_RESEND_WAITING_TIME
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentValidateSmsBinding
 import com.rookia.android.sejo.ui.common.BaseFragment
-import com.rookia.android.sejo.ui.login.LoginStatus
 import com.rookia.android.sejo.ui.main.MainActivity
 import com.rookia.android.sejo.ui.views.numerickeyboard.NumericKeyboardActions
 import com.rookia.android.sejo.utils.TextFormatUtils
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
-class ValidateSmsFragment @Inject constructor(
-    private val viewModelFactory: ViewModelFactory,
-    private val textFormatUtils: TextFormatUtils,
-    loginStatus: LoginStatus
-) : BaseFragment(R.layout.fragment_validate_sms, loginStatus) {
+@AndroidEntryPoint
+class ValidateSmsFragment : BaseFragment(R.layout.fragment_validate_sms) {
+
+    @Inject
+    lateinit var textFormatUtils: TextFormatUtils
 
     private lateinit var binding: FragmentValidateSmsBinding
-    private lateinit var viewModel: ValidateSmsViewModel
+    private val viewModel: ValidateSmsViewModel by viewModels()
     private lateinit var phoneNumber: String
     private lateinit var phonePrefix: String
     private val filter = IntentFilter().apply {
@@ -75,7 +74,6 @@ class ValidateSmsFragment @Inject constructor(
         binding.textFormatUtils = textFormatUtils
         binding.fragmentValidateSmsView.setPhoneText(phonePrefix, phoneNumber)
         setToolbar(binding.fragmentValidateSmsToolbar, showBackArrow = true)
-        viewModel = injectViewModel(viewModelFactory)
 
         //keyboard listener
         context?.let {
@@ -237,7 +235,8 @@ class ValidateSmsFragment @Inject constructor(
     private fun navigateToInfoFragment() {
         (activity as? MainActivity)?.hideKeyboard()
         loginStatus.forceNavigationThroughLogin()
-        val direction = ValidateSmsFragmentDirections.actionValidateSmsFragmentToPersonalInfoFragment()
+        val direction =
+            ValidateSmsFragmentDirections.actionValidateSmsFragmentToPersonalInfoFragment()
         findNavController().navigate(direction)
     }
 

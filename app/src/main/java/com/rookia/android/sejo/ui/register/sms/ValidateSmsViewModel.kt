@@ -1,5 +1,6 @@
 package com.rookia.android.sejo.ui.register.sms
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
@@ -12,20 +13,19 @@ import com.rookia.android.sejo.Constants.NAVIGATION_VALIDATED_PHONE_TAG
 import com.rookia.android.sejo.Constants.USER_ID_TAG
 import com.rookia.android.sejo.Constants.USER_PHONE_NUMBER_TAG
 import com.rookia.android.sejo.Constants.USER_PHONE_PREFIX_TAG
+import com.rookia.android.sejo.di.modules.ProvidesModule
 import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
 import com.rookia.android.sejo.usecases.RequestSmsCodeUseCase
 import com.rookia.android.sejo.usecases.ValidateSmsCodeUseCase
 import kotlinx.coroutines.CoroutineDispatcher
-import javax.inject.Inject
-import javax.inject.Named
 
-class ValidateSmsViewModel @Inject constructor(
+class ValidateSmsViewModel @ViewModelInject constructor(
     private val smsCodeUseCase: RequestSmsCodeUseCase,
     private val validateCodeUseCase: ValidateSmsCodeUseCase,
     val receiver: SMSBroadcastReceiver,
     private val preferencesManager: PreferencesManager,
-    @Named("IO") private val dispatcher: CoroutineDispatcher
+    @ProvidesModule.IODispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     val smsCodeValidationResult: MediatorLiveData<Result<SmsCodeValidation>> = MediatorLiveData()

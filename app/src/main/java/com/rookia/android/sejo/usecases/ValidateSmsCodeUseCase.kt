@@ -4,6 +4,7 @@ import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.data.repository.SmsCodeRepository
 import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 
 /**
@@ -17,7 +18,7 @@ import kotlinx.coroutines.flow.Flow
  *
  */
 
-class ValidateSmsCodeUseCase constructor(private val repository: SmsCodeRepository) {
+class ValidateSmsCodeUseCase @Inject constructor(private val repository: SmsCodeRepository) {
 
     fun validateSmsCode(phonePrefix: String, phoneNumber: String, smsCode: String): Flow<Result<SmsCodeValidation>> =
         repository.validateSmsCode(phonePrefix, phoneNumber, smsCode)

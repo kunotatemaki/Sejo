@@ -4,6 +4,7 @@ import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.data.repository.UserRepository
 import com.rookia.android.sejo.domain.local.user.TokenReceived
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 
 /**
@@ -17,7 +18,7 @@ import kotlinx.coroutines.flow.Flow
  *
  */
 
-class CreateUserUseCase constructor(private val repository: UserRepository) {
+class CreateUserUseCase @Inject constructor(private val repository: UserRepository) {
 
     fun createUser(
         phonePrefix: String,

@@ -4,23 +4,21 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.domain.vo.Result
-import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentPersonalInfoBinding
 import com.rookia.android.sejo.ui.common.BaseFragment
-import com.rookia.android.sejo.ui.login.LoginStatus
 import com.rookia.android.sejo.ui.main.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-
-class PersonalInfoFragment constructor(private val viewModelFactory: ViewModelFactory, loginStatus: LoginStatus) :
-    BaseFragment(R.layout.fragment_personal_info, loginStatus) {
+@AndroidEntryPoint
+class PersonalInfoFragment : BaseFragment(R.layout.fragment_personal_info) {
 
     private lateinit var binding: FragmentPersonalInfoBinding
-    private lateinit var viewModel: PersonalInfoViewModel
+    private val viewModel: PersonalInfoViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -33,7 +31,6 @@ class PersonalInfoFragment constructor(private val viewModelFactory: ViewModelFa
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPersonalInfoBinding.bind(view)
         setToolbar(binding.fragmentPersonalInfoToolbar, true)
-        viewModel = injectViewModel(viewModelFactory)
         binding.fragmentPersonalInfoName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 binding.fragmentPersonalInfoButton.isEnabled = p0.isNullOrBlank().not()

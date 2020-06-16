@@ -1,8 +1,8 @@
 package com.rookia.android.sejo.ui.dashboard
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
-import javax.inject.Inject
 
-class MembersViewModel @Inject constructor(): ViewModel() {
+class MembersViewModel @ViewModelInject constructor(): ViewModel() {
 
 }

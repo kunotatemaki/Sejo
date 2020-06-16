@@ -4,6 +4,7 @@ import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.data.repository.UserRepository
 import com.rookia.android.sejo.domain.local.user.User
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 
 /**
@@ -17,7 +18,7 @@ import kotlinx.coroutines.flow.Flow
  *
  */
 
-class UpdatePersonalInfoUseCase constructor(private val repository: UserRepository) {
+class UpdatePersonalInfoUseCase @Inject constructor(private val repository: UserRepository) {
 
     fun updateUser(user: User): Flow<Result<Int>> =
         repository.updateUser(user)

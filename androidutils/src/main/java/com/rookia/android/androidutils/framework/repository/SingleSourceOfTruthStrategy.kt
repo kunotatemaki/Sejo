@@ -50,7 +50,7 @@ fun <T, A> resultFromPersistenceAndNetworkInLivePagedList(
     liveData {
 
         var cachedData = persistedDataQuery.invoke()
-        val needToGetInfoFromServer = isThePersistedInfoOutdated()
+        val needToGetInfoFromServer = isThePersistedInfoOutdated.invoke()
         if (needToGetInfoFromServer) {
             //show data from db but keep the loading state, as a network call will be done
             emitSource(cachedData.map {  Result.loading(cachedData.value)})

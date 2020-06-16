@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.biometric.BiometricManager
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.sejo.Constants
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 
@@ -19,7 +20,7 @@ import javax.inject.Inject
  */
 
 class FingerprintUtils @Inject constructor(
-    private val context: Context,
+    @ApplicationContext private val context: Context,
     private val preferencesManager: PreferencesManager
 ) {
 

@@ -1,11 +1,11 @@
 package com.rookia.android.androidutils.utils
 
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class RateLimiter {
+class RateLimiter @Inject constructor(){
 
     /**
-     * @param lastFetched: timestamp (ms) of the last time the info was fetched
      * @param timeout: max time to wait until the info is fetched again
      * @param timeUnit: the format in which #timeout is provided
      * @return true if the info need to be fetched again, false otherwise

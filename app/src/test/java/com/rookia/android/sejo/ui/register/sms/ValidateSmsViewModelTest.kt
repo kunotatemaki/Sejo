@@ -8,6 +8,7 @@ import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.domain.local.SmsCodeValidation
+import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
 import com.rookia.android.sejo.usecases.RequestSmsCodeUseCase
 import com.rookia.android.sejo.usecases.ValidateSmsCodeUseCase

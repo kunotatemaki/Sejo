@@ -1,9 +1,9 @@
 package com.rookia.android.sejo.ui.main
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.sejo.Constants
-import javax.inject.Inject
 
 
 /**
@@ -17,9 +17,9 @@ import javax.inject.Inject
  *
  */
 
-class MainViewModel @Inject constructor(private val preferencesManager: PreferencesManager): ViewModel() {
-
-
+class MainViewModel @ViewModelInject constructor(
+    private val preferencesManager: PreferencesManager
+): ViewModel() {
 
     fun needToNavigateToRegister(): Boolean {
         val validatedPin = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PIN_SENT_TAG)
@@ -27,6 +27,7 @@ class MainViewModel @Inject constructor(private val preferencesManager: Preferen
             preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG)
         val personalInfo = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PERSONAL_INFO_TAG)
         return (validatedPin.not() || validatedPhone.not() || personalInfo.not())
+
     }
 
     fun getRegisterDestinationScreen(): MainActivity.Companion.RegisterScreens {

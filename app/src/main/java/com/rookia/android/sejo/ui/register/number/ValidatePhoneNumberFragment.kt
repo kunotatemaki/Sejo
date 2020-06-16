@@ -4,19 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentValidateNumberBinding
 import com.rookia.android.sejo.ui.common.BaseFragment
-import com.rookia.android.sejo.ui.login.LoginStatus
 import com.rookia.android.sejo.ui.main.MainActivity
 import com.rookia.android.sejo.ui.views.PhoneNumberView
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-class ValidatePhoneNumberFragment @Inject constructor(
-    private val resourcesManager: ResourcesManager,
-    loginStatus: LoginStatus
-) : BaseFragment(R.layout.fragment_validate_number, loginStatus) {
+@AndroidEntryPoint
+class ValidatePhoneNumberFragment : BaseFragment(R.layout.fragment_validate_number) {
 
     private lateinit var binding: FragmentValidateNumberBinding
 

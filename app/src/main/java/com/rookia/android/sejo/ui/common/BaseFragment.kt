@@ -7,12 +7,15 @@ import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.MaterialToolbar
+import com.rookia.android.androidutils.data.preferences.PreferencesManager
+import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.sejo.MainGraphDirections
 import com.rookia.android.sejo.ui.login.LoginFragment
 import com.rookia.android.sejo.ui.login.LoginStatus
 import com.rookia.android.sejo.ui.main.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
+import javax.inject.Inject
 
 
 /**
@@ -26,20 +29,32 @@ import kotlinx.coroutines.MainScope
  *
  */
 
-abstract class BaseFragment(layoutId: Int, protected val loginStatus: LoginStatus) :
-    Fragment(layoutId), CoroutineScope by MainScope() {
+abstract class BaseFragment(layoutId: Int) : Fragment(layoutId), CoroutineScope by MainScope() {
+
+
+    @Inject
+    protected lateinit var loginStatus: LoginStatus
+
+    @Inject
+    protected lateinit var preferencesManager: PreferencesManager
+
+    @Inject
+    protected lateinit var resourcesManager: ResourcesManager
 
     protected var forceLoginBeforeLaunchingThisFragment = false
+
+    @CallSuper
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        checkLogin()
+    }
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideLoading()
         //navigate to login if needed
-        if (forceLoginBeforeLaunchingThisFragment || (loginStatus.needToLogin() && this !is LoginFragment && (activity as? MainActivity)?.needToNavigateToRegister() != true)) {
-            forceLoginBeforeLaunchingThisFragment = false
-            findNavController().navigate(MainGraphDirections.actionGlobalLoginFragment())
-        }
+        checkLogin()
 
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
@@ -48,6 +63,20 @@ abstract class BaseFragment(layoutId: Int, protected val loginStatus: LoginStatu
                     doOnBackPressed()
                 }
             })
+    }
+
+    @CallSuper
+    override fun onResume() {
+        super.onResume()
+        checkLogin()
+    }
+
+    private fun checkLogin() {
+        if (forceLoginBeforeLaunchingThisFragment || (loginStatus.needToLogin() && this !is LoginFragment && (activity as? MainActivity)?.needToNavigateToRegister() != true)) {
+            forceLoginBeforeLaunchingThisFragment = false
+            loginStatus.avoidGoingToLogin()
+            findNavController().navigate(MainGraphDirections.actionGlobalLoginFragment())
+        }
     }
 
     protected fun setToolbar(

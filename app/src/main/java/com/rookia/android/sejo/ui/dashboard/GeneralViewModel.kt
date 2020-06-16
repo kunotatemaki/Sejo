@@ -1,5 +1,6 @@
 package com.rookia.android.sejo.ui.dashboard
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
@@ -8,7 +9,6 @@ import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.domain.local.Group
 import com.rookia.android.sejo.usecases.GetGroupsUseCase
-import javax.inject.Inject
 
 
 /**
@@ -22,7 +22,7 @@ import javax.inject.Inject
  *
  */
 
-class GeneralViewModel @Inject constructor(
+class GeneralViewModel @ViewModelInject constructor(
     private val getGroupsUseCase: GetGroupsUseCase,
     private val preferencesManager: PreferencesManager
 ) : ViewModel() {

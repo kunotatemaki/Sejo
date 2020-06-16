@@ -125,7 +125,7 @@ class GroupRepositoryImpl @Inject constructor(
                     listOfGroups.addAll(listOfGroupsReturned)
                     if(listOfGroupsReturned.size < Constants.NUMBER_OF_GROUPS_PER_PAGE_QUERIED){
                         needToRequest = false
-                        saveLastRequestedTime(lastCheckedDate)
+                        saveLastRequestedTime(requestTimestamp)
                     }
                 } else {
                     return Result.error(resp.message(), listOfGroups)
@@ -135,7 +135,6 @@ class GroupRepositoryImpl @Inject constructor(
                 return Result.error(e.message, listOfGroups)
             }
         }
-
         return Result.success(listOfGroups)
 
     }

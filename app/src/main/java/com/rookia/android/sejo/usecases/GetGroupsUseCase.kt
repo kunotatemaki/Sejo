@@ -5,6 +5,7 @@ import androidx.paging.PagedList
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.data.repository.GroupRepository
 import com.rookia.android.sejo.domain.local.Group
+import javax.inject.Inject
 
 
 /**
@@ -18,7 +19,7 @@ import com.rookia.android.sejo.domain.local.Group
  *
  */
 
-class GetGroupsUseCase constructor(
+class GetGroupsUseCase @Inject constructor(
     private val repository: GroupRepository
 ) {
 

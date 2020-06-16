@@ -1,17 +1,16 @@
 package com.rookia.android.sejo
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.google.firebase.FirebaseApp
-import com.rookia.android.sejo.di.components.AppComponent
-import com.rookia.android.sejo.di.components.ComponentFactory
 import com.rookia.android.sejo.ui.login.LoginStatus
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
+import javax.inject.Inject
 
 
 /**
@@ -25,15 +24,11 @@ import timber.log.Timber
  *
  */
 
-class SejoApplication  : DaggerApplication(), LifecycleObserver {
+@HiltAndroidApp
+class SejoApplication  : Application(), LifecycleObserver {
 
-    val loginStatus = LoginStatus()
-
-    override fun applicationInjector(): AndroidInjector<SejoApplication> {
-        val mComponent: AppComponent = ComponentFactory.component(this)
-        mComponent.inject(this)
-        return mComponent
-    }
+    @Inject
+    lateinit var loginStatus: LoginStatus
 
     override fun onCreate() {
         super.onCreate()

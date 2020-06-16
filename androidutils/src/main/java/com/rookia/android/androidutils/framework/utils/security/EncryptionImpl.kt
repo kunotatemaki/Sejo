@@ -11,6 +11,7 @@ import android.security.keystore.KeyProperties
 import android.util.Base64
 import androidx.annotation.RequiresApi
 import com.rookia.android.androidutils.utils.security.Encryption
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.security.KeyPairGenerator
 import java.security.KeyStore
 import java.security.KeyStoreException
@@ -23,7 +24,7 @@ import javax.security.auth.x500.X500Principal
 
 
 @Singleton
-class EncryptionImpl @Inject constructor(private val context: Context) : Encryption {
+class EncryptionImpl @Inject constructor(@ApplicationContext private val context: Context) : Encryption {
 
     companion object {
         private const val CIPHER_TYPE = "RSA/ECB/PKCS1Padding"

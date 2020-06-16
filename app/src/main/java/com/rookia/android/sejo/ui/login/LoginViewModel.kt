@@ -1,5 +1,6 @@
 package com.rookia.android.sejo.ui.login
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
@@ -7,17 +8,16 @@ import androidx.lifecycle.asLiveData
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
+import com.rookia.android.sejo.di.modules.ProvidesModule
 import com.rookia.android.sejo.domain.local.user.TokenReceived
 import com.rookia.android.sejo.usecases.LoginUseCase
 import kotlinx.coroutines.CoroutineDispatcher
-import javax.inject.Inject
-import javax.inject.Named
 
-class LoginViewModel @Inject constructor(
+class LoginViewModel @ViewModelInject constructor(
     private val loginUseCase: LoginUseCase,
     private val loginStatus: LoginStatus,
     private val preferencesManager: PreferencesManager,
-    @Named("IO") private val dispatcher: CoroutineDispatcher
+    @ProvidesModule.IODispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     val loginResult: MediatorLiveData<Result<TokenReceived>> = MediatorLiveData()

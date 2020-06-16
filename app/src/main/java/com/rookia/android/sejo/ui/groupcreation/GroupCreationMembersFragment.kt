@@ -13,39 +13,36 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.rookia.android.androidutils.data.resources.ResourcesManager
-import com.rookia.android.androidutils.di.injectViewModel
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.androidutils.framework.utils.PermissionManager
-import com.rookia.android.androidutils.ui.common.ViewModelFactory
 import com.rookia.android.androidutils.utils.DeviceUtils
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentGroupCreationMembersBinding
 import com.rookia.android.sejo.domain.local.PhoneContact
 import com.rookia.android.sejo.ui.common.BaseFragment
-import com.rookia.android.sejo.ui.login.LoginStatus
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import java.util.*
+import javax.inject.Inject
 
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class GroupCreationMembersFragment constructor(
-    private val viewModelFactory: ViewModelFactory,
-    private val permissionManager: PermissionManager,
-    private val resourcesManager: ResourcesManager,
-    private val deviceUtils: DeviceUtils,
-    loginStatus: LoginStatus
-) :
-    BaseFragment(R.layout.fragment_group_creation_members, loginStatus),
+class GroupCreationMembersFragment : BaseFragment(R.layout.fragment_group_creation_members),
     GroupCreationMembersAdapter.GroupMemberListed,
     GroupCreationMembersAddedAdapter.GroupMemberRemovedList {
+
+    @Inject
+    lateinit var permissionManager: PermissionManager
+
+    @Inject
+    lateinit var deviceUtils: DeviceUtils
 
     companion object {
         private const val CONTACTS_PERMISSION_CODE = 1234
@@ -54,7 +51,7 @@ class GroupCreationMembersFragment constructor(
 
     private lateinit var binding: FragmentGroupCreationMembersBinding
 
-    private lateinit var viewModel: GroupCreationMembersViewModel
+    private val viewModel: GroupCreationMembersViewModel by viewModels()
     private val contactsAdapter = GroupCreationMembersAdapter(this)
     private val contactsAddedAdapter = GroupCreationMembersAddedAdapter(this, resourcesManager)
     private var searchMenuItem: MenuItem? = null
@@ -80,7 +77,6 @@ class GroupCreationMembersFragment constructor(
                 searchMenuItem?.expandActionView()
             }
         }
-        viewModel = injectViewModel(viewModelFactory)
         if (permissionManager.isPermissionGranted(this, Manifest.permission.READ_CONTACTS).not()) {
             binding.fragmentGroupCreationMembersNoContactsContainer.visible()
             binding.fragmentGroupCreationMembersListContainer.gone()
