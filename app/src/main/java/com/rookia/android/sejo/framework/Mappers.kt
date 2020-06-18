@@ -42,7 +42,7 @@ fun GroupEntity.toGroup(member: List<Group.GroupContact>): Group =
         dateModification = dateModification.time
     )
 
-fun Group.GroupContact.toEntity(groupId: Int): MemberEntity =
+fun Group.GroupContact.toEntity(groupId: Long): MemberEntity =
     MemberEntity(
         groupId = groupId,
         numberId = numberId,

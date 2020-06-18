@@ -64,7 +64,6 @@ class UserRepositoryImpl @Inject constructor(
             Result.error(e.message)
         }
 
-
     override fun updateUser(user: User): Flow<Result<Int>> =
         resultOnlyFromOneSourceInFlow {
             updateUserInServer(user)
@@ -89,5 +88,26 @@ class UserRepositoryImpl @Inject constructor(
     private fun storeToken(token: String) {
         preferencesManager.setStringIntoPreferences(Constants.USER_TOKEN_TAG, token)
     }
+
+    override fun updateLastGroupSelected(userId: String, groupId: Long): Flow<Result<Int>> =
+        resultOnlyFromOneSourceInFlow {
+            setLastGroupUsed(userId, groupId)
+        }
+
+
+    @VisibleForTesting
+    suspend fun setLastGroupUsed(userId: String, groupId: Long): Result<Int> =
+        try {
+            val api = networkServiceFactory.getUserInstance()
+
+            val resp = api.updateLastGroupSelected(userId, groupId)
+            if (resp.isSuccessful && resp.body() != null) {
+                Result.success(resp.body()?.code)
+            } else {
+                Result.error(resp.message())
+            }
+        } catch (e: Exception) {
+            Result.error(e.message)
+        }
 
 }

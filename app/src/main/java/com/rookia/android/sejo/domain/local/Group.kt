@@ -13,7 +13,7 @@ package com.rookia.android.sejo.domain.local
  */
 
 data class Group(
-    val groupId: Int? = null,
+    val groupId: Long,
     val name: String,
     val fee: Int,
     val owner: String,

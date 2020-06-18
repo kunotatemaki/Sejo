@@ -20,4 +20,5 @@ import kotlinx.coroutines.flow.Flow
 interface UserRepository {
     fun createUser(phonePrefix: String, phoneNumber: String, pin: Int): Flow<Result<TokenReceived>>
     fun updateUser(user: User): Flow<Result<Int>>
+    fun updateLastGroupSelected(userId: String, groupId: Long): Flow<Result<Int>>
 }

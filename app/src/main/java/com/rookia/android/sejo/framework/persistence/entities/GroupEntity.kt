@@ -22,7 +22,7 @@ import java.util.*
 class GroupEntity constructor(
     @PrimaryKey
     @ColumnInfo(name = "group_id")
-    val groupId: Int,
+    val groupId: Long,
     @ColumnInfo(name = "name")
     val name: String,
     @ColumnInfo(name = "fee")

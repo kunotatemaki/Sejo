@@ -18,7 +18,7 @@ data class UserAdminStatusServer (
     val data: UserAdminStatusResponse? = null
 ){
     data class UserAdminStatusResponse(
-        val groupId: Int,
+        val groupId: Long,
         val memberId: String,
         val isAdmin: Boolean
     )

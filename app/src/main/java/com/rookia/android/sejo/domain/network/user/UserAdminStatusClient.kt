@@ -14,7 +14,7 @@ package com.rookia.android.sejo.domain.network.user
 
 data class UserAdminStatusClient (
     val owner: String,
-    val groupId: Int,
+    val groupId: Long,
     val memberId: String,
     val isAdmin: Boolean
 )

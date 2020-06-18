@@ -20,12 +20,11 @@ import com.rookia.android.sejo.domain.local.Group
  *
  */
 
-class GeneralAdapter : PagedListAdapter<Group, GroupViewHolder>(DIFF_CALLBACK) {
+class GeneralAdapter constructor(private val listener: GroupItemClickable) : PagedListAdapter<Group, GroupViewHolder>(DIFF_CALLBACK) {
 
 
     companion object {
         val DIFF_CALLBACK: DiffUtil.ItemCallback<Group> = object : DiffUtil.ItemCallback<Group>() {
-
 
             override fun areItemsTheSame(oldItem: Group, newItem: Group): Boolean =
                 oldItem.groupId == newItem.groupId
@@ -35,10 +34,14 @@ class GeneralAdapter : PagedListAdapter<Group, GroupViewHolder>(DIFF_CALLBACK) {
         }
     }
 
+    interface GroupItemClickable {
+        fun onGroupClicked(groupId: Long)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemGroupBinding.inflate(inflater, parent, false)
-        return GroupViewHolder(binding)
+        return GroupViewHolder(binding, listener)
     }
 
     override fun onBindViewHolder(holder: GroupViewHolder, position: Int) {
@@ -47,12 +50,17 @@ class GeneralAdapter : PagedListAdapter<Group, GroupViewHolder>(DIFF_CALLBACK) {
     }
 }
 
-class GroupViewHolder constructor(private val binding: ItemGroupBinding) :
+class GroupViewHolder constructor(
+    private val binding: ItemGroupBinding,
+    private val listener: GeneralAdapter.GroupItemClickable
+) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(group: Group?) {
-        group?.let {
+        group?.let {gr->
             binding.group = group
-
+            itemView.setOnClickListener { _ ->
+                listener.onGroupClicked(gr.groupId)
+            }
         }
     }
 }

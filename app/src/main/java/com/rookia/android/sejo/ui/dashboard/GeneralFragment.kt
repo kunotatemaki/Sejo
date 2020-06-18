@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_general.*
 import timber.log.Timber
 
 @AndroidEntryPoint
-class GeneralFragment : BaseFragment(R.layout.fragment_general) {
+class GeneralFragment : BaseFragment(R.layout.fragment_general), GeneralAdapter.GroupItemClickable {
 
 
     private val viewModel: GeneralViewModel by viewModels()
@@ -33,7 +33,7 @@ class GeneralFragment : BaseFragment(R.layout.fragment_general) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentGeneralBinding.bind(view)
 
-        adapter = GeneralAdapter()
+        adapter = GeneralAdapter(this)
 //        test.setText("623")
         button1.setOnClickListener {
             navigateToGroupCreation()
@@ -77,5 +77,9 @@ class GeneralFragment : BaseFragment(R.layout.fragment_general) {
         val direction =
             GeneralFragmentDirections.actionBlankFragmentToGroupCreationActivity()
         findNavController().navigate(direction)
+    }
+
+    override fun onGroupClicked(groupId: Long) {
+        viewModel.setSelectedGroup(groupId)
     }
 }

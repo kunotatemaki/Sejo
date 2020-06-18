@@ -25,7 +25,7 @@ abstract class GroupDao: BaseDao<GroupEntity>() {
 
     @Transaction
     @Query("SELECT * FROM `group` WHERE group_id = :groupId")
-    abstract fun getGroup(groupId: Int): GroupWithMembers?
+    abstract fun getGroup(groupId: Long): GroupWithMembers?
 
     @Transaction
     @Query("SELECT * FROM `group` ORDER BY date_modification DESC")

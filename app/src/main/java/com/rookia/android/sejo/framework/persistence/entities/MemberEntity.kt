@@ -21,7 +21,7 @@ import androidx.room.PrimaryKey
 class MemberEntity constructor(
     @PrimaryKey
     @ColumnInfo(name = "group_id")
-    val groupId: Int,
+    val groupId: Long,
     @ColumnInfo(name = "number_id")
     val numberId: String,
     @ColumnInfo(name = "admin")
