@@ -22,10 +22,10 @@ class MainViewModel @ViewModelInject constructor(
 ): ViewModel() {
 
     fun needToNavigateToRegister(): Boolean {
-        val validatedPin = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PIN_SENT_TAG)
+        val validatedPin = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION.PIN_SENT_TAG)
         val validatedPhone =
-            preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG)
-        val personalInfo = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PERSONAL_INFO_TAG)
+            preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION.VALIDATED_PHONE_TAG)
+        val personalInfo = preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION.PERSONAL_INFO_TAG)
         return (validatedPin.not() || validatedPhone.not() || personalInfo.not())
 
     }
@@ -33,9 +33,9 @@ class MainViewModel @ViewModelInject constructor(
     fun getRegisterDestinationScreen(): MainActivity.Companion.RegisterScreens {
 
         val validatedPin =
-            preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_PIN_SENT_TAG)
+            preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION.PIN_SENT_TAG)
         val validatedPhone =
-            preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION_VALIDATED_PHONE_TAG)
+            preferencesManager.getBooleanFromPreferences(Constants.NAVIGATION.VALIDATED_PHONE_TAG)
         return when {
             validatedPin && validatedPhone -> MainActivity.Companion.RegisterScreens.SET_PERSONAL_INFO
             validatedPhone -> MainActivity.Companion.RegisterScreens.CREATE_PIN

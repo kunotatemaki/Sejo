@@ -62,15 +62,15 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), PinScreen.Biometric
                         hideLoading()
                         if (it.data?.result == LoginResponseCodes.NO_USER.code) {
                             preferencesManager.setBooleanIntoPreferences(
-                                Constants.NAVIGATION_PERSONAL_INFO_TAG,
+                                Constants.NAVIGATION.PERSONAL_INFO_TAG,
                                 false
                             )
                             preferencesManager.setBooleanIntoPreferences(
-                                Constants.NAVIGATION_PIN_SENT_TAG,
+                                Constants.NAVIGATION.PIN_SENT_TAG,
                                 false
                             )
                             preferencesManager.setBooleanIntoPreferences(
-                                Constants.NAVIGATION_VALIDATED_PHONE_TAG,
+                                Constants.NAVIGATION.VALIDATED_PHONE_TAG,
                                 false
                             )
                         } else {
@@ -120,7 +120,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), PinScreen.Biometric
         fingerprintUtils.shouldShowFingerPrintScreen()
 
     private fun shouldShowBiometricPermission(): Boolean =
-        fingerprintUtils.isFingerprintSupported() && preferencesManager.containsKey(Constants.USER_BIOMETRICS_TAG)
+        fingerprintUtils.isFingerprintSupported() && preferencesManager.containsKey(Constants.USER_DATA.BIOMETRICS_TAG)
             .not()
 
     private fun navigateToBiometricPermission() {
@@ -133,8 +133,8 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), PinScreen.Biometric
     private fun login(pin: String? = null) {
         val pinToBeSent = pin
             ?: preferencesManager.getEncryptedStringFromPreferences(
-                Constants.USER_PIN_TAG,
-                Constants.USER_PIN_ALIAS
+                Constants.USER_DATA.PIN_TAG,
+                Constants.USER_DATA.PIN_ALIAS
             )
 
         try {

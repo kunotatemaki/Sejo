@@ -78,7 +78,7 @@ class GroupCreationMembersViewModel @ViewModelInject constructor(
     }
 
     fun createGroup(name: String, fee: Int, members: List<PhoneContact>) {
-        preferencesManager.getStringFromPreferences(Constants.USER_ID_TAG)?.let { userId ->
+        preferencesManager.getStringFromPreferences(Constants.USER_DATA.ID_TAG)?.let { userId ->
             _groupCreationResponse =
                 createGroupUseCase.createGroup(name, fee, userId, members).asLiveData(dispatcher)
             groupCreationResponse.addSource(_groupCreationResponse) {

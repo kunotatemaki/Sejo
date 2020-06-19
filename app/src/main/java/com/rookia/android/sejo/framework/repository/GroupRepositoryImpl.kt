@@ -9,6 +9,7 @@ import com.rookia.android.androidutils.framework.repository.resultFromPersistenc
 import com.rookia.android.androidutils.framework.repository.resultOnlyFromOneSourceInFlow
 import com.rookia.android.androidutils.utils.RateLimiter
 import com.rookia.android.sejo.Constants
+import com.rookia.android.sejo.data.CacheSanity
 import com.rookia.android.sejo.data.persistence.PersistenceManager
 import com.rookia.android.sejo.data.repository.GroupRepository
 import com.rookia.android.sejo.domain.local.Group
@@ -80,7 +81,7 @@ class GroupRepositoryImpl @Inject constructor(
 
     override fun getGroups(userId: String): LiveData<Result<PagedList<Group>>> {
         val lastCheckedDate =
-            preferencesManager.getLongFromPreferences(Constants.LAST_CHECKED_TIMESTAMP, 0L)
+            preferencesManager.getLongFromPreferences(Constants.GROUPS.LAST_CHECKED_TIMESTAMP, 0L)
         return resultFromPersistenceAndNetworkInLivePagedList(
             persistedDataQuery = { persistenceManager.getGroups() },
             networkCall = { getGroupsFromServer(userId) },
@@ -94,39 +95,46 @@ class GroupRepositoryImpl @Inject constructor(
                     lastCheckedDate,
                     5,
                     TimeUnit.MINUTES
-                )
+                ) || CacheSanity.groupsCacheDirty
             }
         )
     }
 
     private suspend fun getGroupsFromServer(userId: String): Result<List<Group>> {
 
+
         val requestTimestamp = System.currentTimeMillis()
+        val listOfGroups = mutableListOf<Group>()
         val api = networkServiceFactory.getGroupInstance()
 
-        val listOfGroups = mutableListOf<Group>()
         var needToRequest = true
         while (needToRequest) {
             val dateModification = getLastRequestedTime()
             try {
+
                 val resp = api.getGroups(
                     userId,
                     dateModification,
-                    Constants.NUMBER_OF_GROUPS_PER_PAGE_QUERIED
+                    Constants.GROUPS.NUMBER_OF_GROUPS_PER_PAGE_QUERIED
                 )
+
                 if (resp.isSuccessful && resp.body() != null) {
+
                     val lastCheckedDate =
                         resp.body()?.data?.maxBy { it.dateModification ?: 0L }?.dateModification
                             ?: 0L
+
                     if (dateModification < lastCheckedDate) {
                         saveLastRequestedTime(lastCheckedDate)
                     }
+
                     val listOfGroupsReturned = resp.body()?.data ?: listOf()
                     listOfGroups.addAll(listOfGroupsReturned)
-                    if(listOfGroupsReturned.size < Constants.NUMBER_OF_GROUPS_PER_PAGE_QUERIED){
+                    if (listOfGroupsReturned.size < Constants.GROUPS.NUMBER_OF_GROUPS_PER_PAGE_QUERIED) {
                         needToRequest = false
                         saveLastRequestedTime(requestTimestamp)
                     }
+
                 } else {
                     return Result.error(resp.message(), listOfGroups)
                 }
@@ -134,19 +142,23 @@ class GroupRepositoryImpl @Inject constructor(
             } catch (e: Exception) {
                 return Result.error(e.message, listOfGroups)
             }
+
         }
+
+        CacheSanity.groupsCacheDirty = false
         return Result.success(listOfGroups)
 
     }
 
-    private fun saveLastRequestedTime(timestamp: Long){
+    private fun saveLastRequestedTime(timestamp: Long) {
         preferencesManager.setLongIntoPreferences(
-            Constants.LAST_CHECKED_TIMESTAMP,
+            Constants.GROUPS.LAST_CHECKED_TIMESTAMP,
             timestamp
         )
     }
 
-    private fun getLastRequestedTime(): Long = preferencesManager.getLongFromPreferences(Constants.LAST_CHECKED_TIMESTAMP, 0L)
+    private fun getLastRequestedTime(): Long =
+        preferencesManager.getLongFromPreferences(Constants.GROUPS.LAST_CHECKED_TIMESTAMP, 0L)
 
     override fun getGroup(groupId: Long): LiveData<Group> =
         persistenceManager.getGroup(groupId)

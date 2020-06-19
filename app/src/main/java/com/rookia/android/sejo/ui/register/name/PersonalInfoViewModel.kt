@@ -25,15 +25,15 @@ class PersonalInfoViewModel @ViewModelInject constructor(
     fun updatePersonalInfo(name: String) {
         try {
             val phonePrefix =
-                preferencesManager.getStringFromPreferences(Constants.USER_PHONE_PREFIX_TAG)
+                preferencesManager.getStringFromPreferences(Constants.USER_DATA.PHONE_PREFIX_TAG)
                     ?: return
             val phoneNumber =
-                preferencesManager.getStringFromPreferences(Constants.USER_PHONE_NUMBER_TAG)
+                preferencesManager.getStringFromPreferences(Constants.USER_DATA.PHONE_NUMBER_TAG)
                     ?: return
             val userId =
-                preferencesManager.getStringFromPreferences(Constants.USER_ID_TAG)
+                preferencesManager.getStringFromPreferences(Constants.USER_DATA.ID_TAG)
                     ?: return
-            val pushToken = preferencesManager.getStringFromPreferences(Constants.PUSH_TOKEN_TAG)
+            val pushToken = preferencesManager.getStringFromPreferences(Constants.USER_DATA.PUSH_TOKEN_TAG)
             val user = User(userId = userId, phonePrefix = phonePrefix, phoneNumber = phoneNumber,  name = name, pushToken = pushToken)
             _userSentToServer =
                 userUseCase.updateUser(user).asLiveData(dispatcher)
@@ -45,8 +45,8 @@ class PersonalInfoViewModel @ViewModelInject constructor(
                 when(it.status){
                     Result.Status.SUCCESS -> {
                         userSentToServer.removeSource(_userSentToServer)
-                        preferencesManager.setStringIntoPreferences(Constants.USER_NAME_TAG, name)
-                        preferencesManager.setBooleanIntoPreferences(Constants.NAVIGATION_PERSONAL_INFO_TAG, true)
+                        preferencesManager.setStringIntoPreferences(Constants.USER_DATA.NAME_TAG, name)
+                        preferencesManager.setBooleanIntoPreferences(Constants.NAVIGATION.PERSONAL_INFO_TAG, true)
                     }
                     Result.Status.ERROR -> userSentToServer.removeSource(_userSentToServer)
                     Result.Status.LOADING -> {}

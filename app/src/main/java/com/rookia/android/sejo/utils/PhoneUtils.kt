@@ -1,20 +1,20 @@
 package com.rookia.android.sejo.utils
 
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
-import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_MAX_LENGTH_WITHOUT_SPACES
-import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_EIGHT_DIGITS
-import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_FIVE_DIGITS
-import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_FOUR_DIGITS
-import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_NINE_DIGITS
-import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_SEVEN_DIGITS
-import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_MATCHER_SIX_DIGITS
-import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_FOUR_GROUP
-import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_THREE_GROUP
-import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_TWO_GROUP
-import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_PREFIX
-import com.rookia.android.sejo.Constants.SPANISH_PHONE_NUMBER_START_PATTERN_MATCHER
-import com.rookia.android.sejo.Constants.USER_PHONE_NUMBER_TAG
-import com.rookia.android.sejo.Constants.USER_PHONE_PREFIX_TAG
+import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_MAX_LENGTH_WITHOUT_SPACES
+import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_MATCHER_EIGHT_DIGITS
+import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_MATCHER_FIVE_DIGITS
+import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_MATCHER_FOUR_DIGITS
+import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_MATCHER_NINE_DIGITS
+import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_MATCHER_SEVEN_DIGITS
+import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_MATCHER_SIX_DIGITS
+import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_REPLACEMENT_FOUR_GROUP
+import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_REPLACEMENT_THREE_GROUP
+import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_REPLACEMENT_TWO_GROUP
+import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PREFIX
+import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_START_PATTERN_MATCHER
+import com.rookia.android.sejo.Constants.USER_DATA.PHONE_NUMBER_TAG
+import com.rookia.android.sejo.Constants.USER_DATA.PHONE_PREFIX_TAG
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -37,7 +37,7 @@ class PhoneUtils @Inject constructor() {
         //Remove spaces
         val cleanPhone = phone.replace("[\\s]".toRegex(), "")
         val maxLengthWithoutSpaces = when (prefix) {
-            SPANISH_PHONE_NUMBER_PREFIX -> SPANISH_PHONE_NUMBER_MAX_LENGTH_WITHOUT_SPACES
+            NUMBER_PREFIX -> NUMBER_MAX_LENGTH_WITHOUT_SPACES
             else -> 0
         }
         return cleanPhone.length == maxLengthWithoutSpaces &&
@@ -51,9 +51,9 @@ class PhoneUtils @Inject constructor() {
         preferencesManager: PreferencesManager
     ): Boolean {
         val storedPhoneNumber: String? =
-            preferencesManager.getStringFromPreferences(USER_PHONE_NUMBER_TAG)
+            preferencesManager.getStringFromPreferences(PHONE_NUMBER_TAG)
         val storedPhonePrefix: String? =
-            preferencesManager.getStringFromPreferences(USER_PHONE_PREFIX_TAG)
+            preferencesManager.getStringFromPreferences(PHONE_PREFIX_TAG)
         return storedPhoneNumber == phone && storedPhonePrefix == prefix
     }
 
@@ -62,7 +62,7 @@ class PhoneUtils @Inject constructor() {
         //Remove spaces
         val cleanPhone = phone.replace("[\\s]".toRegex(), "")
         val patternString = when (prefix) {
-            SPANISH_PHONE_NUMBER_PREFIX -> SPANISH_PHONE_NUMBER_START_PATTERN_MATCHER
+            NUMBER_PREFIX -> NUMBER_START_PATTERN_MATCHER
             else -> ""
         }
         val pattern = Pattern.compile(patternString)
@@ -82,7 +82,7 @@ class PhoneUtils @Inject constructor() {
     fun formatWithSpaces(prefix: String, phone: String, includePrefix: Boolean): String {
         val phoneNumberWithoutSpaces = phone.replace("[^\\d\\s]".toRegex(), "")
         val phoneNumberFormatted = when (prefix) {
-            SPANISH_PHONE_NUMBER_PREFIX -> formatWithSpacesSpanish(phoneNumberWithoutSpaces)
+            NUMBER_PREFIX -> formatWithSpacesSpanish(phoneNumberWithoutSpaces)
             else -> phoneNumberWithoutSpaces
         }
         return if (includePrefix) {
@@ -104,28 +104,28 @@ class PhoneUtils @Inject constructor() {
         val cleanPhone = phone.replace("[\\s]".toRegex(), "")
         return when (cleanPhone.length) {
             9 -> cleanPhone.replace(
-                SPANISH_PHONE_NUMBER_PATTERN_MATCHER_NINE_DIGITS.toRegex(),
-                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_FOUR_GROUP
+                NUMBER_PATTERN_MATCHER_NINE_DIGITS.toRegex(),
+                NUMBER_PATTERN_REPLACEMENT_FOUR_GROUP
             )
             8 -> cleanPhone.replace(
-                SPANISH_PHONE_NUMBER_PATTERN_MATCHER_EIGHT_DIGITS.toRegex(),
-                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_FOUR_GROUP
+                NUMBER_PATTERN_MATCHER_EIGHT_DIGITS.toRegex(),
+                NUMBER_PATTERN_REPLACEMENT_FOUR_GROUP
             )
             7 -> cleanPhone.replace(
-                SPANISH_PHONE_NUMBER_PATTERN_MATCHER_SEVEN_DIGITS.toRegex(),
-                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_THREE_GROUP
+                NUMBER_PATTERN_MATCHER_SEVEN_DIGITS.toRegex(),
+                NUMBER_PATTERN_REPLACEMENT_THREE_GROUP
             )
             6 -> cleanPhone.replace(
-                SPANISH_PHONE_NUMBER_PATTERN_MATCHER_SIX_DIGITS.toRegex(),
-                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_THREE_GROUP
+                NUMBER_PATTERN_MATCHER_SIX_DIGITS.toRegex(),
+                NUMBER_PATTERN_REPLACEMENT_THREE_GROUP
             )
             5 -> cleanPhone.replace(
-                SPANISH_PHONE_NUMBER_PATTERN_MATCHER_FIVE_DIGITS.toRegex(),
-                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_TWO_GROUP
+                NUMBER_PATTERN_MATCHER_FIVE_DIGITS.toRegex(),
+                NUMBER_PATTERN_REPLACEMENT_TWO_GROUP
             )
             4 -> cleanPhone.replace(
-                SPANISH_PHONE_NUMBER_PATTERN_MATCHER_FOUR_DIGITS.toRegex(),
-                SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_TWO_GROUP
+                NUMBER_PATTERN_MATCHER_FOUR_DIGITS.toRegex(),
+                NUMBER_PATTERN_REPLACEMENT_TWO_GROUP
             )
             else -> cleanPhone
 

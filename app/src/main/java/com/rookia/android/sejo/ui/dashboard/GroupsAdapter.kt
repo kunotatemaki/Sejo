@@ -20,7 +20,8 @@ import com.rookia.android.sejo.domain.local.Group
  *
  */
 
-class GeneralAdapter constructor(private val listener: GroupItemClickable) : PagedListAdapter<Group, GroupViewHolder>(DIFF_CALLBACK) {
+class GroupsAdapter constructor(private val listener: GroupItemClickable) :
+    PagedListAdapter<Group, GroupViewHolder>(DIFF_CALLBACK) {
 
 
     companion object {
@@ -48,18 +49,19 @@ class GeneralAdapter constructor(private val listener: GroupItemClickable) : Pag
         val group = getItem(position)
         holder.bind(group)
     }
+
 }
 
 class GroupViewHolder constructor(
     private val binding: ItemGroupBinding,
-    private val listener: GeneralAdapter.GroupItemClickable
+    private val listener: GroupsAdapter.GroupItemClickable
 ) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(group: Group?) {
-        group?.let {gr->
-            binding.group = group
+        group?.let {
+            binding.group = it
             itemView.setOnClickListener { _ ->
-                listener.onGroupClicked(gr.groupId)
+                listener.onGroupClicked(it.groupId)
             }
         }
     }

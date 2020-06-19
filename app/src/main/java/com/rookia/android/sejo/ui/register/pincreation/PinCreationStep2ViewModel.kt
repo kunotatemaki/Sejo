@@ -29,10 +29,10 @@ class PinCreationStep2ViewModel @ViewModelInject constructor(
         try {
             val nPin = pin.toInt()
             val phonePrefix =
-                preferencesManager.getStringFromPreferences(Constants.USER_PHONE_PREFIX_TAG)
+                preferencesManager.getStringFromPreferences(Constants.USER_DATA.PHONE_PREFIX_TAG)
                     ?: return
             val phoneNumber =
-                preferencesManager.getStringFromPreferences(Constants.USER_PHONE_NUMBER_TAG)
+                preferencesManager.getStringFromPreferences(Constants.USER_DATA.PHONE_NUMBER_TAG)
                     ?: return
             _pinSentToServer =
                 userUseCase.createUser(phonePrefix, phoneNumber, nPin).asLiveData(dispatcher)
@@ -44,10 +44,10 @@ class PinCreationStep2ViewModel @ViewModelInject constructor(
                 when(it.status){
                     Result.Status.SUCCESS -> {
                         pinSentToServer.removeSource(_pinSentToServer)
-                        preferencesManager.setEncryptedStringIntoPreferences(Constants.USER_PIN_TAG, pin, Constants.USER_PIN_ALIAS)
-                        preferencesManager.setBooleanIntoPreferences(Constants.NAVIGATION_PIN_SENT_TAG, true)
+                        preferencesManager.setEncryptedStringIntoPreferences(Constants.USER_DATA.PIN_TAG, pin, Constants.USER_DATA.PIN_ALIAS)
+                        preferencesManager.setBooleanIntoPreferences(Constants.NAVIGATION.PIN_SENT_TAG, true)
                         it.data?.let { tokenReceived ->
-                            preferencesManager.setStringIntoPreferences(Constants.USER_ID_TAG, tokenReceived.userId)
+                            preferencesManager.setStringIntoPreferences(Constants.USER_DATA.ID_TAG, tokenReceived.userId)
                         }
                     }
                     Result.Status.ERROR -> pinSentToServer.removeSource(_pinSentToServer)

@@ -40,7 +40,7 @@ class GroupsViewModel @ViewModelInject constructor(
     private val _singleGroupQuery: MutableLiveData<Long> = MutableLiveData()
 
     init {
-        val storedGroupId = preferencesManager.getLongFromPreferences(Constants.LAST_USED_GROUP_TAG)
+        val storedGroupId = preferencesManager.getLongFromPreferences(Constants.USER_DATA.LAST_USED_GROUP_TAG)
         _singleGroupQuery.value = storedGroupId
         group = _singleGroupQuery.switchMap { groupId ->
             getGroupsUseCase.getGroup(groupId)
@@ -48,7 +48,7 @@ class GroupsViewModel @ViewModelInject constructor(
     }
 
     fun loadGroups() {
-        preferencesManager.getStringFromPreferences(Constants.USER_ID_TAG)?.let { userId ->
+        preferencesManager.getStringFromPreferences(Constants.USER_DATA.ID_TAG)?.let { userId ->
             val groupsInternal =
                 getGroupsUseCase.getGroups(userId)
             groups.addSource(groupsInternal) {
@@ -62,7 +62,7 @@ class GroupsViewModel @ViewModelInject constructor(
 
     fun setSelectedGroup(groupId: Long) {
         _singleGroupQuery.value = groupId
-        preferencesManager.getStringFromPreferences(Constants.USER_ID_TAG)?.let { userId ->
+        preferencesManager.getStringFromPreferences(Constants.USER_DATA.ID_TAG)?.let { userId ->
             viewModelScope.launch(dispatcher) {
                 selectedGroupUseCase.updateUser(userId, groupId).collect {
                     Timber.d("")

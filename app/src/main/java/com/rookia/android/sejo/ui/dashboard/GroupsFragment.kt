@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.rookia.android.androidutils.domain.vo.Result
+import com.rookia.android.androidutils.utils.RecyclerViewAdapterUtils
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentGroupsBinding
@@ -14,13 +15,16 @@ import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class GroupsFragment : BaseFragment(R.layout.fragment_groups), GeneralAdapter.GroupItemClickable {
+class GroupsFragment : BaseFragment(R.layout.fragment_groups), GroupsAdapter.GroupItemClickable {
 
+    @Inject
+    lateinit var recyclerViewAdapterUtils: RecyclerViewAdapterUtils
 
     private val viewModel: GroupsViewModel by viewModels()
-    private lateinit var adapter: GeneralAdapter
+    private lateinit var adapter: GroupsAdapter
 
     private lateinit var binding: FragmentGroupsBinding
 
@@ -33,10 +37,12 @@ class GroupsFragment : BaseFragment(R.layout.fragment_groups), GeneralAdapter.Gr
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentGroupsBinding.bind(view)
 
-        adapter = GeneralAdapter(this)
+        adapter = GroupsAdapter(this)
         binding.fragmentGroupsAddButton.setOnClickListener {
             navigateToGroupCreation()
         }
+
+        recyclerViewAdapterUtils.scrollToTopIfItemsInsertedArePlacedBeforeTheFirstRow(adapter, binding.fragmentGroupsList)
 
         binding.fragmentGroupsList.adapter = adapter
 
@@ -61,7 +67,7 @@ class GroupsFragment : BaseFragment(R.layout.fragment_groups), GeneralAdapter.Gr
 
         viewModel.group.observe(viewLifecycleOwner, Observer {
             it?.let {
-                preferencesManager.setLongIntoPreferences(Constants.LAST_USED_GROUP_TAG, it.groupId)
+                preferencesManager.setLongIntoPreferences(Constants.USER_DATA.LAST_USED_GROUP_TAG, it.groupId)
                 binding.fragmentGroupsLastSelectedItem.group = it
             }
         })

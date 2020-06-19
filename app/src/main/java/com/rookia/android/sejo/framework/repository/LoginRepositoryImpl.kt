@@ -64,7 +64,7 @@ class LoginRepositoryImpl @Inject constructor(
         }
 
     private fun storeToken(token: String) {
-        preferencesManager.setStringIntoPreferences(Constants.USER_TOKEN_TAG, token)
+        preferencesManager.setStringIntoPreferences(Constants.USER_DATA.TOKEN_TAG, token)
     }
 
 }

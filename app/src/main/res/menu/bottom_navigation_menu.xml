@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/groupsFFragment"
+        android:id="@+id/groupsFragment"
         android:enabled="true"
         android:icon="@drawable/ic_group_creation_members_search_24dp"
         android:title="@string/bottom_menu_general"/>
     <item
         android:id="@+id/membersFragment"
-        android:enabled="true"
+        android:enabled="false"
         android:icon="@drawable/ic_group_creation_members_search_24dp"
         android:title="@string/bottom_menu_members"/>
     <item

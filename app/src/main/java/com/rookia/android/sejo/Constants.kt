@@ -15,21 +15,23 @@ package com.rookia.android.sejo
 object Constants {
 
     //region PHONE NUMBER FORMAT
-    const val SPANISH_PHONE_NUMBER_PREFIX = "+34"
-    const val SPANISH_PHONE_NUMBER_MAX_LENGTH_WITH_SPACES = 11
-    const val SPANISH_PHONE_NUMBER_MAX_LENGTH_WITHOUT_SPACES = 9
+    object SPANISH_PHONE {
+        const val NUMBER_PREFIX = "+34"
+        const val NUMBER_MAX_LENGTH_WITH_SPACES = 11
+        const val NUMBER_MAX_LENGTH_WITHOUT_SPACES = 9
 
-    const val SPANISH_PHONE_NUMBER_PATTERN_MATCHER_NINE_DIGITS = "(\\d{3})(\\d{2})(\\d{2})(\\d{2})"
-    const val SPANISH_PHONE_NUMBER_PATTERN_MATCHER_EIGHT_DIGITS = "(\\d{3})(\\d{2})(\\d{2})(\\d{1})"
-    const val SPANISH_PHONE_NUMBER_PATTERN_MATCHER_SEVEN_DIGITS = "(\\d{3})(\\d{2})(\\d{2})"
-    const val SPANISH_PHONE_NUMBER_PATTERN_MATCHER_SIX_DIGITS = "(\\d{3})(\\d{2})(\\d{1})"
-    const val SPANISH_PHONE_NUMBER_PATTERN_MATCHER_FIVE_DIGITS = "(\\d{3})(\\d{2})"
-    const val SPANISH_PHONE_NUMBER_PATTERN_MATCHER_FOUR_DIGITS = "(\\d{3})(\\d{1})"
-    const val SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_ONE_GROUP = "$1"
-    const val SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_TWO_GROUP = "$1 $2"
-    const val SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_THREE_GROUP = "$1 $2 $3"
-    const val SPANISH_PHONE_NUMBER_PATTERN_REPLACEMENT_FOUR_GROUP = "$1 $2 $3 $4"
-    const val SPANISH_PHONE_NUMBER_START_PATTERN_MATCHER = "^[678].*"
+        const val NUMBER_PATTERN_MATCHER_NINE_DIGITS = "(\\d{3})(\\d{2})(\\d{2})(\\d{2})"
+        const val NUMBER_PATTERN_MATCHER_EIGHT_DIGITS = "(\\d{3})(\\d{2})(\\d{2})(\\d{1})"
+        const val NUMBER_PATTERN_MATCHER_SEVEN_DIGITS = "(\\d{3})(\\d{2})(\\d{2})"
+        const val NUMBER_PATTERN_MATCHER_SIX_DIGITS = "(\\d{3})(\\d{2})(\\d{1})"
+        const val NUMBER_PATTERN_MATCHER_FIVE_DIGITS = "(\\d{3})(\\d{2})"
+        const val NUMBER_PATTERN_MATCHER_FOUR_DIGITS = "(\\d{3})(\\d{1})"
+        const val NUMBER_PATTERN_REPLACEMENT_ONE_GROUP = "$1"
+        const val NUMBER_PATTERN_REPLACEMENT_TWO_GROUP = "$1 $2"
+        const val NUMBER_PATTERN_REPLACEMENT_THREE_GROUP = "$1 $2 $3"
+        const val NUMBER_PATTERN_REPLACEMENT_FOUR_GROUP = "$1 $2 $3 $4"
+        const val NUMBER_START_PATTERN_MATCHER = "^[678].*"
+    }
 
     //endregion
 
@@ -50,7 +52,7 @@ object Constants {
     //endregion
 
     //region SERVER RESPONSE CODES
-    enum class ResponseCodes constructor(val code: Int){
+    enum class ResponseCodes constructor(val code: Int) {
         OK(-1),
         ERROR(1),
         WRONG_SMS_CODE(2),
@@ -61,23 +63,27 @@ object Constants {
     //endregion
 
     //region NAVIGATION
-    const val NAVIGATION_VALIDATED_PHONE_TAG = "NAVIGATION_VALIDATED_PHONE_NUMBER_TAG"
-    const val NAVIGATION_PIN_SENT_TAG = "NAVIGATION_PASSWORD_TAG"
-    const val NAVIGATION_PERSONAL_INFO_TAG = "NAVIGATION_PERSONAL_INFO_TAG"
+    object NAVIGATION {
+        const val VALIDATED_PHONE_TAG = "NAVIGATION_VALIDATED_PHONE_NUMBER_TAG"
+        const val PIN_SENT_TAG = "NAVIGATION_PASSWORD_TAG"
+        const val PERSONAL_INFO_TAG = "NAVIGATION_PERSONAL_INFO_TAG"
+    }
 
     //endregion
 
     //region USER DATA
-    const val USER_TOKEN_TAG = "USER_TOKEN_TAG"
-    const val USER_NAME_TAG = "USER_NAME_TAG"
-    const val USER_PIN_TAG = "USER_PASSWORD_TAG"
-    const val USER_PIN_ALIAS = "com.rookia.android.sejo"
-    const val USER_BIOMETRICS_TAG = "USER_BIOMETRICS_TAG"
-    const val USER_PHONE_NUMBER_TAG = "USER_PHONE_NUMBER_TAG"
-    const val USER_PHONE_PREFIX_TAG = "USER_PHONE_PREFIX_TAG"
-    const val USER_ID_TAG = "USER_ID_TAG"
-    const val PUSH_TOKEN_TAG = "PUSH_TOKEN_TAG"
-    const val LAST_USED_GROUP_TAG = "LAST_USED_GROUP_TAG"
+    object USER_DATA {
+        const val TOKEN_TAG = "USER_TOKEN_TAG"
+        const val NAME_TAG = "USER_NAME_TAG"
+        const val PIN_TAG = "USER_PASSWORD_TAG"
+        const val PIN_ALIAS = "com.rookia.android.sejo"
+        const val BIOMETRICS_TAG = "USER_BIOMETRICS_TAG"
+        const val PHONE_NUMBER_TAG = "USER_PHONE_NUMBER_TAG"
+        const val PHONE_PREFIX_TAG = "USER_PHONE_PREFIX_TAG"
+        const val ID_TAG = "USER_ID_TAG"
+        const val PUSH_TOKEN_TAG = "PUSH_TOKEN_TAG"
+        const val LAST_USED_GROUP_TAG = "LAST_USED_GROUP_TAG"
+    }
 
 
     //endregion
@@ -86,7 +92,10 @@ object Constants {
     enum class MemberStates(val code: Int) {
         OWNER(0), VALIDATED(1), PENDING(2), GUESS(3)
     }
-    const val LAST_CHECKED_TIMESTAMP = "LAST_CHECKED_TIMESTAMP"
-    const val NUMBER_OF_GROUPS_PER_PAGE_QUERIED = 5
+
+    object GROUPS {
+        const val LAST_CHECKED_TIMESTAMP = "LAST_CHECKED_TIMESTAMP_FOR_GROUPS"
+        const val NUMBER_OF_GROUPS_PER_PAGE_QUERIED = 5
+    }
     //endregion
 }

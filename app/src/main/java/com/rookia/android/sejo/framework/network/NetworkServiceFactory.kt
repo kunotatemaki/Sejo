@@ -46,7 +46,7 @@ open class NetworkServiceFactory @Inject constructor(private val preferencesMana
         smsCodeCodeInstance ?: buildSmsCodeNetworkService().also { smsCodeCodeInstance = it }
 
     fun getUserInstance(): UserApi {
-        val bearer = preferencesManager.getStringFromPreferences(Constants.USER_TOKEN_TAG)
+        val bearer = preferencesManager.getStringFromPreferences(Constants.USER_DATA.TOKEN_TAG)
 
         return userInstance ?: buildUserNetworkService(bearer).also { userApi ->
             bearer?.let { userInstance = userApi }
@@ -54,7 +54,7 @@ open class NetworkServiceFactory @Inject constructor(private val preferencesMana
     }
 
     fun getLoginInstance(): LoginApi {
-        val bearer = preferencesManager.getStringFromPreferences(Constants.USER_TOKEN_TAG)
+        val bearer = preferencesManager.getStringFromPreferences(Constants.USER_DATA.TOKEN_TAG)
 
         return loginInstance ?: buildLoginNetworkService(bearer).also { loginApi ->
             bearer?.let { loginInstance = loginApi }
@@ -62,7 +62,7 @@ open class NetworkServiceFactory @Inject constructor(private val preferencesMana
     }
 
     fun getGroupInstance(): GroupApi {
-        val bearer = preferencesManager.getStringFromPreferences(Constants.USER_TOKEN_TAG)
+        val bearer = preferencesManager.getStringFromPreferences(Constants.USER_DATA.TOKEN_TAG)
 
         return groupInstance ?: buildGroupNetworkService(bearer).also { groupApi ->
             bearer?.let { groupInstance = groupApi }

@@ -23,6 +23,7 @@ import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.androidutils.framework.utils.PermissionManager
 import com.rookia.android.androidutils.utils.DeviceUtils
 import com.rookia.android.sejo.R
+import com.rookia.android.sejo.data.CacheSanity
 import com.rookia.android.sejo.databinding.FragmentGroupCreationMembersBinding
 import com.rookia.android.sejo.domain.local.PhoneContact
 import com.rookia.android.sejo.ui.common.BaseFragment
@@ -118,6 +119,7 @@ class GroupCreationMembersFragment : BaseFragment(R.layout.fragment_group_creati
                 when (it.status) {
                     Result.Status.SUCCESS -> {
                         hideLoading()
+                        CacheSanity.groupsCacheDirty = true
                         navigateToDashboard()
                     }
                     Result.Status.ERROR -> hideLoading()

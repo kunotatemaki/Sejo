@@ -23,7 +23,7 @@ class PushNotificationService : FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         val preferencesManager =
             PreferencesManagerImpl(this.applicationContext, EncryptionImpl(this.applicationContext))
-        preferencesManager.setStringIntoPreferences(Constants.PUSH_TOKEN_TAG, token)
+        preferencesManager.setStringIntoPreferences(Constants.USER_DATA.PUSH_TOKEN_TAG, token)
     }
 
     override fun onMessageReceived(p0: RemoteMessage) {
