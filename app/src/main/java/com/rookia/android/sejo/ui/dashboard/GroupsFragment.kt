@@ -7,22 +7,22 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.rookia.android.androidutils.domain.vo.Result
+import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
-import com.rookia.android.sejo.databinding.FragmentGeneralBinding
+import com.rookia.android.sejo.databinding.FragmentGroupsBinding
 import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_general.*
 import timber.log.Timber
 
 @AndroidEntryPoint
-class GeneralFragment : BaseFragment(R.layout.fragment_general), GeneralAdapter.GroupItemClickable {
+class GroupsFragment : BaseFragment(R.layout.fragment_groups), GeneralAdapter.GroupItemClickable {
 
 
-    private val viewModel: GeneralViewModel by viewModels()
+    private val viewModel: GroupsViewModel by viewModels()
     private lateinit var adapter: GeneralAdapter
 
-    private lateinit var binding: FragmentGeneralBinding
+    private lateinit var binding: FragmentGroupsBinding
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -31,21 +31,14 @@ class GeneralFragment : BaseFragment(R.layout.fragment_general), GeneralAdapter.
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentGeneralBinding.bind(view)
+        binding = FragmentGroupsBinding.bind(view)
 
         adapter = GeneralAdapter(this)
-//        test.setText("623")
-        button1.setOnClickListener {
+        binding.fragmentGroupsAddButton.setOnClickListener {
             navigateToGroupCreation()
-//            test.showPassword()
         }
-//        hide.setOnClickListener {
-//            test.hidePassword()
-//        }
-//        error.setOnClickListener {
-//            test.showErrorFeedback()
-//        }
-        binding.list.adapter = adapter
+
+        binding.fragmentGroupsList.adapter = adapter
 
         viewModel.groups.observe(viewLifecycleOwner, Observer {
             Timber.d("")
@@ -66,6 +59,13 @@ class GeneralFragment : BaseFragment(R.layout.fragment_general), GeneralAdapter.
 
         })
 
+        viewModel.group.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                preferencesManager.setLongIntoPreferences(Constants.LAST_USED_GROUP_TAG, it.groupId)
+                binding.fragmentGroupsLastSelectedItem.group = it
+            }
+        })
+
     }
 
     override fun onResume() {
@@ -75,11 +75,14 @@ class GeneralFragment : BaseFragment(R.layout.fragment_general), GeneralAdapter.
 
     private fun navigateToGroupCreation() {
         val direction =
-            GeneralFragmentDirections.actionBlankFragmentToGroupCreationActivity()
+            GroupsFragmentDirections.actionBlankFragmentToGroupCreationActivity()
         findNavController().navigate(direction)
     }
 
     override fun onGroupClicked(groupId: Long) {
         viewModel.setSelectedGroup(groupId)
     }
+
+    override fun needTohideNavigationBar(): Boolean = false
+
 }

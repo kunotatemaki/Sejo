@@ -69,5 +69,6 @@ class PersonalInfoFragment : BaseFragment(R.layout.fragment_personal_info) {
         findNavController().popBackStack()
     }
 
+    override fun needTohideNavigationBar(): Boolean = true
 
 }

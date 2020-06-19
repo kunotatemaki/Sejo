@@ -19,4 +19,6 @@ import com.rookia.android.sejo.domain.local.Group
 interface PersistenceManager {
     suspend fun saveGroups(groups: List<Group>)
     fun getGroups(): LiveData<PagedList<Group>>
+    fun getGroup(groupId: Long): LiveData<Group>
+//    fun getGroupWithMembers(groupId: Long): LiveData<GroupWithMembers>
 }

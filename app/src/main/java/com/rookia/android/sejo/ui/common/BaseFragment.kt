@@ -15,6 +15,7 @@ import com.rookia.android.sejo.ui.login.LoginStatus
 import com.rookia.android.sejo.ui.main.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -69,7 +70,19 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId), CoroutineScope 
     override fun onResume() {
         super.onResume()
         checkLogin()
+        Timber.d("cretino ${this.javaClass.simpleName} - ${activity != null}")
+        (activity as? MainActivity)?.apply {
+            if (needTohideNavigationBar()) {
+                Timber.d("cretino ${this.javaClass.simpleName} - hide")
+                hideNavigationBar()
+            } else {
+                Timber.d("cretino ${this.javaClass.simpleName} - show")
+                showNavigationBar()
+            }
+        }
     }
+
+    abstract fun needTohideNavigationBar(): Boolean
 
     private fun checkLogin() {
         if (forceLoginBeforeLaunchingThisFragment || (loginStatus.needToLogin() && this !is LoginFragment && (activity as? MainActivity)?.needToNavigateToRegister() != true)) {

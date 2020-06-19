@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         enum class BottomMenuType(val id: Int) {
-            DASHBOARD(R.id.generalFragment),
+            DASHBOARD(R.id.groupsFragment),
             MEMBERS(R.id.membersFragment),
             PAYMENTS(R.id.paymentsFragment),
             MORE(R.id.moreFragment)
@@ -61,8 +61,8 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
         val navController = navHostFragment.navController
-        binding.bottomNavigation.setupWithNavController(navController)
 
+        binding.bottomNavigation.setupWithNavController(navController)
 
     }
 
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
             navigateToRegisterFlow()
         }
         supportFragmentManager.findFragmentById(R.id.fragment_container)?.findNavController()
-            ?.let { navController ->
+            ?.let { _ ->
 //                setupActionBarWithNavController(navController)
 
             }
@@ -145,6 +145,14 @@ class MainActivity : AppCompatActivity() {
 
     fun removeBadgeFromBottomMenu(type: BottomMenuType) {
         binding.bottomNavigation.removeBadge(type.id)
+    }
+
+    fun hideNavigationBar() {
+        binding.bottomNavigation.gone()
+    }
+
+    fun showNavigationBar() {
+        binding.bottomNavigation.visible()
     }
 
 

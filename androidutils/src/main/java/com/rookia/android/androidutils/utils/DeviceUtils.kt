@@ -6,6 +6,7 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
 import com.rookia.android.androidutils.data.resources.ResourcesManager
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 
@@ -20,7 +21,7 @@ import javax.inject.Inject
  *
  */
 
-class DeviceUtils @Inject constructor(private val context: Context, private val resourcesManager: ResourcesManager) {
+class DeviceUtils @Inject constructor(@ApplicationContext private val context: Context, private val resourcesManager: ResourcesManager) {
 
 
     fun getScreenDimensions(): ScreenDimensions? {

@@ -67,4 +67,6 @@ class ValidatePhoneNumberFragment : BaseFragment(R.layout.fragment_validate_numb
         activity?.finish()
     }
 
+    override fun needTohideNavigationBar(): Boolean = true
+
 }

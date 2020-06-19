@@ -1,9 +1,7 @@
 package com.rookia.android.sejo.ui.dashboard
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.PagedList
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
@@ -29,7 +27,7 @@ import timber.log.Timber
  *
  */
 
-class GeneralViewModel @ViewModelInject constructor(
+class GroupsViewModel @ViewModelInject constructor(
     private val getGroupsUseCase: GetGroupsUseCase,
     private val preferencesManager: PreferencesManager,
     private val selectedGroupUseCase: SetLastGroupSelectedUseCase,
@@ -37,6 +35,17 @@ class GeneralViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     val groups: MediatorLiveData<Result<PagedList<Group>>> = MediatorLiveData()
+
+    val group: LiveData<Group>
+    private val _singleGroupQuery: MutableLiveData<Long> = MutableLiveData()
+
+    init {
+        val storedGroupId = preferencesManager.getLongFromPreferences(Constants.LAST_USED_GROUP_TAG)
+        _singleGroupQuery.value = storedGroupId
+        group = _singleGroupQuery.switchMap { groupId ->
+            getGroupsUseCase.getGroup(groupId)
+        }
+    }
 
     fun loadGroups() {
         preferencesManager.getStringFromPreferences(Constants.USER_ID_TAG)?.let { userId ->
@@ -52,6 +61,7 @@ class GeneralViewModel @ViewModelInject constructor(
     }
 
     fun setSelectedGroup(groupId: Long) {
+        _singleGroupQuery.value = groupId
         preferencesManager.getStringFromPreferences(Constants.USER_ID_TAG)?.let { userId ->
             viewModelScope.launch(dispatcher) {
                 selectedGroupUseCase.updateUser(userId, groupId).collect {
@@ -61,6 +71,5 @@ class GeneralViewModel @ViewModelInject constructor(
 
         }
     }
-
 
 }

@@ -21,7 +21,7 @@ import java.util.*
 
 fun Group.toEntity(): GroupEntity =
     GroupEntity(
-        groupId = groupId ?: 0,
+        groupId = groupId,
         name = name,
         fee = fee,
         owner = owner,

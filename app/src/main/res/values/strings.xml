@@ -66,5 +66,9 @@
     <string name="bottom_menu_members">Miembros</string>
     <string name="bottom_menu_pagos">Pagos</string>
 
+    <!-- Groups Fragment -->
+    <string name="fragment_groups_last_group_selected_title">Último grupo usado</string>
+    <string name="fragment_groups_list_title">Grupos</string>
+
 
 </resources>

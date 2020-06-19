@@ -247,4 +247,6 @@ class ValidateSmsFragment : BaseFragment(R.layout.fragment_validate_sms) {
         findNavController().navigate(direction)
     }
 
+    override fun needTohideNavigationBar(): Boolean = true
+
 }

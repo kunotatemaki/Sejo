@@ -57,11 +57,11 @@ class ValidateSmsViewModel @ViewModelInject constructor(
         }
     }
 
-    fun setPinSet(userId: String, lastUsedGroup: Int?) {
+    fun setPinSet(userId: String, lastUsedGroup: Long?) {
         preferencesManager.setBooleanIntoPreferences(NAVIGATION_PIN_SENT_TAG, true)
         preferencesManager.setStringIntoPreferences(USER_ID_TAG, userId)
         lastUsedGroup?.let {
-            preferencesManager.setIntIntoPreferences(LAST_USED_GROUP_TAG, lastUsedGroup)
+            preferencesManager.setLongIntoPreferences(LAST_USED_GROUP_TAG, lastUsedGroup)
         }
     }
 

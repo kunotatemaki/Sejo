@@ -16,4 +16,6 @@ class MembersFragment : BaseFragment(R.layout.members_fragment) {
 
     }
 
+    override fun needTohideNavigationBar(): Boolean = false
+
 }

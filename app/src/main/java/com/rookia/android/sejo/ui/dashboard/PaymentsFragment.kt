@@ -16,4 +16,6 @@ class PaymentsFragment : BaseFragment(R.layout.payments_fragment) {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    override fun needTohideNavigationBar(): Boolean = false
+
 }

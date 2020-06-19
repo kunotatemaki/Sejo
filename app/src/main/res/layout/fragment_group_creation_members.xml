@@ -12,33 +12,34 @@
             android:id="@+id/appbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:theme="@style/AppTheme.AppBarOverlay"
-            android:background="@color/white">
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/fragment_group_creation_members_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_margin="8dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:background="@drawable/fragment_group_creation_members_toolbar_border"
-            app:layout_constraintTop_toTopOf="parent"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            tools:ignore="UnusedAttribute"
-            app:layout_scrollFlags="scroll|enterAlways"/>
+            android:background="@color/white"
+            app:theme="@style/AppTheme.AppBarOverlay">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/fragment_group_creation_members_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_margin="8dp"
+                android:background="@drawable/fragment_group_creation_members_toolbar_border"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                tools:ignore="UnusedAttribute" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragment_group_creation_members_added_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:listitem="@layout/component_phone_contact_thumbnail"
-                tools:itemCount="5"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:orientation="horizontal"
-                />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="5"
+                tools:listitem="@layout/component_phone_contact_thumbnail" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,11 +48,11 @@
             android:layout_height="match_parent"
             android:padding="16dp"
             android:visibility="gone"
-            tools:visibility="visible"
-            app:layout_constraintTop_toBottomOf="@id/fragment_group_creation_members_toolbar"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_group_creation_members_toolbar"
+            tools:visibility="visible">
 
             <ImageView
                 android:id="@+id/fragment_group_creation_members_image"
@@ -84,11 +85,11 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/fragment_group_creation_members_subheader_text"
                 android:textAlignment="center"
-                app:layout_constraintVertical_bias="0"
                 app:layout_constraintBottom_toTopOf="@+id/fragment_group_creation_members_permissions_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_group_creation_members_header" />
+                app:layout_constraintTop_toBottomOf="@+id/fragment_group_creation_members_header"
+                app:layout_constraintVertical_bias="0" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/fragment_group_creation_members_permissions_button"
@@ -107,37 +108,37 @@
             android:id="@+id/fragment_group_creation_members_list_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_group_creation_members_toolbar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_group_creation_members_toolbar">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragment_group_creation_members_list"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:paddingBottom="80dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/component_phone_contact"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:paddingBottom="80dp"
-                android:clipToPadding="false"
-                />
+                tools:listitem="@layout/component_phone_contact" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fragment_group_creation_members_continue_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fabSize="normal"
-                style="@style/FabStyle"
-                android:visibility="gone"
-                app:srcCompat="@drawable/ic_arrow_forward_white_24dp"
-                android:layout_gravity="bottom|end"
-                />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fragment_group_creation_members_continue_button"
+            style="@style/FabStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:visibility="gone"
+            app:fabSize="normal"
+            app:srcCompat="@drawable/ic_arrow_forward_white_24dp"
+            tools:ignore="ContentDescription" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

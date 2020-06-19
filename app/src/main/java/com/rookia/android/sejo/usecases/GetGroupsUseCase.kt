@@ -26,4 +26,7 @@ class GetGroupsUseCase @Inject constructor(
     fun getGroups(userId: String): LiveData<Result<PagedList<Group>>> =
         repository.getGroups(userId)
 
+    fun getGroup(groupId: Long): LiveData<Group> =
+        repository.getGroup(groupId)
+
 }

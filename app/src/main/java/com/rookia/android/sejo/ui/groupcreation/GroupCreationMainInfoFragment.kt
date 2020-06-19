@@ -8,8 +8,9 @@ import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentGroupCreationMainInfoBinding
 import com.rookia.android.sejo.ui.common.BaseFragment
 import com.rookia.android.sejo.ui.main.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class GroupCreationMainInfoFragment : BaseFragment(R.layout.fragment_group_creation_main_info) {
 
     lateinit var binding: FragmentGroupCreationMainInfoBinding
@@ -54,4 +55,6 @@ class GroupCreationMainInfoFragment : BaseFragment(R.layout.fragment_group_creat
         }
         binding.fragmentGroupCreationMainInfoButton.isEnabled = enabled
     }
+
+    override fun needTohideNavigationBar(): Boolean = true
 }

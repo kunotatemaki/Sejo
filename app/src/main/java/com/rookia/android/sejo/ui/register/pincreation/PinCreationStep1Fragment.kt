@@ -68,5 +68,6 @@ class PinCreationStep1Fragment : BaseFragment(R.layout.fragment_pin_creation_ste
         findNavController().navigate(direction)
     }
 
+    override fun needTohideNavigationBar(): Boolean = true
 
 }
