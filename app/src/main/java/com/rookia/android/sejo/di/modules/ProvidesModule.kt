@@ -84,7 +84,8 @@ class ProvidesModule {
                 R.id.pinCreationStep1Fragment,
                 R.id.loginFragment,
                 R.id.biometricPermissionFragment,
-                R.id.groupsFragment
+                R.id.groupsFragment,
+                R.id.moreFragment
             )
         )
 

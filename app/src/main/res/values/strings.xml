@@ -60,13 +60,20 @@
     <string name="fragment_group_creation_main_fee_header">Cuota de acceso al grupo</string>
     <string name="fragment_group_creation_main_info_fee_hint">Cuota</string>
     <string name="component_phone_contact_thumbnail_owner">Yo</string>
-    <string name="bottom_menu_general">General</string>
+
+    <!-- Bottom Menu -->
+    <string name="bottom_menu_dashboard">Grupo</string>
     <string name="bottom_menu_members">Miembros</string>
-    <string name="bottom_menu_pagos">Pagos</string>
+    <string name="bottom_menu_payments">Pagos</string>
+    <string name="bottom_menu_more">Más</string>
 
     <!-- Groups Fragment -->
     <string name="fragment_groups_last_group_selected_title">Último grupo usado</string>
     <string name="fragment_groups_list_title">Grupos</string>
+
+    <!-- More Fragment -->
+    <string name="fragment_more_title">Más</string>
+    <string name="fragment_more_my_groups">Mis grupos</string>
 
 
 </resources>

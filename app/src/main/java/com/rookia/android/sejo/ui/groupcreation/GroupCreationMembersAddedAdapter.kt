@@ -11,7 +11,7 @@ import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.sejo.R
-import com.rookia.android.sejo.databinding.ComponentPhoneContactThumbnailBinding
+import com.rookia.android.sejo.databinding.ElementPhoneContactThumbnailBinding
 import com.rookia.android.sejo.domain.local.PhoneContact
 
 
@@ -40,7 +40,7 @@ class GroupCreationMembersAddedAdapter constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupMemberViewHolder {
         val binding =
-            ComponentPhoneContactThumbnailBinding.inflate(
+            ElementPhoneContactThumbnailBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -94,7 +94,7 @@ class GroupCreationMembersAddedAdapter constructor(
     }
 
     class GroupMemberViewHolder(
-        private val binding: ComponentPhoneContactThumbnailBinding,
+        private val binding: ElementPhoneContactThumbnailBinding,
         private val listener: GroupMemberRemovedList
     ) :
         RecyclerView.ViewHolder(binding.root) {

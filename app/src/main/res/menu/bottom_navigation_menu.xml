@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/groupsFragment"
+        android:id="@+id/selectedGroupFragment"
         android:enabled="true"
         android:icon="@drawable/ic_group_creation_members_search_24dp"
-        android:title="@string/bottom_menu_general"/>
+        android:title="@string/bottom_menu_dashboard"/>
     <item
         android:id="@+id/membersFragment"
         android:enabled="true"
@@ -14,15 +14,10 @@
         android:id="@+id/paymentsFragment"
         android:enabled="true"
         android:icon="@drawable/ic_group_creation_members_search_24dp"
-        android:title="@string/bottom_menu_pagos"/>
-    <item
-        android:id="@+id/selectedGroupFragment"
-        android:enabled="true"
-        android:icon="@drawable/ic_group_creation_members_search_24dp"
-        android:title="@string/bottom_menu_pagos"/>
+        android:title="@string/bottom_menu_payments"/>
     <item
         android:id="@+id/moreFragment"
         android:enabled="true"
         android:icon="@drawable/ic_group_creation_members_search_24dp"
-        android:title="@string/bottom_menu_pagos"/>
+        android:title="@string/bottom_menu_more"/>
 </menu>

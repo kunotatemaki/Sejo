@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.rookia.android.sejo.databinding.ItemGroupBinding
+import com.rookia.android.sejo.databinding.ElementGroupBinding
 import com.rookia.android.sejo.domain.local.Group
 
 
@@ -41,7 +41,7 @@ class GroupsAdapter constructor(private val listener: GroupItemClickable) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemGroupBinding.inflate(inflater, parent, false)
+        val binding = ElementGroupBinding.inflate(inflater, parent, false)
         return GroupViewHolder(binding, listener)
     }
 
@@ -53,7 +53,7 @@ class GroupsAdapter constructor(private val listener: GroupItemClickable) :
 }
 
 class GroupViewHolder constructor(
-    private val binding: ItemGroupBinding,
+    private val binding: ElementGroupBinding,
     private val listener: GroupsAdapter.GroupItemClickable
 ) :
     RecyclerView.ViewHolder(binding.root) {

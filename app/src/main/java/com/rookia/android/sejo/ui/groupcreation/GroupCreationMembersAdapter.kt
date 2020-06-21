@@ -3,7 +3,7 @@ package com.rookia.android.sejo.ui.groupcreation
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.rookia.android.sejo.databinding.ComponentPhoneContactBinding
+import com.rookia.android.sejo.databinding.ElementPhoneContactBinding
 import com.rookia.android.sejo.domain.local.PhoneContact
 
 
@@ -28,7 +28,7 @@ class GroupCreationMembersAdapter constructor(private val listener: GroupMemberL
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupMemberViewHolder {
         val binding =
-            ComponentPhoneContactBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ElementPhoneContactBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return GroupMemberViewHolder(binding, listener)
     }
 
@@ -45,7 +45,7 @@ class GroupCreationMembersAdapter constructor(private val listener: GroupMemberL
         }
     }
 
-    class GroupMemberViewHolder(private val binding: ComponentPhoneContactBinding, private val listener: GroupMemberListed) :
+    class GroupMemberViewHolder(private val binding: ElementPhoneContactBinding, private val listener: GroupMemberListed) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(contact: PhoneContact) {
             binding.contact = contact

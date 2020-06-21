@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/groupsFragment">
+    app:startDestination="@id/selectedGroupFragment">
 
     <fragment
         android:id="@+id/groupsFragment"
@@ -51,8 +51,21 @@
     <fragment
         android:id="@+id/selectedGroupFragment"
         android:name="com.rookia.android.sejo.ui.dashboard.SelectedGroupFragment"
-        android:label="SelectedGroupFragment"
         tools:layout="@layout/fragment_selected_group"/>
+    <fragment
+        android:id="@+id/moreFragment"
+        android:name="com.rookia.android.sejo.ui.dashboard.MoreFragment"
+        android:label="@string/fragment_more_title"
+        tools:layout="@layout/fragment_more">
+        <action
+            android:id="@+id/action_moreFragment_to_groupsFragment"
+            app:destination="@id/groupsFragment"
+            app:enterAnim="@anim/navigation_fragment_enter"
+            app:exitAnim="@anim/navigation_fragment_exit"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/navigation_fragment_pop_enter"
+            app:popExitAnim="@anim/navigation_fragment_pop_exit"/>
+    </fragment>
 
 
 </navigation>

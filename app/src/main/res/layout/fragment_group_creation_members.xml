@@ -39,7 +39,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:itemCount="5"
-                tools:listitem="@layout/component_phone_contact_thumbnail" />
+                tools:listitem="@layout/element_phone_contact_thumbnail" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -125,7 +125,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/component_phone_contact" />
+                tools:listitem="@layout/element_phone_contact" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

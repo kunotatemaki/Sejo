@@ -29,7 +29,7 @@
             tools:itemCount="4"
             android:paddingBottom="80dp"
             android:clipToPadding="false"
-            tools:listitem="@layout/item_group" />
+            tools:listitem="@layout/element_group" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fragment_groups_add_button"

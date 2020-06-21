@@ -43,6 +43,27 @@ class BindingAdapters {
                 .into(view)
         }
 
+        @BindingAdapter(value = ["imageRounded", "defaultImage"], requireAll = false)
+        @JvmStatic
+        fun setImageUrlRounded(view: ImageView, url: Int?, defaultImage: Drawable?) {
+            //circle images
+            val options = if (defaultImage == null) {
+                RequestOptions()
+                    .circleCrop()
+            } else {
+                RequestOptions()
+                    .circleCrop()
+                    .placeholder(defaultImage)
+            }
+
+            Glide.with(view.context)
+                .load(url)
+                .apply(
+                    options
+                )
+                .into(view)
+        }
+
         @JvmStatic
         @BindingAdapter(value = ["imageCenterAndCropped", "defaultImage"], requireAll = false)
         fun setImageUrlCenterAndCropped(view: ImageView, url: String?, defaultImage: Drawable?) {
