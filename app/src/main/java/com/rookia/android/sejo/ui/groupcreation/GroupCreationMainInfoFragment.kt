@@ -25,7 +25,7 @@ class GroupCreationMainInfoFragment : BaseFragment(R.layout.fragment_group_creat
                 checkButton()
             }
         }
-        setToolbar(binding.fragmentGroupCreationMainInfoToolbar, true)
+        setToolbar(binding.fragmentGroupCreationMainInfoToolbar)
     }
 
     override fun onDestroyView() {
@@ -56,5 +56,5 @@ class GroupCreationMainInfoFragment : BaseFragment(R.layout.fragment_group_creat
         binding.fragmentGroupCreationMainInfoButton.isEnabled = enabled
     }
 
-    override fun needTohideNavigationBar(): Boolean = true
+    override fun needToHideNavigationBar(): Boolean = true
 }

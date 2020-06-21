@@ -25,7 +25,6 @@
     <fragment
         android:id="@+id/validateSmsFragment"
         android:name="com.rookia.android.sejo.ui.register.sms.ValidateSmsFragment"
-        android:label="validate_sms_fragment"
         tools:layout="@layout/fragment_validate_sms">
         <argument
             android:name="phonePrefix"
@@ -44,12 +43,18 @@
             app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_validateSmsFragment_to_personalInfoFragment"
-            app:destination="@id/personalInfoFragment" />
+            app:destination="@id/personalInfoFragment"
+            app:enterAnim="@anim/navigation_fragment_enter"
+            app:exitAnim="@anim/navigation_fragment_exit"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/navigation_fragment_pop_enter"
+            app:popExitAnim="@anim/navigation_fragment_pop_exit"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/pinCreationStep1Fragment"
         android:name="com.rookia.android.sejo.ui.register.pincreation.PinCreationStep1Fragment"
-        android:label="PinCreationStep1Fragment"
+        android:label="@string/fragment_pin_creation_toolbar_title"
         tools:layout="@layout/fragment_pin_creation_step1">
         <action
             android:id="@+id/action_pinCreationStep1Fragment_to_pinCreationStep2Fragment"
@@ -65,7 +70,7 @@
     <fragment
         android:id="@+id/pinCreationStep2Fragment"
         android:name="com.rookia.android.sejo.ui.register.pincreation.PinCreationStep2Fragment"
-        android:label="PinCreationStep2Fragment"
+        android:label="@string/fragment_pin_creation_toolbar_title"
         tools:layout="@layout/fragment_pin_creation_step2">
         <argument
             android:name="code"
@@ -78,8 +83,7 @@
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/navigation_fragment_pop_enter"
             app:popExitAnim="@anim/navigation_fragment_pop_exit"
-            app:popUpTo="@id/pinCreationStep1Fragment"
-            app:popUpToInclusive="false">
+            >
             <argument
                 android:name="forceLogin"
                 android:defaultValue="false"

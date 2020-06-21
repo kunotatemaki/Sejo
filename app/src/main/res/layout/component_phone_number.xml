@@ -23,6 +23,7 @@
             android:layout_marginStart="8dp"
             android:autofillHints="Phone Number"
             android:inputType="phone"
+            android:text="625665592"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/component_phone_prefix"
             app:layout_constraintTop_toTopOf="parent"

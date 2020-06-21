@@ -80,7 +80,7 @@ class GroupCreationMembersFragment : BaseFragment(R.layout.fragment_group_creati
 
         binding = FragmentGroupCreationMembersBinding.bind(view)
 
-        setToolbar(binding.fragmentGroupCreationMembersToolbar, true)
+        setToolbar(binding.fragmentGroupCreationMembersToolbar)
 
         binding.fragmentGroupCreationMembersToolbar.setOnClickListener {
             if (searchMenuItem?.isActionViewExpanded == false) {
@@ -324,5 +324,5 @@ class GroupCreationMembersFragment : BaseFragment(R.layout.fragment_group_creati
         findNavController().popBackStack(R.id.groupCreationMainInfoFragment, true)
     }
 
-    override fun needTohideNavigationBar(): Boolean = true
+    override fun needToHideNavigationBar(): Boolean = true
 }

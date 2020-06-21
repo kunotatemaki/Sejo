@@ -95,7 +95,7 @@ object Constants {
 
     object GROUPS {
         const val LAST_CHECKED_TIMESTAMP = "LAST_CHECKED_TIMESTAMP_FOR_GROUPS"
-        const val NUMBER_OF_GROUPS_PER_PAGE_QUERIED = 5
+        const val NUMBER_OF_GROUPS_PER_PAGE_QUERIED = 100
     }
     //endregion
 }

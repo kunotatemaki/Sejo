@@ -30,7 +30,7 @@ class PersonalInfoFragment : BaseFragment(R.layout.fragment_personal_info) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPersonalInfoBinding.bind(view)
-        setToolbar(binding.fragmentPersonalInfoToolbar, true)
+        setToolbar(binding.fragmentPersonalInfoToolbar)
         binding.fragmentPersonalInfoName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 binding.fragmentPersonalInfoButton.isEnabled = p0.isNullOrBlank().not()
@@ -69,6 +69,6 @@ class PersonalInfoFragment : BaseFragment(R.layout.fragment_personal_info) {
         findNavController().popBackStack()
     }
 
-    override fun needTohideNavigationBar(): Boolean = true
+    override fun needToHideNavigationBar(): Boolean = true
 
 }

@@ -8,10 +8,10 @@
     <fragment
         android:id="@+id/groupsFragment"
         android:name="com.rookia.android.sejo.ui.dashboard.GroupsFragment"
-        android:label="fragment_blank"
+        android:label="@string/fragment_groups_list_title"
         tools:layout="@layout/fragment_groups" >
         <action
-            android:id="@+id/action_blankFragment_to_groupCreationActivity"
+            android:id="@+id/action_groupsFragment_to_groupCreationActivity"
             app:destination="@id/group_creation_graph"
             app:enterAnim="@anim/navigation_new_graph_enter"
             app:exitAnim="@anim/navigation_new_graph_exit"
@@ -48,6 +48,11 @@
         android:name="com.rookia.android.sejo.ui.dashboard.MembersFragment"
         android:label="members_fragment"
         tools:layout="@layout/members_fragment" />
+    <fragment
+        android:id="@+id/selectedGroupFragment"
+        android:name="com.rookia.android.sejo.ui.dashboard.SelectedGroupFragment"
+        android:label="SelectedGroupFragment"
+        tools:layout="@layout/fragment_selected_group"/>
 
 
 </navigation>

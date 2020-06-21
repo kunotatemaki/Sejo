@@ -17,7 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.views.register.number.ValidateSmsFragment">
+        tools:context=".ui.register.sms.ValidateSmsFragment">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/fragment_validate_sms_toolbar"
@@ -25,7 +25,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/transparent"
             app:layout_constraintTop_toTopOf="parent"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
         <com.rookia.android.sejo.ui.views.SmsCodeView
             android:id="@+id/fragment_validate_sms_view"

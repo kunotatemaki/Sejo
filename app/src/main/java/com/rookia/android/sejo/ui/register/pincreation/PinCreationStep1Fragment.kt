@@ -26,16 +26,14 @@ class PinCreationStep1Fragment : BaseFragment(R.layout.fragment_pin_creation_ste
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding = FragmentPinCreationStep1Binding.bind(view)
         binding.fragmentPinCreationStep1PinScreen.apply {
             setPinValidator(this@PinCreationStep1Fragment)
             setHeader(resourcesManager.getString(R.string.fragment_pin_creation_step_1_header))
         }
-        setToolbar(
-            binding.fragmentPinCreationStep1Toolbar,
-            false,
-            resourcesManager.getString(R.string.fragment_pin_creation_toolbar_title)
-        )
+
+        setToolbar(binding.fragmentPinCreationStep1Toolbar)
 
     }
 
@@ -68,6 +66,9 @@ class PinCreationStep1Fragment : BaseFragment(R.layout.fragment_pin_creation_ste
         findNavController().navigate(direction)
     }
 
-    override fun needTohideNavigationBar(): Boolean = true
+    override fun needToHideNavigationBar(): Boolean = true
+
+    override fun doOnBackPressed() {
+    }
 
 }

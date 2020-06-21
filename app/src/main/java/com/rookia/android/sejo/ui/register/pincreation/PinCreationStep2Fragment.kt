@@ -38,7 +38,7 @@ class PinCreationStep2Fragment : BaseFragment(R.layout.fragment_pin_creation_ste
         binding = FragmentPinCreationStep2Binding.bind(view)
         binding.fragmentPinCreationStep2PinScreen.setHeader(resourcesManager.getString(R.string.fragment_pin_creation_step_2_header))
         binding.fragmentPinCreationStep2PinScreen.setPinValidator(this)
-        setToolbar(binding.fragmentPinCreationStep2Toolbar, true, resourcesManager.getString(R.string.fragment_pin_creation_toolbar_title))
+        setToolbar(binding.fragmentPinCreationStep2Toolbar)
 
         viewModel.pinSentToServer.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -88,6 +88,6 @@ class PinCreationStep2Fragment : BaseFragment(R.layout.fragment_pin_creation_ste
         findNavController().navigate(direction)
     }
 
-    override fun needTohideNavigationBar(): Boolean = true
+    override fun needToHideNavigationBar(): Boolean = true
 
 }

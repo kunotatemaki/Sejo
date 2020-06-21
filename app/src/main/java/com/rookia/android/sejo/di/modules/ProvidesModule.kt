@@ -3,6 +3,7 @@ package com.rookia.android.sejo.di.modules
 import android.content.Context
 import androidx.biometric.BiometricPrompt
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.ui.AppBarConfiguration
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.framework.persistence.databases.AppDatabase
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
@@ -74,5 +75,17 @@ class ProvidesModule {
     fun provideDb(
         @ApplicationContext context: Context
     ): AppDatabase = AppDatabase.getInstance(context)
+
+    @Provides
+    @Singleton
+    fun providesAppBarConfiguration(): AppBarConfiguration =
+        AppBarConfiguration(
+            setOf(
+                R.id.pinCreationStep1Fragment,
+                R.id.loginFragment,
+                R.id.biometricPermissionFragment,
+                R.id.groupsFragment
+            )
+        )
 
 }

@@ -35,10 +35,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         enum class BottomMenuType(val id: Int) {
-            DASHBOARD(R.id.groupsFragment),
+            DASHBOARD(R.id.selectedGroupFragment),
+            GROUPS(R.id.groupsFragment),
             MEMBERS(R.id.membersFragment),
             PAYMENTS(R.id.paymentsFragment),
-            MORE(R.id.moreFragment)
+            SELECTED(R.id.moreFragment)
         }
     }
 
@@ -73,8 +74,8 @@ class MainActivity : AppCompatActivity() {
             navigateToRegisterFlow()
         }
         supportFragmentManager.findFragmentById(R.id.fragment_container)?.findNavController()
-            ?.let { _ ->
-//                setupActionBarWithNavController(navController)
+            ?.let {
+//                setupActionBarWithNavController(it)
 
             }
     }
@@ -155,5 +156,14 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.visible()
     }
 
+    fun navigateToFragment(fragment: BottomMenuType) {
+        when(fragment){
+            BottomMenuType.DASHBOARD -> binding.bottomNavigation.selectedItemId = R.id.selectedGroupFragment
+            BottomMenuType.GROUPS -> TODO()
+            BottomMenuType.MEMBERS -> TODO()
+            BottomMenuType.PAYMENTS -> binding.bottomNavigation.selectedItemId = R.id.paymentsFragment
+            BottomMenuType.SELECTED -> TODO()
+        }
+    }
 
 }

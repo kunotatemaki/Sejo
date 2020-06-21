@@ -24,12 +24,9 @@ import com.rookia.android.sejo.framework.persistence.model.GroupWithMembers
 @Dao
 abstract class GroupDao: BaseDao<GroupEntity>() {
 
-//    @Transaction
-//    @Query("SELECT * FROM `group` WHERE group_id = :groupId")
-//    abstract fun getGroupWithMembers(groupId: Long): LiveData<GroupWithMembers>
-
+    @Transaction
     @Query("SELECT * FROM `group` WHERE group_id = :groupId")
-    abstract fun getGroup(groupId: Long): LiveData<GroupEntity>
+    abstract fun getGroup(groupId: Long): LiveData<GroupWithMembers>
 
     @Transaction
     @Query("SELECT * FROM `group` ORDER BY date_modification DESC")

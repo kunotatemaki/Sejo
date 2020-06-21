@@ -6,6 +6,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.data.resources.ResourcesManager
@@ -15,7 +17,6 @@ import com.rookia.android.sejo.ui.login.LoginStatus
 import com.rookia.android.sejo.ui.main.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
-import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -41,6 +42,9 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId), CoroutineScope 
 
     @Inject
     protected lateinit var resourcesManager: ResourcesManager
+
+    @Inject
+    protected lateinit var appBarConfiguration: AppBarConfiguration
 
     protected var forceLoginBeforeLaunchingThisFragment = false
 
@@ -70,19 +74,16 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId), CoroutineScope 
     override fun onResume() {
         super.onResume()
         checkLogin()
-        Timber.d("cretino ${this.javaClass.simpleName} - ${activity != null}")
         (activity as? MainActivity)?.apply {
-            if (needTohideNavigationBar()) {
-                Timber.d("cretino ${this.javaClass.simpleName} - hide")
+            if (needToHideNavigationBar()) {
                 hideNavigationBar()
             } else {
-                Timber.d("cretino ${this.javaClass.simpleName} - show")
                 showNavigationBar()
             }
         }
     }
 
-    abstract fun needTohideNavigationBar(): Boolean
+    abstract fun needToHideNavigationBar(): Boolean
 
     private fun checkLogin() {
         if (forceLoginBeforeLaunchingThisFragment || (loginStatus.needToLogin() && this !is LoginFragment && (activity as? MainActivity)?.needToNavigateToRegister() != true)) {
@@ -93,18 +94,15 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId), CoroutineScope 
     }
 
     protected fun setToolbar(
-        toolbar: MaterialToolbar,
-        showBackArrow: Boolean,
-        title: String? = null
+        toolbar: MaterialToolbar
     ) {
-        (activity as? MainActivity)?.apply {
-            setSupportActionBar(toolbar)
-            supportActionBar?.let {
-                it.setDisplayHomeAsUpEnabled(showBackArrow)
-                it.setDisplayShowTitleEnabled(title != null)
-                it.title = title
-            }
-        }
+        val navController = findNavController()
+        toolbar.setupWithNavController(navController, appBarConfiguration)
+        (activity as? MainActivity)?.setSupportActionBar(toolbar)
+    }
+
+    protected fun setTitle(title:String){
+        (activity as? MainActivity)?.supportActionBar?.title = title
     }
 
     protected fun showLoading() {
@@ -115,6 +113,9 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId), CoroutineScope 
         (activity as? MainActivity)?.hideLoading()
     }
 
+    /**
+     * Method called when tha back button is pressed. Override it in the fragment to modify the behaviour
+     */
     protected open fun doOnBackPressed() {
         findNavController().popBackStack()
     }

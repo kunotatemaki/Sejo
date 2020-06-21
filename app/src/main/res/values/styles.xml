@@ -193,5 +193,4 @@
         <item name="android:clickable">false</item>
     </style>
 
-    <dimen name="component_login_keyboard_view_number_fontsize">32dp</dimen>
 </resources>

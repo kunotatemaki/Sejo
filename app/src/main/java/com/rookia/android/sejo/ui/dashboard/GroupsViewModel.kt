@@ -1,19 +1,14 @@
 package com.rookia.android.sejo.ui.dashboard
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
-import com.rookia.android.sejo.di.modules.ProvidesModule
 import com.rookia.android.sejo.domain.local.Group
 import com.rookia.android.sejo.usecases.GetGroupsUseCase
-import com.rookia.android.sejo.usecases.SetLastGroupSelectedUseCase
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import timber.log.Timber
 
 
 /**
@@ -29,23 +24,11 @@ import timber.log.Timber
 
 class GroupsViewModel @ViewModelInject constructor(
     private val getGroupsUseCase: GetGroupsUseCase,
-    private val preferencesManager: PreferencesManager,
-    private val selectedGroupUseCase: SetLastGroupSelectedUseCase,
-    @ProvidesModule.IODispatcher private val dispatcher: CoroutineDispatcher
+    private val preferencesManager: PreferencesManager
 ) : ViewModel() {
 
     val groups: MediatorLiveData<Result<PagedList<Group>>> = MediatorLiveData()
 
-    val group: LiveData<Group>
-    private val _singleGroupQuery: MutableLiveData<Long> = MutableLiveData()
-
-    init {
-        val storedGroupId = preferencesManager.getLongFromPreferences(Constants.USER_DATA.LAST_USED_GROUP_TAG)
-        _singleGroupQuery.value = storedGroupId
-        group = _singleGroupQuery.switchMap { groupId ->
-            getGroupsUseCase.getGroup(groupId)
-        }
-    }
 
     fun loadGroups() {
         preferencesManager.getStringFromPreferences(Constants.USER_DATA.ID_TAG)?.let { userId ->
@@ -57,18 +40,6 @@ class GroupsViewModel @ViewModelInject constructor(
                     groups.removeSource(groupsInternal)
                 }
             }
-        }
-    }
-
-    fun setSelectedGroup(groupId: Long) {
-        _singleGroupQuery.value = groupId
-        preferencesManager.getStringFromPreferences(Constants.USER_DATA.ID_TAG)?.let { userId ->
-            viewModelScope.launch(dispatcher) {
-                selectedGroupUseCase.updateUser(userId, groupId).collect {
-                    Timber.d("")
-                }
-            }
-
         }
     }
 

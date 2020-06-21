@@ -46,11 +46,8 @@ class PersistenceManagerImpl @Inject constructor(private val db: AppDatabase) : 
     @Suppress("UNNECESSARY_SAFE_CALL")
     override fun getGroup(groupId: Long): LiveData<Group> =
         db.groupDao().getGroup(groupId).map {
-            it?.toGroup(listOf())
+            it?.toGroup()
         }
-
-//    override fun getGroupWithMembers(groupId: Long): LiveData<GroupWithMembers> =
-//        db.groupDao().getGroupWithMembers(groupId)
 
 
 }

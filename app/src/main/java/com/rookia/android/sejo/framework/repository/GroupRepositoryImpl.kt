@@ -163,7 +163,5 @@ class GroupRepositoryImpl @Inject constructor(
     override fun getGroup(groupId: Long): LiveData<Group> =
         persistenceManager.getGroup(groupId)
 
-//    override fun getGroupWithMembers(groupId: Long): LiveData<GroupWithMembers> =
-//        persistenceManager.getGroupWithMembers(groupId)
 
 }

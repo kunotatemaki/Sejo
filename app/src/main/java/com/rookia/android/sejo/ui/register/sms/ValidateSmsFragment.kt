@@ -73,7 +73,7 @@ class ValidateSmsFragment : BaseFragment(R.layout.fragment_validate_sms) {
         binding = FragmentValidateSmsBinding.bind(view)
         binding.textFormatUtils = textFormatUtils
         binding.fragmentValidateSmsView.setPhoneText(phonePrefix, phoneNumber)
-        setToolbar(binding.fragmentValidateSmsToolbar, showBackArrow = true)
+        setToolbar(binding.fragmentValidateSmsToolbar)
 
         //keyboard listener
         context?.let {
@@ -247,6 +247,6 @@ class ValidateSmsFragment : BaseFragment(R.layout.fragment_validate_sms) {
         findNavController().navigate(direction)
     }
 
-    override fun needTohideNavigationBar(): Boolean = true
+    override fun needToHideNavigationBar(): Boolean = true
 
 }

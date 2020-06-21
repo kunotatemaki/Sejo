@@ -1,6 +1,5 @@
 package com.rookia.android.sejo.ui.dashboard
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -28,27 +27,27 @@ class GroupsFragment : BaseFragment(R.layout.fragment_groups), GroupsAdapter.Gro
 
     private lateinit var binding: FragmentGroupsBinding
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (activity as? MainActivity)?.hideKeyboard()
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentGroupsBinding.bind(view)
 
+        setToolbar(binding.fragmentGroupsToolbar)
         adapter = GroupsAdapter(this)
         binding.fragmentGroupsAddButton.setOnClickListener {
             navigateToGroupCreation()
         }
 
-        recyclerViewAdapterUtils.scrollToTopIfItemsInsertedArePlacedBeforeTheFirstRow(adapter, binding.fragmentGroupsList)
+        recyclerViewAdapterUtils.scrollToTopIfItemsInsertedArePlacedBeforeTheFirstRow(
+            adapter,
+            binding.fragmentGroupsList
+        )
 
         binding.fragmentGroupsList.adapter = adapter
 
         viewModel.groups.observe(viewLifecycleOwner, Observer {
             Timber.d("")
-            when(it.status){
+            when (it.status) {
                 Result.Status.SUCCESS -> {
                     hideLoading()
                     adapter.submitList(it.data)
@@ -65,30 +64,34 @@ class GroupsFragment : BaseFragment(R.layout.fragment_groups), GroupsAdapter.Gro
 
         })
 
-        viewModel.group.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                preferencesManager.setLongIntoPreferences(Constants.USER_DATA.LAST_USED_GROUP_TAG, it.groupId)
-                binding.fragmentGroupsLastSelectedItem.group = it
-            }
-        })
-
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.loadGroups()
+        (activity as? MainActivity)?.hideKeyboard()
     }
 
     private fun navigateToGroupCreation() {
         val direction =
-            GroupsFragmentDirections.actionBlankFragmentToGroupCreationActivity()
+            GroupsFragmentDirections.actionGroupsFragmentToGroupCreationActivity()
         findNavController().navigate(direction)
     }
 
     override fun onGroupClicked(groupId: Long) {
-        viewModel.setSelectedGroup(groupId)
+        navigateToSelectedGroup(groupId)
     }
 
-    override fun needTohideNavigationBar(): Boolean = false
+    override fun needToHideNavigationBar(): Boolean = false
+
+    private fun navigateToSelectedGroup(groupId: Long) {
+        preferencesManager.setLongIntoPreferences(
+            Constants.USER_DATA.LAST_USED_GROUP_TAG,
+            groupId
+        )
+        (activity as? MainActivity)?.apply {
+            navigateToFragment(MainActivity.Companion.BottomMenuType.DASHBOARD)
+        }
+    }
 
 }

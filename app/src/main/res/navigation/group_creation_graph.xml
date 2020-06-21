@@ -9,7 +9,7 @@
         android:id="@+id/groupCreationMainInfoFragment"
         android:name="com.rookia.android.sejo.ui.groupcreation.GroupCreationMainInfoFragment"
         tools:layout="@layout/fragment_group_creation_main_info"
-        android:label="GroupCreationMainInfoFragment" >
+        android:label="@string/fragment_group_creation_main_info_title" >
         <action
             android:id="@+id/action_groupCreationMainInfoFragment_to_groupCreationMembersFragment"
             app:destination="@id/groupCreationMembersFragment"
@@ -23,7 +23,7 @@
     <fragment
         android:id="@+id/groupCreationMembersFragment"
         android:name="com.rookia.android.sejo.ui.groupcreation.GroupCreationMembersFragment"
-        android:label="fragment_group_members"
+        android:label=""
         tools:layout="@layout/fragment_group_creation_members" >
         <argument
             android:name="groupName"

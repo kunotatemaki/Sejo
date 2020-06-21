@@ -37,5 +37,5 @@ class BiometricPermissionFragment :
     override fun doOnBackPressed() {
     }
 
-    override fun needTohideNavigationBar(): Boolean = true
+    override fun needToHideNavigationBar(): Boolean = true
 }

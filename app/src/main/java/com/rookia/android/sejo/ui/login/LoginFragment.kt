@@ -144,6 +144,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), PinScreen.Biometric
         }
     }
 
-    override fun needTohideNavigationBar(): Boolean = true
+    override fun needToHideNavigationBar(): Boolean = true
 
 }

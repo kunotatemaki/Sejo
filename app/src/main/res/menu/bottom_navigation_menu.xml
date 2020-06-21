@@ -7,11 +7,16 @@
         android:title="@string/bottom_menu_general"/>
     <item
         android:id="@+id/membersFragment"
-        android:enabled="false"
+        android:enabled="true"
         android:icon="@drawable/ic_group_creation_members_search_24dp"
         android:title="@string/bottom_menu_members"/>
     <item
         android:id="@+id/paymentsFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_group_creation_members_search_24dp"
+        android:title="@string/bottom_menu_pagos"/>
+    <item
+        android:id="@+id/selectedGroupFragment"
         android:enabled="true"
         android:icon="@drawable/ic_group_creation_members_search_24dp"
         android:title="@string/bottom_menu_pagos"/>

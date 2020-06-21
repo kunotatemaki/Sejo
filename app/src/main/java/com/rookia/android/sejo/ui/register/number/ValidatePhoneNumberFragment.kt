@@ -35,11 +35,11 @@ class ValidatePhoneNumberFragment : BaseFragment(R.layout.fragment_validate_numb
                             binding.validatePhoneNumberPhoneNumber.hideError()
                         }
                         PhoneNumberView.PhoneNumberFormat.INCOMPLETE -> {
-                            binding.buttonEnabled = false
+                            binding.buttonEnabled = true
                             binding.validatePhoneNumberPhoneNumber.hideError()
                         }
                         PhoneNumberView.PhoneNumberFormat.WRONG -> {
-                            binding.buttonEnabled = false
+                            binding.buttonEnabled = true
                             binding.validatePhoneNumberPhoneNumber.showError(
                                 resourcesManager.getString(
                                     R.string.component_phone_number_error
@@ -67,6 +67,6 @@ class ValidatePhoneNumberFragment : BaseFragment(R.layout.fragment_validate_numb
         activity?.finish()
     }
 
-    override fun needTohideNavigationBar(): Boolean = true
+    override fun needToHideNavigationBar(): Boolean = true
 
 }
