@@ -17,6 +17,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.visible
+import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.MainGraphDirections
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ActivityMainBinding
@@ -36,10 +37,9 @@ class MainActivity : AppCompatActivity() {
 
         enum class BottomMenuType(val id: Int) {
             DASHBOARD(R.id.selectedGroupFragment),
-            GROUPS(R.id.groupsFragment),
             MEMBERS(R.id.membersFragment),
             PAYMENTS(R.id.paymentsFragment),
-            SELECTED(R.id.moreFragment)
+            MORE(R.id.moreFragment)
         }
     }
 
@@ -57,7 +57,6 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme_NoActionBar)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
@@ -72,12 +71,10 @@ class MainActivity : AppCompatActivity() {
 
         if (needToNavigateToRegister()) {
             navigateToRegisterFlow()
+        } else if (intent.extras == null && preferencesManager.containsKey(Constants.USER_DATA.LAST_USED_GROUP_TAG).not()) {
+//            navigateToGroupsFragment()
         }
-        supportFragmentManager.findFragmentById(R.id.fragment_container)?.findNavController()
-            ?.let {
-//                setupActionBarWithNavController(it)
 
-            }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
@@ -157,12 +154,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun navigateToFragment(fragment: BottomMenuType) {
-        when(fragment){
-            BottomMenuType.DASHBOARD -> binding.bottomNavigation.selectedItemId = R.id.selectedGroupFragment
-            BottomMenuType.GROUPS -> TODO()
-            BottomMenuType.MEMBERS -> TODO()
-            BottomMenuType.PAYMENTS -> binding.bottomNavigation.selectedItemId = R.id.paymentsFragment
-            BottomMenuType.SELECTED -> TODO()
+        when (fragment) {
+            BottomMenuType.DASHBOARD -> binding.bottomNavigation.selectedItemId =
+                R.id.selectedGroupFragment
+            BottomMenuType.MEMBERS -> binding.bottomNavigation.selectedItemId =
+                R.id.membersFragment
+            BottomMenuType.PAYMENTS -> binding.bottomNavigation.selectedItemId =
+                R.id.paymentsFragment
+            BottomMenuType.MORE -> binding.bottomNavigation.selectedItemId =
+                R.id.moreFragment
+        }
+    }
+
+    fun enableSelectedGroupBottomIcons() {
+        with(binding.bottomNavigation.menu){
+            findItem(R.id.selectedGroupFragment).isEnabled = true
+            findItem(R.id.membersFragment).isEnabled = true
+            findItem(R.id.paymentsFragment).isEnabled = true
         }
     }
 

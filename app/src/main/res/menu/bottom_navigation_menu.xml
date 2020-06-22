@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/selectedGroupFragment"
-        android:enabled="true"
+        android:enabled="false"
         android:icon="@drawable/ic_group_creation_members_search_24dp"
         android:title="@string/bottom_menu_dashboard"/>
     <item
         android:id="@+id/membersFragment"
-        android:enabled="true"
+        android:enabled="false"
         android:icon="@drawable/ic_group_creation_members_search_24dp"
         android:title="@string/bottom_menu_members"/>
     <item
         android:id="@+id/paymentsFragment"
-        android:enabled="true"
+        android:enabled="false"
         android:icon="@drawable/ic_group_creation_members_search_24dp"
         android:title="@string/bottom_menu_payments"/>
     <item

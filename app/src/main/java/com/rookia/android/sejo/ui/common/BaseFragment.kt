@@ -101,7 +101,11 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId), CoroutineScope 
         (activity as? MainActivity)?.setSupportActionBar(toolbar)
     }
 
-    protected fun setTitle(title:String){
+    protected fun forceHideBackArrow() {
+        (activity as? MainActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+    }
+
+    protected fun setTitle(title: String) {
         (activity as? MainActivity)?.supportActionBar?.title = title
     }
 

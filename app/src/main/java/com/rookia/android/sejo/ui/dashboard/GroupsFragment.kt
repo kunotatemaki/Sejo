@@ -33,6 +33,7 @@ class GroupsFragment : BaseFragment(R.layout.fragment_groups), GroupsAdapter.Gro
         binding = FragmentGroupsBinding.bind(view)
 
         setToolbar(binding.fragmentGroupsToolbar)
+
         adapter = GroupsAdapter(this)
         binding.fragmentGroupsAddButton.setOnClickListener {
             navigateToGroupCreation()
@@ -61,7 +62,6 @@ class GroupsFragment : BaseFragment(R.layout.fragment_groups), GroupsAdapter.Gro
                 }
             }
 
-
         })
 
     }
@@ -82,16 +82,20 @@ class GroupsFragment : BaseFragment(R.layout.fragment_groups), GroupsAdapter.Gro
         navigateToSelectedGroup(groupId)
     }
 
-    override fun needToHideNavigationBar(): Boolean = false
+    override fun needToHideNavigationBar(): Boolean = true
 
     private fun navigateToSelectedGroup(groupId: Long) {
+
         preferencesManager.setLongIntoPreferences(
             Constants.USER_DATA.LAST_USED_GROUP_TAG,
             groupId
         )
+
         (activity as? MainActivity)?.apply {
+            enableSelectedGroupBottomIcons()
             navigateToFragment(MainActivity.Companion.BottomMenuType.DASHBOARD)
         }
+
     }
 
 }

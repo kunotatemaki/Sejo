@@ -66,6 +66,15 @@
             app:popEnterAnim="@anim/navigation_fragment_pop_enter"
             app:popExitAnim="@anim/navigation_fragment_pop_exit"/>
     </fragment>
+    <action
+        android:id="@+id/action_global_groupsFragment"
+        app:destination="@id/groupsFragment"
+        app:enterAnim="@anim/navigation_new_graph_enter"
+        app:exitAnim="@anim/navigation_new_graph_exit"
+        app:launchSingleTop="true"
+        app:popEnterAnim="@anim/navigation_new_graph_pop_enter"
+        app:popExitAnim="@anim/navigation_new_graph_pop_exit"
+        app:popUpTo="@id/moreFragment" />
 
 
 </navigation>

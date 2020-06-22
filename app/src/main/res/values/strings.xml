@@ -75,5 +75,9 @@
     <string name="fragment_more_title">Más</string>
     <string name="fragment_more_my_groups">Mis grupos</string>
 
+    <!-- Selected group -->
+    <string name="fragment_selected_group_no_one_selected_caption">Ir a Mis Grupos</string>
+    <string name="fragment_selected_group_no_one_selected_title">Parece que aun no has seleccionado ningún grupo.</string>
+
 
 </resources>
