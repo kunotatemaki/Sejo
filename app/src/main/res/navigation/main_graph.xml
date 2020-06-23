@@ -46,7 +46,7 @@
     <fragment
         android:id="@+id/membersFragment"
         android:name="com.rookia.android.sejo.ui.dashboard.MembersFragment"
-        android:label="members_fragment"
+        android:label="@string/fragment_members_header"
         tools:layout="@layout/members_fragment" />
     <fragment
         android:id="@+id/selectedGroupFragment"

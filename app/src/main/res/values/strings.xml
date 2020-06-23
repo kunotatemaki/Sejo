@@ -44,7 +44,8 @@
     <string name="fragment_group_creation_main_admins_explanation1">Los administradores se encargan de validar peticiones de dinero del bote por parte de los demás miembros, así como pagos que pudiera hacer un miembro al bote desde fuera de la aplicación, bien sea con dinero en efectivo o con cualquier otro método de pago.</string>
     <string name="fragment_group_creation_main_admins_explanation2">Se necesita un mínimo de dos administradores por grupo, ya que un administrador no puede validarse sus propios movimientos.</string>
     <string name="fragment_group_creation_main_admins_error">Valor incorrecto</string>
-    <!-- Group Members -->
+
+    <!-- Group Member Selection -->
     <string name="fragment_group_creation_members_header_text">Acceso a los contactos</string>
     <string name="fragment_group_creation_members_subheader_text">Para poder añadir amigos a tu grupo necesitas permitir acceso a los contactos de tu teléfono</string>
     <string name="fragment_group_creation_members_permissions_button_caption">Permitir Acceso</string>
@@ -78,6 +79,9 @@
     <!-- Selected group -->
     <string name="fragment_selected_group_no_one_selected_caption">Ir a Mis Grupos</string>
     <string name="fragment_selected_group_no_one_selected_title">Parece que aun no has seleccionado ningún grupo.</string>
+
+    <!-- Members Fragment -->
+    <string name="fragment_members_header">Miembros del grupo</string>
 
 
 </resources>

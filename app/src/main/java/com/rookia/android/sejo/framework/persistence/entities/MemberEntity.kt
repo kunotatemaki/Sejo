@@ -3,8 +3,6 @@ package com.rookia.android.sejo.framework.persistence.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
-import androidx.room.PrimaryKey
-
 
 /**
  * Copyright (C) Rookia - All Rights Reserved
@@ -17,9 +15,11 @@ import androidx.room.PrimaryKey
  *
  */
 
-@Entity(tableName = "member", indices = [(Index(value = arrayOf("group_id"), unique = true))])
+@Entity(
+    tableName = "member",
+    primaryKeys = ["group_id", "number_id"],
+    indices = [(Index(value = arrayOf("group_id"), unique = false))])
 class MemberEntity constructor(
-    @PrimaryKey
     @ColumnInfo(name = "group_id")
     val groupId: Long,
     @ColumnInfo(name = "number_id")

@@ -94,7 +94,7 @@ class GroupRepositoryImpl @Inject constructor(
                 rateLimiter.expired(
                     lastCheckedDate,
                     5,
-                    TimeUnit.MINUTES
+                    TimeUnit.SECONDS
                 ) || CacheSanity.groupsCacheDirty
             }
         )
