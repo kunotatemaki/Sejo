@@ -5,8 +5,7 @@ import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.framework.repository.resultOnlyFromOneSourceInFlow
 import com.rookia.android.sejo.data.repository.SmsCodeRepository
 import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
-import com.rookia.android.sejo.domain.network.smscode.SmsCodeRequestClient
-import com.rookia.android.sejo.domain.network.smscode.SmsCodeValidationClient
+import com.rookia.android.sejo.domain.network.RepositoryErrorHandling
 import com.rookia.android.sejo.domain.network.toSmsCodeValidation
 import com.rookia.android.sejo.framework.network.NetworkServiceFactory
 import kotlinx.coroutines.flow.Flow
@@ -26,7 +25,7 @@ import javax.inject.Inject
 
 class SmsCodeRepositoryImpl @Inject constructor(
     private val networkServiceFactory: NetworkServiceFactory
-) : SmsCodeRepository {
+) : SmsCodeRepository, RepositoryErrorHandling {
     override fun askForSmsCode(phonePrefix: String, phoneNumber: String): Flow<Result<Int>> =
         resultOnlyFromOneSourceInFlow {
             requestSmsFromServer(phonePrefix, phoneNumber)
@@ -36,12 +35,11 @@ class SmsCodeRepositoryImpl @Inject constructor(
     suspend fun requestSmsFromServer(phonePrefix: String, phoneNumber: String): Result<Int> =
         try {
             val api = networkServiceFactory.getSmsCodeCodeInstance()
-            val smsCodeRequest = SmsCodeRequestClient(phonePrefix, phoneNumber)
-            val resp = api.requestSmsCode(smsCodeRequest)
+            val resp = api.requestSmsCode(phonePrefix, phoneNumber)
             if (resp.isSuccessful && resp.body() != null) {
                 Result.success(resp.body()?.code)
             } else {
-                Result.error(resp.message())
+                Result.error(getErrorMessage(resp))
             }
         } catch (e: Exception) {
             Result.error(e.message)
@@ -65,17 +63,11 @@ class SmsCodeRepositoryImpl @Inject constructor(
     ): Result<SmsCodeValidation> =
         try {
             val api = networkServiceFactory.getSmsCodeCodeInstance()
-            val smsCodeValidation =
-                SmsCodeValidationClient(
-                    phonePrefix,
-                    phoneNumber,
-                    smsCode
-                )
-            val resp = api.validateSmsCode(smsCodeValidation)
+            val resp = api.validateSmsCode(phonePrefix, phoneNumber, smsCode)
             if (resp.isSuccessful && resp.body() != null) {
                 Result.success(resp.body()?.toSmsCodeValidation())
             } else {
-                Result.error(resp.message())
+                Result.error(getErrorMessage(resp))
             }
         } catch (e: Exception) {
             Result.error(e.message)
