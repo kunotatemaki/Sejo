@@ -17,6 +17,7 @@ import com.rookia.android.sejo.domain.local.PhoneContact
 import com.rookia.android.sejo.domain.network.group.CreateGroupClient
 import com.rookia.android.sejo.domain.network.toCreateGroupContact
 import com.rookia.android.sejo.framework.network.NetworkServiceFactory
+import com.rookia.android.sejo.framework.utils.DateUtils
 import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -37,7 +38,8 @@ class GroupRepositoryImpl @Inject constructor(
     private val networkServiceFactory: NetworkServiceFactory,
     private val persistenceManager: PersistenceManager,
     private val rateLimiter: RateLimiter,
-    private val preferencesManager: PreferencesManager
+    private val preferencesManager: PreferencesManager,
+    private val dateUtils: DateUtils
 ) : GroupRepository {
     override fun createGroup(
         name: String,
@@ -121,7 +123,7 @@ class GroupRepositoryImpl @Inject constructor(
                 if (resp.isSuccessful && resp.body() != null) {
 
                     val lastCheckedDate =
-                        resp.body()?.data?.maxBy { it.dateModification ?: 0L }?.dateModification
+                        resp.body()?.data?.maxBy { it.getDateModificationAsUTCTimestamp(dateUtils) }?.getDateModificationAsUTCTimestamp(dateUtils)
                             ?: 0L
 
                     if (dateModification < lastCheckedDate) {

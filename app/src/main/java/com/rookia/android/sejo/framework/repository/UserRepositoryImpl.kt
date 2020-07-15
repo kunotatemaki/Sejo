@@ -8,9 +8,8 @@ import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.data.repository.UserRepository
 import com.rookia.android.sejo.domain.local.user.TokenReceived
 import com.rookia.android.sejo.domain.local.user.User
+import com.rookia.android.sejo.domain.network.RepositoryErrorHandling
 import com.rookia.android.sejo.domain.network.toTokenReceived
-import com.rookia.android.sejo.domain.network.toUserUpdateRequestClient
-import com.rookia.android.sejo.domain.network.user.UserCreationRequestClient
 import com.rookia.android.sejo.framework.network.NetworkServiceFactory
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -30,7 +29,7 @@ import javax.inject.Inject
 class UserRepositoryImpl @Inject constructor(
     private val networkServiceFactory: NetworkServiceFactory,
     private val preferencesManager: PreferencesManager
-) : UserRepository {
+) : UserRepository, RepositoryErrorHandling {
     override fun createUser(
         phonePrefix: String,
         phoneNumber: String,
@@ -48,8 +47,7 @@ class UserRepositoryImpl @Inject constructor(
     ): Result<TokenReceived> =
         try {
             val api = networkServiceFactory.getUserInstance()
-            val userRequest = UserCreationRequestClient(phonePrefix, phoneNumber, pin)
-            val resp = api.addUser(userRequest)
+            val resp = api.addUser(phonePrefix, phoneNumber, pin)
             if (resp.isSuccessful && resp.body() != null) {
                 Result.success(
                     resp.body()?.toTokenReceived().also {
@@ -58,7 +56,7 @@ class UserRepositoryImpl @Inject constructor(
                     }
                 )
             } else {
-                Result.error(resp.message())
+                Result.error(getErrorMessage(resp))
             }
         } catch (e: Exception) {
             Result.error(e.message)
@@ -74,12 +72,11 @@ class UserRepositoryImpl @Inject constructor(
     suspend fun updateUserInServer(user: User): Result<Int> =
         try {
             val api = networkServiceFactory.getUserInstance()
-            val updateUserValidation = user.toUserUpdateRequestClient()
-            val resp = api.updateUser(updateUserValidation)
+            val resp = api.updateUser(pin = user.pin, name = user.name, userId = user.userId, pushToken = user.pushToken)
             if (resp.isSuccessful && resp.body() != null) {
                 Result.success(resp.body()?.code)
             } else {
-                Result.error(resp.message())
+                Result.error(getErrorMessage(resp))
             }
         } catch (e: Exception) {
             Result.error(e.message)
@@ -104,7 +101,7 @@ class UserRepositoryImpl @Inject constructor(
             if (resp.isSuccessful && resp.body() != null) {
                 Result.success(resp.body()?.code)
             } else {
-                Result.error(resp.message())
+                Result.error(getErrorMessage(resp))
             }
         } catch (e: Exception) {
             Result.error(e.message)

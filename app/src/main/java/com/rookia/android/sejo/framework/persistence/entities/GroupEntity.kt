@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import java.util.*
 
 
 /**
@@ -26,14 +25,14 @@ class GroupEntity constructor(
     @ColumnInfo(name = "name")
     val name: String,
     @ColumnInfo(name = "fee")
-    val fee: Int,
+    val fee: Float,
     @ColumnInfo(name = "owner")
     val owner: String,
     @ColumnInfo(name = "balance")
     val balance: Double,
     @ColumnInfo(name = "date_creation")
-    val dateCreation: Date,
+    val dateCreation: Long,
     @ColumnInfo(name = "date_modification")
-    val dateModification: Date
+    val dateModification: Long
 
 )

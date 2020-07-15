@@ -7,7 +7,7 @@ import com.rookia.android.androidutils.framework.repository.resultOnlyFromOneSou
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.data.repository.LoginRepository
 import com.rookia.android.sejo.domain.local.user.TokenReceived
-import com.rookia.android.sejo.domain.network.login.LoginRequestClient
+import com.rookia.android.sejo.domain.network.RepositoryErrorHandling
 import com.rookia.android.sejo.domain.network.toTokenReceived
 import com.rookia.android.sejo.framework.network.NetworkServiceFactory
 import kotlinx.coroutines.flow.Flow
@@ -28,7 +28,7 @@ import javax.inject.Inject
 class LoginRepositoryImpl @Inject constructor(
     private val networkServiceFactory: NetworkServiceFactory,
     private val preferencesManager: PreferencesManager
-) : LoginRepository {
+) : LoginRepository, RepositoryErrorHandling {
 
     override fun login(
         userId: String,
@@ -47,8 +47,7 @@ class LoginRepositoryImpl @Inject constructor(
     ): Result<TokenReceived> =
         try {
             val api = networkServiceFactory.getLoginInstance()
-            val loginRequest = LoginRequestClient(pin = pin, userId = userId, pushToken = pushToken)
-            val resp = api.login(loginRequest)
+            val resp = api.login(pin, userId, pushToken)
             if (resp.isSuccessful && resp.body() != null) {
                 Result.success(
                     resp.body()?.toTokenReceived().also {
@@ -57,7 +56,7 @@ class LoginRepositoryImpl @Inject constructor(
                     }
                 )
             } else {
-                Result.error(resp.message())
+                Result.error(getErrorMessage(resp))
             }
         } catch (e: Exception) {
             Result.error(e.message)

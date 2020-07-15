@@ -17,6 +17,6 @@ data class User(
     val phonePrefix: String,
     val phoneNumber: String,
     val name: String,
-    var pin: String? = null,
+    var pin: Int? = null,
     var pushToken: String? = null
 )

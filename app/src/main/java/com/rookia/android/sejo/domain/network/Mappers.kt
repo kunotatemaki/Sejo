@@ -3,12 +3,10 @@ package com.rookia.android.sejo.domain.network
 import com.rookia.android.sejo.domain.local.PhoneContact
 import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
 import com.rookia.android.sejo.domain.local.user.TokenReceived
-import com.rookia.android.sejo.domain.local.user.User
 import com.rookia.android.sejo.domain.network.group.CreateGroupClient
 import com.rookia.android.sejo.domain.network.login.LoginRequestServer
 import com.rookia.android.sejo.domain.network.smscode.SmsCodeValidationServer
 import com.rookia.android.sejo.domain.network.user.UserCreationRequestServer
-import com.rookia.android.sejo.domain.network.user.UserUpdateRequestClient
 
 
 /**
@@ -31,11 +29,6 @@ fun LoginRequestServer.toTokenReceived(): TokenReceived =
 fun UserCreationRequestServer.toTokenReceived(): TokenReceived =
     TokenReceived(result = code, token = data?.token, userId = data?.userId)
 
-fun User.toUserUpdateRequestClient(
-    pin: Int? = null,
-    pushToken: String? = null
-): UserUpdateRequestClient =
-    UserUpdateRequestClient(pin = pin, userId = userId, name = name, pushToken = pushToken)
 
 fun PhoneContact.toCreateGroupContact(): CreateGroupClient.Contact =
     CreateGroupClient.Contact(numberId = phoneNumberNormalized)

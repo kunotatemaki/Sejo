@@ -10,6 +10,7 @@ import com.rookia.android.sejo.framework.persistence.databases.AppDatabase
 import com.rookia.android.sejo.framework.persistence.entities.MemberEntity
 import com.rookia.android.sejo.framework.toEntity
 import com.rookia.android.sejo.framework.toGroup
+import com.rookia.android.sejo.framework.utils.DateUtils
 import javax.inject.Inject
 
 
@@ -24,9 +25,12 @@ import javax.inject.Inject
  *
  */
 
-class PersistenceManagerImpl @Inject constructor(private val db: AppDatabase) : PersistenceManager {
+class PersistenceManagerImpl @Inject constructor(
+    private val db: AppDatabase,
+    private val dateUtils: DateUtils
+) : PersistenceManager {
     override suspend fun saveGroups(groups: List<Group>) {
-        db.groupDao().insert(groups.map { it.toEntity() })
+        db.groupDao().insert(groups.map { it.toEntity(dateUtils) })
         val contacts = mutableListOf<MemberEntity>()
         groups.flatMapTo(
             contacts
@@ -40,13 +44,13 @@ class PersistenceManagerImpl @Inject constructor(private val db: AppDatabase) : 
 
     override fun getGroups(): LiveData<PagedList<Group>> =
         db.groupDao().getAllGroups()
-            .map { it.toGroup() }
+            .map { it.toGroup(dateUtils) }
             .toLiveData(pageSize = 10)
 
     @Suppress("UNNECESSARY_SAFE_CALL")
     override fun getGroup(groupId: Long): LiveData<Group> =
         db.groupDao().getGroup(groupId).map {
-            it?.toGroup()
+            it?.toGroup(dateUtils)
         }
 
 

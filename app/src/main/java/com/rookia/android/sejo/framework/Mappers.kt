@@ -5,7 +5,7 @@ import com.rookia.android.sejo.domain.local.Group
 import com.rookia.android.sejo.framework.persistence.entities.GroupEntity
 import com.rookia.android.sejo.framework.persistence.entities.MemberEntity
 import com.rookia.android.sejo.framework.persistence.model.GroupWithMembers
-import java.util.*
+import com.rookia.android.sejo.framework.utils.DateUtils
 
 
 /**
@@ -19,27 +19,27 @@ import java.util.*
  *
  */
 
-fun Group.toEntity(): GroupEntity =
+fun Group.toEntity(dateUtils: DateUtils): GroupEntity =
     GroupEntity(
         groupId = groupId,
         name = name,
         fee = fee,
         owner = owner,
         balance = balance,
-        dateCreation = Date(dateCreation ?: 0L),
-        dateModification = Date(dateModification ?: 0L)
+        dateCreation = dateUtils.convertZuluTimeToUTCTimestamp(dateCreation),
+        dateModification = dateUtils.convertZuluTimeToUTCTimestamp(dateModification)
     )
 
-fun GroupEntity.toGroup(member: List<Group.GroupContact>): Group =
+fun GroupEntity.toGroup(member: List<Group.GroupContact>, dateUtils: DateUtils): Group =
     Group(
         groupId = groupId,
         name = name,
         fee = fee,
         owner = owner,
         balance = balance,
-        dateCreation = dateCreation.time,
+        dateCreation = dateUtils.convertUTCTimestampToZuluTime(dateCreation),
         members = member,
-        dateModification = dateModification.time
+        dateModification = dateUtils.convertUTCTimestampToZuluTime(dateModification)
     )
 
 fun Group.GroupContact.toEntity(groupId: Long): MemberEntity =
@@ -53,7 +53,7 @@ fun Group.GroupContact.toEntity(groupId: Long): MemberEntity =
 fun MemberEntity.toEntity(): Group.GroupContact =
     Group.GroupContact(numberId = numberId, isAdmin = admin, memberStatus = memberStatus)
 
-fun GroupWithMembers.toGroup(): Group {
+fun GroupWithMembers.toGroup(dateUtils: DateUtils): Group {
     val members = this.members.map { it.toEntity() }
-    return group.toGroup(members)
+    return group.toGroup(members, dateUtils)
 }
