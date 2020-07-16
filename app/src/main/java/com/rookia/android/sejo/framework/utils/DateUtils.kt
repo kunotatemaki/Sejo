@@ -1,5 +1,7 @@
 package com.rookia.android.sejo.framework.utils
 
+import java.time.Instant
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 
@@ -15,14 +17,10 @@ import javax.inject.Inject
  */
 
 class DateUtils @Inject constructor() {
-    //todo hacer esto
-    fun convertZuluTimeToUTCTimestamp(zulu: String?): Long {
+    fun convertZuluTimeToUTCTimestamp(zulu: String?): Long =
+        Instant.parse(zulu).epochSecond
 
-        return 0L
-    }
+    fun convertUTCTimestampToZuluTime(timestamp: Long?): String =
+        DateTimeFormatter.ISO_INSTANT.format(Instant.ofEpochMilli(timestamp ?: 0L))
 
-    fun convertUTCTimestampToZuluTime(timestamp: Long?): String {
-
-        return ""
-    }
 }

@@ -5,7 +5,6 @@ import com.rookia.android.sejo.domain.local.Group
 import com.rookia.android.sejo.framework.persistence.entities.GroupEntity
 import com.rookia.android.sejo.framework.persistence.entities.MemberEntity
 import com.rookia.android.sejo.framework.persistence.model.GroupWithMembers
-import com.rookia.android.sejo.framework.utils.DateUtils
 
 
 /**
@@ -19,27 +18,27 @@ import com.rookia.android.sejo.framework.utils.DateUtils
  *
  */
 
-fun Group.toEntity(dateUtils: DateUtils): GroupEntity =
+fun Group.toEntity(): GroupEntity =
     GroupEntity(
         groupId = groupId,
         name = name,
         fee = fee,
         owner = owner,
         balance = balance,
-        dateCreation = dateUtils.convertZuluTimeToUTCTimestamp(dateCreation),
-        dateModification = dateUtils.convertZuluTimeToUTCTimestamp(dateModification)
+        dateCreation = dateCreation,
+        dateModification = dateModification
     )
 
-fun GroupEntity.toGroup(member: List<Group.GroupContact>, dateUtils: DateUtils): Group =
+fun GroupEntity.toGroup(member: List<Group.GroupContact>): Group =
     Group(
         groupId = groupId,
         name = name,
         fee = fee,
         owner = owner,
         balance = balance,
-        dateCreation = dateUtils.convertUTCTimestampToZuluTime(dateCreation),
+        dateCreation = dateCreation,
         members = member,
-        dateModification = dateUtils.convertUTCTimestampToZuluTime(dateModification)
+        dateModification = dateModification
     )
 
 fun Group.GroupContact.toEntity(groupId: Long): MemberEntity =
@@ -53,7 +52,7 @@ fun Group.GroupContact.toEntity(groupId: Long): MemberEntity =
 fun MemberEntity.toEntity(): Group.GroupContact =
     Group.GroupContact(numberId = numberId, isAdmin = admin, memberStatus = memberStatus)
 
-fun GroupWithMembers.toGroup(dateUtils: DateUtils): Group {
+fun GroupWithMembers.toGroup(): Group {
     val members = this.members.map { it.toEntity() }
-    return group.toGroup(members, dateUtils)
+    return group.toGroup(members)
 }

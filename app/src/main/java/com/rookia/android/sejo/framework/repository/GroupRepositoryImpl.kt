@@ -16,6 +16,7 @@ import com.rookia.android.sejo.domain.local.Group
 import com.rookia.android.sejo.domain.local.PhoneContact
 import com.rookia.android.sejo.domain.network.group.CreateGroupClient
 import com.rookia.android.sejo.domain.network.toCreateGroupContact
+import com.rookia.android.sejo.domain.network.toGroup
 import com.rookia.android.sejo.framework.network.NetworkServiceFactory
 import com.rookia.android.sejo.framework.utils.DateUtils
 import kotlinx.coroutines.flow.Flow
@@ -122,15 +123,14 @@ class GroupRepositoryImpl @Inject constructor(
 
                 if (resp.isSuccessful && resp.body() != null) {
 
+                    val listOfGroupsReturned = resp.body()?.data?.map { it.toGroup(dateUtils) } ?: listOf()
                     val lastCheckedDate =
-                        resp.body()?.data?.maxBy { it.getDateModificationAsUTCTimestamp(dateUtils) }?.getDateModificationAsUTCTimestamp(dateUtils)
-                            ?: 0L
+                        listOfGroupsReturned.maxBy { it.dateModification }?.dateModification ?: 0L
 
                     if (dateModification < lastCheckedDate) {
                         saveLastRequestedTime(lastCheckedDate)
                     }
 
-                    val listOfGroupsReturned = resp.body()?.data ?: listOf()
                     listOfGroups.addAll(listOfGroupsReturned)
                     if (listOfGroupsReturned.size < Constants.GROUPS.NUMBER_OF_GROUPS_PER_PAGE_QUERIED) {
                         needToRequest = false

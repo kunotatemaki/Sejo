@@ -1,7 +1,5 @@
 package com.rookia.android.sejo.domain.local
 
-import com.rookia.android.sejo.framework.utils.DateUtils
-
 
 /**
  * Copyright (C) Rookia - All Rights Reserved
@@ -19,10 +17,10 @@ data class Group(
     val name: String,
     val fee: Float,
     val owner: String,
-    val dateCreation: String? = null,
+    val dateCreation: Long,
     val balance: Double,
     var members: List<GroupContact>,
-    val dateModification: String? = null
+    val dateModification: Long
 ){
     data class GroupContact(
         val numberId: String,
@@ -30,9 +28,4 @@ data class Group(
         val memberStatus: Int?
     )
 
-    fun getDateModificationAsUTCTimestamp(dateUtils: DateUtils): Long =
-        dateUtils.convertZuluTimeToUTCTimestamp(dateModification)
-
-    fun getDateCreationAsUTCTimestamp(dateUtils: DateUtils): Long =
-        dateUtils.convertZuluTimeToUTCTimestamp(dateCreation)
 }
