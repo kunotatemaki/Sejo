@@ -47,7 +47,7 @@ class UserRepositoryImpl @Inject constructor(
     ): Result<TokenReceived> =
         try {
             val api = networkServiceFactory.getUserInstance()
-            val resp = api.addUser(phonePrefix, phoneNumber, pin)
+            val resp = api.addUser(phonePrefix = phonePrefix, phoneNumber = phoneNumber, pin = pin)
             if (resp.isSuccessful && resp.body() != null) {
                 Result.success(
                     resp.body()?.toTokenReceived().also {
