@@ -1,6 +1,5 @@
 package com.rookia.android.sejo.framework.persistence.daos
 
-import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
@@ -8,6 +7,7 @@ import androidx.room.Transaction
 import com.rookia.android.androidutils.framework.persistence.daos.BaseDao
 import com.rookia.android.sejo.framework.persistence.entities.GroupEntity
 import com.rookia.android.sejo.framework.persistence.model.GroupWithMembers
+import kotlinx.coroutines.flow.Flow
 
 
 /**
@@ -26,7 +26,7 @@ abstract class GroupDao: BaseDao<GroupEntity>() {
 
     @Transaction
     @Query("SELECT * FROM `group` WHERE group_id = :groupId")
-    abstract fun getGroup(groupId: Long): LiveData<GroupWithMembers>
+    abstract fun getGroup(groupId: Long): Flow<GroupWithMembers>
 
     @Transaction
     @Query("SELECT * FROM `group` ORDER BY date_modification DESC")

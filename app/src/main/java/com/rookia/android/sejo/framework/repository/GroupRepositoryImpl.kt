@@ -167,7 +167,7 @@ class GroupRepositoryImpl @Inject constructor(
     private fun getLastRequestedTime(): Long =
         preferencesManager.getLongFromPreferences(Constants.GROUPS.LAST_CHECKED_TIMESTAMP, 0L)
 
-    override fun getGroup(groupId: Long): LiveData<Group> =
+    override fun getGroup(groupId: Long): Flow<Group> =
         persistenceManager.getGroup(groupId)
 
 

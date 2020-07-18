@@ -29,6 +29,5 @@ interface GroupRepository {
 
     suspend fun saveGroups(groups: List<Group>)
     fun getGroups(userId: String): LiveData<Result<PagedList<Group>>>
-    fun getGroup(groupId: Long): LiveData<Group>
-//    fun getGroupWithMembers(groupId: Long): LiveData<GroupWithMembers>
+    fun getGroup(groupId: Long): Flow<Group>
 }

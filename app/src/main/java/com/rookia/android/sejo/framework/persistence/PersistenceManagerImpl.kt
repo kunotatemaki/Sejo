@@ -1,7 +1,6 @@
 package com.rookia.android.sejo.framework.persistence
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import androidx.paging.PagedList
 import androidx.paging.toLiveData
 import com.rookia.android.sejo.data.persistence.PersistenceManager
@@ -10,6 +9,8 @@ import com.rookia.android.sejo.framework.persistence.databases.AppDatabase
 import com.rookia.android.sejo.framework.persistence.entities.MemberEntity
 import com.rookia.android.sejo.framework.toEntity
 import com.rookia.android.sejo.framework.toGroup
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 
@@ -46,7 +47,7 @@ class PersistenceManagerImpl @Inject constructor(
             .toLiveData(pageSize = 10)
 
     @Suppress("UNNECESSARY_SAFE_CALL")
-    override fun getGroup(groupId: Long): LiveData<Group> =
+    override fun getGroup(groupId: Long): Flow<Group> =
         db.groupDao().getGroup(groupId).map {
             it?.toGroup()
         }

@@ -1,6 +1,7 @@
 package com.rookia.android.sejo.usecases
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import androidx.paging.PagedList
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.data.repository.GroupRepository
@@ -27,6 +28,6 @@ class GetGroupsUseCase @Inject constructor(
         repository.getGroups(userId)
 
     fun getGroup(groupId: Long): LiveData<Group> =
-        repository.getGroup(groupId)
+        repository.getGroup(groupId).asLiveData()
 
 }

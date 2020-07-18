@@ -3,6 +3,7 @@ package com.rookia.android.sejo.data.persistence
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import com.rookia.android.sejo.domain.local.Group
+import kotlinx.coroutines.flow.Flow
 
 
 /**
@@ -19,5 +20,5 @@ import com.rookia.android.sejo.domain.local.Group
 interface PersistenceManager {
     suspend fun saveGroups(groups: List<Group>)
     fun getGroups(): LiveData<PagedList<Group>>
-    fun getGroup(groupId: Long): LiveData<Group>
+    fun getGroup(groupId: Long): Flow<Group>
 }
