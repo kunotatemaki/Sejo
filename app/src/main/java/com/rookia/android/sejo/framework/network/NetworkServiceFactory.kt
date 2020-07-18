@@ -25,8 +25,8 @@ import javax.inject.Inject
 open class NetworkServiceFactory @Inject constructor(private val preferencesManager: PreferencesManager) {
 
     companion object {
-//        const val ROOKIA_EXPENSES_SERVER_BASE_URL = "http://10.0.2.2:8080"
-        const val ROOKIA_EXPENSES_SERVER_BASE_URL = "http://192.168.1.53:8080"
+        const val ROOKIA_EXPENSES_SERVER_BASE_URL = "http://10.0.2.2:8080"
+//        const val ROOKIA_EXPENSES_SERVER_BASE_URL = "http://192.168.1.53:8080"
 
     }
 

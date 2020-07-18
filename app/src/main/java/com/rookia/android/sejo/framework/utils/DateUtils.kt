@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 class DateUtils @Inject constructor() {
     fun convertZuluTimeToUTCTimestamp(zulu: String?): Long =
-        Instant.parse(zulu).epochSecond
+        Instant.parse(zulu).toEpochMilli()
 
     fun convertUTCTimestampToZuluTime(timestamp: Long?): String =
         DateTimeFormatter.ISO_INSTANT.format(Instant.ofEpochMilli(timestamp ?: 0L))

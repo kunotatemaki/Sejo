@@ -105,10 +105,11 @@ class GroupRepositoryImpl @Inject constructor(
 
     private suspend fun getGroupsFromServer(userId: String): Result<List<Group>> {
 
-
         val requestTimestamp = System.currentTimeMillis()
         val listOfGroups = mutableListOf<Group>()
         val api = networkServiceFactory.getGroupInstance()
+        var offset = 0
+        var dateInclusive = false
 
         var needToRequest = true
         while (needToRequest) {
@@ -118,23 +119,27 @@ class GroupRepositoryImpl @Inject constructor(
                 val resp = api.getGroups(
                     userId,
                     dateModification,
-                    Constants.GROUPS.NUMBER_OF_GROUPS_PER_PAGE_QUERIED
+                    offset,
+                    Constants.GROUPS.NUMBER_OF_GROUPS_PER_PAGE_QUERIED,
+                    dateInclusive
                 )
 
                 if (resp.isSuccessful && resp.body() != null) {
 
-                    val listOfGroupsReturned = resp.body()?.data?.map { it.toGroup(dateUtils) } ?: listOf()
+                    val listOfGroupsReturned =
+                        resp.body()?.data?.map { it.toGroup(dateUtils) } ?: listOf()
                     val lastCheckedDate =
                         listOfGroupsReturned.maxBy { it.dateModification }?.dateModification ?: 0L
 
-                    if (dateModification < lastCheckedDate) {
-                        saveLastRequestedTime(lastCheckedDate)
-                    }
+                    saveLastRequestedTime(lastCheckedDate)
 
                     listOfGroups.addAll(listOfGroupsReturned)
                     if (listOfGroupsReturned.size < Constants.GROUPS.NUMBER_OF_GROUPS_PER_PAGE_QUERIED) {
                         needToRequest = false
                         saveLastRequestedTime(requestTimestamp)
+                    } else {
+                        offset = listOfGroups.count { it.dateModification == lastCheckedDate }
+                        dateInclusive = true
                     }
 
                 } else {
