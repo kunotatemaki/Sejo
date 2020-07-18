@@ -8,11 +8,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import java.lang.ref.WeakReference
 import java.text.Normalizer
+import java.util.*
 
 
 fun String.normalizedString(): String {
     val normalized: String = Normalizer.normalize(this, Normalizer.Form.NFD)
-    return normalized.replace("[^\\p{ASCII}]".toRegex(), "").trim { it <= ' ' }.toLowerCase()
+    return normalized.replace("[^\\p{ASCII}]".toRegex(), "").trim { it <= ' ' }.toLowerCase(Locale.getDefault())
 }
 
 fun <T> WeakReference<T>.safe(body : T.() -> Unit) {
