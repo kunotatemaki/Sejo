@@ -80,7 +80,7 @@ class PhoneNumberView : ConstraintLayout {
                         val cleanPhoneNumber = text?.replace("[\\s]".toRegex(), "") ?: ""
                         var cursorPosition = binding.componentPhoneNumber.selectionStart
                         val cutText: CharSequence?
-                        if (deletingSpace || cleanPhoneNumber.length > Constants.SPANISH_PHONE.NUMBER_MAX_LENGTH_WITHOUT_SPACES) {
+                        if (deletingSpace || cleanPhoneNumber.length > Constants.SpanishPhone.NUMBER_MAX_LENGTH_WITHOUT_SPACES) {
                             cutText = text?.removeRange(cursorPosition - 1 until cursorPosition)
                             cursorPosition -= 1
                         } else {
@@ -95,7 +95,7 @@ class PhoneNumberView : ConstraintLayout {
                             phoneUtils.isValidPhoneNumber(phonePrefix, cleanPhoneNumberAfter)
                         _validPhone.value = when {
                             isValidPhone -> PhoneNumberFormat.OK
-                            isValidPhone.not() && cleanPhoneNumberAfter.length == Constants.SPANISH_PHONE.NUMBER_MAX_LENGTH_WITHOUT_SPACES -> PhoneNumberFormat.WRONG
+                            isValidPhone.not() && cleanPhoneNumberAfter.length == Constants.SpanishPhone.NUMBER_MAX_LENGTH_WITHOUT_SPACES -> PhoneNumberFormat.WRONG
                             else -> PhoneNumberFormat.INCOMPLETE
                         }
 

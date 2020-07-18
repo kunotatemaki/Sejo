@@ -83,7 +83,7 @@ class UserRepositoryImpl @Inject constructor(
         }
 
     private fun storeToken(token: String) {
-        preferencesManager.setStringIntoPreferences(Constants.USER_DATA.TOKEN_TAG, token)
+        preferencesManager.setStringIntoPreferences(Constants.UserData.TOKEN_TAG, token)
     }
 
     override fun updateLastGroupSelected(userId: String, groupId: Long): Flow<Result<Int>> =

@@ -31,7 +31,7 @@ class GroupsViewModel @ViewModelInject constructor(
 
 
     fun loadGroups() {
-        preferencesManager.getStringFromPreferences(Constants.USER_DATA.ID_TAG)?.let { userId ->
+        preferencesManager.getStringFromPreferences(Constants.UserData.ID_TAG)?.let { userId ->
             val groupsInternal =
                 getGroupsUseCase.getGroups(userId)
             groups.addSource(groupsInternal) {

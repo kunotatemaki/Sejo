@@ -87,7 +87,7 @@ class GroupsFragment : BaseFragment(R.layout.fragment_groups), GroupsAdapter.Gro
     private fun navigateToSelectedGroup(groupId: Long) {
 
         preferencesManager.setLongIntoPreferences(
-            Constants.USER_DATA.LAST_USED_GROUP_TAG,
+            Constants.UserData.LAST_USED_GROUP_TAG,
             groupId
         )
 

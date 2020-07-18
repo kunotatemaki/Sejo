@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
         if (needToNavigateToRegister()) {
             navigateToRegisterFlow()
-        } else if (intent.extras == null && preferencesManager.containsKey(Constants.USER_DATA.LAST_USED_GROUP_TAG).not()) {
+        } else if (intent.extras == null && preferencesManager.containsKey(Constants.UserData.LAST_USED_GROUP_TAG).not()) {
 //            navigateToGroupsFragment()
         }
 

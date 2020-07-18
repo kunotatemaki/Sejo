@@ -1,20 +1,20 @@
 package com.rookia.android.sejo.utils
 
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
-import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_MAX_LENGTH_WITHOUT_SPACES
-import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_MATCHER_EIGHT_DIGITS
-import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_MATCHER_FIVE_DIGITS
-import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_MATCHER_FOUR_DIGITS
-import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_MATCHER_NINE_DIGITS
-import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_MATCHER_SEVEN_DIGITS
-import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_MATCHER_SIX_DIGITS
-import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_REPLACEMENT_FOUR_GROUP
-import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_REPLACEMENT_THREE_GROUP
-import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PATTERN_REPLACEMENT_TWO_GROUP
-import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_PREFIX
-import com.rookia.android.sejo.Constants.SPANISH_PHONE.NUMBER_START_PATTERN_MATCHER
-import com.rookia.android.sejo.Constants.USER_DATA.PHONE_NUMBER_TAG
-import com.rookia.android.sejo.Constants.USER_DATA.PHONE_PREFIX_TAG
+import com.rookia.android.sejo.Constants.SpanishPhone.NUMBER_MAX_LENGTH_WITHOUT_SPACES
+import com.rookia.android.sejo.Constants.SpanishPhone.NUMBER_PATTERN_MATCHER_EIGHT_DIGITS
+import com.rookia.android.sejo.Constants.SpanishPhone.NUMBER_PATTERN_MATCHER_FIVE_DIGITS
+import com.rookia.android.sejo.Constants.SpanishPhone.NUMBER_PATTERN_MATCHER_FOUR_DIGITS
+import com.rookia.android.sejo.Constants.SpanishPhone.NUMBER_PATTERN_MATCHER_NINE_DIGITS
+import com.rookia.android.sejo.Constants.SpanishPhone.NUMBER_PATTERN_MATCHER_SEVEN_DIGITS
+import com.rookia.android.sejo.Constants.SpanishPhone.NUMBER_PATTERN_MATCHER_SIX_DIGITS
+import com.rookia.android.sejo.Constants.SpanishPhone.NUMBER_PATTERN_REPLACEMENT_FOUR_GROUP
+import com.rookia.android.sejo.Constants.SpanishPhone.NUMBER_PATTERN_REPLACEMENT_THREE_GROUP
+import com.rookia.android.sejo.Constants.SpanishPhone.NUMBER_PATTERN_REPLACEMENT_TWO_GROUP
+import com.rookia.android.sejo.Constants.SpanishPhone.NUMBER_PREFIX
+import com.rookia.android.sejo.Constants.SpanishPhone.NUMBER_START_PATTERN_MATCHER
+import com.rookia.android.sejo.Constants.UserData.PHONE_NUMBER_TAG
+import com.rookia.android.sejo.Constants.UserData.PHONE_PREFIX_TAG
 import java.util.regex.Pattern
 import javax.inject.Inject
 

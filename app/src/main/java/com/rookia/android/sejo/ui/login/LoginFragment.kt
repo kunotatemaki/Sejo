@@ -62,15 +62,15 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), PinScreen.Biometric
                         hideLoading()
                         if (it.data?.result == LoginResponseCodes.NO_USER.code) {
                             preferencesManager.setBooleanIntoPreferences(
-                                Constants.NAVIGATION.PERSONAL_INFO_TAG,
+                                Constants.Navigation.PERSONAL_INFO_TAG,
                                 false
                             )
                             preferencesManager.setBooleanIntoPreferences(
-                                Constants.NAVIGATION.PIN_SENT_TAG,
+                                Constants.Navigation.PIN_SENT_TAG,
                                 false
                             )
                             preferencesManager.setBooleanIntoPreferences(
-                                Constants.NAVIGATION.VALIDATED_PHONE_TAG,
+                                Constants.Navigation.VALIDATED_PHONE_TAG,
                                 false
                             )
                         } else {
@@ -120,7 +120,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), PinScreen.Biometric
         fingerprintUtils.shouldShowFingerPrintScreen()
 
     private fun shouldShowBiometricPermission(): Boolean =
-        fingerprintUtils.isFingerprintSupported() && preferencesManager.containsKey(Constants.USER_DATA.BIOMETRICS_TAG)
+        fingerprintUtils.isFingerprintSupported() && preferencesManager.containsKey(Constants.UserData.BIOMETRICS_TAG)
             .not()
 
     private fun navigateToBiometricPermission() {
@@ -133,8 +133,8 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), PinScreen.Biometric
     private fun login(pin: String? = null) {
         val pinToBeSent = pin
             ?: preferencesManager.getEncryptedStringFromPreferences(
-                Constants.USER_DATA.PIN_TAG,
-                Constants.USER_DATA.PIN_ALIAS
+                Constants.UserData.PIN_TAG,
+                Constants.UserData.PIN_ALIAS
             )
 
         try {

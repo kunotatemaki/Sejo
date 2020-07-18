@@ -16,7 +16,7 @@ class MembersViewModel @ViewModelInject constructor(
     val group: LiveData<Group>
 
     init {
-        val storedGroupId = preferencesManager.getLongFromPreferences(Constants.USER_DATA.LAST_USED_GROUP_TAG)
+        val storedGroupId = preferencesManager.getLongFromPreferences(Constants.UserData.LAST_USED_GROUP_TAG)
         group = getGroupsUseCase.getGroup(storedGroupId)
     }
 }

@@ -7,7 +7,6 @@ import com.jraska.livedata.test
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
-import com.rookia.android.sejo.domain.local.SmsCodeValidation
 import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
 import com.rookia.android.sejo.usecases.RequestSmsCodeUseCase
@@ -154,7 +153,7 @@ class ValidateSmsViewModelTest {
 
     @Test
     fun `validate sms code with success response from server`() {
-        val smsCodeValidation = SmsCodeValidation(1, true)
+        val smsCodeValidation = SmsCodeValidation(1, "userId", 0L)
         coEvery { validateSmsCodeUseCase.validateSmsCode(any(), any(), any()) } returns flow {
             emit(Result.loading(null))
             emit(Result.success(smsCodeValidation))
@@ -217,19 +216,19 @@ class ValidateSmsViewModelTest {
 
         verify {
             preferencesManager.setBooleanIntoPreferences(
-                Constants.NAVIGATION_VALIDATED_PHONE_TAG,
+                Constants.Navigation.VALIDATED_PHONE_TAG,
                 true
             )
         }
         verify {
             preferencesManager.setStringIntoPreferences(
-                Constants.VALIDATED_PHONE_PREFIX_TAG,
+                Constants.UserData.PHONE_PREFIX_TAG,
                 phonePrefix
             )
         }
         verify {
             preferencesManager.setStringIntoPreferences(
-                Constants.VALIDATED_PHONE_NUMBER_TAG,
+                Constants.UserData.PHONE_NUMBER_TAG,
                 phoneNumber
             )
         }

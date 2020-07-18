@@ -20,11 +20,11 @@ class BiometricPermissionFragment :
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentBiometricPermisssionBinding.bind(view)
         binding.fragmentBiometricPermissionActivateButton.setOnClickListener {
-            preferencesManager.setBooleanIntoPreferences(Constants.USER_DATA.BIOMETRICS_TAG, true)
+            preferencesManager.setBooleanIntoPreferences(Constants.UserData.BIOMETRICS_TAG, true)
             navigate()
         }
         binding.fragmentBiometricPermissionNotNowButton.setOnClickListener {
-            preferencesManager.setBooleanIntoPreferences(Constants.USER_DATA.BIOMETRICS_TAG, false)
+            preferencesManager.setBooleanIntoPreferences(Constants.UserData.BIOMETRICS_TAG, false)
             navigate()
         }
 

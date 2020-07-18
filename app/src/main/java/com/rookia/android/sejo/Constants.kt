@@ -15,7 +15,7 @@ package com.rookia.android.sejo
 object Constants {
 
     //region PHONE NUMBER FORMAT
-    object SPANISH_PHONE {
+    object SpanishPhone {
         const val NUMBER_PREFIX = "+34"
         const val NUMBER_MAX_LENGTH_WITH_SPACES = 11
         const val NUMBER_MAX_LENGTH_WITHOUT_SPACES = 9
@@ -63,7 +63,7 @@ object Constants {
     //endregion
 
     //region NAVIGATION
-    object NAVIGATION {
+    object Navigation {
         const val VALIDATED_PHONE_TAG = "NAVIGATION_VALIDATED_PHONE_NUMBER_TAG"
         const val PIN_SENT_TAG = "NAVIGATION_PASSWORD_TAG"
         const val PERSONAL_INFO_TAG = "NAVIGATION_PERSONAL_INFO_TAG"
@@ -72,7 +72,7 @@ object Constants {
     //endregion
 
     //region USER DATA
-    object USER_DATA {
+    object UserData {
         const val TOKEN_TAG = "USER_TOKEN_TAG"
         const val NAME_TAG = "USER_NAME_TAG"
         const val PIN_TAG = "USER_PASSWORD_TAG"

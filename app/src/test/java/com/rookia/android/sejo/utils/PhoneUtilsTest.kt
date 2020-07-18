@@ -1,8 +1,8 @@
 package com.rookia.android.sejo.utils
 
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
-import com.rookia.android.sejo.Constants.USER_PHONE_NUMBER_TAG
-import com.rookia.android.sejo.Constants.USER_PHONE_PREFIX_TAG
+import com.rookia.android.sejo.Constants.UserData.PHONE_NUMBER_TAG
+import com.rookia.android.sejo.Constants.UserData.PHONE_PREFIX_TAG
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
@@ -35,8 +35,8 @@ class PhoneUtilsTest {
     fun setUp() {
         MockKAnnotations.init(this, relaxed = true)
         phoneUtils = PhoneUtils()
-        every { preferencesManager.getStringFromPreferences(USER_PHONE_NUMBER_TAG) } returns spanishPhoneNumber
-        every { preferencesManager.getStringFromPreferences(USER_PHONE_PREFIX_TAG) } returns spanishPhonePrefix
+        every { preferencesManager.getStringFromPreferences(PHONE_NUMBER_TAG) } returns spanishPhoneNumber
+        every { preferencesManager.getStringFromPreferences(PHONE_PREFIX_TAG) } returns spanishPhonePrefix
     }
 
     @After
