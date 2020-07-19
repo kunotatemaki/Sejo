@@ -5,12 +5,11 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.jraska.livedata.test
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
-import com.rookia.android.androidutils.domain.vo.Result
+import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
-import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
-import com.rookia.android.sejo.usecases.RequestSmsCodeUseCase
-import com.rookia.android.sejo.usecases.ValidateSmsCodeUseCase
+import com.rookia.android.sejo.usecases.SmsCodeUseCases
+import com.rookia.android.sejocore.domain.local.SmsCodeValidation
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.every
@@ -54,10 +53,10 @@ class ValidateSmsViewModelTest {
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")
 
     @MockK
-    lateinit var requestSmsCodeUseCase: RequestSmsCodeUseCase
+    lateinit var smsCodeUseCases: SmsCodeUseCases
 
     @MockK
-    lateinit var validateSmsCodeUseCase: ValidateSmsCodeUseCase
+    lateinit var smsCodeUseCase: SmsCodeUseCases
 
     @MockK
     lateinit var smsBroadcastReceiver: SMSBroadcastReceiver
@@ -77,8 +76,8 @@ class ValidateSmsViewModelTest {
         }
         Dispatchers.setMain(mainThreadSurrogate)
         viewModel = ValidateSmsViewModel(
-            requestSmsCodeUseCase,
-            validateSmsCodeUseCase,
+            smsCodeUseCases,
+            smsCodeUseCase,
             smsBroadcastReceiver,
             preferencesManager,
             testDispatcher
@@ -98,7 +97,7 @@ class ValidateSmsViewModelTest {
 
     @Test
     fun `request sms code with success response from server`() {
-        coEvery { requestSmsCodeUseCase.askForSmsCode(any(), any()) } returns flow {
+        coEvery { smsCodeUseCases.askForSmsCode(any(), any()) } returns flow {
             emit(Result.loading(null))
             emit(Result.success(1))
         }
@@ -126,7 +125,7 @@ class ValidateSmsViewModelTest {
     @Test
     fun `request sms code with error response from server`() {
         val errorMessage = "error"
-        every { requestSmsCodeUseCase.askForSmsCode(any(), any()) } returns flow {
+        every { smsCodeUseCases.askForSmsCode(any(), any()) } returns flow {
             emit(Result.loading(null))
             emit(Result.error(errorMessage, null))
         }
@@ -154,7 +153,7 @@ class ValidateSmsViewModelTest {
     @Test
     fun `validate sms code with success response from server`() {
         val smsCodeValidation = SmsCodeValidation(1, "userId", 0L)
-        coEvery { validateSmsCodeUseCase.validateSmsCode(any(), any(), any()) } returns flow {
+        coEvery { smsCodeUseCase.validateSmsCode(any(), any(), any()) } returns flow {
             emit(Result.loading(null))
             emit(Result.success(smsCodeValidation))
         }
@@ -182,7 +181,7 @@ class ValidateSmsViewModelTest {
     @Test
     fun `validate sms code with error response from server`() {
         val errorMessage = "error"
-        every { validateSmsCodeUseCase.validateSmsCode(any(), any(), any()) } returns flow {
+        every { smsCodeUseCase.validateSmsCode(any(), any(), any()) } returns flow {
             emit(Result.loading(null))
             emit(Result.error(errorMessage, null))
         }

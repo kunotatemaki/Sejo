@@ -8,6 +8,10 @@ import com.rookia.android.sejo.R
 import com.rookia.android.sejo.framework.persistence.databases.AppDatabase
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
 import com.rookia.android.sejo.utils.TextFormatUtils
+import com.rookia.android.sejocore.data.remote.LoginRemoteDataSource
+import com.rookia.android.sejocore.data.remote.SmsCodeRemoteDataSource
+import com.rookia.android.sejocore.data.repository.LoginRepository
+import com.rookia.android.sejocore.data.repository.SmsCodeRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +29,6 @@ class ProvidesModule {
     @Qualifier
     @Retention(AnnotationRetention.RUNTIME)
     annotation class SmsCode
-
 
     @Provides
     @SmsCode
@@ -90,5 +93,14 @@ class ProvidesModule {
                 R.id.moreFragment
             )
         )
+
+    @Provides
+    fun providesSmsCodeRepository(smsCodeRemoteDataSource: SmsCodeRemoteDataSource): SmsCodeRepository =
+        SmsCodeRepository(smsCodeRemoteDataSource)
+
+    @Provides
+    fun providesLoginCodeRepository(loginRemoteDataSource: LoginRemoteDataSource): LoginRepository =
+        LoginRepository(loginRemoteDataSource)
+
 
 }

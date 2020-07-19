@@ -2,12 +2,9 @@ package com.rookia.android.sejo.domain.network
 
 import com.rookia.android.sejo.domain.local.Group
 import com.rookia.android.sejo.domain.local.PhoneContact
-import com.rookia.android.sejo.domain.local.smscode.SmsCodeValidation
 import com.rookia.android.sejo.domain.local.user.TokenReceived
 import com.rookia.android.sejo.domain.network.group.CreateGroupClient
 import com.rookia.android.sejo.domain.network.group.RequestGroupsServer
-import com.rookia.android.sejo.domain.network.login.LoginRequestServer
-import com.rookia.android.sejo.domain.network.smscode.SmsCodeValidationServer
 import com.rookia.android.sejo.domain.network.user.UserCreationRequestServer
 import com.rookia.android.sejo.framework.utils.DateUtils
 
@@ -22,12 +19,6 @@ import com.rookia.android.sejo.framework.utils.DateUtils
  *
  *
  */
-
-fun SmsCodeValidationServer.toSmsCodeValidation(): SmsCodeValidation =
-    SmsCodeValidation(result = code, userId = data.userId, lastUsedGroup = data.lastUsedGroup)
-
-fun LoginRequestServer.toTokenReceived(): TokenReceived =
-    TokenReceived(result = code, token = data?.token, userId = null)
 
 fun UserCreationRequestServer.toTokenReceived(): TokenReceived =
     TokenReceived(result = code, token = data?.token, userId = data?.userId)

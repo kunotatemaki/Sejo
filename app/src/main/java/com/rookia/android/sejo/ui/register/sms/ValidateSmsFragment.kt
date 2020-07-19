@@ -8,9 +8,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.phone.SmsRetriever
-import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.extensions.invisible
 import com.rookia.android.androidutils.extensions.visible
+import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.Constants.SMS_PIN_LENGTH
 import com.rookia.android.sejo.Constants.SMS_RESEND_WAITING_TIME
