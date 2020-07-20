@@ -2,8 +2,8 @@ package com.rookia.android.sejo.framework.repository
 
 import androidx.annotation.VisibleForTesting
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
-import com.rookia.android.androidutils.domain.vo.Result
-import com.rookia.android.androidutils.framework.repository.resultOnlyFromOneSourceInFlow
+import com.rookia.android.kotlinutils.domain.vo.Result
+import com.rookia.android.kotlinutils.repository.resultOnlyFromOneSourceInFlow
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.data.repository.UserRepository
 import com.rookia.android.sejo.domain.local.user.TokenReceived

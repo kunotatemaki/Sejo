@@ -6,7 +6,7 @@
 
         <variable
             name="member"
-            type="com.rookia.android.sejo.domain.local.Group.GroupContact" />
+            type="com.rookia.android.sejocore.domain.local.Group.GroupContact" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

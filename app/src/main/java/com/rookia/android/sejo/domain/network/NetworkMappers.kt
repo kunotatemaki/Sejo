@@ -1,12 +1,12 @@
 package com.rookia.android.sejo.domain.network
 
-import com.rookia.android.sejo.domain.local.Group
-import com.rookia.android.sejo.domain.local.PhoneContact
+import com.rookia.android.androidutils.utils.DateUtils
 import com.rookia.android.sejo.domain.local.user.TokenReceived
 import com.rookia.android.sejo.domain.network.group.CreateGroupClient
 import com.rookia.android.sejo.domain.network.group.RequestGroupsServer
 import com.rookia.android.sejo.domain.network.user.UserCreationRequestServer
-import com.rookia.android.sejo.framework.utils.DateUtils
+import com.rookia.android.sejocore.domain.local.Group
+import com.rookia.android.sejocore.domain.local.PhoneContact
 
 
 /**

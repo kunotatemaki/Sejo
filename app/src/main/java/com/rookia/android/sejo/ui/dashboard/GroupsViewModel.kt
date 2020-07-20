@@ -3,12 +3,12 @@ package com.rookia.android.sejo.ui.dashboard
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
-import androidx.paging.PagedList
+import androidx.lifecycle.asLiveData
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
-import com.rookia.android.androidutils.domain.vo.Result
+import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
-import com.rookia.android.sejo.domain.local.Group
 import com.rookia.android.sejo.usecases.GetGroupsUseCase
+import com.rookia.android.sejocore.domain.local.Group
 
 
 /**
@@ -27,13 +27,13 @@ class GroupsViewModel @ViewModelInject constructor(
     private val preferencesManager: PreferencesManager
 ) : ViewModel() {
 
-    val groups: MediatorLiveData<Result<PagedList<Group>>> = MediatorLiveData()
+    val groups: MediatorLiveData<Result<List<Group>>> = MediatorLiveData()
 
 
     fun loadGroups() {
         preferencesManager.getStringFromPreferences(Constants.UserData.ID_TAG)?.let { userId ->
             val groupsInternal =
-                getGroupsUseCase.getGroups(userId)
+                getGroupsUseCase.getGroups(userId).asLiveData()
             groups.addSource(groupsInternal) {
                 groups.value = it
                 if (it.status != Result.Status.LOADING) {

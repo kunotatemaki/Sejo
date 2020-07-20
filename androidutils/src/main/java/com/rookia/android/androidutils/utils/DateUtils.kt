@@ -3,11 +3,14 @@ package com.rookia.android.androidutils.utils
 import com.rookia.android.androidutils.R
 import com.rookia.android.androidutils.data.resources.ResourcesManager
 import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 
-object DateUtils {
+class DateUtils @Inject constructor(){
 
     fun parseStringDate(date: String?, time: String?): Date? {
         return try {
@@ -79,6 +82,14 @@ object DateUtils {
         }.time
         return isSameDay(date1, today)
     }
+
+
+    fun convertZuluTimeToUTCTimestamp(zulu: String?): Long =
+        Instant.parse(zulu).toEpochMilli()
+
+    fun convertUTCTimestampToZuluTime(timestamp: Long?): String =
+        DateTimeFormatter.ISO_INSTANT.format(Instant.ofEpochMilli(timestamp ?: 0L))
+
 
 
 }

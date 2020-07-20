@@ -6,7 +6,7 @@
     <data>
         <variable
             name="group"
-            type="com.rookia.android.sejo.domain.local.Group" />
+            type="com.rookia.android.sejocore.domain.local.Group" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -7,7 +7,7 @@
         <import type="android.view.View"/>
         <variable
             name="group"
-            type="com.rookia.android.sejo.domain.local.Group" />
+            type="com.rookia.android.sejocore.domain.local.Group" />
 
         <variable
             name="hideNoGroup"

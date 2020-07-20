@@ -5,8 +5,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.utils.RecyclerViewAdapterUtils
+import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentGroupsBinding
@@ -51,11 +51,12 @@ class GroupsFragment : BaseFragment(R.layout.fragment_groups), GroupsAdapter.Gro
             when (it.status) {
                 Result.Status.SUCCESS -> {
                     hideLoading()
-                    adapter.submitList(it.data)
+                    //todo meter los grupos al adapter
+//                    adapter.submitList(it.data)
                 }
                 Result.Status.LOADING -> {
                     showLoading()
-                    adapter.submitList(it.data)
+//                    adapter.submitList(it.data)
                 }
                 Result.Status.ERROR -> {
                     hideLoading()

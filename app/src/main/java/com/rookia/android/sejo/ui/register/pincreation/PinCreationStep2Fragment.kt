@@ -8,7 +8,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.rookia.android.androidutils.domain.vo.Result
+import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentPinCreationStep2Binding
 import com.rookia.android.sejo.ui.common.BaseFragment

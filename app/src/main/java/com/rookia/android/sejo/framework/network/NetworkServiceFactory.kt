@@ -2,6 +2,7 @@ package com.rookia.android.sejo.framework.network
 
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.sejo.Constants
+import com.rookia.android.sejoandroidframework.data.apis.GroupApi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request

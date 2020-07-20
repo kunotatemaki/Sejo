@@ -7,8 +7,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.MembersFragmentBinding
-import com.rookia.android.sejo.domain.local.Group
 import com.rookia.android.sejo.ui.common.BaseFragment
+import com.rookia.android.sejocore.domain.local.Group
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

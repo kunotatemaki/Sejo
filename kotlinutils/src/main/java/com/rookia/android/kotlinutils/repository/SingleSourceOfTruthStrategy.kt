@@ -2,36 +2,39 @@ package com.rookia.android.kotlinutils.repository
 
 import com.rookia.android.kotlinutils.domain.vo.Result
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 
 fun <T, A> resultFromPersistenceAndNetworkInFlow(
-    persistedDataQuery: () -> T,
+    persistedDataQuery: () -> Flow<T>,
     networkCall: suspend () -> Result<A>,
     persistCallResult: suspend (A?) -> Unit,
     isThePersistedInfoOutdated: (T?) -> Boolean
 ): Flow<Result<T>> =
     flow {
 
-        var cachedData = persistedDataQuery.invoke()
-        val needToGetInfoFromServer = isThePersistedInfoOutdated(cachedData)
-        if (needToGetInfoFromServer) {
-            //show data from db but keep the loading state, as a network call will be done
-            emit(Result.loading(cachedData))
-        } else {
-            //no network call -> show success
-            emit(Result.success(cachedData))
-        }
-
-        if (needToGetInfoFromServer) {
-            val responseStatus = networkCall.invoke()
-            // Stop the previous emission to avoid dispatching the updated user
-            // as `loading`.
-            if (responseStatus.status == Result.Status.ERROR) {
-                emit(Result.error(responseStatus.message, cachedData))
+        persistedDataQuery.invoke().collect { cachedData ->
+            val needToGetInfoFromServer = isThePersistedInfoOutdated(cachedData)
+            if (needToGetInfoFromServer) {
+                //show data from db but keep the loading state, as a network call will be done
+                emit(Result.loading(cachedData))
             } else {
-                persistCallResult.invoke(responseStatus.data)
-                cachedData = persistedDataQuery.invoke()
+                //no network call -> show success
                 emit(Result.success(cachedData))
+            }
+
+            if (needToGetInfoFromServer) {
+                val responseStatus = networkCall.invoke()
+                // Stop the previous emission to avoid dispatching the updated user
+                // as `loading`.
+                if (responseStatus.status == Result.Status.ERROR) {
+                    emit(Result.error(responseStatus.message, cachedData))
+                } else {
+                    persistCallResult.invoke(responseStatus.data)
+                    //todo ver si esto vuelve a llamar a todo el ciclo
+//                    cachedData = persistedDataQuery.invoke()
+//                    emit(Result.success(cachedData))
+                }
             }
         }
     }

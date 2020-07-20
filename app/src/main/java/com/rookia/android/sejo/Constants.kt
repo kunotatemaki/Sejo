@@ -89,13 +89,10 @@ object Constants {
     //endregion
 
     //region GROUPS
-    enum class MemberStates(val code: Int) {
-        OWNER(0), VALIDATED(1), PENDING(2), GUESS(3)
-    }
 
-    object GROUPS {
-        const val LAST_CHECKED_TIMESTAMP = "LAST_CHECKED_TIMESTAMP_FOR_GROUPS"
-        const val NUMBER_OF_GROUPS_PER_PAGE_QUERIED = 5
-    }
+//    object GROUPS {
+////        const val LAST_CHECKED_TIMESTAMP = "LAST_CHECKED_TIMESTAMP_FOR_GROUPS"
+////        const val NUMBER_OF_GROUPS_PER_PAGE_QUERIED = 100
+//    }
     //endregion
 }

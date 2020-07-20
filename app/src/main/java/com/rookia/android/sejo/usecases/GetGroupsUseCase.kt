@@ -1,11 +1,9 @@
 package com.rookia.android.sejo.usecases
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
-import androidx.paging.PagedList
-import com.rookia.android.androidutils.domain.vo.Result
-import com.rookia.android.sejo.data.repository.GroupRepository
-import com.rookia.android.sejo.domain.local.Group
+import com.rookia.android.kotlinutils.domain.vo.Result
+import com.rookia.android.sejocore.data.repository.GroupsRepository
+import com.rookia.android.sejocore.domain.local.Group
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 
@@ -21,13 +19,13 @@ import javax.inject.Inject
  */
 
 class GetGroupsUseCase @Inject constructor(
-    private val repository: GroupRepository
+    private val repository: GroupsRepository
 ) {
 
-    fun getGroups(userId: String): LiveData<Result<PagedList<Group>>> =
+    fun getGroups(userId: String): Flow<Result<List<Group>>> =
         repository.getGroups(userId)
 
-    fun getGroup(groupId: Long): LiveData<Group> =
-        repository.getGroup(groupId).asLiveData()
+    fun getGroup(groupId: Long): Flow<Group> =
+        repository.getGroup(groupId)
 
 }

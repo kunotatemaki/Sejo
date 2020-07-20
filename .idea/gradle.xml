@@ -15,8 +15,8 @@
             <option value="$PROJECT_DIR$/androidutils" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/kotlinutils" />
-            <option value="$PROJECT_DIR$/sejoandroidframework" />
             <option value="$PROJECT_DIR$/sejocore" />
+            <option value="$PROJECT_DIR$/sejocoreandroid" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

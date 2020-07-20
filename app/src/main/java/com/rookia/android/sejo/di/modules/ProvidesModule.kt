@@ -4,12 +4,18 @@ import android.content.Context
 import androidx.biometric.BiometricPrompt
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.ui.AppBarConfiguration
+import com.rookia.android.kotlinutils.utils.RateLimiter
 import com.rookia.android.sejo.R
-import com.rookia.android.sejo.framework.persistence.databases.AppDatabase
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
 import com.rookia.android.sejo.utils.TextFormatUtils
+import com.rookia.android.sejoandroidframework.data.persistence.databases.AppDatabase
+import com.rookia.android.sejocore.data.local.ContactsLocalDataSource
+import com.rookia.android.sejocore.data.local.GroupsLocalDataSource
+import com.rookia.android.sejocore.data.remote.GroupsRemoteDataSource
 import com.rookia.android.sejocore.data.remote.LoginRemoteDataSource
 import com.rookia.android.sejocore.data.remote.SmsCodeRemoteDataSource
+import com.rookia.android.sejocore.data.repository.ContactsRepository
+import com.rookia.android.sejocore.data.repository.GroupsRepository
 import com.rookia.android.sejocore.data.repository.LoginRepository
 import com.rookia.android.sejocore.data.repository.SmsCodeRepository
 import dagger.Module
@@ -99,8 +105,26 @@ class ProvidesModule {
         SmsCodeRepository(smsCodeRemoteDataSource)
 
     @Provides
-    fun providesLoginCodeRepository(loginRemoteDataSource: LoginRemoteDataSource): LoginRepository =
-        LoginRepository(loginRemoteDataSource)
+    fun providesContactsRepository(contactsLocalDataSource: ContactsLocalDataSource): ContactsRepository =
+        ContactsRepository(contactsLocalDataSource)
 
+    @Provides
+    fun providesLoginRepository(loginLocalDataSource: LoginRemoteDataSource): LoginRepository =
+        LoginRepository(loginLocalDataSource)
+
+    @Provides
+    fun providesGroupsRepository(
+        groupsRemoteDataSource: GroupsRemoteDataSource,
+        groupsLocalDataSource: GroupsLocalDataSource,
+        rateLimiter: RateLimiter
+    ): GroupsRepository =
+        GroupsRepository(
+            groupsLocalDataSource = groupsLocalDataSource,
+            groupsRemoteDataSource = groupsRemoteDataSource,
+            rateLimiter = rateLimiter
+        )
+
+    @Provides
+    fun providesRateLimiter(): RateLimiter = RateLimiter()
 
 }

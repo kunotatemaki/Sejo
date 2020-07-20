@@ -6,7 +6,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.rookia.android.sejo.databinding.ElementGroupBinding
-import com.rookia.android.sejo.domain.local.Group
+import com.rookia.android.sejocore.domain.local.Group
 
 
 /**

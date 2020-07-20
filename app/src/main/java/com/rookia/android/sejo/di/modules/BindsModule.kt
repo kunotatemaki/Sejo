@@ -1,15 +1,11 @@
 package com.rookia.android.sejo.di.modules
 
-import com.rookia.android.sejo.data.persistence.PersistenceManager
-import com.rookia.android.sejo.data.repository.ContactsRepository
-import com.rookia.android.sejo.data.repository.GroupRepository
 import com.rookia.android.sejo.data.repository.UserRepository
-import com.rookia.android.sejo.framework.persistence.PersistenceManagerImpl
-import com.rookia.android.sejo.framework.repository.ContactsRepositoryImpl
-import com.rookia.android.sejo.framework.repository.GroupRepositoryImpl
 import com.rookia.android.sejo.framework.repository.UserRepositoryImpl
-import com.rookia.android.sejoandroidframework.data.datasources.LoginRemoteDataSourceImpl
-import com.rookia.android.sejoandroidframework.data.datasources.SmsCodeRemoteDataSourceImpl
+import com.rookia.android.sejoandroidframework.data.datasources.*
+import com.rookia.android.sejocore.data.local.ContactsLocalDataSource
+import com.rookia.android.sejocore.data.local.GroupsLocalDataSource
+import com.rookia.android.sejocore.data.remote.GroupsRemoteDataSource
 import com.rookia.android.sejocore.data.remote.LoginRemoteDataSource
 import com.rookia.android.sejocore.data.remote.SmsCodeRemoteDataSource
 import dagger.Binds
@@ -29,15 +25,16 @@ abstract class BindsModule {
     abstract fun providesLoginRemoteDataSource(loginRemoteDataSourceImpl: LoginRemoteDataSourceImpl): LoginRemoteDataSource
 
     @Binds
+    abstract fun providesContactsLocalDataSource(contactsLocalDataSourceImpl: ContactsLocalDataSourceImpl): ContactsLocalDataSource
+
+    @Binds
     abstract fun providesUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
 
     @Binds
-    abstract fun providesContactsRepository(contactsRepository: ContactsRepositoryImpl): ContactsRepository
+    abstract fun providesGroupsLocalDataSource(groupsLocalDataSourceImpl: GroupsLocalDataSourceImp): GroupsLocalDataSource
 
     @Binds
-    abstract fun providesGroupRepository(groupRepository: GroupRepositoryImpl): GroupRepository
+    abstract fun providesGroupsRemoteDataSource(groupsRemoteDataSourceImpl: GroupsRemoteDataSourceImpl): GroupsRemoteDataSource
 
-    @Binds
-    abstract fun providesPersistenceManager(persistenceManagerImpl: PersistenceManagerImpl): PersistenceManager
 
 }

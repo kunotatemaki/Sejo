@@ -3,13 +3,13 @@ package com.rookia.android.sejo.ui.groupcreation
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.rookia.android.androidutils.data.preferences.PreferencesManager
-import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.extensions.normalizedString
+import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.di.modules.ProvidesModule
-import com.rookia.android.sejo.domain.local.PhoneContact
 import com.rookia.android.sejo.usecases.CreateGroupUseCase
 import com.rookia.android.sejo.usecases.GetContactsUseCase
+import com.rookia.android.sejocore.domain.local.PhoneContact
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -33,7 +33,7 @@ class GroupCreationMembersViewModel @ViewModelInject constructor(
         private const val QUERY_DEBOUNCE = 500L
     }
 
-    private lateinit var _phoneContactsList: LiveData<Result<List<PhoneContact>>>
+    private lateinit var _phoneContactsList: LiveData<Result<List<com.rookia.android.sejocore.domain.local.PhoneContact>>>
     val phoneContactsList: MediatorLiveData<Result<List<PhoneContact>>> = MediatorLiveData()
 
     private lateinit var _groupCreationResponse: LiveData<Result<Unit>>

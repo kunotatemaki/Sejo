@@ -17,16 +17,19 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.rookia.android.androidutils.domain.vo.Result
 import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.androidutils.framework.utils.PermissionManager
 import com.rookia.android.androidutils.utils.DeviceUtils
+import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.sejo.R
-import com.rookia.android.sejo.data.CacheSanity
 import com.rookia.android.sejo.databinding.FragmentGroupCreationMembersBinding
-import com.rookia.android.sejo.domain.local.PhoneContact
+import com.rookia.android.sejo.domain.local.PhoneContactParcelable
+import com.rookia.android.sejo.domain.toPhoneContact
+import com.rookia.android.sejo.domain.toPhoneContactParcelable
 import com.rookia.android.sejo.ui.common.BaseFragment
+import com.rookia.android.sejocore.data.local.CacheSanity
+import com.rookia.android.sejocore.domain.local.PhoneContact
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -142,9 +145,9 @@ class GroupCreationMembersFragment : BaseFragment(R.layout.fragment_group_creati
         savedInstanceState?.let {
             if (it.containsKey(CONTACTS_ADDED)) {
                 contactsAddedAdapter.addListOfContacts(
-                    it.getParcelableArrayList<PhoneContact>(
+                    it.getParcelableArrayList<PhoneContactParcelable>(
                         CONTACTS_ADDED
-                    )?.toList()
+                    )?.toList()?.map { contact -> contact.toPhoneContact() }
                 )
             }
         }
@@ -236,7 +239,8 @@ class GroupCreationMembersFragment : BaseFragment(R.layout.fragment_group_creati
 
         outState.putParcelableArrayList(
             CONTACTS_ADDED,
-            contactsAddedAdapter.getContactsAdded() as? ArrayList<out Parcelable>
+            contactsAddedAdapter.getContactsAdded()
+                .map { it.toPhoneContactParcelable() } as? ArrayList<out Parcelable>
         )
 
         super.onSaveInstanceState(outState)

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rookia.android.sejo.databinding.ElementPhoneContactBinding
-import com.rookia.android.sejo.domain.local.PhoneContact
+import com.rookia.android.sejocore.domain.local.PhoneContact
 
 
 /**
