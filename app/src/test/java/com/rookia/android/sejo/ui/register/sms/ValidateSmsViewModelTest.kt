@@ -4,6 +4,7 @@ import android.os.Looper
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.jraska.livedata.test
+import com.rookia.android.androidutils.preferences.PreferencesManager
 import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
@@ -76,7 +77,6 @@ class ValidateSmsViewModelTest {
         Dispatchers.setMain(mainThreadSurrogate)
         viewModel = ValidateSmsViewModel(
             smsCodeUseCases,
-            smsCodeUseCase,
             smsBroadcastReceiver,
             preferencesManager,
             testDispatcher

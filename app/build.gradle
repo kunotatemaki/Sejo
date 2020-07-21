@@ -96,11 +96,11 @@ dependencies {
     }
 
     //Db and pagination
-    def roomVersion = '2.2.5'
+    def roomVersion = '2.3.0-alpha01'
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
-    def paging_version = "2.1.2"
+    def paging_version = "3.0.0-alpha02"
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 
 
