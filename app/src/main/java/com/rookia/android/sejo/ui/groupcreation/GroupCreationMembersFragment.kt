@@ -28,8 +28,8 @@ import com.rookia.android.sejo.domain.local.PhoneContactParcelable
 import com.rookia.android.sejo.domain.toPhoneContact
 import com.rookia.android.sejo.domain.toPhoneContactParcelable
 import com.rookia.android.sejo.ui.common.BaseFragment
-import com.rookia.android.sejocore.data.local.CacheSanity
-import com.rookia.android.sejocore.domain.local.PhoneContact
+import com.rookia.android.sejocoreandroid.data.datasources.local.CacheSanity
+import com.rookia.android.sejocoreandroid.domain.local.PhoneContact
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview

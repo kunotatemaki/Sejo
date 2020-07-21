@@ -12,7 +12,7 @@ import com.rookia.android.androidutils.extensions.visible
 import com.rookia.android.androidutils.resources.ResourcesManager
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ElementPhoneContactThumbnailBinding
-import com.rookia.android.sejocore.domain.local.PhoneContact
+import com.rookia.android.sejocoreandroid.domain.local.PhoneContact
 
 
 /**

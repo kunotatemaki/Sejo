@@ -1,11 +1,7 @@
 package com.rookia.android.sejocoreandroid.domain.remote
 
 import com.rookia.android.androidutils.utils.DateUtils
-import com.rookia.android.sejocore.domain.local.Group
-import com.rookia.android.sejocore.domain.local.PhoneContact
-import com.rookia.android.sejocore.domain.local.SmsCodeValidation
-import com.rookia.android.sejocore.domain.local.TokenReceived
-import com.rookia.android.sejocoreandroid.domain.local.CreateGroupClient
+import com.rookia.android.sejocoreandroid.domain.local.*
 
 
 /**

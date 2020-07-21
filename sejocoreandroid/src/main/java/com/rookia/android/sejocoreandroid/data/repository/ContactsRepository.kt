@@ -1,9 +1,9 @@
-package com.rookia.android.sejocore.data.repository
+package com.rookia.android.sejocoreandroid.data.repository
 
 import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.kotlinutils.repository.resultOnlyFromOneSourceInFlow
-import com.rookia.android.sejocore.data.local.ContactsLocalDataSource
-import com.rookia.android.sejocore.domain.local.PhoneContact
+import com.rookia.android.sejocoreandroid.data.datasources.local.ContactsLocalDataSource
+import com.rookia.android.sejocoreandroid.domain.local.PhoneContact
 import kotlinx.coroutines.flow.Flow
 
 /**

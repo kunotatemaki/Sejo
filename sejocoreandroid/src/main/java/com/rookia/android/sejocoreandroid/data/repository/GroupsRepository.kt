@@ -1,14 +1,14 @@
-package com.rookia.android.sejocore.data.repository
+package com.rookia.android.sejocoreandroid.data.repository
 
 import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.kotlinutils.repository.resultFromPersistenceAndNetworkInFlow
 import com.rookia.android.kotlinutils.repository.resultOnlyFromOneSourceInFlow
 import com.rookia.android.kotlinutils.utils.RateLimiter
-import com.rookia.android.sejocore.data.local.CacheSanity
-import com.rookia.android.sejocore.data.local.GroupsLocalDataSource
-import com.rookia.android.sejocore.data.remote.GroupsRemoteDataSource
-import com.rookia.android.sejocore.domain.local.Group
-import com.rookia.android.sejocore.domain.local.PhoneContact
+import com.rookia.android.sejocoreandroid.data.datasources.local.CacheSanity
+import com.rookia.android.sejocoreandroid.data.datasources.local.GroupsLocalDataSource
+import com.rookia.android.sejocoreandroid.data.datasources.remote.GroupsRemoteDataSource
+import com.rookia.android.sejocoreandroid.domain.local.Group
+import com.rookia.android.sejocoreandroid.domain.local.PhoneContact
 import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.TimeUnit
 

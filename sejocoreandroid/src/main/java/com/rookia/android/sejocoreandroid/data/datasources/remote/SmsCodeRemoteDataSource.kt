@@ -1,10 +1,9 @@
-package com.rookia.android.sejocoreandroid.data.datasources
+package com.rookia.android.sejocoreandroid.data.datasources.remote
 
 import com.rookia.android.kotlinutils.domain.vo.Result
-import com.rookia.android.sejocore.data.remote.SmsCodeRemoteDataSource
-import com.rookia.android.sejocore.domain.local.SmsCodeValidation
 import com.rookia.android.sejocoreandroid.data.network.NetworkServiceFactory
 import com.rookia.android.sejocoreandroid.data.repository.RepositoryErrorHandling
+import com.rookia.android.sejocoreandroid.domain.local.SmsCodeValidation
 import com.rookia.android.sejocoreandroid.domain.remote.toSmsCodeValidation
 import javax.inject.Inject
 
@@ -19,10 +18,10 @@ import javax.inject.Inject
  *
  */
 
-class SmsCodeRemoteDataSourceImpl @Inject constructor(
+class SmsCodeRemoteDataSource @Inject constructor(
     private val networkServiceFactory: NetworkServiceFactory
-): SmsCodeRemoteDataSource, RepositoryErrorHandling {
-    override suspend fun requestSmsFromServer(phonePrefix: String, phoneNumber: String): Result<Int> =
+) : RepositoryErrorHandling {
+    suspend fun requestSmsFromServer(phonePrefix: String, phoneNumber: String): Result<Int> =
         try {
             val api = networkServiceFactory.getSmsCodeCodeInstance()
             val resp = api.requestSmsCode(phonePrefix, phoneNumber)
@@ -35,7 +34,7 @@ class SmsCodeRemoteDataSourceImpl @Inject constructor(
             Result.error(e.message)
         }
 
-    override suspend fun validateSmsFromServer(
+    suspend fun validateSmsFromServer(
         phonePrefix: String,
         phoneNumber: String,
         smsCode: String

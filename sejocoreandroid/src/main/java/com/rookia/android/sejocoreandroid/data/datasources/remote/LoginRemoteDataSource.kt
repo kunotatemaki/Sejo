@@ -1,10 +1,9 @@
-package com.rookia.android.sejocoreandroid.data.datasources
+package com.rookia.android.sejocoreandroid.data.datasources.remote
 
 import com.rookia.android.kotlinutils.domain.vo.Result
-import com.rookia.android.sejocore.data.remote.LoginRemoteDataSource
-import com.rookia.android.sejocore.domain.local.TokenReceived
 import com.rookia.android.sejocoreandroid.data.network.NetworkServiceFactory
 import com.rookia.android.sejocoreandroid.data.repository.RepositoryErrorHandling
+import com.rookia.android.sejocoreandroid.domain.local.TokenReceived
 import com.rookia.android.sejocoreandroid.domain.remote.toTokenReceived
 import com.rookia.android.sejocoreandroid.utils.TokenUtils
 import javax.inject.Inject
@@ -20,12 +19,12 @@ import javax.inject.Inject
  *
  */
 
-class LoginRemoteDataSourceImpl @Inject constructor(
+class LoginRemoteDataSource @Inject constructor(
     private val networkServiceFactory: NetworkServiceFactory,
     private val tokenUtils: TokenUtils
-) : LoginRemoteDataSource, RepositoryErrorHandling {
+) : RepositoryErrorHandling {
 
-    override suspend fun loginInServer(
+    suspend fun loginInServer(
         userId: String,
         pin: Int,
         pushToken: String?

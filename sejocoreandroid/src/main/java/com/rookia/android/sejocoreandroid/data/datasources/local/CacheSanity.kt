@@ -1,4 +1,4 @@
-package com.rookia.android.sejocore.domain.local
+package com.rookia.android.sejocoreandroid.data.datasources.local
 
 
 /**
@@ -12,8 +12,8 @@ package com.rookia.android.sejocore.domain.local
  *
  */
 
-data class TokenReceived(
-    val result: Int,
-    val token: String? = null,
-    val userId: String?
-)
+object CacheSanity {
+
+    var groupsCacheDirty: Boolean = false
+
+}

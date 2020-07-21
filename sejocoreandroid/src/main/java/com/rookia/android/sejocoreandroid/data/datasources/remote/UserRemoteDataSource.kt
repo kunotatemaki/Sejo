@@ -1,12 +1,10 @@
-package com.rookia.android.sejocoreandroid.data.datasources
+package com.rookia.android.sejocoreandroid.data.datasources.remote
 
 import com.rookia.android.kotlinutils.domain.vo.Result
-import com.rookia.android.sejocore.data.local.UserLocalDataSource
-import com.rookia.android.sejocore.data.remote.UserRemoteDataSource
-import com.rookia.android.sejocore.domain.local.TokenReceived
-import com.rookia.android.sejocore.domain.local.User
 import com.rookia.android.sejocoreandroid.data.network.NetworkServiceFactory
 import com.rookia.android.sejocoreandroid.data.repository.RepositoryErrorHandling
+import com.rookia.android.sejocoreandroid.domain.local.TokenReceived
+import com.rookia.android.sejocoreandroid.domain.local.User
 import com.rookia.android.sejocoreandroid.domain.remote.toTokenReceived
 import javax.inject.Inject
 
@@ -22,11 +20,11 @@ import javax.inject.Inject
  *
  */
 
-class UserRemoteDataSourceImpl @Inject constructor(
+class UserRemoteDataSource @Inject constructor(
     private val networkServiceFactory: NetworkServiceFactory,
     private val userLocalDataSource: UserLocalDataSource
-) : UserRemoteDataSource, RepositoryErrorHandling {
-    override suspend fun createUserInServer(
+) : RepositoryErrorHandling {
+    suspend fun createUserInServer(
         phonePrefix: String,
         phoneNumber: String,
         pin: Int
@@ -48,7 +46,7 @@ class UserRemoteDataSourceImpl @Inject constructor(
             Result.error(e.message)
         }
 
-    override suspend fun updateUserInServer(user: User): Result<Int> =
+    suspend fun updateUserInServer(user: User): Result<Int> =
         try {
             val api = networkServiceFactory.getUserInstance()
             val resp = api.updateUser(
@@ -66,7 +64,7 @@ class UserRemoteDataSourceImpl @Inject constructor(
             Result.error(e.message)
         }
 
-    override suspend fun setLastGroupUsed(userId: String, groupId: Long): Result<Int> =
+    suspend fun setLastGroupUsed(userId: String, groupId: Long): Result<Int> =
         try {
             val api = networkServiceFactory.getUserInstance()
 

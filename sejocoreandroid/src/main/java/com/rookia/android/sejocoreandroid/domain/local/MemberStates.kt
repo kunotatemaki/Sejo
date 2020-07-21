@@ -1,4 +1,4 @@
-package com.rookia.android.sejocore.data.local
+package com.rookia.android.sejocoreandroid.domain.local
 
 
 /**
@@ -12,8 +12,6 @@ package com.rookia.android.sejocore.data.local
  *
  */
 
-object CacheSanity {
-
-    var groupsCacheDirty: Boolean = false
-
+enum class MemberStates(val code: Int) {
+    OWNER(0), VALIDATED(1), PENDING(2), GUESS(3)
 }

@@ -1,14 +1,13 @@
-package com.rookia.android.sejocoreandroid.data.datasources
+package com.rookia.android.sejocoreandroid.data.datasources.remote
 
 import com.rookia.android.androidutils.utils.DateUtils
 import com.rookia.android.kotlinutils.domain.vo.Result
-import com.rookia.android.sejocore.data.local.CacheSanity
-import com.rookia.android.sejocore.data.local.GroupsLocalDataSource
-import com.rookia.android.sejocore.data.remote.GroupsRemoteDataSource
-import com.rookia.android.sejocore.domain.local.Group
-import com.rookia.android.sejocore.domain.local.PhoneContact
+import com.rookia.android.sejocoreandroid.data.datasources.local.CacheSanity
+import com.rookia.android.sejocoreandroid.data.datasources.local.GroupsLocalDataSource
 import com.rookia.android.sejocoreandroid.data.network.NetworkServiceFactory
 import com.rookia.android.sejocoreandroid.domain.local.CreateGroupClient
+import com.rookia.android.sejocoreandroid.domain.local.Group
+import com.rookia.android.sejocoreandroid.domain.local.PhoneContact
 import com.rookia.android.sejocoreandroid.domain.remote.toCreateGroupContact
 import com.rookia.android.sejocoreandroid.domain.remote.toGroup
 import javax.inject.Inject
@@ -25,17 +24,17 @@ import javax.inject.Inject
  *
  */
 
-class GroupsRemoteDataSourceImpl @Inject constructor(
+class GroupsRemoteDataSource @Inject constructor(
     private val networkServiceFactory: NetworkServiceFactory,
     private val groupsLocalDataSource: GroupsLocalDataSource,
     private val dateUtils: DateUtils
-) : GroupsRemoteDataSource {
+)  {
 
     companion object {
         private const val NUMBER_OF_GROUPS_PER_PAGE_QUERIED = 100
     }
 
-    override suspend fun createGroupInServer(
+    suspend fun createGroupInServer(
         name: String,
         fee: Int,
         owner: String,
@@ -56,7 +55,7 @@ class GroupsRemoteDataSourceImpl @Inject constructor(
         }
 
 
-    override suspend fun getGroupsFromServer(userId: String): Result<List<Group>> {
+    suspend fun getGroupsFromServer(userId: String): Result<List<Group>> {
         val requestTimestamp = System.currentTimeMillis()
         val listOfGroups = mutableListOf<Group>()
         val api = networkServiceFactory.getGroupInstance()

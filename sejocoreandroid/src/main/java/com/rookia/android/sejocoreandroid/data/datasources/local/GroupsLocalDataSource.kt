@@ -1,9 +1,8 @@
-package com.rookia.android.sejocoreandroid.data.datasources
+package com.rookia.android.sejocoreandroid.data.datasources.local
 
 import com.rookia.android.androidutils.preferences.PreferencesManager
-import com.rookia.android.sejocore.data.local.GroupsLocalDataSource
-import com.rookia.android.sejocore.domain.local.Group
 import com.rookia.android.sejocoreandroid.data.persistence.PersistenceManager
+import com.rookia.android.sejocoreandroid.domain.local.Group
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -19,32 +18,33 @@ import javax.inject.Inject
  *
  */
 
-class GroupsLocalDataSourceImp @Inject constructor(
+class GroupsLocalDataSource @Inject constructor(
     private val persistenceManager: PersistenceManager,
     private val preferencesManager: PreferencesManager
-): GroupsLocalDataSource {
+) {
 
     companion object{
         const val LAST_CHECKED_TIMESTAMP = "LAST_CHECKED_TIMESTAMP_FOR_GROUPS"
     }
-    override suspend fun saveGroups(groups: List<Group>) {
+
+    suspend fun saveGroups(groups: List<Group>) {
         persistenceManager.saveGroups(groups)
     }
 
-    override fun saveLastRequestedTime(timestamp: Long) {
+    fun saveLastRequestedTime(timestamp: Long) {
         preferencesManager.setLongIntoPreferences(
             LAST_CHECKED_TIMESTAMP,
             timestamp
         )
     }
 
-    override fun getLastRequestedTime(): Long =
+    fun getLastRequestedTime(): Long =
         preferencesManager.getLongFromPreferences(LAST_CHECKED_TIMESTAMP, 0L)
 
 
-    override fun getGroup(groupId: Long): Flow<Group> =
+    fun getGroup(groupId: Long): Flow<Group> =
         persistenceManager.getGroup(groupId)
 
-    override fun getGroups(): Flow<List<Group>> =
+    fun getGroups(): Flow<List<Group>> =
         persistenceManager.getGroups()
 }

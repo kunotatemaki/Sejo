@@ -10,7 +10,7 @@ import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.di.modules.ProvidesModule
 import com.rookia.android.sejo.usecases.LoginUseCase
-import com.rookia.android.sejocore.domain.local.TokenReceived
+import com.rookia.android.sejocoreandroid.domain.local.TokenReceived
 import kotlinx.coroutines.CoroutineDispatcher
 
 class LoginViewModel @ViewModelInject constructor(

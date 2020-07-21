@@ -9,7 +9,7 @@ import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.di.modules.ProvidesModule
 import com.rookia.android.sejo.usecases.CreateGroupUseCase
 import com.rookia.android.sejo.usecases.GetContactsUseCase
-import com.rookia.android.sejocore.domain.local.PhoneContact
+import com.rookia.android.sejocoreandroid.domain.local.PhoneContact
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview

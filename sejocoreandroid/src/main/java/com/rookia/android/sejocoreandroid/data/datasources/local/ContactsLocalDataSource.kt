@@ -1,11 +1,10 @@
-package com.rookia.android.sejocoreandroid.data.datasources
+package com.rookia.android.sejocoreandroid.data.datasources.local
 
 import android.content.Context
 import android.database.Cursor
 import android.provider.ContactsContract
 import com.rookia.android.kotlinutils.domain.vo.Result
-import com.rookia.android.sejocore.data.local.ContactsLocalDataSource
-import com.rookia.android.sejocore.domain.local.PhoneContact
+import com.rookia.android.sejocoreandroid.domain.local.PhoneContact
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -21,8 +20,8 @@ import javax.inject.Inject
  *
  */
 
-class ContactsLocalDataSourceImpl @Inject constructor(@ApplicationContext private val context: Context): ContactsLocalDataSource {
-    override fun loadContacts(): Result<List<PhoneContact>> {
+class ContactsLocalDataSource @Inject constructor(@ApplicationContext private val context: Context) {
+    fun loadContacts(): Result<List<PhoneContact>> {
         val phoneList: MutableList<PhoneContact> = mutableListOf()
 
         val phones: Cursor? = context.contentResolver.query(

@@ -1,11 +1,11 @@
-package com.rookia.android.sejocore.data.repository
+package com.rookia.android.sejocoreandroid.data.repository
 
 import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.kotlinutils.repository.resultOnlyFromOneSourceInFlow
-import com.rookia.android.sejocore.data.local.UserLocalDataSource
-import com.rookia.android.sejocore.data.remote.UserRemoteDataSource
-import com.rookia.android.sejocore.domain.local.TokenReceived
-import com.rookia.android.sejocore.domain.local.User
+import com.rookia.android.sejocoreandroid.data.datasources.remote.UserLocalDataSource
+import com.rookia.android.sejocoreandroid.data.datasources.remote.UserRemoteDataSource
+import com.rookia.android.sejocoreandroid.domain.local.TokenReceived
+import com.rookia.android.sejocoreandroid.domain.local.User
 import kotlinx.coroutines.flow.Flow
 
 

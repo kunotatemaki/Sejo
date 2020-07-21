@@ -1,6 +1,5 @@
 include ':androidutils'
 include ':app'
 rootProject.name = "Sejo"
-include ':sejocore'
 include ':kotlinutils'
 include ':sejocoreandroid'

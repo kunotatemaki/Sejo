@@ -7,7 +7,7 @@
     <data>
         <variable
             name="contact"
-            type="com.rookia.android.sejocore.domain.local.PhoneContact" />
+            type="com.rookia.android.sejocoreandroid.domain.local.PhoneContact" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

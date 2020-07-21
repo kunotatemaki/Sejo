@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rookia.android.sejo.databinding.ElementMemberBinding
-import com.rookia.android.sejocore.domain.local.Group
+import com.rookia.android.sejocoreandroid.domain.local.Group
 
 
 /**

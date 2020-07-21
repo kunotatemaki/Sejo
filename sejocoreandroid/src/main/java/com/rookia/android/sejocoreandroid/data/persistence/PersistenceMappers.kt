@@ -1,10 +1,10 @@
 package com.rookia.android.sejocoreandroid.data.persistence
 
-import com.rookia.android.sejocore.domain.local.Group
-import com.rookia.android.sejocore.domain.local.MemberStates
 import com.rookia.android.sejocoreandroid.data.persistence.entities.GroupEntity
 import com.rookia.android.sejocoreandroid.data.persistence.entities.MemberEntity
 import com.rookia.android.sejocoreandroid.data.persistence.model.GroupWithMembers
+import com.rookia.android.sejocoreandroid.domain.local.Group
+import com.rookia.android.sejocoreandroid.domain.local.MemberStates
 
 
 /**

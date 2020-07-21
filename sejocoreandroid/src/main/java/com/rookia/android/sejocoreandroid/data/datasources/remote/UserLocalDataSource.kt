@@ -1,7 +1,6 @@
-package com.rookia.android.sejocoreandroid.data.datasources
+package com.rookia.android.sejocoreandroid.data.datasources.remote
 
 import com.rookia.android.androidutils.preferences.PreferencesManager
-import com.rookia.android.sejocore.data.local.UserLocalDataSource
 import com.rookia.android.sejocoreandroid.data.repository.RepositoryErrorHandling
 import javax.inject.Inject
 
@@ -17,18 +16,18 @@ import javax.inject.Inject
  *
  */
 
-class UserLocalDataSourceImpl @Inject constructor(
+class UserLocalDataSource @Inject constructor(
     private val preferencesManager: PreferencesManager
-) : UserLocalDataSource, RepositoryErrorHandling {
+) : RepositoryErrorHandling {
 
     companion object {
         private const val TOKEN_TAG = "USER_TOKEN_TAG"
     }
 
-    override fun storeToken(token: String) {
+    fun storeToken(token: String) {
         preferencesManager.setStringIntoPreferences(TOKEN_TAG, token)
     }
 
-    override fun getToken(): String? = preferencesManager.getStringFromPreferences(TOKEN_TAG)
+    fun getToken(): String? = preferencesManager.getStringFromPreferences(TOKEN_TAG)
 
 }

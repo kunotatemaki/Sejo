@@ -1,4 +1,4 @@
-package com.rookia.android.sejocore.domain.local
+package com.rookia.android.sejocoreandroid.domain.local
 
 
 /**
@@ -12,11 +12,11 @@ package com.rookia.android.sejocore.domain.local
  *
  */
 
-data class PhoneContact (
-    val id: String,
+data class User(
+    val userId: String,
+    val phonePrefix: String,
     val phoneNumber: String,
-    val phoneNumberNormalized: String,
     val name: String,
-    val photoUrl: String?,
-    var isAdmin: Boolean = false
+    var pin: Int? = null,
+    var pushToken: String? = null
 )

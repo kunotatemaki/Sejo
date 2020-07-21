@@ -16,7 +16,7 @@ import com.rookia.android.sejo.Constants.UserData.PHONE_PREFIX_TAG
 import com.rookia.android.sejo.di.modules.ProvidesModule
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
 import com.rookia.android.sejo.usecases.SmsCodeUseCases
-import com.rookia.android.sejocore.domain.local.SmsCodeValidation
+import com.rookia.android.sejocoreandroid.domain.local.SmsCodeValidation
 import kotlinx.coroutines.CoroutineDispatcher
 
 class ValidateSmsViewModel @ViewModelInject constructor(

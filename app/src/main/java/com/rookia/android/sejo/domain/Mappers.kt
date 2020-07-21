@@ -1,7 +1,7 @@
 package com.rookia.android.sejo.domain
 
 import com.rookia.android.sejo.domain.local.PhoneContactParcelable
-import com.rookia.android.sejocore.domain.local.PhoneContact
+import com.rookia.android.sejocoreandroid.domain.local.PhoneContact
 
 
 /**

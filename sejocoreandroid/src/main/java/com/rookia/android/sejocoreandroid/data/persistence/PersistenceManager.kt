@@ -1,8 +1,8 @@
 package com.rookia.android.sejocoreandroid.data.persistence
 
-import com.rookia.android.sejocore.domain.local.Group
 import com.rookia.android.sejocoreandroid.data.persistence.databases.AppDatabase
 import com.rookia.android.sejocoreandroid.data.persistence.entities.MemberEntity
+import com.rookia.android.sejocoreandroid.domain.local.Group
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

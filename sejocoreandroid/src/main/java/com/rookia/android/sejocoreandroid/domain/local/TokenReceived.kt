@@ -1,4 +1,4 @@
-package com.rookia.android.sejocore.domain.local
+package com.rookia.android.sejocoreandroid.domain.local
 
 
 /**
@@ -12,6 +12,8 @@ package com.rookia.android.sejocore.domain.local
  *
  */
 
-enum class MemberStates(val code: Int) {
-    OWNER(0), VALIDATED(1), PENDING(2), GUESS(3)
-}
+data class TokenReceived(
+    val result: Int,
+    val token: String? = null,
+    val userId: String?
+)

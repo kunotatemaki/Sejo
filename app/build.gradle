@@ -55,7 +55,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta8'
     implementation project(path: ':androidutils')
-    implementation project(path: ':sejocore')
     implementation project(path: ':kotlinutils')
     implementation project(path: ':sejocoreandroid')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

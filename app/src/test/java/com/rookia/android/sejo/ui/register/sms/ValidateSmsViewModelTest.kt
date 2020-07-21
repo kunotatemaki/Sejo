@@ -9,7 +9,7 @@ import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
 import com.rookia.android.sejo.usecases.SmsCodeUseCases
-import com.rookia.android.sejocore.domain.local.SmsCodeValidation
+import com.rookia.android.sejocoreandroid.domain.local.SmsCodeValidation
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.every

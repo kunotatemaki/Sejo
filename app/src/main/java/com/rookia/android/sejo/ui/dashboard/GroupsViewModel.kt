@@ -8,7 +8,7 @@ import com.rookia.android.androidutils.preferences.PreferencesManager
 import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.usecases.GetGroupsUseCase
-import com.rookia.android.sejocore.domain.local.Group
+import com.rookia.android.sejocoreandroid.domain.local.Group
 
 
 /**
