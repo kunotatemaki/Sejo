@@ -2,8 +2,8 @@ package com.rookia.android.sejo.framework.receivers
 
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.rookia.android.androidutils.framework.preferences.PreferencesManagerImpl
-import com.rookia.android.androidutils.framework.utils.security.EncryptionImpl
+import com.rookia.android.androidutils.preferences.PreferencesManager
+import com.rookia.android.androidutils.utils.Encryption
 import com.rookia.android.sejo.Constants
 
 
@@ -22,7 +22,7 @@ class PushNotificationService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         val preferencesManager =
-            PreferencesManagerImpl(this.applicationContext, EncryptionImpl(this.applicationContext))
+            PreferencesManager(this.applicationContext, Encryption(this.applicationContext))
         preferencesManager.setStringIntoPreferences(Constants.UserData.PUSH_TOKEN_TAG, token)
     }
 

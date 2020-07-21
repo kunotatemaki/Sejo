@@ -1,8 +1,7 @@
 package com.rookia.android.sejocoreandroid.data.datasources
 
-import com.rookia.android.androidutils.data.preferences.PreferencesManager
+import com.rookia.android.androidutils.preferences.PreferencesManager
 import com.rookia.android.sejocore.data.local.UserLocalDataSource
-import com.rookia.android.sejocoreandroid.data.network.NetworkServiceFactory
 import com.rookia.android.sejocoreandroid.data.repository.RepositoryErrorHandling
 import javax.inject.Inject
 
@@ -19,7 +18,6 @@ import javax.inject.Inject
  */
 
 class UserLocalDataSourceImpl @Inject constructor(
-    private val networkServiceFactory: NetworkServiceFactory,
     private val preferencesManager: PreferencesManager
 ) : UserLocalDataSource, RepositoryErrorHandling {
 

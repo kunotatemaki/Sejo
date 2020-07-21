@@ -2,7 +2,7 @@ package com.rookia.android.sejo.ui.main
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
-import com.rookia.android.androidutils.data.preferences.PreferencesManager
+import com.rookia.android.androidutils.preferences.PreferencesManager
 import com.rookia.android.sejo.Constants
 
 

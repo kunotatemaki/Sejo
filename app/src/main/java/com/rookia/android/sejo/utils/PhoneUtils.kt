@@ -1,6 +1,6 @@
 package com.rookia.android.sejo.utils
 
-import com.rookia.android.androidutils.data.preferences.PreferencesManager
+import com.rookia.android.androidutils.preferences.PreferencesManager
 import com.rookia.android.sejo.Constants.SpanishPhone.NUMBER_MAX_LENGTH_WITHOUT_SPACES
 import com.rookia.android.sejo.Constants.SpanishPhone.NUMBER_PATTERN_MATCHER_EIGHT_DIGITS
 import com.rookia.android.sejo.Constants.SpanishPhone.NUMBER_PATTERN_MATCHER_FIVE_DIGITS

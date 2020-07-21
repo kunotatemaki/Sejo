@@ -14,9 +14,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.visible
+import com.rookia.android.androidutils.preferences.PreferencesManager
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.MainGraphDirections
 import com.rookia.android.sejo.R

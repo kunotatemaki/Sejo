@@ -1,4 +1,4 @@
-package com.rookia.android.androidutils.framework.persistence.utils
+package com.rookia.android.androidutils.persistence.utils
 
 import androidx.room.TypeConverter
 import java.util.*

@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.rookia.android.androidutils.framework.persistence.utils.DbConverters
+import com.rookia.android.androidutils.persistence.utils.DbConverters
 import com.rookia.android.sejocoreandroid.data.persistence.daos.GroupDao
 import com.rookia.android.sejocoreandroid.data.persistence.daos.MembersDao
 import com.rookia.android.sejocoreandroid.data.persistence.entities.GroupEntity

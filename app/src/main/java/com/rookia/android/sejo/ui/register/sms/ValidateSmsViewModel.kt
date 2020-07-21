@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.rookia.android.androidutils.data.preferences.PreferencesManager
+import com.rookia.android.androidutils.preferences.PreferencesManager
 import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.sejo.Constants.Navigation.PIN_SENT_TAG
 import com.rookia.android.sejo.Constants.Navigation.VALIDATED_PHONE_TAG

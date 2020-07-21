@@ -1,4 +1,4 @@
-package com.rookia.android.androidutils.framework.persistence.daos
+package com.rookia.android.androidutils.persistence.daos
 
 import androidx.room.*
 

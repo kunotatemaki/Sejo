@@ -1,4 +1,4 @@
-package com.rookia.android.androidutils.framework.repository
+package com.rookia.android.androidutils.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData

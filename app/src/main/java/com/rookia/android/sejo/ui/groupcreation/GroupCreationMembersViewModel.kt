@@ -2,8 +2,8 @@ package com.rookia.android.sejo.ui.groupcreation
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.androidutils.extensions.normalizedString
+import com.rookia.android.androidutils.preferences.PreferencesManager
 import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.di.modules.ProvidesModule
@@ -33,7 +33,7 @@ class GroupCreationMembersViewModel @ViewModelInject constructor(
         private const val QUERY_DEBOUNCE = 500L
     }
 
-    private lateinit var _phoneContactsList: LiveData<Result<List<com.rookia.android.sejocore.domain.local.PhoneContact>>>
+    private lateinit var _phoneContactsList: LiveData<Result<List<PhoneContact>>>
     val phoneContactsList: MediatorLiveData<Result<List<PhoneContact>>> = MediatorLiveData()
 
     private lateinit var _groupCreationResponse: LiveData<Result<Unit>>

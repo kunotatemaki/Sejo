@@ -1,7 +1,7 @@
 package com.rookia.android.androidutils.utils
 
 import com.rookia.android.androidutils.R
-import com.rookia.android.androidutils.data.resources.ResourcesManager
+import com.rookia.android.androidutils.resources.ResourcesManager
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.format.DateTimeFormatter

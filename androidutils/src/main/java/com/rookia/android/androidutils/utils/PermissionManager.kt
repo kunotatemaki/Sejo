@@ -1,4 +1,4 @@
-package com.rookia.android.androidutils.framework.utils
+package com.rookia.android.androidutils.utils
 
 import android.app.Activity
 import android.content.pm.PackageManager
@@ -6,8 +6,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.rookia.android.androidutils.R
-import com.rookia.android.androidutils.data.resources.ResourcesManager
-import com.rookia.android.androidutils.utils.ViewUtils
+import com.rookia.android.androidutils.resources.ResourcesManager
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 

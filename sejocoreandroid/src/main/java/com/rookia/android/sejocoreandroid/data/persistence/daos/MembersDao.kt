@@ -1,7 +1,7 @@
 package com.rookia.android.sejocoreandroid.data.persistence.daos
 
 import androidx.room.Dao
-import com.rookia.android.androidutils.framework.persistence.daos.BaseDao
+import com.rookia.android.androidutils.persistence.daos.BaseDao
 import com.rookia.android.sejocoreandroid.data.persistence.entities.MemberEntity
 
 

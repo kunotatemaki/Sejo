@@ -5,7 +5,7 @@ import android.content.res.Configuration
 import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
-import com.rookia.android.androidutils.data.resources.ResourcesManager
+import com.rookia.android.androidutils.resources.ResourcesManager
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 

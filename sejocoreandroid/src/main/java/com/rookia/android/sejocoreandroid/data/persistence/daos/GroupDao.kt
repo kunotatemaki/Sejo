@@ -3,7 +3,7 @@ package com.rookia.android.sejocoreandroid.data.persistence.daos
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
-import com.rookia.android.androidutils.framework.persistence.daos.BaseDao
+import com.rookia.android.androidutils.persistence.daos.BaseDao
 import com.rookia.android.sejocoreandroid.data.persistence.entities.GroupEntity
 import com.rookia.android.sejocoreandroid.data.persistence.model.GroupWithMembers
 import kotlinx.coroutines.flow.Flow

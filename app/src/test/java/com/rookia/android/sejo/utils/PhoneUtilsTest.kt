@@ -1,6 +1,5 @@
 package com.rookia.android.sejo.utils
 
-import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.sejo.Constants.UserData.PHONE_NUMBER_TAG
 import com.rookia.android.sejo.Constants.UserData.PHONE_PREFIX_TAG
 import io.mockk.MockKAnnotations

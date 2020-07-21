@@ -1,6 +1,6 @@
 package com.rookia.android.sejocoreandroid.data.datasources
 
-import com.rookia.android.androidutils.data.preferences.PreferencesManager
+import com.rookia.android.androidutils.preferences.PreferencesManager
 import com.rookia.android.sejocore.data.local.GroupsLocalDataSource
 import com.rookia.android.sejocore.domain.local.Group
 import com.rookia.android.sejocoreandroid.data.persistence.PersistenceManager

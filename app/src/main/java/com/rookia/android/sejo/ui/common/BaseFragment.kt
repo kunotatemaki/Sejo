@@ -9,8 +9,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.MaterialToolbar
-import com.rookia.android.androidutils.data.preferences.PreferencesManager
-import com.rookia.android.androidutils.data.resources.ResourcesManager
+import com.rookia.android.androidutils.preferences.PreferencesManager
+import com.rookia.android.androidutils.resources.ResourcesManager
 import com.rookia.android.sejo.MainGraphDirections
 import com.rookia.android.sejo.ui.login.LoginFragment
 import com.rookia.android.sejo.ui.login.LoginStatus

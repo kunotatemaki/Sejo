@@ -19,8 +19,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.visible
-import com.rookia.android.androidutils.framework.utils.PermissionManager
 import com.rookia.android.androidutils.utils.DeviceUtils
+import com.rookia.android.androidutils.utils.PermissionManager
 import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.FragmentGroupCreationMembersBinding

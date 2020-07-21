@@ -1,4 +1,4 @@
-package com.rookia.android.androidutils.framework.utils
+package com.rookia.android.androidutils.utils
 
 import android.content.Context
 import java.io.IOException

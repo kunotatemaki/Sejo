@@ -1,6 +1,6 @@
 package com.rookia.android.sejocoreandroid.utils
 
-import com.rookia.android.androidutils.data.preferences.PreferencesManager
+import com.rookia.android.androidutils.preferences.PreferencesManager
 import javax.inject.Inject
 
 

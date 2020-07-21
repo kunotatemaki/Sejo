@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
-import com.rookia.android.androidutils.data.resources.ResourcesManager
 import com.rookia.android.androidutils.extensions.gone
 import com.rookia.android.androidutils.extensions.visible
+import com.rookia.android.androidutils.resources.ResourcesManager
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.databinding.ElementPhoneContactThumbnailBinding
 import com.rookia.android.sejocore.domain.local.PhoneContact

@@ -2,7 +2,7 @@ package com.rookia.android.sejo.framework.utils
 
 import android.content.Context
 import androidx.biometric.BiometricManager
-import com.rookia.android.androidutils.data.preferences.PreferencesManager
+import com.rookia.android.androidutils.preferences.PreferencesManager
 import com.rookia.android.sejo.Constants
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
