@@ -57,14 +57,14 @@ class GroupsRepository constructor(
             networkCall = { groupsRemoteDataSource.getGroupsFromServer(userId) },
             persistCallResult = { listOfGroups ->
                 listOfGroups?.let {
-                    groupsLocalDataSource.saveGroups(it)
+                    saveGroups(it)
                 }
             },
             isThePersistedInfoOutdated = {
                 rateLimiter.expired(
                     lastCheckedDate,
                     5,
-                    TimeUnit.SECONDS
+                    TimeUnit.MINUTES
                 ) || CacheSanity.groupsCacheDirty
             }
         )

@@ -64,11 +64,11 @@ class GroupsFragment : BaseFragment(R.layout.fragment_groups), GroupsAdapter.Gro
 
         })
 
+        viewModel.loadGroups()
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.loadGroups()
         (activity as? MainActivity)?.hideKeyboard()
     }
 

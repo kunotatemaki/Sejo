@@ -36,9 +36,6 @@ class GroupsViewModel @ViewModelInject constructor(
                 getGroupsUseCase.getGroups(userId).asLiveData()
             groups.addSource(groupsInternal) {
                 groups.value = it
-                if (it.status != Result.Status.LOADING) {
-                    groups.removeSource(groupsInternal)
-                }
             }
         }
     }
