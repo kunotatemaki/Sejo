@@ -9,8 +9,8 @@ import com.rookia.android.androidutils.data.preferences.PreferencesManager
 import com.rookia.android.kotlinutils.domain.vo.Result
 import com.rookia.android.sejo.Constants
 import com.rookia.android.sejo.di.modules.ProvidesModule
-import com.rookia.android.sejo.domain.local.user.User
 import com.rookia.android.sejo.usecases.UpdatePersonalInfoUseCase
+import com.rookia.android.sejocore.domain.local.User
 import kotlinx.coroutines.CoroutineDispatcher
 
 class PersonalInfoViewModel @ViewModelInject constructor(

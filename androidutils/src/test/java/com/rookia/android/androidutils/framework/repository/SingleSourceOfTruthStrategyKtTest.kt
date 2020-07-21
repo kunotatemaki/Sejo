@@ -1,6 +1,9 @@
 package com.rookia.android.androidutils.framework.repository
 
-import com.rookia.android.androidutils.domain.vo.Result
+import com.rookia.android.kotlinutils.domain.vo.Result
+import com.rookia.android.kotlinutils.repository.resultFromPersistenceAndNetwork
+import com.rookia.android.kotlinutils.repository.resultFromPersistenceAndNetworkInFlow
+import com.rookia.android.kotlinutils.repository.resultOnlyFromOneSourceInFlow
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.every
@@ -8,6 +11,8 @@ import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.resetMain
@@ -37,7 +42,7 @@ class SingleSourceOfTruthStrategyKtTest {
 //    private val mainThreadSurrogate = newSingleThreadContext("UI thread")
 
     interface SingleSourceOfTruthPersistenceAndNetworkTestClass {
-        fun databaseQuery(): List<Int>
+        fun databaseQuery(): Flow<List<Int>>
         suspend fun networkCall(): Result<List<Int>>
         suspend fun saveCallResult(value: Int?)
     }
@@ -63,9 +68,9 @@ class SingleSourceOfTruthStrategyKtTest {
         databaseUpdatedWithNetwork = false
         every { singleSourceOfTruthTestClassPersistenceAndNetwork.databaseQuery() } answers {
             if (databaseUpdatedWithNetwork) {
-                responseFromNetwork
+                flow { emit(responseFromNetwork) }
             } else {
-                responseFromDb
+                flow { emit(responseFromDb) }
             }
         }
         coEvery { singleSourceOfTruthTestClassPersistenceAndNetwork.saveCallResult(any()) } coAnswers {

@@ -73,7 +73,6 @@ object Constants {
 
     //region USER DATA
     object UserData {
-        const val TOKEN_TAG = "USER_TOKEN_TAG"
         const val NAME_TAG = "USER_NAME_TAG"
         const val PIN_TAG = "USER_PASSWORD_TAG"
         const val PIN_ALIAS = "com.rookia.android.sejo"

@@ -8,16 +8,15 @@ import com.rookia.android.kotlinutils.utils.RateLimiter
 import com.rookia.android.sejo.R
 import com.rookia.android.sejo.framework.receivers.SMSBroadcastReceiver
 import com.rookia.android.sejo.utils.TextFormatUtils
-import com.rookia.android.sejoandroidframework.data.persistence.databases.AppDatabase
 import com.rookia.android.sejocore.data.local.ContactsLocalDataSource
 import com.rookia.android.sejocore.data.local.GroupsLocalDataSource
+import com.rookia.android.sejocore.data.local.UserLocalDataSource
 import com.rookia.android.sejocore.data.remote.GroupsRemoteDataSource
 import com.rookia.android.sejocore.data.remote.LoginRemoteDataSource
 import com.rookia.android.sejocore.data.remote.SmsCodeRemoteDataSource
-import com.rookia.android.sejocore.data.repository.ContactsRepository
-import com.rookia.android.sejocore.data.repository.GroupsRepository
-import com.rookia.android.sejocore.data.repository.LoginRepository
-import com.rookia.android.sejocore.data.repository.SmsCodeRepository
+import com.rookia.android.sejocore.data.remote.UserRemoteDataSource
+import com.rookia.android.sejocore.data.repository.*
+import com.rookia.android.sejocoreandroid.data.persistence.databases.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -123,6 +122,12 @@ class ProvidesModule {
             groupsRemoteDataSource = groupsRemoteDataSource,
             rateLimiter = rateLimiter
         )
+
+    @Provides
+    fun providesUserRepository(
+        userLocalDataSource: UserLocalDataSource,
+        userRemoteDataSource: UserRemoteDataSource
+    ): UserRepository = UserRepository(userRemoteDataSource, userLocalDataSource)
 
     @Provides
     fun providesRateLimiter(): RateLimiter = RateLimiter()

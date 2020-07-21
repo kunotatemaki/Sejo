@@ -1,8 +1,8 @@
 package com.rookia.android.sejo.usecases
 
 import com.rookia.android.kotlinutils.domain.vo.Result
-import com.rookia.android.sejo.data.repository.UserRepository
-import com.rookia.android.sejo.domain.local.user.User
+import com.rookia.android.sejocore.data.repository.UserRepository
+import com.rookia.android.sejocore.domain.local.User
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
