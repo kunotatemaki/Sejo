@@ -2,8 +2,8 @@ package com.rookia.android.sejo.ui.dashboard
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.rookia.android.sejo.databinding.ElementGroupBinding
 import com.rookia.android.sejocore.domain.local.Group
@@ -20,8 +20,7 @@ import com.rookia.android.sejocore.domain.local.Group
  *
  */
 
-class GroupsAdapter constructor(private val listener: GroupItemClickable) :
-    PagedListAdapter<Group, GroupViewHolder>(DIFF_CALLBACK) {
+class GroupsAdapter constructor(private val listener: GroupItemClickable) : ListAdapter<Group, GroupViewHolder>(DIFF_CALLBACK) {
 
 
     companion object {

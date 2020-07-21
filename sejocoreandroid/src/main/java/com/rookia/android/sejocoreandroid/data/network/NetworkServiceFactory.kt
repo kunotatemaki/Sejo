@@ -18,8 +18,8 @@ open class NetworkServiceFactory @Inject constructor(
 ) {
 
     companion object {
-        const val ROOKIA_EXPENSES_SERVER_BASE_URL = "http://10.0.2.2:8080"
-//        const val ROOKIA_EXPENSES_SERVER_BASE_URL = "http://192.168.1.53:8080"
+//        const val ROOKIA_EXPENSES_SERVER_BASE_URL = "http://10.0.2.2:8080"
+        const val ROOKIA_EXPENSES_SERVER_BASE_URL = "http://192.168.8.102:8080"
 
     }
 

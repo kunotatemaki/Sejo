@@ -51,12 +51,11 @@ class GroupsFragment : BaseFragment(R.layout.fragment_groups), GroupsAdapter.Gro
             when (it.status) {
                 Result.Status.SUCCESS -> {
                     hideLoading()
-                    //todo meter los grupos al adapter
-//                    adapter.submitList(it.data)
+                    adapter.submitList(it.data)
                 }
                 Result.Status.LOADING -> {
                     showLoading()
-//                    adapter.submitList(it.data)
+                    adapter.submitList(it.data)
                 }
                 Result.Status.ERROR -> {
                     hideLoading()

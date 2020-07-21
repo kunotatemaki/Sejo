@@ -30,10 +30,8 @@ fun <T, A> resultFromPersistenceAndNetworkInFlow(
                 if (responseStatus.status == Result.Status.ERROR) {
                     emit(Result.error(responseStatus.message, cachedData))
                 } else {
+                    emit(Result.success(cachedData))
                     persistCallResult.invoke(responseStatus.data)
-                    //todo ver si esto vuelve a llamar a todo el ciclo
-//                    cachedData = persistedDataQuery.invoke()
-//                    emit(Result.success(cachedData))
                 }
             }
         }
